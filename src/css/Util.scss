@@ -1,0 +1,42 @@
+@import './variables/colors';
+
+.util-two-panel{
+    height: auto;
+    padding: 1em 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.util-two-panel-reverse{
+  flex-direction: row-reverse;
+}
+
+.two-panel-text{
+    width: 45vw;
+}
+
+.two-panel-text p{
+    font-size: 24px;
+}
+
+.two-panel-image{
+    width: 47vw;
+}
+
+.util-point{
+    border-bottom: 1px $secondary dashed;
+    padding-bottom:2em ;
+}
+
+.util-employee-panel{
+ display: flex;
+ flex-wrap: wrap;
+width: 400px;
+margin: 2em 0;
+}
+
+

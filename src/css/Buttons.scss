@@ -1,0 +1,75 @@
+@import './variables/colors';
+
+.btn{
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.btn:hover{
+    background-color: $info;
+    color: $secondary
+}
+
+.btn-solid{
+  background-color: white;
+}
+
+.btn-solid:hover{
+    background-color: $info;
+    color: $secondary;
+}
+
+.btn-outline{
+    color: black;
+    border: 1px solid $info;
+    border-radius: 5px;
+}
+
+.btn-outline:hover{
+    background-color: $info;
+    color: $secondary;
+}
+
+
+.btn-primary{
+    color: $info;
+    background-color: $primary;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-secondary{
+    color: $info;
+    background-color: $secondary;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-success{
+    color: $info;
+    background-color: $success;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-danger{
+  color: $info;
+  background-color: $danger;
+  padding: 10px;
+  border-radius:5px;
+}
+
+.btn-info{
+    color: $secondary;
+    background-color: $info;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-link{
+    color: $info;
+    padding: 10px;
+    border-radius:5px;
+}
