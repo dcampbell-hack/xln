@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { header, footer, landing, socialLinks, kyc } from "../data";
+import { header, footer, landing, socialLinks, register } from "../data";
 import Header from "./global/Header";
 import Footer from "./global/Footer";
 import Landing from "./landing";
 import FormatLayout from "./utils/layout/";
 import "../css/App.scss";
 import "../css/Buttons.scss";
+import "../css/Form.scss";
 
 const App = () => {
   return (
@@ -18,11 +19,11 @@ const App = () => {
             element={<Landing landing={landing} socialLinks={socialLinks} />}
           />
           <Route 
-          path="/kyc" 
-          element={<FormatLayout type={kyc.type} options={kyc.options}  /> }
+          path="/register" 
+          element={<FormatLayout type={register.type} options={register.options}  /> }
           />
         </Routes>
-        <Footer footer={footer} />
+        <Footer footer={footer} socialLinks={socialLinks} />
         </BrowserRouter>
     </div>
   );

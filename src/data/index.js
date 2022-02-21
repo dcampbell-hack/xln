@@ -242,16 +242,20 @@ export const landing = {
 
 
 
-export const kyc = {
+export const register = {
     type: "panel-image-form",
     options: {
         standard:"Standard",
-        title:"Title",
-        description:"Description",
+        title:"Create your account",
+        description:"You need it to buy our token on the ICO",
         image: XLNForm,
         formData: {
             action: "/action_page.php", 
             method: "post", 
+            submit: {
+                label: "Sign Up",
+                className: "btn btn-block btn-info"
+            },
             fields: [
                 { 
                     type: "input",
@@ -259,16 +263,56 @@ export const kyc = {
                         label: { 
                             show: true, 
                             labelText: "Enter Email", 
-                            forId: "email" 
+                            forId: "kyc-email" 
                         },
                         input: { 
                             type: "email", 
-                            id: "", 
+                            id: "kyc-email", 
                             className: "", 
                             name: "email", 
                             value: "", 
                             onChange: "", 
                             placeholder: "Email *" 
+                        },
+                        aria: {}
+                    }
+                },
+                { 
+                    type: "input",
+                    attributes: {
+                        label: { 
+                            show: true, 
+                            labelText: "Enter Password", 
+                            forId: "kyc-password" 
+                        },
+                        input: { 
+                            type: "password", 
+                            id: "kyc-password", 
+                            className: "", 
+                            name: "password", 
+                            value: "", 
+                            onChange: "", 
+                            placeholder: "Password *" 
+                        },
+                        aria: {}
+                    }
+                },
+                { 
+                    type: "input",
+                    attributes: {
+                        label: { 
+                            show: true, 
+                            labelText: "Confirm Password", 
+                            forId: "kyc-password-2" 
+                        },
+                        input: { 
+                            type: "password", 
+                            id: "kyc-password-2", 
+                            className: "", 
+                            name: "password", 
+                            value: "", 
+                            onChange: "", 
+                            placeholder: "Confirm Password *" 
                         },
                         aria: {}
                     }

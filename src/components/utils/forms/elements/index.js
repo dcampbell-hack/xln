@@ -9,16 +9,18 @@ const mapOptions = (options) => options.map(({value, text, selected }, index) =>
 export const FormInput = ({
     options: {
         label: { show, labelText, forId },
-        input: { type, id, className, name, value, onChange, placeholder },
+        input: { type, id, className, name, placeholder },
         aria: {}
     }
 }) => {
-    console.log("Form Input", show, labelText, forId)
+
     return(
-        <>
-            {  show && <label for={forId}>{labelText}</label> }
-            <input type={type} id={id} className={className} name={name} placeholder={placeholder} value={value} onChange={onChange} />
-        </>
+        <div className="form-control-container">
+            {  show && <label htmlFor={forId}>{labelText}</label> }
+            <div className="form-control">
+               <input type={type} id={id} className={className} name={name} placeholder={placeholder}  onChange={e => e.target.value} />
+            </div>
+        </div>
     )
 }
 
@@ -73,3 +75,6 @@ export const FormDropdown = ({
     </div>
     )
 }
+
+
+export const FormButton = ({ label, className }) => <input className={className} type="submit" value={label} />

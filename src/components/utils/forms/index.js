@@ -1,7 +1,4 @@
-import { FormInput } from "./elements";
-import { FormTextArea } from "./elements";
-import { FormSelect } from "./elements";
-import { FormDropdown } from "./elements";
+import { FormInput,  FormTextArea, FormSelect, FormDropdown, FormButton } from "./elements";
 
 /*
 {
@@ -17,45 +14,33 @@ fields: [
 
  */
 
-const Form = ({ formData: { action, method, fields } }) => {
+const Form = ({ formData: { action, method, fields, submit } }) => {
 
-  const formFieldTypes = ( type, formData ) => {
-    console.log('Form Inputs  -----', type, formData)
+  const formFieldTypes = ( type, attributes ) => {
     switch (type) {
       case "input":
-        return <FormInput options={formData} />;
+        return <FormInput options={attributes} />;
 
       case "textarea":
-        return <FormTextArea options={formData} />;
+        return <FormTextArea options={attributes} />;
 
       case "select":
-        return <FormSelect options={formData} />;
+        return <FormSelect options={attributes} />;
 
       case "dropdown":
-        return <FormDropdown options={formData} />;
+        return <FormDropdown options={attributes} />;
 
     default:
         return <>Empty</>
     }
   };
 
-  const formFieldTypesTest = (type, attributes) => {
-    console.log('Form Field Attr', attributes)
-    switch (type) {
-      case "input":
-        return  <FormInput options={attributes} />;
-
-    default:
-        return ( <>Empty</> )
-    }
-    
-  }
-
-  const mapFields = (fields) => fields.map(({type, attributes }) => formFieldTypesTest( type, attributes ) ); 
+  const mapFields = (fields) => fields.map(({type, attributes }) => formFieldTypes( type, attributes ) ); 
 
   return (
   <form action={action} method={method}>
        {  mapFields(fields) }
+       <FormButton className={submit.className} label={submit.label} />
   </form>
   )
 };
