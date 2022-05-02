@@ -1,0 +1,25 @@
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const REGISTER = 'REGISTER'; 
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const LOAD_USER = 'LOAD_USER';
+export const CONNECTED_WALLET = 'CONNECTED_WALLET';
+export const CREATE_USER = 'CREATE_USER';
+export const GET_USER = 'GET_USER';
+export const GET_USERS = 'GET_USERS'; 
+export const GET_USER_BY_USERNAME = 'GET_USER_BY_USERNAME';
+export const UPDATE_USER_AVATAR = 'UPDATE_USER_AVATAR';
+export const UPDATE_USER_COVER = 'UPDATE_USER_COVER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const USER_ERROR = 'USER_ERROR';
+export const GET_ASSET = 'GET_ASSET';
+export const GET_ASSETS = 'GET_ASSETS';
+export const GET_USER_ASSETS = 'GET_USER_ASSETS';
+export const CREATE_ASSET = 'CREATE_ASSET';
+export const UPDATE_ASSET = 'UPDATE_ASSET';
+export const DELETE_ASSET = 'DELETE_USER';
+
+export const AUTH_ERROR = 'AUTH_ERROR';

@@ -1,0 +1,106 @@
+@import './variables/colors';
+
+.btn{
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 5px;
+    background-color: rgba(0,0,0,0);
+}
+
+.btn-block{
+    width: 100%;
+    height: 50px;
+}
+
+.btn-solid{
+  background-color: white;
+}
+
+.btn-solid:hover{
+    background-color: $info;
+    color: $secondary;
+}
+
+.btn-outline{
+    color: black;
+    border: 1px solid $info;
+    border-radius: 5px;
+}
+
+.btn-outline:hover{
+    background-color: $info;
+    color: $secondary;
+}
+
+
+.btn-primary{
+    color: $info;
+    background-color: $primary;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-secondary{
+    color: $info;
+    background-color: $secondary;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-success{
+    color: $info;
+    background-color: $success;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-danger{
+  color: #e4e4e4;
+  background-color: $danger;
+  padding: 10px;
+  border-radius:5px;
+}
+
+.btn-info{
+    color: $secondary;
+    background-color: $info;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-link{
+    color: $info;
+    padding: 10px;
+    border-radius:5px;
+}
+
+.btn-link-no-padding{
+    color: $info;
+    text-decoration: underline;
+}
+
+.btn-link-no-padding:hover{
+    color: $success;
+}
+
+
+.btn-s{
+  width: 10%;
+}
+
+.btn-m{
+    width: 25%; 
+}
+
+.btn-l{
+    width: 50%;
+}
+
+.btn-xl{
+    width: 75%;
+}
+
+.btn-full{
+    width: 100%;
+}

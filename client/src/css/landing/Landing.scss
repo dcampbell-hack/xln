@@ -1,0 +1,242 @@
+@import '../variables/colors';
+
+.xln-cta{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cta-text{
+    max-width: 80vw;
+    line-height: 4em;
+}
+
+.cta-text h1{
+    font-size: 50px;
+}
+
+.cta-text a{
+    font-size: 30px;
+}
+
+.cta-social-links{
+width: 20em;
+display: flex;
+justify-content: space-between;
+ margin: 3em 0;
+ line-height: 2em;
+}
+
+.cta-image{
+    width: 98vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.xln-summary{
+    width: auto;
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary;
+}
+
+.summary-content{
+    width: 80vw;
+    height: auto;
+}
+
+.summary-content h4{
+    font-size: 36px;
+}
+
+.summary-content a{
+    font-size: 24px;
+}
+
+.xln-overview{
+    width: auto;
+}
+
+.xln-blockchain{
+    height: auto;
+    background-color: $secondary;
+}
+
+.blockchain-header{
+    height: auto;
+    display: flex;
+    justify-content:stretch;
+    align-items: center;
+}
+
+.xln-team{
+    background-color: $info;
+    color: $primary;
+}
+
+.team-container{
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;   
+ margin: 3em 0;
+}
+
+
+.xln-app-marketplace{
+    height: auto;
+    justify-content: center;
+    align-content: space-between;
+}
+
+.app-marketplace-header{
+
+}
+
+.app-marketplace-icons{
+    height: 200px;
+    font-size: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5em 0;
+}
+
+.app-marketplace-form{
+    font-size: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.xln-mission{
+
+}
+
+.mission-phase{
+ padding: 0 5em;
+}
+
+.contact-us-img{
+    padding: 1em 2em;
+}
+
+.contact-us p{
+    font-size: 18px;
+  }
+
+.xln-ico-sale-form p{
+    font-size: 18px;
+}
+
+.xln-roadmap{
+    background-color: $secondary;
+}
+
+.xln-roadmap-slider{
+    width: 100%;
+    height: auto;
+border: 1px solid #ccc;
+background-color: #fff;;
+    display: flex;
+    overflow-x: auto;
+    border-radius: 15px;
+    padding: 1em;
+}
+
+.xln-roadmap-panel{
+    min-width: 400px;
+}
+
+.xln-roadmap-panel > h3, h2, p{
+    padding: 0 1em;
+}
+
+.xln-roadmap-panel:hover h2{
+    color: #f00;
+}
+
+.xln-roadmap-panel:hover .xln-roadmap-bar{
+    background-color: #f00;
+}
+
+.xln-roadmap-panel:hover .xln-roadmap-bar-icon{
+    background-color: #f00;
+    border: 0.2em solid #f00;
+}
+
+.xln-roadmap-bar-container{
+    width: 100%;
+    height: 2em;
+    display: flex;
+    align-items: center;
+}
+
+.xln-roadmap-bar{
+    width: 100%;
+    height: 0.2em;
+    background-color: #000;
+}
+
+.xln-roadmap-bar-icon{
+    width: 1.8em;
+    height: 1.6em;
+    border-radius:5em;
+    background-color: #fff;
+    border: 0.2em solid #000;
+}
+
+@media only screen and (max-width: 900px) {
+
+    .cta-text{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 100vw;
+    }
+
+    .cta-text h1{
+        font-size: 30px;
+    }
+
+    .cta-image{
+       width: 100vw;
+       min-width: 385px;
+    }
+    
+}
+
+@media only screen and (max-width: 727px) {
+    .team-container{
+        justify-content: center;
+    }
+
+    .cta-text a{
+        font-size: 24px;
+    }
+
+    .cta-image{
+        width: 100vw;
+        overflow-x: scroll;
+    }
+
+.xln-summary .panel-paddding{
+    padding: 5em 0.5em;
+}
+
+    .summary-content h4{
+        font-size: 24px;
+    }
+
+    .summary-content a{
+        font-size: 18px;
+    }
+}

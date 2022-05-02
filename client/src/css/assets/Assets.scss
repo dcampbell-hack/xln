@@ -1,0 +1,138 @@
+.asset-container{
+width: 100vw;
+height: auto;
+background-color: aqua;
+margin: 0;
+padding: 0;
+display: flex;
+flex-wrap: wrap;
+}
+
+.profile-container{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100px;
+}
+
+.profile-items{
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.asset-search{
+    width: 100vw;
+    height: 80px;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.asset-search input{
+ width: 95%;
+ padding: 0 2.5%;
+ background-color: rgba(0,0,0,0);
+ color: #fff;
+ border: none;
+}
+
+.asset-type-container{
+    width: 95vw;
+    padding: 0 2.5vw;
+}
+
+.asset-types{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.asset-type-item{
+    width: 300px;
+    height: 150px;
+    margin: 5px 10px;
+    background-color: pink;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.asset-checkboxes{
+    width: 95vw;
+}
+
+.checkbox{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0 3em 0;
+}
+
+.checkbox-item{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 5px;
+    background-color: violet;
+}
+
+.checkbox-item + .permission{
+    width: 32rem;
+}
+
+
+.checkbox-item + .username{
+    width: 18rem;
+}
+
+.checkbox-item + .asset{
+    width: 21rem;
+}
+
+.permission-checkbox{
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+}
+
+
+.permission-checkbox input{
+    width: 50%;
+    height: 50%;
+}
+
+.permission-label{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    text-align: center;
+}
+
+.asset-dependency-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.asset-list{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #03f;
+}
+
+.asset-value{
+    width: 100vw;
+}
+
+.asset-upload{
+    width: 100vw;
+}
+
+.asset-launch{
+    width: 100vw;
+}

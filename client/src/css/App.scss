@@ -1,0 +1,105 @@
+@import './variables/colors';
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif, Helvetica, Arial;
+    line-height: 3.5em;
+}
+
+
+.header-padding{
+    padding: 2em 2em; 
+}
+
+.panel-padding{
+    padding: 5em 4em;
+}
+
+.primary{
+  background-color: $primary;
+}
+
+.secondary{
+    background-color: $secondary;
+}
+
+.success{
+    background-color: $success;
+}
+
+.info{
+    background-color: $info;
+}
+
+.danger{
+    background-color: $danger;
+}
+
+.primary-text{
+    color: $primary;
+  }
+  
+  .secondary-text{
+      color: $secondary;
+  }
+  
+  .success-text{
+      color: $success;
+  }
+  
+  .info-text{
+      color: $info;
+  }
+  
+  .danger-text{
+      color: $danger;
+  }
+
+.xln-container{
+    width: 100vw;
+    height: auto;
+}
+
+.xln-header{
+    width: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.xln-logo{
+    width: 100px;
+    height: 100px;
+}
+
+.header-image-none{
+
+}
+
+.header-image-active{
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header-avatar-stats{
+    padding: 0 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header-profile{
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.xln-footer{
+    height: auto;
+    padding: 1em 3em;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
