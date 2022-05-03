@@ -1,5 +1,7 @@
 import {
     AUTH_ERROR,
+    GET_BALANCE,
+    GET_ADDRESS,
     CONNECTED_WALLET,
     } from'../../actions/types'
     
@@ -16,6 +18,12 @@ import {
     
     export default function(state = initState, action){
         switch(action.type){
+            case GET_ADDRESS:
+                console.log('Get address ------', action.payload)
+                return { ...state, loading: false, isError: false, address: action.payload }
+                case GET_BALANCE:
+                    console.log('Get balance ------', action.payload)
+                    return { ...state, loading: false, isError: false, balance: Number(action.payload) }
             case CONNECTED_WALLET:
                 console.log('Connected Payload ------', action)
                 return { ...state, loading: false, isError: false, profile: { address: action.address, balance: action.balance, username: action.username } }

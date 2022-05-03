@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { getAddress, updateWalletBalance } from "../../actions/blockchain";
+
 import ClickThroughUI from '../utils/clickThroughUI';
 import { connect } from 'react-redux';
 import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
@@ -8,7 +10,7 @@ import { ethers } from 'ethers';
 import '../../css/xln/XLN.scss';
 
 
-const XLN = ({ users, xln: { infura, authentication: { userChecks } }, connectUserWallet,  }) => {
+const XLN = ({ users, xln: { infura, authentication: { userChecks } }, getAddress, updateWalletBalance }) => {
 
 
 const [ userWallet, setUserWallet ] = useState({ balance: null, address: null });
@@ -36,10 +38,20 @@ if(userWallet.address){
 
  return (
     <div className="xln-setup-container">
-       <ClickThroughUI steps={userChecks} />
+       <ClickThroughUI steps={userChecks} getAddress={getAddress} updateWalletBalance={updateWalletBalance} />
     </div>
   );
 }
 
 
-export default XLN;
+const mapStateToProps = (state) => {
+   return {
+     blockchain: state.blockchain,
+   };
+ };
+ 
+ const mapDispatchToProps = {
+   getAddress, updateWalletBalance
+ };
+
+export default connect(mapStateToProps, mapDispatchToProps)(XLN);

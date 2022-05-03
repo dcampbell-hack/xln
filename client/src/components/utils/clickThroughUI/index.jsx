@@ -1,18 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
 import FeaturedContent from './content/featured-content';
-import { metaMaskWalletExt } from '../smartContracts';
+import { metaMaskWalletExt, getBalance } from '../smartContracts';
 
-const ClickThroughUI = () => {
+const ClickThroughUI = ({ getAddress, updateWalletBalance }) => {
 
   const [ count, setCount ] = useState(0);
-  const [ balance, setBalance ] = useState('')
+  const [ address, setAddress ] = useState('');
+  const [balance, setBalance] = useState('');
+
+  useEffect(() => {
+    if(address !== ''){
+      getAddress(address);
+      getBalance(address, setBalance)
+    } 
+
+if(balance > 0){
+     updateWalletBalance( ethers.utils.formatEther(balance) );
+}
+
+  }, [address, balance]);
+
+
+  const walletWrapper = () => {
+    metaMaskWalletExt(setAddress);
+   if(address){
+
+   }
+  }
+
+
 const array = [
   {
     include: true,
-    header: `Connect Wallet ${balance}`,
+    header: `Connect Wallet`,
     content: "By connecting your wallet, you agree to our Terms of Service and our Privacy Policy.",
     userInterface: <div>
-      <button className='btn btn btn-success' onClick={() => metaMaskWalletExt(setBalance)}>Metamask Wallet</button>
+      <button className='btn btn btn-success' onClick={() => metaMaskWalletExt(setAddress)}>Metamask Wallet</button>
       <button className='btn btn btn-success' onClick={() => walletConnectExt()}>Wallet Connect</button> 
     </div>
   },

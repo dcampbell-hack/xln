@@ -1,14 +1,26 @@
 import axios from '../axios';
 
 import {
+GET_ADDRESS,
+GET_BALANCE,
 CONNECTED_WALLET
 } from './types';
 
 
 export const getAddress = (address) => {
+
+    console.log('Get Address Action ----', address)
     return({
         type: GET_ADDRESS,
         payload: address
+    })
+}
+
+
+export const updateWalletBalance = (balance) => {
+    return({
+        type: GET_BALANCE,
+        payload: balance
     })
 }
 

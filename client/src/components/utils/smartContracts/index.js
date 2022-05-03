@@ -26,7 +26,10 @@ const chainLinkContractAddress = "0xa36085F69e2889c224210F603D836748e7dC0088";
 const contract = new ethers.Contract(chainLinkContractAddress, ERC20_ABI, metamask);
 
 
-export const getBalance = async (address) => await metamask.getBalance(address);;
+export const getBalance = async (address, setBalance) => {
+  const balance = await metamask.getBalance(address);
+  setBalance(balance);
+}
 
 // export const walletConnectExt = () => new providers.Web3Provider(walletconnect);
 
