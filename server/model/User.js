@@ -42,7 +42,10 @@ const UserSchema = new Schema({
         select: false
     },
     files: [FileSchema],
-    totalBalance: {
+    address: {
+        type: String
+    },
+    balance: {
        type: Number
     },
     resetPasswordToken: String,

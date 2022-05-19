@@ -26,14 +26,16 @@ const chainLinkContractAddress = "0xa36085F69e2889c224210F603D836748e7dC0088";
 const contract = new ethers.Contract(chainLinkContractAddress, ERC20_ABI, metamask);
 
 
-export const getBalance = async (address, setBalance) => {
-  const balance = await metamask.getBalance(address);
-  setBalance(balance);
+export const getBalance = async (checks, setChecks, updateWalletBalance) => {
+const value = await metamask.getBalance(checks.address);
+const balance = ethers.utils.formatEther(value);
+updateWalletBalance(balance)
+setChecks({ ...checks, balance });
 }
 
 // export const walletConnectExt = () => new providers.Web3Provider(walletconnect);
 
-export const metaMaskWalletExt = async (setBalance) => {
+export const connectWalletExt = async (checks, setChecks) => {
 
    console.log('Wallet Extension Function()')
 
@@ -42,7 +44,7 @@ export const metaMaskWalletExt = async (setBalance) => {
        window.ethereum.request({ method: 'eth_requestAccounts'})
        .then(result => {
           let address = result[0];
-          setBalance(address);
+          setChecks({ ...checks, address});
        })
        .catch(err => console.log(err));
  

@@ -19,14 +19,14 @@ import {
     export default function(state = initState, action){
         switch(action.type){
             case GET_ADDRESS:
-                console.log('Get address ------', action.payload)
+                console.log('REDUCER: Get address ------', action.payload)
                 return { ...state, loading: false, isError: false, address: action.payload }
                 case GET_BALANCE:
                     console.log('Get balance ------', action.payload)
-                    return { ...state, loading: false, isError: false, balance: Number(action.payload) }
+                    return { ...state, loading: false, isError: false, balance: Number(action.payload).toFixed(6) }
             case CONNECTED_WALLET:
-                console.log('Connected Payload ------', action)
-                return { ...state, loading: false, isError: false, profile: { address: action.address, balance: action.balance, username: action.username } }
+                console.log('Connected Payload ------', action.payload.data)
+                return { ...state, loading: false, isError: false }
             case AUTH_ERROR:
                 return { ...state, loading: false, isError: true, error: action.payload?.response?.data?.error, status: action.payload?.response?.status }
             default: 

@@ -319,6 +319,7 @@ export const landing = {
     members: [
       {
         image: CEO,
+        avatar: 'CEO-Executive.png',
         name: "Dwayne",
         position: "Chief Executive Officer (CEO) / Founder",
         bio: "Bio: Dwayne has been a Software Engineer for over a decade building software infrastructure for companies such as  Equinix, Dropbox, Gap & Freedom Financial. He first got interested in the blockchain & asset management in 2017 when WikiLeaks sold crypto kitty's to fund their organization. His responsibilities are to define the vision and momentum of Medallion XLN.",
@@ -328,6 +329,7 @@ export const landing = {
       },
       {
         image: COO,
+        avatar: 'COO-Executive.png',
         name: "Allan",
         position: "Chief Operating Officer (COO)",
         bio: "Bio: Allan has over 20 years of experience in the investment industry working with small boutique financial firms to large Turnkey Asset Management Programs.  Allan has held leadership roles in operations, service, learning & development, and internal communications.  His interest in blockchain & asset management space in 2019 as an investor in cryptocurrencies.",
@@ -337,6 +339,7 @@ export const landing = {
       },
       {
         image: CMO,
+        avatar: 'CMO-Executive.png',
         name: "Sophie",
         position: "Chief Marketing Officer (CMO)",
         bio: "Bio: N/A",
@@ -346,6 +349,7 @@ export const landing = {
       },
       {
         image: XPO,
+        avatar: 'XPO-Executive.png',
         name: "Ana",
         position: "Executive Program Officer (XPO)",
         bio: "N/A",
@@ -355,6 +359,7 @@ export const landing = {
       },
       {
         image: CTO,
+        avatar: 'CTO-Executive.png',
         name: "Gaurav",
         position: "Chief Technology Officer (CTO)",
         bio: "N/A",
@@ -364,6 +369,7 @@ export const landing = {
       },
       {
         image: CAO,
+        avatar: 'CAO-Executive.png',
         name: "Gary",
         position: "Client Acquisions Officer (CAO)",
         bio: "Gary has been a Sales & Customer Service Professional and Creative Talent for over 30 years. He has help onboard clients for ABC Television, The CW Network, Proctor & Gamble and Scandinavian Designs.",
@@ -373,6 +379,7 @@ export const landing = {
       },
       {
         image: XRO,
+        avatar: 'XRO-Executive.png',
         name: "Ptah `ArtCrazy` Quammie",
         position: "Experience Reality (XRO)",
         bio: "N/A",
@@ -381,6 +388,7 @@ export const landing = {
     },
       {
           image: CBO,
+          avatar: 'CBO-Executive.jpg',
           name: "Tom",
           position: "Chief Blockchain Officer (CBO)",
           bio: "N/A",
@@ -806,6 +814,8 @@ export const xln = {
 
 export const whitepaper = {
      header: 'Whitepaper',
+     image: DownloadWhitepaper,
+     description: "A whitepaper is an informational document usually issued by a company to highlight the features of a solution that it offers or plans to offer. Medallion XLN’s whitepaper will educate our community regarding the Digital Resource Management industry. Medallion XLN’s many use cases and implementations will be highlighted. Medallion XLN is creating a technology that has the potential to give birth to many new industries in a decentralized ecosystem. The whitepaper will provide our vision, values, implementation strategy, and provide a theoretical & practical approach to Asset Management.",
      options: {
      tableLabel: 'Table Of Contents',
      sections: [

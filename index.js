@@ -58,6 +58,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'client/public')));
 
 const User = require('./server/routes/user');
+const Wallet = require('./server/routes/wallet');
 const Conditional = require('./server/routes/conditional');
 const Auth = require('./server/routes/auth')
 

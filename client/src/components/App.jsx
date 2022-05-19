@@ -94,7 +94,7 @@ const App = ({ auth, users, loadUser }) => {
 
           <Route path="/assets" element={<Assets />} />
           <Route path="/assets/:id" element={<Assets />} />
-          <Route path="/assets/create" element={<ExecuteAsset />} />
+          <Route path="/assets/create" element={<ExecuteAsset users={users} />} />
           <Route path="/assets/:id/sell" element={<ExecuteAsset />} />
           <Route path="/assets/:id/buy" element={<ExecuteAsset />} />
           <Route path="/users/:id/assets/:id/view" element={<ExecuteAsset />} />

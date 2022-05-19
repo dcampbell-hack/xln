@@ -11,7 +11,8 @@ import {
     } from'../../actions/types'
 ;    
     const initState = {
-        user: {},
+        address: null,
+        balance: null,
         users: [],
         id: "",
         assetsOwned: 0,
@@ -22,7 +23,7 @@ import {
         lastname: "",
         email: '',
         role: "",
-        accountCreated: '',
+        accountCreated: null,
         files: [],
         totalBalance: 0,
         hasWallet: false,
@@ -34,7 +35,7 @@ import {
         switch(action.type){
             case LOAD_USER:
             const { } = action.payload.data;
-                return { ...state, ...action.payload.data, loading: false   }   
+                return { ...state, ...action.payload.data, loading: false, accountCreated: true }   
             case GET_USER:
                 return { ...state, user: action.payload, loading: true }
             case GET_USER_BY_USERNAME:

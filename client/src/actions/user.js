@@ -69,7 +69,8 @@ export const getUsers = () => async  dispatch => {
 export const updateUserAvatar = (id, file, config ) => async  dispatch => {
   try{
   if(file){
-  const res = await axios.put(`/api/v1/users/${id}/avatar`, file, config);
+  const assetPermissions = await axios.put(`/api/v1/users/${id}/avatar`, file, config);
+  const newFile = await axios.put(`/api/v1/users/${id}/avatar`, file, config);
   dispatch({
       type: UPDATE_USER_AVATAR,
       payload: res.data

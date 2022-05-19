@@ -82,5 +82,7 @@ export const FormDropdown = ({
     )
 }
 
+export const FileUpload = ({ className, id, name }) => <input className={className} type="file" id={id} name={name} />
+
 
 export const FormButton = ({ label, className, disable }) => <input className={className} type="submit" value={label} disabled={disable} />

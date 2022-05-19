@@ -194,6 +194,26 @@ background-color: #fff;;
     border: 0.2em solid #000;
 }
 
+.whitepaper-container{
+    padding: 0 1em;
+}
+
+.whitepaper-cover{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.wp-image{
+    width: 30em;
+
+}
+
+.wp-desc{
+    width: 30em;
+    font-size: 1.5em;
+}
+
 @media only screen and (max-width: 900px) {
 
     .cta-text{
@@ -215,6 +235,29 @@ background-color: #fff;;
 }
 
 @media only screen and (max-width: 727px) {
+
+
+    .xln-roadmap-bar-container{
+        display: none;
+    }
+
+    .xln-roadmap-panel{
+     border-left: 2px solid #000;
+    }
+
+    .xln-roadmap-panel h2{
+        padding: 0 0.5em;
+
+    }
+
+    .xln-roadmap-panel:hover{
+        border-left: 3px solid #f00;
+    }
+
+    .xln-roadmap-slider{
+        display: block;
+    }
+
     .team-container{
         justify-content: center;
     }

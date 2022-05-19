@@ -49,7 +49,8 @@ export const getSingleAsset = (id) => async dispatch => {
 
 export const createAsset = (body) => async dispatch => {
     try{
-        const res = await axios.post(`/api/v1/assets`, body);
+        const assetData = await axios.post(`/api/v1/assets`, body);
+        const assetFile = await axios.post(`/api/v1/assets/5f1c5d18c32d4481e03c1619/cover`, body);
         dispatch({
             type: CREATE_ASSET,
             payload: res.data

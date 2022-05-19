@@ -1,33 +1,62 @@
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import FeaturedContent from './content/featured-content';
-import { metaMaskWalletExt, getBalance } from '../smartContracts';
+import ConnectWallet from './content/connect-wallet';
+import SelectAvatar from './content/select-avatar';
+import { connectWalletExt, getBalance } from '../smartContracts';
 
-const ClickThroughUI = ({ getAddress, updateWalletBalance }) => {
+const ClickThroughUI = ({ blockchain, users, getAddress, updateWalletBalance, connectUserWallet }) => {
 
   const [ count, setCount ] = useState(0);
-  const [ address, setAddress ] = useState('');
-  const [balance, setBalance] = useState('');
+  const [ checks, setChecks ] = useState({})
+const { balance, address } = blockchain;
 
   useEffect(() => {
-    if(address !== ''){
-      getAddress(address);
-      getBalance(address, setBalance)
+
+    console.log('Checks ----', checks, users.address);
+
+    if(users.accountCreated){
+      setCount(1);
+      console.log('Check Account Created', count)
+      return;
+  }
+
+    async function balanceLoader(){
+      await getBalance(checks, setChecks, updateWalletBalance);
+      console.log('2 Address', { address, balance, checks });
+    }
+
+    if(address && !checks.balance ){
+        balanceLoader();
+    }
+
+    if(checks.balance && !users.accountCreated ){
+       console.log('3 Address & Balance', checks.balance )
+       connectUserWallet({ id: users.id, active: true, address, balance: checks.balance, accountCreated: true })
+    }
+
+    if(checks.address){
+      getAddress(checks.address);
+      return;
     } 
 
-if(balance > 0){
-     updateWalletBalance( ethers.utils.formatEther(balance) );
-}
-
-  }, [address, balance]);
+  }, [ checks.address, checks.balance ]);
 
 
-  const walletWrapper = () => {
-    metaMaskWalletExt(setAddress);
-   if(address){
+  const walletWrapper = async () => {
+    await connectWalletExt(checks, setChecks);
+  };
 
-   }
+
+  const wrappedCounter = () => {
+    if(count < array.length - 1 ){
+      setCount(count + 1);
+    } else {
+      setCount(0);
+    }
+  
   }
+  
 
 
 const array = [
@@ -35,41 +64,31 @@ const array = [
     include: true,
     header: `Connect Wallet`,
     content: "By connecting your wallet, you agree to our Terms of Service and our Privacy Policy.",
-    userInterface: <div>
-      <button className='btn btn btn-success' onClick={() => metaMaskWalletExt(setAddress)}>Metamask Wallet</button>
-      <button className='btn btn btn-success' onClick={() => walletConnectExt()}>Wallet Connect</button> 
-    </div>
+    userInterface: <ConnectWallet connect={walletWrapper } />
   },
   {
     include: true,
-    header: "KYC",
-    content: "Know Your Customer (KYC)",
-    userInterface: <div>UI Two</div>
+    header: "Add an Avatar",
+    content: "Select an avatar from Metamask or Upload one here",
+    userInterface: <SelectAvatar />
   },
   {
     include: true,
-    header: "AML",
+    header: "Invest In ICO",
     content: "AML Panel",
-    userInterface: <div>UI Three</div>
+    userInterface: <div>
+      Send money to ICO: Buy 1 ETH, 5 ETH, 10 ETH, 50 ETH, 100 ETH
+    </div>
   },
 ];
 
 
-const wrappedCounter = () => {
-  if(count < array.length - 1 ){
-    setCount(count + 1);
-  } else {
-    setCount(0);
-  }
-
-}
 
 
 
   return(
       <div className="click-through-ui-container">
          <FeaturedContent header={array[count].header} content={array[count].content} userInterface={array[count].userInterface} />
-         <button className="btn btn-primary btn-m" onClick={() => wrappedCounter()}>Next</button>
       </div>
   )
 }

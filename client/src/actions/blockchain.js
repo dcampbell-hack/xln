@@ -3,13 +3,12 @@ import axios from '../axios';
 import {
 GET_ADDRESS,
 GET_BALANCE,
-CONNECTED_WALLET
+CONNECTED_WALLET,
+AUTH_ERROR
 } from './types';
 
 
 export const getAddress = (address) => {
-
-    console.log('Get Address Action ----', address)
     return({
         type: GET_ADDRESS,
         payload: address
@@ -25,7 +24,17 @@ export const updateWalletBalance = (balance) => {
 }
 
 
-export const connectUserWallet = (payload) => {
+export const connectUserWallet = (payload) => async dispatch => {
+
+    try{
+        const res = await axios.post(`/api/v1/users/${payload.id}/wallets`, payload);
+        dispatch({
+            type: CONNECTED_WALLET,
+            payload: res.data
+        })
+    } catch(err){
+        dispatch({ type: AUTH_ERROR, payload: err})
+    }
 
     if(!payload.code){
     return({

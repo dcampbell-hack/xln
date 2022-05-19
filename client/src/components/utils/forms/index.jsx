@@ -7,7 +7,7 @@ import { ErrorAlert } from '../layout/errors/alert';
 import { connect } from 'react-redux';
 import { loginUser, registerUser } from '../../../actions/auth';
 import { validateEmailAddress, validatePassword } from '../operations/auth';
-import { FormInput,  FormTextArea, FormSelect, FormDropdown, FormButton } from "./elements";
+import { FormInput,  FormTextArea, FormSelect, FormDropdown, FormButton, FileUpload } from "./elements";
 
 /*
 {
@@ -50,6 +50,9 @@ const Form = ({ formData: { action, method, fields, submit }, setValues, values,
 
       case "dropdown":
         return <FormDropdown key={index}  options={attributes} />;
+
+        case "file":
+          return <FileUpload key={index}  options={attributes} />;
 
     default:
         return <>Empty</>

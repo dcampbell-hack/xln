@@ -1,7 +1,6 @@
 .asset-container{
 width: 100vw;
 height: auto;
-background-color: aqua;
 margin: 0;
 padding: 0;
 display: flex;
@@ -13,6 +12,7 @@ flex-wrap: wrap;
     justify-content: center;
     width: 100vw;
     height: 100px;
+    padding: 1em 0;
 }
 
 .profile-items{
@@ -73,43 +73,60 @@ flex-wrap: wrap;
 }
 
 .checkbox-item{
+    width: 300px;
+    height: 200px;
     display: flex;
+    flex-wrap: wrap;
+    align-items: end;
     justify-content: space-between;
-    margin: 10px 5px;
-    background-color: violet;
+    margin: 5px;
 }
 
-.checkbox-item + .permission{
-    width: 32rem;
+.permission-label-container{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 3px;
+    background-color: #fff;
+    box-shadow: 1px 3px 1px #333;
+    display: grid;
+    place-items: center;
+}
+
+.permission-label{
+    width: 95%;
+    height: 95%;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.permission-checkbox input {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 5px solid #03f;
 }
 
 
-.checkbox-item + .username{
-    width: 18rem;
-}
+// .checkbox-item + .permission{
+//     width: 32rem;
+// }
 
-.checkbox-item + .asset{
-    width: 21rem;
-}
+
+// .checkbox-item + .username{
+//     width: 18rem;
+// }
+
+// .checkbox-item + .asset{
+//     width: 21rem;
+// }
 
 .permission-checkbox{
     width: 50px;
     height: 50px;
     display: grid;
     place-items: center;
-}
-
-
-.permission-checkbox input{
-    width: 50%;
-    height: 50%;
-}
-
-.permission-label{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    text-align: center;
 }
 
 .asset-dependency-container{
@@ -122,7 +139,7 @@ flex-wrap: wrap;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: #03f;
+    background-color: #333;
 }
 
 .asset-value{
@@ -136,3 +153,6 @@ flex-wrap: wrap;
 .asset-launch{
     width: 100vw;
 }
+
+
+
