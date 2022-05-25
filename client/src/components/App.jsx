@@ -23,6 +23,9 @@ import ExecuteAsset from "./asset/execute";
 import Shares from "./share";
 import ExecuteShare from "./share/execute";
 
+import AIWrapper from './AI/models/objectDetection';
+import XRDemo from './XR';
+
 // Utils
 import FormatLayout from "./utils/layout/";
 
@@ -97,6 +100,10 @@ const App = ({ auth, users, loadUser }) => {
           <Route path="/assets/create" element={<ExecuteAsset users={users} />} />
           <Route path="/assets/:id/sell" element={<ExecuteAsset />} />
           <Route path="/assets/:id/buy" element={<ExecuteAsset />} />
+
+          <Route path="/ai" element={<AIWrapper />} /> 
+          <Route path="/xr" element={<XRDemo />} /> 
+
           <Route path="/users/:id/assets/:id/view" element={<ExecuteAsset />} />
           <Route path="//shares" element={<Shares />} />
           <Route path="/shares/:id" element={<Shares />} />

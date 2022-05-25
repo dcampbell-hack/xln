@@ -74,21 +74,32 @@ flex-wrap: wrap;
 
 .checkbox-item{
     width: 300px;
-    height: 200px;
     display: flex;
     flex-wrap: wrap;
-    align-items: end;
     justify-content: space-between;
     margin: 5px;
+    background-color: #e4e4e4;
+}
+
+.checkbox-item:hover{
+    background-color: #ccc;
+}
+
+.checkbox-item  .asset{
+    height: 200px;
+    align-items: end;
+}
+
+.checkbox-item  .permission{
+    background-color: aquamarine;
+    align-items: start;
 }
 
 .permission-label-container{
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin: 3px;
     background-color: #fff;
-    box-shadow: 1px 3px 1px #333;
     display: grid;
     place-items: center;
 }
@@ -104,23 +115,31 @@ flex-wrap: wrap;
 .permission-checkbox input {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
     border: 5px solid #03f;
 }
 
+.permission-checkbox-container{
+    width: 12%;
+    height: auto;
 
-// .checkbox-item + .permission{
-//     width: 32rem;
-// }
+}
 
+.permission-checkbox-container input{
+    width: 30px;
+    height: 30px;
+}
 
-// .checkbox-item + .username{
-//     width: 18rem;
-// }
+.permission-name{
+    width: 88%;
+    height: auto;
+    display: flex;
+    align-items: start;
+}
 
-// .checkbox-item + .asset{
-//     width: 21rem;
-// }
+.permission-name p{
+    margin: 0;
+    padding: 0 1em 0;
+}
 
 .permission-checkbox{
     width: 50px;

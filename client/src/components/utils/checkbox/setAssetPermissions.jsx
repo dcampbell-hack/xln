@@ -1,151 +1,69 @@
 const SetAssetPermissions = () => {
+
+
+const permissions = [
+  { 
+    label: "Sell Shares in Asset"
+  },
+  { 
+    label: "Only shareholders can access Asset"
+  },
+  { 
+    label: "Allow shareholder to share as themselves"
+  },
+  { 
+    label: "Else must share as owners avatar boolean"
+  },
+  { 
+    label: "Shareholder can share asset"
+  },
+  { 
+    label: "Copy and paste enabled"
+  },
+  { 
+    label: "Link eternally"
+  },
+  { 
+    label: "send GET, POST, PATCH, UPDATE, DELETE request"
+  },
+  { 
+    label: "Show teaser"
+  },
+  { 
+    label: "Charge for likes"
+  },
+  { 
+    label: "Charge for comments"
+  },
+  { 
+    label: "Display asset link to non shareholders"
+  },
+  { 
+    label: "Shareable to any other streams"
+  },
+  { 
+    label: "Can be sent as a message"
+  },
+  { 
+    label: "Can be advertised"
+  },
+]
+
+
+const mapPermissions = () => permissions.map(({ label }) => <div className="checkbox-item permission">
+<div className="permission-checkbox-container">
+  <input type="checkbox" />
+</div>
+<div className="permission-name">
+  <p>{label}</p>
+</div>
+</div>)
+
     return(
         <div className="asset-checkboxes">
         <p>Set Permission</p>
         <div className="checkbox">
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Sell Shares in Asset </p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Only shareholders can access Asset</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Allow shareholder to share as themselve</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Else must share as owners avatar boolean</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Shareholder can share asset</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Copy and paste enabled</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Link eternally</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>send GET, POST, PATCH, UPDATE, DELETE request</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Display date created</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Show teaser</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Charge for likes</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Charge for comments</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Display asset link to non shareholders</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Shareable to any other streams</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Can be sent as a message</p>
-            </div>
-          </div>
-
-          <div className="checkbox-item permission">
-            <div className="permission-checkbox">
-              <input type="checkbox" />
-            </div>
-            <div className="permission-label">
-              <p>Can be advertised</p>
-            </div>
-          </div>
+          { mapPermissions() }
         </div>
       </div>
     )

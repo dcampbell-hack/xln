@@ -8,5 +8,8 @@ export default defineConfig({
       "api/v1": "http://localhost:4005/"
     },
   },
-  plugins: [react()]
+  plugins: [react()],
+  optimizeDeps: {
+    allowNodeBuiltins: ["seedrandom"],
+  },
 })

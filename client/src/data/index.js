@@ -342,7 +342,7 @@ export const landing = {
         avatar: 'CMO-Executive.png',
         name: "Sophie",
         position: "Chief Marketing Officer (CMO)",
-        bio: "Bio: N/A",
+        bio: "Bio:  Kushner Sophia , an American entrepreneur who was born and raised in Canada, I am one of many entrepreneurs who has taken her talents to the digital space by minting and selling non-fungible tokens, or NFTs, on digital marketplaces. Prior to minting and selling non- fungible tokens I also have a career in crypto where back in 2020 I started off my ROI (Return on investments) the success rate was 90% for myself and others who invested and has moved further up to hold coins on Public. Kushner Sophia is a principal body under Arenalive a United Kingdom based company charged with promoting economic programs and national public-private partnerships to advance innovation and entrepreneurship.",
         responsibilities: "Tasks: Creates marketing strategy and is responsible for advertising, branding & client acquisition for the company. Must have a deep understanding about how to leverage social media to create an army of followers. Stay up to date with the latest trends, defining and attracting a loyal and passionate user base. Construct marketing plans to meet customers & business partners alike.",
         manages:
           "Brand Manager, Director of Marketing, SEO Manager, Social Media Manager, Email Marketing Manager",
@@ -352,7 +352,7 @@ export const landing = {
         avatar: 'XPO-Executive.png',
         name: "Ana",
         position: "Executive Program Officer (XPO)",
-        bio: "N/A",
+        bio: "Bio: Ana is an accomplished Digital leader with 15 years of experience, offering a unique blend of Program Management, Technology, and Marketing expertise. She also offers an exceptional record of strategic planning/execution, while building high-performing cross-functional teams, coaching/developing talent, and ensuring operational excellence.",
         responsibilities: "Executive Program Officer oversee the fulfillment of larger organizational goals. They coordinate activities between multiple projects without directly managing them. Instead, they manage the main program, giving detailed attention to program strategy, project delegation, and program implementation.",
         manages:
           "As an Executive Program Officer, you will be communicating, coordinating, and collaborating with cross functional teams daily. Working most closely with the Engineering and Product Management teams, you will be influencing all aspects of the product delivery process.",
@@ -362,7 +362,7 @@ export const landing = {
         avatar: 'CTO-Executive.png',
         name: "Gaurav",
         position: "Chief Technology Officer (CTO)",
-        bio: "N/A",
+        bio: "Bio: Gaurav Kumar, Chief Technology Officer (CTO)  Meet GK our CTO | ex PayPal, ex eBay, he has more than a decade experience in building core technologies and shipping stellar user experiences to millions of users. GK holds a BS, MS degrees in Computer Science. Based out of San Francisco Bay Area, when he is not in a Nerd mode, he spends time with his friends and family.",
         responsibilities: "Oversees the development and dissemination of technology for external customers, vendors, and other clients to help improve and increase business. Keeps pace with the accelerated rate of change in technology. Offers innovative solutions to the company. They may also deal with internal IT operations if a company is small and doesn't have a Chief Information Officer.                ",
         manages:
           "Engineering Manager, Front End Developer, Lead Software Engineer, Machine Learning Engineer, QA Engineer, Senior Software Engineer, Software Engineer",

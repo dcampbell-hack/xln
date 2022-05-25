@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
@@ -44,6 +45,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "request": "^2.88.2",
+    "seedrandom": "^3.0.5",
     "slugify": "^1.4.0",
     "uuid": "^8.3.2",
     "xss-clean": "^0.1.1",

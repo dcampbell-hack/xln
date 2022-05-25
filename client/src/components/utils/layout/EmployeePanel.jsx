@@ -12,7 +12,6 @@ const EmployeePanel = ({ image, name, position, bio, responsibilities, manages }
                      {position}
                      <TruncateText text={bio} charLimit={90} />
                      <TruncateText text={responsibilities} charLimit={90} />
-                     <TruncateText text={manages} charLimit={90} />
                   </p>
              </div>
         </div>
