@@ -3,13 +3,15 @@ import { landing } from "../../../../data";
 import Avatar from "../../avatar"; 
 import Form from "../../forms";
 import QRCodeGenerator from '../../qrcode';
+import SetAssetPermissions from '../../checkbox/setAssetPermissions';
+
 
 const SelectAvatar = () => {
 
 const { team } = landing;
 
 const formData = {
-    action: "register",
+    action: "avatar",
     method: "post",
     submit: {
         display: 'none',
@@ -58,7 +60,8 @@ const renderAvatarOptions = () => team.members.map(({ avatar }, index) => <Avata
                     </div>
                 </div>
                 <div className="avatar-permission">
-                  <QRCodeGenerator text="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/111345543521549204964270021530169195022188228486824666382521162042179852435457" />
+                  {/* <QRCodeGenerator text="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/111345543521549204964270021530169195022188228486824666382521162042179852435457" /> */}
+                  <SetAssetPermissions />
                 </div>
             </div>
         </div>

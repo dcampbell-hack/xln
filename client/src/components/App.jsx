@@ -22,9 +22,9 @@ import Assets from "./asset";
 import ExecuteAsset from "./asset/execute";
 import Shares from "./share";
 import ExecuteShare from "./share/execute";
-
-import AIWrapper from './AI/models/objectDetection';
-import XRDemo from './XR';
+import NotFound from "./notFound";
+import AIModelSelector from './AI/';
+import XRDemo from './XR/';
 
 // Utils
 import FormatLayout from "./utils/layout/";
@@ -64,6 +64,7 @@ const App = ({ auth, users, loadUser }) => {
         <Header auth={auth} user={users} header={header} isLoggedIn={isLoggedIn} xln={xln} landing={landing} />
         { auth.isError && <Error auth={auth} /> }
         <Routes>
+        <Route path='*' element={<NotFound />} />
           <Route
             path="/"
             element={<Landing landing={landing} socialLinks={socialLinks} />}
@@ -101,7 +102,8 @@ const App = ({ auth, users, loadUser }) => {
           <Route path="/assets/:id/sell" element={<ExecuteAsset />} />
           <Route path="/assets/:id/buy" element={<ExecuteAsset />} />
 
-          <Route path="/ai" element={<AIWrapper />} /> 
+          <Route path="/ai" element={<AIModelSelector type="handPoseDetection" />} /> 
+ 
           <Route path="/xr" element={<XRDemo />} /> 
 
           <Route path="/users/:id/assets/:id/view" element={<ExecuteAsset />} />

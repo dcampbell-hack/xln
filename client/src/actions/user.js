@@ -66,7 +66,7 @@ export const getUsers = () => async  dispatch => {
   }
 }
 
-export const updateUserAvatar = (id, file, config ) => async  dispatch => {
+export const uploadFile = (id, file, config ) => async  dispatch => {
   try{
   if(file){
   const assetPermissions = await axios.put(`/api/v1/users/${id}/avatar`, file, config);

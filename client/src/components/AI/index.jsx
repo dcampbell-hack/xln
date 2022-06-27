@@ -3,7 +3,7 @@ import Deeplab from "./models/deeplab";
 import DepthEstimation from "./models/depthEstimation";
 import FaceDetection from "./models/faceDetection";
 import FaceLandmarksDetection from "./models/faceLandmarksDetection";
-import HandPoseDetection from "./models/handPoseDetection";/
+import HandPoseDetection from "./models/handPoseDetection";
 import KNNClassifier from "./models/knnClassifier";
 import Mobilenet from "./models/mobilenet";
 import ObjectDetection from "./models/objectDetection";

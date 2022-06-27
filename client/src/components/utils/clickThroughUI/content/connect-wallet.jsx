@@ -1,8 +1,8 @@
-const ConnectWallet = ({ connect }) => {
+const ConnectWallet = ({ metaMask, walletConnect }) => {
     return(
-        <div>
-            <button className='btn btn btn-success' onClick={() => connect()}>Metamask Wallet</button>
-            <button className='btn btn btn-primary' onClick={() => connect()}>Wallet Connect</button> 
+        <div className="wallet-btn-container">
+            <button className='btn btn btn-success' onClick={() => metaMask()}>Metamask Wallet</button>
+            <button className='btn btn btn-primary' onClick={() => walletConnect()}>Wallet Connect</button> 
         </div>
     )
 }

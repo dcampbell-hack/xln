@@ -8,6 +8,7 @@ import ContactUs from './ContactUs';
 import Team from './Team';
 import Roadmap from './Roadmap';
 import DownloadWhitepaper from './DownloadWhitepaper';
+import XRDemo from '../XR/lambo';
 
 
 const Landing = ({ landing: { cta, summary, overview, blockchain, tokenAllocation, downloadWhitepaper, team, roadMap, contact}, socialLinks }) => {

@@ -6,6 +6,7 @@ import { ErrorAlert } from '../layout/errors/alert';
 //Redux
 import { connect } from 'react-redux';
 import { loginUser, registerUser } from '../../../actions/auth';
+import { uploadFile } from '../../../actions/user'
 import { validateEmailAddress, validatePassword } from '../operations/auth';
 import { FormInput,  FormTextArea, FormSelect, FormDropdown, FormButton, FileUpload } from "./elements";
 
@@ -23,7 +24,7 @@ fields: [
 
  */
 
-const Form = ({ formData: { action, method, fields, submit }, setValues, values, loginUser, registerUser, auth }) => {
+const Form = ({ formData: { action, method, fields, submit }, setValues, values, loginUser, registerUser, uploadFile, auth }) => {
   let navigate = useNavigate();
   useEffect(() => {
     if(auth.register.success){
@@ -99,9 +100,11 @@ if(!errorArr.length){
       loginUser(values);
       break;
     case "register":
-      console.log('Register??? ----', auth)
        registerUser(values)
        break;
+      case "avatar":
+      uploadFile(values)
+      break;
     default: 
     return null
   }
@@ -128,7 +131,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { 
   loginUser, 
-  registerUser
+  registerUser,
+  uploadFile
 }
 
 

@@ -44,10 +44,7 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
               </div>
 
               </Link>
-             { auth.isAuthenticated && <div className="header-avatar-stats">
-                  <i>{user.username}</i>
-                  <b>{Number(auth.profile.balance).toFixed(5)} ETH</b>
-            </div> }
+   
             </div>
               <div className="">
                   { !isLoggedIn.success ?

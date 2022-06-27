@@ -1,12 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-//import * as tf from "@tensorflow/tfjs";
-// 1. TODO - Import required model here
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
-//import * as cocossd from "@tensorflow-models/coco-ssd";
-
 import Webcam from "react-webcam";
-// 2. TODO - Import drawing utility here
-// e.g. import { drawRect } from "./utilities";
 import { drawRect } from "../../utils/AIMethods";
 
 const ObjectDetection = () => {
@@ -16,9 +9,8 @@ const ObjectDetection = () => {
   // Main function
   const runCoco = async () => {
     // 3. TODO - Load network 
-    // e.g. const net = await cocossd.load();
     const net = await cocoSsd.load();
-    //  Loop and detect hands
+
     setInterval(() => {
       detect(net);
     }, 10);
@@ -59,9 +51,10 @@ const ObjectDetection = () => {
 
   useEffect(()=>{runCoco()},[]);
 
+  console.log('Object Detection')
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="">
         <Webcam
           ref={webcamRef}
           muted={true} 
@@ -92,7 +85,6 @@ const ObjectDetection = () => {
             height: 780,
           }}
         />
-      </header>
     </div>
   );
 }

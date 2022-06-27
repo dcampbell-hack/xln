@@ -229,8 +229,8 @@ export const landing = {
         allocation: ["Allocation", "Percentage", "Amount"],
         distribution: [
           {
-            allocation: "Investors",
-            percentage: 0.30,
+            allocation: "Seed Sale",
+            percentage: 0.15,
             color: "rgba(0, 150, 255, 0.5)",
           },
           {
@@ -240,12 +240,12 @@ export const landing = {
           },
           {
             allocation: "Liquidity",
-            percentage: 0.125,
+            percentage: .15,
             color: "rgba(255, 156, 0, 0.5)",
           },
           {
             allocation: "Founders",
-            percentage: 0.10,
+            percentage: 0.12,
             color: "rgba(255, 205, 86, 0.5)",
           },
           {
@@ -255,12 +255,12 @@ export const landing = {
           },
           {
             allocation: "Advisors",
-            percentage: 0.05,
+            percentage: 0.09,
             color: "rgba(109, 248, 81, 0.5)",
           },
           {
             allocation: "Air Drop",
-            percentage: 0.025,
+            percentage: 0.09,
             color: "rgba(255, 156, 0, 0.5)",
           },
         ],

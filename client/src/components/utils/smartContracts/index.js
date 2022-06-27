@@ -1,4 +1,7 @@
 import { xln } from '../../../data/index';
+// import Web3Modal from 'web3modal';
+// import WalletConnect from '@walletconnect/web3-provider';
+
 import { ethers, providers } from 'ethers';
 // import WalletConnectProvider from "@walletconnect/web3-provider";
 
@@ -26,6 +29,8 @@ const chainLinkContractAddress = "0xa36085F69e2889c224210F603D836748e7dC0088";
 const contract = new ethers.Contract(chainLinkContractAddress, ERC20_ABI, metamask);
 
 
+
+
 export const getBalance = async (checks, setChecks, updateWalletBalance) => {
 const value = await metamask.getBalance(checks.address);
 const balance = ethers.utils.formatEther(value);
@@ -36,8 +41,6 @@ setChecks({ ...checks, balance });
 // export const walletConnectExt = () => new providers.Web3Provider(walletconnect);
 
 export const connectWalletExt = async (checks, setChecks) => {
-
-   console.log('Wallet Extension Function()')
 
     if(window.ethereum){
       console.log('Ethereum ---')
@@ -53,6 +56,16 @@ export const connectWalletExt = async (checks, setChecks) => {
   }
  
  }
+
+
+//  export const web3Modal = new Web3Modal({
+//     network: "mainnet",
+//     providerOptions: {
+//        walletconnect: {
+//           infuraId: xln.infura
+//        }
+//     }
+//  }) 
 
  export const readContract = async () => async () => {
     const name = await contract.name();

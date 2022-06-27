@@ -3,8 +3,6 @@ import { PrimaryL } from "../../buttons/links";
 
 const TwoPanelTextImageCol = ({ options: { id, standard, title, description, image, clickable, charLimit, minimizeImage, button } }) => {
 
-    console.log('Check Button -----', button)
-
     return(
         <div className={`util-two-panel-col ${ standard && 'util-two-panel-reverse' }`}>
             <div className='two-panel-text'>

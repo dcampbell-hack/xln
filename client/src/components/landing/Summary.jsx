@@ -1,7 +1,7 @@
 import { LinkL } from '../utils/buttons/links'
 
 const Summary = ({ summary: {content, url }}) => {
-  console.log('Summary loaded -----', url)
+
   return(
       <div className='xln-summary panel-padding'>
           <div className='summary-content'>

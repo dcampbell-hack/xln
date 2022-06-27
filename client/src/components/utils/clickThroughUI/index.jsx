@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
+// import { web3Modal } from '../smartContracts';
+import Modal from '../modal';
 import FeaturedContent from './content/featured-content';
 import ConnectWallet from './content/connect-wallet';
+import FFMpeg from '../ffmpeg/';
 import SelectAvatar from './content/select-avatar';
 import { connectWalletExt, getBalance } from '../smartContracts';
 
-const ClickThroughUI = ({ blockchain, users, getAddress, updateWalletBalance, connectUserWallet }) => {
+// const provider = await web3Modal.connect();
+// const web3 = new Web3(provider);
+
+const ClickThroughUI = ({ blockchain, users, accounts, getAddress, updateWalletBalance, connectUserWallet }) => {
 
   const [ count, setCount ] = useState(0);
-  const [ checks, setChecks ] = useState({})
-const { balance, address } = blockchain;
+  const [ checks, setChecks ] = useState({});
+  const [ modal, setModal ] = useState(false)
+  const { balance, address } = blockchain;
 
   useEffect(() => {
-
-    console.log('Checks ----', checks, users.address);
 
     if(users.accountCreated){
       setCount(1);
@@ -38,7 +43,7 @@ const { balance, address } = blockchain;
     if(checks.address){
       getAddress(checks.address);
       return;
-    } 
+    }
 
   }, [ checks.address, checks.balance ]);
 
@@ -48,29 +53,28 @@ const { balance, address } = blockchain;
   };
 
 
-  const wrappedCounter = () => {
-    if(count < array.length - 1 ){
-      setCount(count + 1);
-    } else {
-      setCount(0);
-    }
-  
-  }
-  
+  const wrappedCounter = () => setModal(!modal)
+
 
 
 const array = [
   {
     include: true,
     header: `Connect Wallet`,
-    content: "By connecting your wallet, you agree to our Terms of Service and our Privacy Policy.",
-    userInterface: <ConnectWallet connect={walletWrapper } />
+    content: `Address: ${accounts ? accounts : "Not Connected"} <br/> By connecting your wallet, you agree to our Terms of Service and our Privacy Policy.`,
+    userInterface: <ConnectWallet metaMask={walletWrapper} walletConnect={wrappedCounter} />
   },
   {
     include: true,
     header: "Add an Avatar",
     content: "Select an avatar from Metamask or Upload one here",
     userInterface: <SelectAvatar />
+  },
+  {
+    include: true,
+    header: `Video Editor`,
+    content: "Testing out FFMpeg Video upload",
+    userInterface: <FFMpeg />
   },
   {
     include: true,
@@ -88,6 +92,10 @@ const array = [
 
   return(
       <div className="click-through-ui-container">
+          { modal && <Modal action={setModal} bool={modal}>
+          <p>Hello</p>
+          </Modal>
+         }
          <FeaturedContent header={array[count].header} content={array[count].content} userInterface={array[count].userInterface} />
       </div>
   )

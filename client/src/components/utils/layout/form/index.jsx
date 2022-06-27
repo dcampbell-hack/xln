@@ -15,7 +15,9 @@ const FormLayout = ({ options: { standard, title, warning, warningLink: { text, 
                 <div className="form-container">
                   <Form formData={formData} setValues={setValues} values={values} />
                 </div>
-                <i>{warning}<LinkNoPaddingL text={text} url={to} icon={icon} show={show} external={external} /></i>
+                <i>{warning} <LinkNoPaddingL text={text} url={to} icon={icon} show={show} external={external} /></i>
+                <br/>
+                {formData.action == "login" && <i>Forgot Password?</i>}
             </div>
         </div>
     )
