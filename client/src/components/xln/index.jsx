@@ -7,10 +7,10 @@ import { xln } from '../../data';
 import { ethers } from 'ethers';
 import '../../css/xln/XLN.scss';
 import '../../css/assets/Avatar.scss';
+import Template from '../utils/layout/template';
 
 
-const XLN = ({ users, blockchain, xln: { infura, authentication: { userChecks } }, getAddress, updateWalletBalance, connectUserWallet }) => {
-
+const XLN = ({ users, blockchain, xln: { infura, options, authentication: { userChecks } }, getAddress, updateWalletBalance, connectUserWallet }) => {
   const [web3Api, setWeb3Api ] = useState("")
   const [ accounts, setAccounts ] = useState(null);
 
@@ -33,7 +33,7 @@ useEffect(() => {
     }
 
 setWeb3Api({
-  web3: new Web3(provider),
+  // web3: new Web3(provider),
   provider
 })
 
@@ -57,7 +57,8 @@ useEffect(() => {
 
  return (
     <div className="xln-setup-container">
-       <ClickThroughUI
+       {/* <ClickThroughUI
+          options={options}
           users={users}
           blockchain={blockchain}
           accounts={accounts}
@@ -65,7 +66,9 @@ useEffect(() => {
           getAddress={getAddress}
           updateWalletBalance={updateWalletBalance}
           connectUserWallet={connectUserWallet}
-          />
+          /> */}
+
+          <Template options={options} />
     </div>
   );
 }

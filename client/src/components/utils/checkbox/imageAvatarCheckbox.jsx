@@ -1,6 +1,6 @@
 const ImageAvatarCheckbox = ({ id, username, asset_name, avatar, cover, checkbox, setCheckbox }) => {
     return(
-        <div key={id} style={{   background: `url(/uploads/${username}/asset/${cover})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className="checkbox-item asset">
+        <div key={id} style={{ background: `url(/uploads/${username}/asset/${cover})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className="checkbox-item asset">
         <div className="permission-checkbox">
            <input type="checkbox" onChange={() => setCheckbox({ ...checkbox, id, username, asset_name, avatar, cover })} />
         </div>

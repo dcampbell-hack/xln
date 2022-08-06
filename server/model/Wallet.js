@@ -4,12 +4,8 @@ const ErrorResponse = require('../utils/errorResponse');
 
 const WalletSchema = new Schema({
   balance: {
-    type: String,
+    type: Number,
     require: [ true, 'User must have a balance']
-},
-address: {
-   type: String,
-   require: [true, "wallet address must be included"]
 },
 active: {
   type: Boolean,
@@ -28,19 +24,14 @@ active: {
 
 //Only one wallet can be active at a time
 WalletSchema.pre('save', async function(next){
-
-/*
-  // if(this.balance > 0.00001){
-  //    new ErrorResponse('Balance must be greater than 0 to create a wallet', 500)
-  // }
-*/
-
-console.log('Check ')
+  if(this.balance < 0.01){
+     new ErrorResponse('Balance must be greater than 0 to create a wallet', 500)
+  }
 
 const user = await this.model('User').findById(this.user);
-//if(user.role !== 'system'){ 
-  await this.model('User').findByIdAndUpdate(this.user, { role: 'publisher', balance: this.balance, address: this.address });
-//}
+if(user.role !== 'system'){ 
+  await this.model('User').findByIdAndUpdate(this.user, { role: 'publisher' });
+}
   next();
   
 })

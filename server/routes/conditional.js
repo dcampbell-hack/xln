@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true});
 
-const advancedResults = require('../middleware/advancedResult');
+const advancedResults = require('../middleware/advancedResults');
 
 const { getConditional, createConditional, updateConditional }  = require('../controller/conditional');
 

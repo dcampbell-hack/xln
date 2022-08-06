@@ -13,7 +13,7 @@ const filterContent = (value) => {
 
 const mapTableOfContents = () => sections.map(({ id, title }) => <TableName key={id} title={title} action={filterContent} />);
 
-const mapContents = () => contents.map(({ id, title, content: { list, details, lists } }) => <Content key={id} title={title} list={list} lists={lists} details={details} />)
+const mapContents = () => contents.map(({ id, title, image, content }, index) => <Content key={index} title={title} image={image} content={content} />)
 
 
     return(

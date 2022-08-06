@@ -13,5 +13,5 @@ import blockchainReducer from './type/blockchainReducer';
 export default combineReducers({
     auth: authReducer,
     users: userReducer,
-    blockchain: blockchainReducer
+    blockchain: blockchainReducer,
 })

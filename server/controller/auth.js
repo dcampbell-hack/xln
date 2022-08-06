@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 const sendEmail = require('../utils/sendEmail');
+const newEmail = require('../utils/newEmail');
 const User = require('../model/User');
 const sendTokenResponse = require('../middleware/sendToken');
 
@@ -16,10 +17,6 @@ exports.register = asyncHandler(async (req, res, next) => {
         firstname, lastname, username, email, password, role
     });
 
-    if(!user){
-        return next(new ErrorResponse('Invalid credentials', 500))
-    }
-
     sendTokenResponse(user, 200, res)
 })
 
@@ -31,7 +28,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     
     // Validate password & email
     if(!email || !password ){
-        return next(res.status(400).json({ error: "Must include email & password"}))
+        return next(new ErrorResponse('Please provide an email and password', 400))
     }
 
     // Check for user 
@@ -108,6 +105,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
 
     if(!user){
+        res.status(404).send({ error: 'There is no user with that email'  })
         return next(new ErrorResponse('There is no user with that email', 404));
     }
 
@@ -115,12 +113,13 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     const resetToken = await user.getResetPasswordToken();
 
     await user.save({ validateBeforeSave: false })
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
+    const resetUrl = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}`;
     const message = `You are recieving this email you (or someone else) has 
     requested the rest of a password. Please make a PUT request to: \n\n ${resetUrl}`;
 
     try{ 
-        await sendEmail({
+
+        await newEmail({
             email: user.email,
             subject: 'Password reset token',
             message

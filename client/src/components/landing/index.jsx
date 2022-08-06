@@ -8,7 +8,7 @@ import ContactUs from './ContactUs';
 import Team from './Team';
 import Roadmap from './Roadmap';
 import DownloadWhitepaper from './DownloadWhitepaper';
-import XRDemo from '../XR/lambo';
+import Timer from './Timer';
 
 
 const Landing = ({ landing: { cta, summary, overview, blockchain, tokenAllocation, downloadWhitepaper, team, roadMap, contact}, socialLinks }) => {
@@ -17,6 +17,7 @@ const Landing = ({ landing: { cta, summary, overview, blockchain, tokenAllocatio
             <CTA cta={cta} socialLinks={socialLinks} />
             <Summary summary={summary} />
             <Overview overview={overview} />
+            <Timer />
             <Blockchain blockchain={blockchain} />
             <TokenAllocation tokenAllocation={tokenAllocation} />
             <Roadmap roadMap={roadMap} /> 

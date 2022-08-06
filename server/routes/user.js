@@ -2,23 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 const { getUser, getUsers, createUser, updateUser, deleteUser, updateUserAvatar, updateUserCover } = require('../controller/user');
-const walletRouter = require('./wallet');
-router.use('/:userId/wallets', walletRouter);
 
-/*
 const sharesRouter = require('./share');
 const reviewsRouter = require('./review');
-
+const walletRouter = require('./wallet');
 const commentsRouter = require('./comment');
 
-
- router.use('/:userId/shares', sharesRouter) 
+router.use('/:userId/wallets', walletRouter)
+router.use('/:userId/shares', sharesRouter)
 router.use('/:userId/reviews', reviewsRouter)
 router.use('/:userId/comments', commentsRouter)
-*/
 
 
-const advancedResults = require('../middleware/advancedResult');
+const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
 const User = require('../model/User');
 

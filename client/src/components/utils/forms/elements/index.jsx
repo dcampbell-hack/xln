@@ -1,3 +1,6 @@
+import{ useState } from 'react';
+
+
 const Option = ({ value, text, selected}) => {
     return (
       <option value={value} selected={selected}>{text}</option>
@@ -16,15 +19,44 @@ export const FormInput = ({
     values
 }) => {
 
+    const [ showPassword, setShowPassword ] = useState(false)
+
     const onchange = e => {
        setValues({ ...values, [e.target.name]: e.target.value });
     }
 
     return(
-        <div className={`form-control-container ${error && 'form-error'} ${ inverse && 'row-reverse' }`}>
+        <div className={`form-control-container ${type == 'password' ? 'password_input' : 'normal_input'} ${error && 'form-error'} ${ inverse && 'row-reverse' }`}>
             {  show && <label htmlFor={forId}>{labelText}</label> }
             <div className="form-control">
-               <input type={type} id={id} className={className} name={name} placeholder={placeholder}  onChange={e => onchange(e) } />
+               <input type={ showPassword ? 'text' : type } id={id} className={className} name={name} placeholder={placeholder}  onChange={e => onchange(e) } />
+               {type == 'password' && <div className="form-toggle-password" onClick={() => setShowPassword(!showPassword)}>{ !showPassword ? <h6>Show</h6> : <h6>Hide</h6> }</div> }
+            </div>
+        </div>
+    )
+}
+
+export const BuyFormInput = ({
+    options: {
+        label: { error, inverse, show, labelText, forId },
+        input: { type, id, className, name, value, placeholder },
+        aria: {}
+    },
+    setValues,
+    values
+}) => {
+
+    const [ price, setPrice ] = useState(false)
+
+    const onchange = e => {
+       setValues({ ...values, [e.target.name]: e.target.value });
+    }
+
+    return(
+        <div className={`buy-xln-container ${error && 'form-error'} ${ inverse && 'row-reverse' }`}>
+            <div className="form-control">
+               <input type="number" name="buyxln" placeholder={0.5}  onChange={e => onchange(e) } />
+               {/* {type == 'password' && <div className="form-toggle-password" onClick={() => setShowPassword(!showPassword)}>{ !showPassword ? <h6>Show</h6> : <h6>Hide</h6> }</div> } */}
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFound3D from '../XR/notFound';
+import NotFound3D from '../XR/scene/notFound';
 
 const NotFound = () => {
   return (

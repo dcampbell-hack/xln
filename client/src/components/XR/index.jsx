@@ -1,66 +1,28 @@
-import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, Environment } from '@react-three/drei';
-import * as THREE  from 'three';
+import React, { Suspense } from "react";
 
-const angleToRadians = angleInDeg => (Math.PI / 180 ) * angleInDeg;
+// Three
+import { Canvas } from "@react-three/fiber";
 
+// Components
+import { Crosshair } from "./controls/Crosshair";
+import { UI } from "./controls/UI";
+//Scene
+import { Shooter } from "./scene/shooter";
 
-const Ball = () => {
-    return (
-        <mesh>
-            <sphereBufferGeometry />
-            <meshStandardMaterial color={"yellow"}  />
-        </mesh>
-    )
-}
+// Styles
+// import "./styles.css";
 
-
-const Plane = ({ color, position, rotation }) => {
-
-    return(
-        <mesh scale={100} position={position} rotation={rotation}  receiveShadow >
-            <planeBufferGeometry args={[24,20]} />
-            <meshStandardMaterial color={color} />
-        </mesh>
-    )
-}
-
-const Scene = () => {
-    return(
-        <mesh>
-            <OrbitControls />
-            <Ball castShadow />
-            <Plane color={"cyan"} position={[0,-1,0]} rotation={[ angleToRadians(-90), 0,0]}  receiveShadow />
-            <spotLight  args={["#fff", 1.5, 7]} position={[4, 3, 0]} intensity={1}  castShadow />
-            <PerspectiveCamera />
-            <ambientLight intensity={0.25} />
-
-            <Environment
-              background
-             >
-                 <mesh scale={100}>
-                    <sphereGeometry args={[1,100,100]} />
-                    <meshBasicMaterial color={"#429495"} side={THREE.BackSide} />
-                 </mesh>
-             </Environment>
-
-
-        </mesh>
-    )
-}
-
-
-const XRDemo = () => {
+export default function XRScene() {
   return (
     <div className="canvas">
-        <Canvas shadows>
-            <Suspense fallback={null}>
-                <Scene />
-            </Suspense>
-        </Canvas>
+      <UI>
+        <Crosshair />
+      </UI>
+      <Canvas style={{ width: '100vw', height: '100vh' }} shadowsMap sRGB shadows dpr={[1, 2]}>
+        <Suspense fallback={null}>
+           <Shooter />
+        </Suspense>
+      </Canvas>
     </div>
-  )
+  );
 }
-
-export default XRDemo

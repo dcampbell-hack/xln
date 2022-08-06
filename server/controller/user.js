@@ -1,5 +1,5 @@
 const asyncHandler = require('../middleware/async');
-const advancedResults = require('../middleware/advancedResult');
+const advancedResults = require('../middleware/advancedResults');
 const ErrorResponse = require('../utils/errorResponse');
 const path = require('path');
 const assetUpload = require('../middleware/assetUpload');

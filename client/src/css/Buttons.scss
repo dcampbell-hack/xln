@@ -8,7 +8,7 @@
 }
 
 .btn-block{
-    width: 100%;
+    width: 350px;
     height: 50px;
 }
 
@@ -102,4 +102,10 @@
 
 .btn-full{
     width: 100%;
+}
+
+.truncate-btn:hover{
+ background-color: #000;
+ color: #fff;
+ border-radius: 5px;
 }

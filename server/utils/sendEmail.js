@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
+    console.log('SEND EMAIL', process.env.SMTP_HOST, process.env.SMTP_PORT, )
     // Generate test SMTP service account from ethereal.email 
     let transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,

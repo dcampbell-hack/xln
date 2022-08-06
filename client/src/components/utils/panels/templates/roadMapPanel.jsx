@@ -1,3 +1,5 @@
+import TruncateText from "../../text/truncate";
+
 const RoadMapPanel = ({ timePeriod, months, description}) => {
    return(
     <div className="xln-roadmap-panel">
@@ -6,8 +8,7 @@ const RoadMapPanel = ({ timePeriod, months, description}) => {
             <div className="xln-roadmap-bar"></div>
             <div className="xln-roadmap-bar-icon"></div>
         </div>
-        <h3>{months}</h3>
-        <p>{description}</p>
+        <TruncateText text={description} charLimit="270" />
     </div>
     )
 }

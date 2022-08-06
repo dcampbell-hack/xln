@@ -1,6 +1,11 @@
 require("@nomiclabs/hardhat-waffle");
-const eth_id = '68eb211506c141e78162043b7b0df69a'
-const p_key = 'b026e73511bc97873460063947cc258d2fb5c99f9e8bc0077a97a626de08425f'
+const fs = require("fs");
+// const keyData = fs.readFileSync('./server/config/p-key.txt', {
+//   encoding: 'utf8', flag: 'r'
+// })
+
+const keyData = "880cc13f65a639ab6ddd37afbfa9b008bc5045fccc2da1b715b67f7c8317fdec"
+const eth_id = '68eb211506c141e78162043b7b0df69a';
 
 module.exports = {
   defaultNetwork: 'hardhat',
@@ -9,12 +14,12 @@ module.exports = {
       chainId: 1337
     },
     kovan: {
-      url: `https://kovan.infura.io/v3/${process.env.ETHEREUM_ID || eth_id}`,
-      accounts: [process.env.PKey || p_key]
+      url: `https://kovan.infura.io/v3/${ eth_id }`,
+      accounts: [ keyData ]
     },
     mainnet: {
-      url: `https://mainnet.infura.io/v3/${process.env.ETHEREUM_ID || eth_id}`,
-      accounts: [process.env.PKey || p_key]
+      url: `https://mainnet.infura.io/v3/${ eth_id }`,
+      accounts: [ keyData ]
     }
   },
   solidity: {

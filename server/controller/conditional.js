@@ -1,6 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
-//const Asset = require('../model/Asset');
+const Asset = require('../model/Asset');
 const Conditional = require('../model/Conditional');
 
 //@desc Get Conditional

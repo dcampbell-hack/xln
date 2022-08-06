@@ -1,3 +1,8 @@
+.xln-avatar-upload-header{
+    width: 100%;
+    height: auto;
+}
+
 .select-avatar-container{
     width: 100%;
     height: auto;
@@ -10,6 +15,8 @@
 
 .select-avatar-from-wallet{
     width: auto;
+    height: auto;
+    padding: 20px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -35,22 +42,44 @@
     transform: scale(1.1)
 }
 
-.upload-xln-avatar{
+.upload-xln-avatar-container{
     width: 100%;
-    height: auto;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.upload-xln-avatar{
+    width: 80%;
+    height: auto;
+    padding: 5em 0;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
 }
 
 .upload-xln-avatar-form{
-    width: 25em;
-    min-width: 300px;
-    height: 100%;
+    width: 80%;
+    height: auto;
+
     padding: 0.5em 1em;
 }
 
 .avatar-permission{
-    width: 70%;
-    min-width: 450px;
+    width: 100%;
     padding: 0.5em 1em;
+}
 
+.avatar-permission p{
+    line-height: normal;
+}
+
+.asset-set-value{
+    width: 100%;
+    background-color: aqua;
+}
+
+.asset-set-value input{
+    width: 100px;
+    height: 30px;
 }

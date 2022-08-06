@@ -1,41 +1,30 @@
-const hre = require("hardhat");
-const fs = require('fs');
+const Token = artifacts.require("XLN_Token");
+const ICO = artifacts.require("XLN_ICO");
+const web3 = require('web3');
 
-async function main() {
+module.exports = async function(deployer) {
+    const totalSupply =  5444444671; //5.4B
 
-  const SICCMarket = await hre.ethers.getContractFactory("SICCMarket");
-  const siccMarket = await SICCMarket.deploy();
-  await siccMarket.deployed();
-  console.log('siccMarket contract deployed to: ', siccMarket.address )
+    //Token
+    await deployer.deploy(
+        Token,
+        'Medallion XLN', //name
+        '$XLN', //sticker
+        totalSupply
+    );
+    const token = await Token.deployed();
 
-  const SICC = await hre.ethers.getContractFactory("SICC");
-  const sicc = await SICC.deploy();
-  await sicc.deployed(siccMarket.address);
-  console.log('sicc contract deployed to: ', sicc.address )
-
-
-  const Crowdfunding = await hre.ethers.getContractFactory("Crowdfunding");
-  const crowdfunding = await Crowdfunding.deploy();
-  await crowdfunding.deployed();
-  console.log('crowdfunding contract deployed to: ', crowdfunding.address )
-
-let config = `
-   export const siccMarketAddress = ${siccMarket.address}
-   export const siccAddress = ${sicc.address}
-   export const crowdfundingAddress = ${crowdfunding.address}
-`;
-
-let data = JSON.stringify(config);
-
-fs.writeFileSync('../server/config/config.js', JSON.parse(data))
-
-}
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+    //ICO
+    await deployer.deploy(
+        ICO,
+        token.address,
+        592200, // duration (592200s = 1 week)
+        web3.utils.toWei('2', 'milli'), // price of 1 token in DAI (wei) (= 0.002 DAI. 0.002 * 10M = 20,000 DAI ~= 20,000 USD)
+        totalSupply, //_availableTokens for the ICO. can be less than maxTotalSupply
+        200, //_minPurchase (in DAI)
+        5000 //_maxPurchase (in DAI)
+    );
+    const ico = await ICO.deployed();
+    await token.updateAdmin(ico.address);
+    await ico.start();
+};

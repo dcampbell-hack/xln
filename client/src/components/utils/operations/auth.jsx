@@ -27,7 +27,7 @@ return {
 
 
 export const validatePassword = (password, confirm) => {
-
+    console.log('IS VALIDATING AS PASSWORD?')
     //Validation
     const validLength = String(password).length >= 8;
     const containsLowercase = String(password).match(/(?=.*[a-z])/);

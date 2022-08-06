@@ -14,7 +14,13 @@ const renderFinalText = (textField) => {
     } else {
         finalText = textField
     }
-    return <p>{finalText}</p>;
+    return (
+    <div>
+        <p>
+        {finalText}
+        </p>
+    </div>
+    );
 }
 
 const initText = () => {
@@ -23,7 +29,7 @@ const initText = () => {
     return(
         <div className='truncate-text'>
             { initText() }
-            <button className="btn" onClick={() => setShowText(!showText)}>{ showText ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i> }</button>
+            <button className="btn truncate-btn" onClick={() => setShowText(!showText)}>{ showText ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i> }</button>
         </div>
     )
 }

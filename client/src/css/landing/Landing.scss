@@ -133,6 +133,42 @@ justify-content: space-between;
     font-size: 18px;
   }
 
+.xln-countdown{
+    background-color: #780000;
+}
+
+.countdown-wrapper{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: gold;
+}
+
+.countdown-time{
+    width: 100%;
+    margin: 2em 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.countdown-item{
+   width: auto;
+}
+
+.countdown-item h1{
+    font-size: 10em;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+}
+
+.countdown-item p{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
 .xln-ico-sale-form p{
     font-size: 18px;
 }

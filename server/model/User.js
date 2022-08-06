@@ -27,7 +27,7 @@ const UserSchema = new Schema({
     email: {
         type: String,
         required: [false, 'Please add email'],
-        unique: [true, 'There is already an account associated with this email'],
+        unique: true,
         match: [ /^\w+([\.-]?\w+)*(\@\w+\.\w+)/, ' Please add a valid email']
     },
     role: {
@@ -38,14 +38,11 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: [true, 'User must have a password'],
-        minlength: 8,
+        minlength: 10,
         select: false
     },
     files: [FileSchema],
-    address: {
-        type: String
-    },
-    balance: {
+    totalBalance: {
        type: Number
     },
     resetPasswordToken: String,
@@ -113,6 +110,20 @@ UserSchema.pre('save', async function(next){
     next()
 });
 
+//If user does not have a wallet then role = user
+UserSchema.pre('save', async function(next){
+
+    const wallet = await this.model('Wallet').findOne({ user: this._id});
+    console.log('Update role', wallet )
+if( !wallet ){
+    if(this.role === 'system'){
+    await this.model('User').findByIdAndUpdate(this._id, { role: 'system' })
+    } 
+}
+
+next();
+
+});
 
 // Sign JWT and return 
 UserSchema.methods.getSignedJwtToken = function(){
@@ -157,7 +168,13 @@ UserSchema.pre('remove', async function(next){
 })
 
 
-
+//Reverse populate with virtuals
+UserSchema.virtual('wallets', {
+    ref: 'Wallet',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false
+})
 
 
 // //Reverse populate with virtuals
@@ -166,7 +183,14 @@ UserSchema.virtual('assets', {
     localField: '_id',
     foreignField: 'user',
     justOne: false
-});
+})
 
+// //Reverse populate with virtuals
+UserSchema.virtual('shares', {
+    ref: 'Share',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false
+})
 
 module.exports = mongoose.model('User', UserSchema);

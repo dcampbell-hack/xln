@@ -5,6 +5,8 @@ const Error = ({ auth }) => {
 
 const determineError = (status) => {
   switch(status){
+    case status:
+        return auth.error
      case 4001:
          return 'Authenticate your wallet extension.'
      case -32602:

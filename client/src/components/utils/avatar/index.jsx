@@ -1,10 +1,10 @@
-const Avatar = ({ username, avatar}) => {
+const Avatar = ({ username, avatar, width, height}) => {
     return(
-        <div className="permission-label-container">
-        <div className="permission-label">
-            <img src={`/uploads/${username}/avatar/${avatar}`} width="100%" height="auto" />
+        <div className="permission-label-container" style={{ width, height }}>
+            <div className="permission-label">
+            <img src={`/uploads/${username}/avatar/${avatar}`} width={width} height={height} />
         </div>  
-        </div>
+</div>
     )
 }
 

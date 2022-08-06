@@ -6,13 +6,13 @@ const EmployeePanel = ({ image, name, position, bio, responsibilities, manages }
              <div className="panel-image">
                  <img src={image} width="100%" />
              </div>
-             <div className="panel-text">
+             <div className="panel-text center white">
                  <h4>{name}</h4>
                  <p>
                      {position}
-                     <TruncateText text={bio} charLimit={90} />
-                     <TruncateText text={responsibilities} charLimit={90} />
                   </p>
+                     <TruncateText text={bio} charLimit={90} />
+
              </div>
         </div>
     )

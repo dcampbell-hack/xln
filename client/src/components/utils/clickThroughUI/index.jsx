@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 // import { web3Modal } from '../smartContracts';
 import Modal from '../modal';
-import FeaturedContent from './content/featured-content';
-import ConnectWallet from './content/connect-wallet';
+import FeaturedContent from './content/featuredContent';
+import ConnectWallet from './content/connectWallet';
 import FFMpeg from '../ffmpeg/';
-import SelectAvatar from './content/select-avatar';
+import SelectAvatar from './content/selectAvatar';
 import { connectWalletExt, getBalance } from '../smartContracts';
+import Template from '../layout/template';
 
 // const provider = await web3Modal.connect();
 // const web3 = new Web3(provider);
 
-const ClickThroughUI = ({ blockchain, users, accounts, getAddress, updateWalletBalance, connectUserWallet }) => {
+const ClickThroughUI = ({ blockchain, users, accounts, getAddress, updateWalletBalance, connectUserWallet, options }) => {
 
   const [ count, setCount ] = useState(0);
   const [ checks, setChecks ] = useState({});
@@ -54,7 +55,7 @@ const ClickThroughUI = ({ blockchain, users, accounts, getAddress, updateWalletB
 
 
   const wrappedCounter = () => setModal(!modal)
-
+console.log({options})
 
 
 const array = [
@@ -62,13 +63,14 @@ const array = [
     include: true,
     header: `Connect Wallet`,
     content: `Address: ${accounts ? accounts : "Not Connected"} <br/> By connecting your wallet, you agree to our Terms of Service and our Privacy Policy.`,
-    userInterface: <ConnectWallet metaMask={walletWrapper} walletConnect={wrappedCounter} />
+    // userInterface: <ConnectWallet metaMask={walletWrapper} walletConnect={wrappedCounter} />
+    userInterface: <Template options={options} />
   },
   {
     include: true,
-    header: "Add an Avatar",
+    header: "Mint an XLN Avatar",
     content: "Select an avatar from Metamask or Upload one here",
-    userInterface: <SelectAvatar />
+    userInterface: <SelectAvatar users={users} />
   },
   {
     include: true,

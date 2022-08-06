@@ -62,24 +62,35 @@ const Wallet = require('./server/routes/wallet');
 const Conditional = require('./server/routes/conditional');
 const Auth = require('./server/routes/auth')
 
-// const Asset = require('./server/routes/asset')
-// const Share = require('./server/routes/share')
-// const Offer = require('./server/routes/offer')
-// const Review = require('./server/routes/review')
-// const Comment = require('./server/routes/comment')
-// const Transaction = require('./server/routes/transaction')
+const Market = require('./server/routes/blockchain/market')
+const NFT = require('./server/routes/blockchain/nft')
+const ICO = require('./server/routes/blockchain/ico')
+const Token = require('./server/routes/blockchain/token')
+
+const Asset = require('./server/routes/asset')
+const Share = require('./server/routes/share')
+const Offer = require('./server/routes/offer')
+const Review = require('./server/routes/review')
+const Comment = require('./server/routes/comment')
+const Transaction = require('./server/routes/transaction')
 
 //Mount routers
 app.use('/api/v1/auth', Auth);
 app.use('/api/v1/users', User);
 app.use('/api/v1/conditional', Conditional);
+app.use('/api/v1/assets', Asset);
+app.use('/api/v1/shares', Share);
+app.use('/api/v1/offers', Offer);
+app.use('/api/v1/reviews', Review);
+app.use('/api/v1/tx', Transaction);
+app.use('/api/v1/comments', Comment);
 
-// app.use('/api/v1/assets', Asset);
-// app.use('/api/v1/shares', Share);
-// app.use('/api/v1/offers', Offer);
-// app.use('/api/v1/reviews', Review);
-// app.use('/api/v1/tx', Transaction);
-// app.use('/api/v1/comments', Comment);
+// Blockchain Routes
+app.use('/api/v1/blockchain/token', Token );
+app.use('/api/v1/blockchain/nft', NFT );
+app.use('/api/v1/blockchain/ico', ICO );
+app.use('/api/v1/blockchain/market', Market );
+
 
 const server = app.listen(PORT, () => console.log(`Server is started on PORT: ${PORT}`));
 

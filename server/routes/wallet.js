@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 
 const { getWallet, getWallets, createWallet, transactWallet, deleteWallet, chooseWallet } = require('../controller/wallet');
 
-const advancedResults = require('../middleware/advancedResult');
+const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
 const Wallet = require('../model/Wallet');
 

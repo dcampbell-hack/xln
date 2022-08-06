@@ -5,13 +5,13 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 // Data
-import { header, footer, landing, socialLinks, register, login, xln, whitepaper } from "../data";
+import { header, footer, landing, socialLinks, register, login, xln, whitepaper, documentation, forgotPassword, resetPassword } from "../data";
 
 // Components
 import Header from "./global/Header";
 import Error from "./global/Error";
 import Footer from "./global/Footer";
-import Whitepaper from "./whitepaper";
+import Documentation from "./utils/documentation";
 import Landing from "./landing";
 import Profile from "./profile";
 import XLN from "./xln";
@@ -24,7 +24,7 @@ import Shares from "./share";
 import ExecuteShare from "./share/execute";
 import NotFound from "./notFound";
 import AIModelSelector from './AI/';
-import XRDemo from './XR/';
+import XRScene from './XR/index';
 
 // Utils
 import FormatLayout from "./utils/layout/";
@@ -62,7 +62,7 @@ const App = ({ auth, users, loadUser }) => {
   return (
     <div className="xln-container">
         <Header auth={auth} user={users} header={header} isLoggedIn={isLoggedIn} xln={xln} landing={landing} />
-        { auth.isError && <Error auth={auth} /> }
+        {/* { auth.isError && <Error auth={auth.error} /> } */}
         <Routes>
         <Route path='*' element={<NotFound />} />
           <Route
@@ -81,15 +81,38 @@ const App = ({ auth, users, loadUser }) => {
           />
 
           <Route
+            path="/forgotpassword"
+            element={
+              <FormatLayout type={forgotPassword.type} options={forgotPassword.options} />
+            }
+          />
+
+          <Route
+            path="/reset_password?:id"
+            element={
+              <FormatLayout type={resetPassword.type} options={resetPassword.options} />
+            }
+          />
+
+          <Route
+            path="/resetpassword"
+            element={
+              <FormatLayout type={resetPassword.type} options={resetPassword.options} />
+            }
+          />
+
+          <Route
             path="/whitepaper"
-            element={<Whitepaper whitepaper={whitepaper} />}
+            element={<Documentation docs={whitepaper} />}
+          />
+
+          <Route
+            path="/docs"
+            element={<Documentation docs={documentation} />}
           />
 
 
-          <Route path="/xln" element={<XLN 
-              users={users}
-              xln={xln}
-          />} />
+          <Route path="/xln" element={<XLN users={users} xln={xln} />} />
 
           <Route path="/xln/:username" element={<Profile />} />
           <Route path="/users/:id/wallet" element={<Wallet />} />
@@ -104,7 +127,7 @@ const App = ({ auth, users, loadUser }) => {
 
           <Route path="/ai" element={<AIModelSelector type="handPoseDetection" />} /> 
  
-          <Route path="/xr" element={<XRDemo />} /> 
+          <Route path="/xr" element={<XRScene />} /> 
 
           <Route path="/users/:id/assets/:id/view" element={<ExecuteAsset />} />
           <Route path="//shares" element={<Shares />} />

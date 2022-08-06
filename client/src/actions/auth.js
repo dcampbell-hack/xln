@@ -30,6 +30,7 @@ dispatch({
 export const registerUser = (user) => async dispatch => {
  try{
     const res = await axios.post('/api/v1/auth/register', user);
+    console.log('Register Values ---', user)
     dispatch({
         type: REGISTER,
         payload: res.data
@@ -38,6 +39,36 @@ export const registerUser = (user) => async dispatch => {
     dispatch({ type: AUTH_ERROR, payload: err})
 }
 }
+
+
+export const forgotPassword = (email) => async dispatch => {
+    try{
+        const res = await axios.post('api/v1/auth/forgotpassword', email);
+        dispatch({
+            type: FORGOT_PASSWORD,
+            payload: res.data
+        })
+    } catch(err){
+        dispatch({ type: AUTH_ERROR, payload: err})
+    }
+}
+
+
+export const resetPassword = (user) => async  dispatch => {
+
+    try{
+    const res = await axios.post('/api/v1/auth/login', user);
+    
+    dispatch({
+        type: RESET_PASSWORD,
+        payload: res.data
+    })
+    } catch(err){
+        dispatch({ type: AUTH_ERROR, payload: err })
+    }
+    }
+
+
 
 
 export const logoutUser = () => {

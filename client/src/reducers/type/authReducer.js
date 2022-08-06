@@ -13,6 +13,7 @@ import {
     const initState = {
         login: {},
         register: {},
+        forgotPassword: {},
         profile: {
         username: "",
         avatar: "",
@@ -39,11 +40,12 @@ import {
              case UPDATE_PASSWORD:
              return { ...state, loading: false, isError: false, }
             case FORGOT_PASSWORD:
-                return { ...state, loading: false, isError: false, }
+                return { ...state, loading: false, isError: false, forgotPassword: { success: true } }
             case RESET_PASSWORD:
                 return { ...state, loading: false, isError: false, }
              case AUTH_ERROR:
-                return { ...state, loading: false, isError: true, error: action.payload?.response?.data?.error || 'check credentials' , status: action.payload?.response?.status || 500 }
+                console.log('FORGOT PASSWORD ', action )
+                return { ...state, loading: false, isError: true, forgotPassword: { error: action.payload.response.data.error }, error: action.payload?.response?.data?.error || 'check form inputs' , status: action.payload?.response?.status || 500 }
             default: 
                return state;
         }

@@ -51,11 +51,9 @@ if(!user){
     return next(new ErrorResponse(`No user with the id ${req.params.userId}`, 404))
 }
 
-
-if(req.body.balance < 0.00001){
+if(req.body.balance < 0.01){
     return next(new ErrorResponse(`Balance must be greater than 0 to create a wallet`, 500))  
 }
-
 
 if(req.user.id === req.params.userId){
 
@@ -64,8 +62,8 @@ const wallet = await Wallet.create(req.body);
 // Update User Account
 
 const wallets = await Wallet.find({ user: req.params.userId })
-//const balance = wallets.length > 0 && wallets.map(({ balance }) => balance).reduce((a,b) => a + b )
-await User.findByIdAndUpdate(req.params.userId, { balance: req.body.balance })
+const totalBalance = wallets.length > 0 && wallets.map(({ balance }) => balance).reduce((a,b) => a + b )
+await User.findByIdAndUpdate(req.params.userId, { totalBalance })
 
 res.status(201).json({
     success: true,

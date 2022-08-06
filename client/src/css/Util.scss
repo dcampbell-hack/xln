@@ -1,7 +1,7 @@
 @import './variables/colors';
 
 .util-form-layout{
-    min-height: 40em;
+    min-height: auto;
     display: grid;
     place-items: center;
 }
@@ -72,6 +72,12 @@ padding: 0 2.5vw;
     width: 47vw;
 }
 
+form textarea{
+    width: 99%;
+    height: 250px;
+}
+
+
 .util-point{
     border-bottom: 1px $secondary dashed;
     padding-bottom:2em ;
@@ -126,9 +132,15 @@ th, td {
     justify-content: space-between;
     align-items: end;
     height: auto;
-    transition-timing-function: ease-in;
+    transition-timing-function: ease-out;
+    animation-delay: 2s;
+    animation-duration: 6s;
 }
 
+.truncate-text p{
+    padding: 0;
+    margin: 0;
+}
 
 .truncate-text button{
     text-align: center;
@@ -139,6 +151,10 @@ th, td {
 .util-two-panel > .truncate-text button {
     color: #333;
 
+}
+
+.panel-text h4{
+    color: #fff;
 }
 
 .panel-text .truncate-text > button {
@@ -177,9 +193,13 @@ th, td {
     padding: 0 0 0 2.5em;
 }
 
+.xln-table-of-contents .main .content-lists .team{
+    display: flex;
+    justify-content: space-between;
+
+}
+
 .xln-table-of-contents .main .content-lists .item{
-    background-color: rgb(238, 238, 238, 0.5);
-    border-left: 3px solid #ccc;
     padding: 0 2em;
     margin: 1em 0;
 

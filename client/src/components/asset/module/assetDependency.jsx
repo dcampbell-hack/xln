@@ -6,7 +6,7 @@ const AssetDependency = ({  type, assets, setCheckbox, checkbox }) => {
 
 const [ search, setSearch ] = useState('')
 
-const mapAssets  = () => assets.filter(({ asset_name }) => asset_name  ).map(({ id, username, asset_name, avatar, cover  }) => <CheckboxItem key={id} username={username} assetName={asset_name} avatar={avatar} cover={cover} setCheckbox={setCheckbox} checkbox={checkbox} />)
+const mapAssets  = () => assets.filter(({ asset_name }) => asset_name.includes(asset_name)  ).map(({ id, username, asset_name, avatar, cover  }) => <CheckboxItem key={id} username={username} assetName={asset_name} avatar={avatar} cover={cover} setCheckbox={setCheckbox} checkbox={checkbox} />)
 
 const mapAvatars  = () => assets.filter(({ asset_name }) => asset_name  ).map(({ id, username, avatar  }) => <Avatar key={id} username={username} avatar={avatar} setCheckbox={setCheckbox} checkbox={checkbox} />)
 
