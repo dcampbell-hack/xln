@@ -8,11 +8,11 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "concurrently \"npm server\" \"npm client\" ",
     "build": "concurrently \"npm run server\" \"npm run client\" ",
-    "client": "cd ./client && npm run dev",
+    "client": "cd ./client && yarn dev",
     "server": "nodemon index.js",
     "ci": "concurrently \"npm backend\" \"npm frontend\" ",
     "backend": "rm -rf node_modules && npm install",
-    "frontend": "cd ./client && rm -rf node_modules && npm install"
+    "frontend": "cd ./client && rm -rf node_modules && yarn install"
   },
   "repository": {
     "type": "git",
