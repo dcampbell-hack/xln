@@ -11,8 +11,8 @@
     "client": "cd ./client && npm run dev",
     "server": "nodemon index.js",
     "ci": "concurrently \"npm backend\" \"npm frontend\" ",
-    "backend": "npm install",
-    "frontend": "cd ./client && npm install"
+    "backend": "rm -rf node_modules && npm install",
+    "frontend": "cd ./client && rm -rf node_modules && npm install"
   },
   "repository": {
     "type": "git",
