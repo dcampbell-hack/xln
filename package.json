@@ -6,13 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node index.js",
-    "dev": "concurrently \"yarn server\" \"yarn client\" ",
-    "build": "concurrently \"yarn server\" \"yarn client\" ",
-    "client": "cd ./client && yarn dev",
+    "dev": "concurrently \"npm server\" \"npm client\" ",
+    "build": "concurrently \"npm server\" \"npm client\" ",
+    "client": "cd ./client && npm dev",
     "server": "nodemon index.js",
-    "ci": "concurrently \"yarn backend\" \"yarn frontend\" ",
-    "backend": "yarn install --frozen-lockfile",
-    "frontend": "cd ./client && yarn install --frozen-lockfile"
+    "ci": "concurrently \"npm backend\" \"npm frontend\" ",
+    "backend": "npm install",
+    "frontend": "cd ./client && yarn install"
   },
   "repository": {
     "type": "git",
