@@ -19,7 +19,7 @@ const keyData = "880cc13f65a639ab6ddd37afbfa9b008bc5045fccc2da1b715b67f7c8317fde
 const address = '0xf62b5824d151094359C831A6195112e355D5dC61';
 const eth_id = 'https://kovan.infura.io/v3/68eb211506c141e78162043b7b0df69a';
 
-const XLNICO = require('../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json');
+//const XLNICO = require('../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json');
 
 const { tokenAddress, icoAddress } = require('../../config/config')
 
@@ -73,46 +73,47 @@ exports.start = asyncHandler(async (req, res, next ) => {
 //@access Public 
 exports.buyXLN = asyncHandler(async (req, res, next ) => {
 
+  res.send('Buy XLN Tokens')
+ 
+//   try{
+//   const web3 = new Web3(eth_id)
+//   const networkId = await web3.eth.net.getId();
+//   XLNICO.networks = [networkId];
+//   XLNICO.address = icoAddress;
 
-  try{
-  const web3 = new Web3(eth_id)
-  const networkId = await web3.eth.net.getId();
-  XLNICO.networks = [networkId];
-  XLNICO.address = icoAddress;
+//   const xlnICO = new web3.eth.Contract(
+//     XLNICO.abi,
+//     icoAddress
+//   );
 
-  const xlnICO = new web3.eth.Contract(
-    XLNICO.abi,
-    icoAddress
-  );
+//   const tx = xlnICO.methods.buy( 20 );
 
-  const tx = xlnICO.methods.buy( 20 );
+// const availableTokens = await xlnICO.methods.availableTokens(); 
+// console.log('Available Tokens -------', availableTokens )
+//   const gas = await tx.estimateGas({ from: address });
+//   const gasPrice = await web3.eth.getGasPrice();
+//   const data = await tx.encodeABI();
+//   const nonce = await web3.eth.getTransactionCount(address);
 
-const availableTokens = await xlnICO.methods.availableTokens(); 
-console.log('Available Tokens -------', availableTokens )
-  const gas = await tx.estimateGas({ from: address });
-  const gasPrice = await web3.eth.getGasPrice();
-  const data = await tx.encodeABI();
-  const nonce = await web3.eth.getTransactionCount(address);
+//   const signedTx = await web3.eth.accounts.signTransaction({
+//     to: xlnICO.options.address,
+//     data,
+//     gas,
+//     value: 100 *  10 ** 18,
+//     gasPrice,
+//     chainId: networkId
+//   },
+//   keyData
+//   );
 
-  const signedTx = await web3.eth.accounts.signTransaction({
-    to: xlnICO.options.address,
-    data,
-    gas,
-    value: 100 *  10 ** 18,
-    gasPrice,
-    chainId: networkId
-  },
-  keyData
-  );
+//   const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+//   console.log(`Transaction hash: ${receipt.transactionHash}`)
+//   // console.log(` New data value: ${ await xlnICO.methods.data().call() }`);
 
-  const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-  console.log(`Transaction hash: ${receipt.transactionHash}`)
-  // console.log(` New data value: ${ await xlnICO.methods.data().call() }`);
-
-    res.status(200).json({ success: true, ico: { ico: xlnICO, null: { /* receipt */ } } })
-  } catch(err){
-    res.status(500).json({ success: false, error: `${err}` })
-  }
+//     res.status(200).json({ success: true, ico: { ico: xlnICO, null: { /* receipt */ } } })
+//   } catch(err){
+//     res.status(500).json({ success: false, error: `${err}` })
+//   }
 
   })
 
