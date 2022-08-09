@@ -15,50 +15,9 @@ const axios = require('axios');
 const hre = require('hardhat');
 const web3 = require('web3');
 
-const XLNToken = require('../../../artifacts/contracts/XLN_Token.sol/XLNToken.json');
-const XLNICO = require('../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json');
-
 // Middleware
 const asyncHandler = require('../../middleware/async');
 const { checkConditionals, preventPublicKnowledge  } = require('../../middleware/checkIfValidAsset');
-
-
-const mintNFT  = async ( address ) => {
-
-  const web3 = new Web3(eth_id)
-  const networkId = await web3.eth.net.getId();
-  XLNNFT.networks = [networkId];
-  const xlnNFT = new web3.eth.Contract(
-    XLNNFT.abi,
-    XLNNFT?.networks[networkId]
-  );
-
-
-  const tx = xlnNFT.methods.mintNFT( address );
-
-  const gas = await tx.estimateGas({ from: address });
-  const gasPrice = await web3.eth.getGasPrice();
-  const data = await tx.encodeABI();
-  const nonce = await web3.eth.getTransactionCount(address);
-
-  const signedTx = await web3.eth.accounts.signTransaction({
-    to: xlnToken.options.address,
-    data,
-    gas,
-    value: 100 *  10 ** 18,
-    gasPrice,
-    chainId: networkId
-  },
-  keyData
-  );
-
-  console.log(` Old data value: ${ await xlnToken.methods.data().call() }`);
-  const receipt = await web3.ethers.sendTransaction(signedTx.rawTransaction);
-  console.log(`Transaction hash: ${receipt.transactionHash}`)
-  console.log(` New data value: ${ await xlnToken.methods.data().call() }`);
-
-}
-
 
 //@desc Get Listing Price
 //@route GET /api/v1/market/get-listing-price 
