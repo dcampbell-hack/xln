@@ -23,9 +23,9 @@ describe("XLNToken", function () {
 
   describe("XLNICO", function () {
     it("Should buy new tokens", async function () {
-
+      const totalSupply =  5444444671; //5.4B
       const Token = await ethers.getContractFactory('XLNToken');
-      const token = await Token.deploy('Medallion XLN', '$XLN', ethers.BigNumber.from("5444444671") );
+      const token = await Token.deploy('Medallion XLN', '$XLN', ethers.BigNumber.from(totalSupply) );
       console.log('XLNToken 1 --- ', token)
       await token.deployed();
       const tokenAddress = token.address;
@@ -40,9 +40,15 @@ describe("XLNToken", function () {
         ethers.utils.parseUnits("5000", 18), //_maxPurchase (in DAI));
       );
       await ico.deployed();
+
+
+      await token.updateAdmin(ico.address);
+      await ico.start();
+
       const icoAddress = ico.address;
       console.log('XLN ICO ----', icoAddress )
        })
+       
     });
 
   describe("XLNNFT", function () {
