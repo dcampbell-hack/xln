@@ -19,7 +19,6 @@ const keyData = "880cc13f65a639ab6ddd37afbfa9b008bc5045fccc2da1b715b67f7c8317fde
 const address = '0xf62b5824d151094359C831A6195112e355D5dC61';
 const eth_id = 'https://kovan.infura.io/v3/68eb211506c141e78162043b7b0df69a';
 
-const XLNToken = require('../../../artifacts/contracts/XLN_Token.sol/XLNToken.json');
 const XLNICO = require('../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json');
 
 const { tokenAddress, icoAddress } = require('../../config/config')
