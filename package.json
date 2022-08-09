@@ -9,7 +9,10 @@
     "dev": "concurrently \"yarn server\" \"yarn client\" ",
     "build": "concurrently \"yarn server\" \"yarn client\" ",
     "client": "cd ./client && yarn dev",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "ci": "concurrently \"yarn backend\" \"yarn frontend\" ",
+    "backend": "yarn install --frozen-lockfile",
+    "frontend": "cd ./client && yarn install --frozen-lockfile"
   },
   "repository": {
     "type": "git",
