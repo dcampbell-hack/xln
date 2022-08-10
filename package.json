@@ -9,7 +9,7 @@
     "dev": "concurrently \"npm server\" \"npm client\" ",
     "build": "npm run server ",
     "server": "nodemon index.js",
-    "ci": "concurrently \"npm backend\" ",
+    "ci": "npm backend",
     "backend": "rm -rf node_modules && npm install"
   },
   "repository": {
