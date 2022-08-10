@@ -7,12 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node index.js",
     "dev": "concurrently \"npm server\" \"npm client\" ",
-    "build": "concurrently \"npm run server\" \"npm run client\" ",
-    "client": "cd ./client && serve -s build",
+    "build": "npm run server ",
     "server": "nodemon index.js",
-    "ci": "concurrently \"npm backend\" \"npm frontend\" ",
-    "backend": "rm -rf node_modules && npm install",
-    "frontend": "cd ./client && npm install -g serve && serve -s build"
+    "ci": "concurrently \"npm backend\" ",
+    "backend": "rm -rf node_modules && npm install"
   },
   "repository": {
     "type": "git",
