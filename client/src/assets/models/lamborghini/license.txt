@@ -1,8 +1,0 @@
-Model Information:
-* title:	Lambo Aventador
-* source:	https://sketchfab.com/3d-models/lambo-aventador-e8a99a5d8900490aaa0c3a68ae78d639
-* author:	Polygon.by - Art & Gamedev (https://sketchfab.com/polygonschool)
-
-Model License:
-* license type:	SKETCHFAB Editorial (https://sketchfab.com/licenses)
-* requirements:	Use only in connection with events that are newsworthy or of public interest
