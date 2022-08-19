@@ -22,7 +22,7 @@ contract XLNICO {
     uint256 public minPurchase;
     uint256 public maxPurchase;
     XLNToken public token;
-    IERC20 public dai = IERC20(0x4E8357700EB25C9c5c3E7853F9430938EEBA26f0);
+    IERC20 public dai = IERC20(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266);
 
     constructor (
         address tokenAddress,

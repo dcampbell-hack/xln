@@ -1,6 +1,6 @@
 
-          exports.tokenAddress = '0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc'
-          exports.icoAddress = '0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f'
-          exports.nftAddress = '0xFD471836031dc5108809D173A067e8486B9047A3'
-          exports.nftMarketAddress = '0xc351628EB244ec633d5f21fBD6621e1a683B1181'
+          exports.tokenAddress = '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6'
+          exports.icoAddress = '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318'
+          exports.nftAddress = '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853'
+          exports.marketAddress = '0x0165878A594ca255338adfa4d48449f69242Eb8F'
           

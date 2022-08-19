@@ -62,6 +62,7 @@ const Wallet = require('./server/routes/wallet');
 const Conditional = require('./server/routes/conditional');
 const Auth = require('./server/routes/auth')
 
+const XLN = require('./server/routes/blockchain/')
 const Market = require('./server/routes/blockchain/market')
 const NFT = require('./server/routes/blockchain/nft')
 const ICO = require('./server/routes/blockchain/ico')
@@ -86,6 +87,7 @@ app.use('/api/v1/tx', Transaction);
 app.use('/api/v1/comments', Comment);
 
 // Blockchain Routes
+app.use('/api/v1/blockchain/', XLN );
 app.use('/api/v1/blockchain/token', Token );
 app.use('/api/v1/blockchain/nft', NFT );
 app.use('/api/v1/blockchain/ico', ICO );

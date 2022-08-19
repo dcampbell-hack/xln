@@ -1,0 +1,163 @@
+@import './variables/colors';
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif, Helvetica, Arial;
+    line-height: 3.5em;
+}
+
+#root{
+    position: relative;
+    z-index: 1;
+}
+
+.header-padding{
+    padding: 2em 2em; 
+}
+
+.panel-padding{
+    padding: 5em 4em;
+}
+
+.primary{
+  background-color: $primary;
+}
+
+.secondary{
+    background-color: $secondary;
+}
+
+.success{
+    background-color: $success;
+}
+
+.info{
+    background-color: $info;
+}
+
+.danger{
+    background-color: $danger;
+}
+
+.primary-text{
+    color: $primary;
+  }
+  
+  .secondary-text{
+      color: $secondary;
+  }
+  
+  .success-text{
+      color: $success;
+  }
+  
+  .info-text{
+      color: $info;
+  }
+  
+  .danger-text{
+      color: $danger;
+  }
+
+.xln-container{
+    width: 100vw;
+    height: auto;
+}
+
+.xln-header{
+    width: auto;
+    height: 20px;
+    font-size: small;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.xln-logo{
+    width: 50px;
+    height: 50px;
+}
+
+.header-image-none{
+
+}
+
+.header-image-active{
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header-avatar-stats{
+    padding: 0 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header-profile{
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.xln-footer{
+    height: auto;
+    padding: 1em 3em;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.not-found-container{
+    width: 100vw;
+    height: 700px;
+}
+
+.wallet-btn-container{
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#modal{
+    position: relative;
+    z-index: 10;
+}
+
+.modal-overlay{
+    width: 80vw;
+    height: 80vh;
+    background-color: rgb(255, 252, 203);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 10;
+    top: 10vh;
+    left: 10vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-header{
+    width: 100%;
+    height: 5vh;
+}
+
+.modal-close-btn{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.modal-content{
+    width: 100%;
+    height: 75vh;
+}
+
+.center{
+    text-align: center ;
+}

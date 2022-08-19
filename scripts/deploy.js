@@ -43,11 +43,13 @@ async function main() {
   await token.updateAdmin(ico.address);
   await ico.start();
 
+  console.log('ICO Deployed -----', ico.address )
+
   let config = `
           exports.tokenAddress = '${token.address}'
           exports.icoAddress = '${ico.address}'
           exports.nftAddress = '${nft.address}'
-          exports.nftMarketAddress = '${market.address}'
+          exports.marketAddress = '${market.address}'
           `;
 
   let data = JSON.stringify(config);
