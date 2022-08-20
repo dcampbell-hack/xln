@@ -102,11 +102,10 @@ export const buyTokens = async (ico) =>  async  (dispatch) => {
     const contract = new ethers.Contract( ico.address, ICO.abi, signer );
     
     const price = ethers.utils.parseUnits( amount.toString(), 'ethers');
-    const transaction = await contract.buyXLN( ico.address, ico.TokenId, {
+    let transaction = await contract.buyXLN( ico.address, ico.TokenId, {
      value: price
     })
-  
-   transaction = await transaction.wait();
+    await transaction.wait();
 
     dispatch({
       type: BUY_TOKENS,

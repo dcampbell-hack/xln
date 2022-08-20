@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import wasm from 'vite-plugin-wasm';
 import topLevelAwait from "vite-plugin-top-level-await";
@@ -13,9 +13,17 @@ globalsPlugin.name = 'globals'; // required, see https://github.com/vitejs/vite/
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    watch: {
+      // https://rollupjs.org/guide/en/#watch-options
+    },
+    rollupOptions: {
+      // https://rollupjs.org/guide/en/#big-list-of-options
+    }
+  },
   server: {
     proxy: {
-      "api/v1": "http://localhost:4005/"
+      "api/v1": "http://localhost:8000/"
     },
   },
   plugins: [
@@ -26,7 +34,8 @@ export default defineConfig({
       // Other files will fallback to Vite's default WASM loader (i.e. You need to call `initWasm()` for them).
       filter: /syntect_bg.wasm$/
     }),
-    topLevelAwait()
+    topLevelAwait(),
+    splitVendorChunkPlugin()
   ],
   rollupInputOptions: {
     plugins: [

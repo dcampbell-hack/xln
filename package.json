@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node index.js",
-    "dev": "concurrently \"npm  server\" \"npm client\" ",
-    "build": "concurrently \"npm run server\" \"npm run client\" ",
-    "client": "cd ./client && yarn dev",
+    "dev": "concurrently \"yarn  server\" \"yarn client\" ",
+    "build": "concurrently \"npm run server\" \"npm run production-client\" ",
+    "client": "cd ./client && bun dev",
     "server": "nodemon index.js",
     "ci": "concurrently \"npm backend\" \"npm frontend\" ",
     "backend": "rm -rf node_modules && npm install",
-    "frontend": "cd ./client && rm -rf node_modules && yarn install"
+    "frontend": "cd ./client && rm -rf node_modules && yarn install",
+    "production-server": "pm2 start index.js",
+    "production-client": "cd ./client2 && pm2 start npm -- dev"
   },
   "repository": {
     "type": "git",

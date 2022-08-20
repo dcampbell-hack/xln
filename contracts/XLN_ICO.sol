@@ -14,6 +14,8 @@ contract XLNICO {
         bool tokensWithdrawn;
     }
     mapping(address => Sale) public sales;
+
+    bool public icoIsActive; 
     address public admin;
     uint256 public end;
     uint256 public duration;
@@ -47,15 +49,17 @@ contract XLNICO {
         admin = msg.sender;
         duration = _duration;
         price = _price;
-        availableTokens = availableTokens;
+        availableTokens = _availableTokens;
         minPurchase = _minPurchase;
         maxPurchase = _maxPurchase;
+        icoIsActive = false;
     }
 
     function start()
         external
         onlyAdmin()
         icoNotActive() {
+            icoIsActive = true;
             end = block.timestamp + duration;
     }
 

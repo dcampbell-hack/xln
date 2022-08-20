@@ -9,9 +9,12 @@ const eth_id = '68eb211506c141e78162043b7b0df69a';
 
 module.exports = {
   defaultNetwork: 'hardhat',
+  allowUnlimitedContractSize: true,
   networks: {
     hardhat: {
-      chainId: 1337
+      chainId: 1337,
+      gas: 2100000,
+      gasPrice: 8000000000,
     },
     kovan: {
       url: `https://kovan.infura.io/v3/${ eth_id }`,
