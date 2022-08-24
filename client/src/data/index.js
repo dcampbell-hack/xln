@@ -43,7 +43,7 @@ export const header = {
       },
       {
         text: "Wallet",
-        to: "/xln",
+        to: "/xln/assets/id",
         icon: "",
         show: true,
         external: false,

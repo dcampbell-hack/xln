@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import './XLN_Token.sol';
+import "hardhat/console.sol";
 
 contract XLNICO {
     using SafeMath for uint;
@@ -24,7 +25,7 @@ contract XLNICO {
     uint256 public minPurchase;
     uint256 public maxPurchase;
     XLNToken public token;
-    IERC20 public dai = IERC20(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266);
+    IERC20 public dai; 
 
     constructor (
         address tokenAddress,
@@ -33,7 +34,9 @@ contract XLNICO {
         uint _availableTokens,
         uint _minPurchase,
         uint _maxPurchase) {
+
         token = XLNToken(tokenAddress);
+        dai = IERC20(tokenAddress);
 
         require(_duration > 0, 'duration should be > 0');
         require(
@@ -66,6 +69,7 @@ contract XLNICO {
     function buy(uint daiAmount)
         external
         icoActive() {
+
             require(
                 daiAmount >= minPurchase && daiAmount <= maxPurchase,
                 'have to buy between minPurchase and maxPurchase'
@@ -75,12 +79,17 @@ contract XLNICO {
                 tokenAmount <= availableTokens,
                 'Not enough tokens left for sale'
             );
-            dai.transferFrom(msg.sender, address(this), daiAmount);
+            
+
+            dai.transfer( address(this), daiAmount);
+              
             sales[msg.sender] = Sale(
                 msg.sender,
                 tokenAmount,
                 false
             );
+
+            console.log('Print address', msg.sender );
     }
 
     function withdrawTokens()

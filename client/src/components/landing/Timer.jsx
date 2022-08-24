@@ -11,7 +11,7 @@ const [ timerSeconds, setTimerSeconds ] = useState(0)
 let interval;
 
 const startTimer = () => {
-    const countdownDate = new Date("November 14, 2022").getTime();
+    const countdownDate = new Date("January, 31  2023").getTime();
 
     interval = setInterval(() => {
         const now = new Date().getTime();

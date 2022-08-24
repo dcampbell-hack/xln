@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "concurrently \"yarn  server\" \"yarn client\" ",
     "build": "concurrently \"npm run server\" \"npm run production-client\" ",
-    "client": "cd ./client && bun dev",
+    "client": "cd ./client && yarn dev",
     "server": "nodemon index.js",
     "ci": "concurrently \"npm backend\" \"npm frontend\" ",
     "backend": "rm -rf node_modules && npm install",

@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+import "hardhat/console.sol";
 
 contract XLNToken is ERC20 {
     using SafeMath for uint;
@@ -31,6 +32,8 @@ contract XLNToken is ERC20 {
             totalSupply.add(amount) <= maxTotalSupply,
             'above maxTotalSupply limit'
         );
+
+        console.log('Minting ', amount, ' new tokens for account', account);
         _mint(account, amount);
     }
 }

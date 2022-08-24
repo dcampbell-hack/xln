@@ -32,6 +32,7 @@ import {
     export default function(state = initState, action){
         switch(action.type){
             case LOGIN:
+                console.log('Whats hatnen', action.payload )
                 return { ...state, loading: false, isError: false, login: action.payload, tokenRecieved: true, isAuthenticated: true }
             case LOGOUT:
                 return { ...state, loading: false, isError: false, user: {}, login: {}, loading: false, tokenRecieved: false, isAuthenticated: false }
@@ -44,8 +45,8 @@ import {
             case RESET_PASSWORD:
                 return { ...state, loading: false, isError: false, }
              case AUTH_ERROR:
-                console.log('FORGOT PASSWORD ', action )
-                return { ...state, loading: false, isError: true, forgotPassword: { error: action.payload.response.data.error }, error: action.payload?.response?.data?.error || 'check form inputs' , status: action.payload?.response?.status || 500 }
+                console.log('Error', action.payload)
+                return { ...state, loading: false, isError: true, forgotPassword: { error: action.payload.response.data.error }, error:  action.payload?.response?.data?.error || action.payload || 'check form inputs' , status: action.payload?.response?.status || 500 }
             default: 
                return state;
         }

@@ -86,7 +86,7 @@ const XLN = ({
         try {
           const eth = await provider.request({ method: "eth_requestAccounts" });
           if (page == "walletSignIn") {
-            setAccounts({ ...accounts, address: eth[0], url: "/xln/assets" });
+            setAccounts({ ...accounts, address: eth[0], url: "/xln/buy-tokens" });
           }
         } catch {
           console.error("User denied accounts access!");
@@ -269,7 +269,7 @@ const XLN = ({
   return (
     <div className="xln-setup-container">
       <div className="flex justify-center">
-        <h4>Figure out how to layout later</h4>
+        {/* <h4>Figure out how to layout later</h4> */}
         <div className="px-4"></div>
         <div className="grid grid-cols-1">
           {nfts.map((nft, i) => {

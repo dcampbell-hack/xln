@@ -16,6 +16,7 @@ export const loginUser = (user) => async  dispatch => {
 
 try{
 const res = await axios.post('/api/v1/auth/login', user);
+console.log('Login', res )
 
 dispatch({
     type: LOGIN,
