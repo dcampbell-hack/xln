@@ -29,7 +29,7 @@ return {
 export const validatePassword = (password, confirm) => {
     console.log('IS VALIDATING AS PASSWORD?')
     //Validation
-    const validLength = String(password).length >= 8;
+    const validLength = String(password).length >= 10;
     const containsLowercase = String(password).match(/(?=.*[a-z])/);
     const containsUppercase = String(password).match(/(?=.*[A-Z])/);
     const containsNumber = String(password).match(/(?=.*[0-9])/);
@@ -40,7 +40,7 @@ export const validatePassword = (password, confirm) => {
     if(!validLength){
         return {
             status: false,
-            error: "The password must be eight characters or longer"
+            error: "The password must be 10 characters or longer"
         } 
     } else if(!containsLowercase){
         return {

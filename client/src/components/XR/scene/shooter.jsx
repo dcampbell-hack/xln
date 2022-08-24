@@ -12,7 +12,7 @@ import { Player } from "../../utils/XRMethods/elements/player";
 import { Skybox } from "../../utils/XRMethods/elements/skybox";
 import { Cube } from "../../utils/XRMethods/elements/cube";
 
-// extend({ PointerLockControls });
+
 
 export const Shooter = () => {
   const { camera, gl } = useThree();

@@ -45,8 +45,8 @@ import {
             case RESET_PASSWORD:
                 return { ...state, loading: false, isError: false, }
              case AUTH_ERROR:
-                console.log('Error', action.payload)
-                return { ...state, loading: false, isError: true, forgotPassword: { error: action.payload.response.data.error }, error:  action.payload?.response?.data?.error || action.payload || 'check form inputs' , status: action.payload?.response?.status || 500 }
+                console.log('Error ---->', action.payload)
+                return { ...state, loading: false, isError: true, forgotPassword: { error: action.payload.response.data.error }, error:  action.payload?.response?.data?.error || 'check form inputs' , status: action.payload?.response?.status || 500 }
             default: 
                return state;
         }

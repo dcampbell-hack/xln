@@ -225,32 +225,16 @@ describe("XLNICO", () => {
         console.log("Checking Token Allowance", allowance );
         expect(allowance).to.equal(0);
 
-      //   //Buy Tokens in ICO
-         await buyTokens(ico, buyer, purchasePrice);
+        //Buy Tokens in ICO
+        await buyTokens(ico, buyer, purchasePrice);
         const buyerBalance = await ico.sales(buyer.address); 
         console.log('Buyer Balance ---->', buyerBalance.amount )
         
         await token.connect(deployer).mint(buyer.address, buyerBalance.amount)
         console.log('Tokens owned by buyer', await token.balanceOf(buyer.address) )
-        expect( Math.round(await ethers.BigNumber.from(buyerBalance.amount)) ).to.equal(Math.round( token.balanceOf(buyer.address) ) )
+        expect( Math.round(await ethers.BigNumber.from(buyerBalance.amount)) ).to.equal( Math.round( await token.balanceOf(buyer.address) ) )
      
-        console.log('Check supply 2 ----', await ico.availableTokens() )
-
-        // // check if ICO is active
-        // const tokenSales = await ico.sales();
-        // expect(tokenSales).to.equal(0);
-
-        //  // check if ICO availableTokens
-        //  dai = await ico.dai();
-        //  expect(dai).to.equal(0);
-
-        //  // check if ICO availableTokens
-        //  end = await ico.end();
-        //  expect(end).to.equal(0);
-
-        //  // check if ICO availableTokens
-        //  sales = await ico.sales();
-        //  expect(sales).to.equal(0);
+         
       } catch (err) {
         console.log(err);
       }

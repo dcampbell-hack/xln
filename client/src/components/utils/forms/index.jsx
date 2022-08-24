@@ -67,12 +67,13 @@ const Form = ({ formData: { action, method, fields, submit }, setValues, values,
   const mapFields = (fields) => fields.map(({type, attributes }, index) => formFieldTypes( type, attributes,index ) ); 
   const mapErrors = (errors) => errors.map((error, index) => <ErrorAlert key={index} error={error} />)
   const errorArr = [];
+
   const onSubmit = async (e) => {
       e.preventDefault();
 
       // action !== 'forgotPassword') && 
-     const validPassword =  ( action !== 'login') || ( action !== 'buyXLN')   && validatePassword(values.password, values.password2);
-     const validEmail = ( action !== 'buyXLN') && validateEmailAddress(values.email);
+     const validPassword = validatePassword(values.password, values.password2);
+     const validEmail = validateEmailAddress(values.email);
 
  
 
@@ -99,7 +100,7 @@ if(!errorArr[''] || errorArr.length){
 //  throw new Error( errorArr[0] );
 }
 
-console.log('Form Values ----', action, values )
+console.log('Form Values ----', action, values, validPassword )
 
 if(!errorArr.length){
   switch(action){
@@ -146,9 +147,9 @@ if(!errorArr.length){
 
        <FormButton className={submit.className} label={submit.label} />
 
-       { auth.isError || showError && <div className='form-alert form-alert-error'>
-          <div className='error-text'>{ auth.error || values.errors && mapErrors(values.errors) }</div> 
-          <div className="dismiss" onClick={() => setShowError(false)}>x</div>
+       { auth.isError  && <div className='form-alert form-alert-error'>
+          <div className='error-text'>{  values.errors && mapErrors(values.errors) }</div> 
+          <div className="dismiss" onClick={() => setShowError(false)}><i className="fas fa-times-square"></i></div>
       </div> 
       }
        </div>
