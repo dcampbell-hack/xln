@@ -1,7 +1,6 @@
 import { useSphere } from "@react-three/cannon";
 import React, { useEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Vector3, Raycaster } from "three";
 import { useKeyboardInput } from "../../hooks/useKeyboardControls";
 import { useMouseInput } from "../../hooks/useMouseInput";
 import { useVariable } from "../../hooks/useVariable";
@@ -109,19 +108,19 @@ export const Player = () => {
     );
 
     /** Handles jumping */
-    if (state.current.jumping && state.current.vel[1] < 0) {
+    //if (state.current.jumping && state.current.vel[1] < 0) {
       /** Ground check */
-      const raycaster = new Raycaster(
-        sphereRef.current.position,
-        new Vector3(0, -1, 0),
-        0,
-        0.2
-      );
-      const intersects = raycaster.intersectObjects(scene.children);
-      if (intersects.length !== 0) {
-        state.current.jumping = false;
-      }
-    }
+      // const raycaster = new Raycaster(
+      //   sphereRef.current.position,
+      //   new Vector3(0, -1, 0),
+      //   0,
+      //   0.2
+      // );
+    //   const intersects = raycaster.intersectObjects(scene.children);
+    //   if (intersects.length !== 0) {
+    //     state.current.jumping = false;
+    //   }
+    // }
 
     if (space && !state.current.jumping) {
       const now = Date.now();

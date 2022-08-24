@@ -5,7 +5,6 @@ import { Physics } from "@react-three/cannon";
 
 // Three
 import { extend, useThree } from "@react-three/fiber";
-import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 
 // Prefabs
 import { Plane } from "../../utils/XRMethods/elements/plane";
@@ -13,7 +12,7 @@ import { Player } from "../../utils/XRMethods/elements/player";
 import { Skybox } from "../../utils/XRMethods/elements/skybox";
 import { Cube } from "../../utils/XRMethods/elements/cube";
 
-extend({ PointerLockControls });
+// extend({ PointerLockControls });
 
 export const Shooter = () => {
   const { camera, gl } = useThree();
@@ -40,7 +39,7 @@ export const Shooter = () => {
       {/** Skybox */}
       <Skybox />
       {/** Pointer lock */}
-      <pointerLockControls ref={controls} args={[camera, gl.domElement]} />
+      {/* <pointerLockControls ref={controls} args={[camera, gl.domElement]} /> */}
       {/** Lighting */}
       <directionalLight position={[3, 0, 3]} intensity={0.5} castShadow />
       <pointLight position={[0, 0, -3]} intensity={0.6} castShadow />

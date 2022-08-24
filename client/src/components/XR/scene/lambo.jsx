@@ -4,7 +4,6 @@ import Lambo from "../models/Lambo";
 import { Environment, OrbitControls, PerspectiveCamera, Text } from "@react-three/drei";
 import { useDrag } from "react-use-gesture"; 
 import "../../css/xr/index.scss";
-import * as THREE from "three";
 
 const sizes = {
   width: window.innerWidth,

@@ -3,7 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, Environment, Text3D, useTexture, Sky, Loader } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 import fontUrl from '../../assets/fonts/xenosphere.json';
-import * as THREE from "three";
 import { FPSControls } from 'react-three-fpscontrols';
 
 import { Cube } from '../utils/XRMethods/elements/cube';
@@ -304,7 +303,6 @@ const Scene = ({ movement }) => {
              >
                  <mesh>
                     <sphereGeometry args={[1,100,100]} />
-                    <meshBasicMaterial side={THREE.BackSide} />
                  </mesh>
              </Environment>
 

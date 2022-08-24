@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSphere } from "@react-three/cannon";
-import { useThree, useFrame } from "@react-three/fiber";
+import { useThree, useFrame, Vector3 } from "@react-three/fiber";
 import { useKeyboardControls } from "../../hooks/useKeyboardControls";
-import { Vector3 } from "three";
 import Lola from "../../../XR/models/Lola";
 
 const SPEED = 6;

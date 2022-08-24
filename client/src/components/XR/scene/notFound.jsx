@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, Environment, Text3D } from '@react-three/drei';
 import fontUrl from '../../../assets/fonts/xenosphere.json';
-import * as THREE  from 'three';
 
 const angleToRadians = angleInDeg => (Math.PI / 180 ) * angleInDeg;
 
@@ -129,7 +128,6 @@ const Scene = () => {
              >
                  <mesh scale={100}>
                     <sphereGeometry args={[1,100,100]} />
-                    <meshBasicMaterial color={"#429495"} side={THREE.BackSide} />
                  </mesh>
              </Environment>
 

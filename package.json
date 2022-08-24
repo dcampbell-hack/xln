@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node index.js",
     "dev": "concurrently \"yarn  server\" \"yarn client\" ",
+    "setUp":  "yarn  install && cd ./client && yarn install ",
     "build": "concurrently \"npm run server\" \"npm run production-client\" ",
     "client": "cd ./client && yarn dev",
     "server": "nodemon index.js",

@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, Environment } from '@react-three/drei';
-import * as THREE  from 'three';
 
 const angleToRadians = angleInDeg => (Math.PI / 180 ) * angleInDeg;
 
@@ -41,7 +40,6 @@ const Scene = () => {
              >
                  <mesh scale={100}>
                     <sphereGeometry args={[1,100,100]} />
-                    <meshBasicMaterial color={"#429495"} side={THREE.BackSide} />
                  </mesh>
              </Environment>
 
