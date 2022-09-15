@@ -1,13 +1,28 @@
 const hre = require("hardhat");
 const web3 = require("web3");
 const fs = require("fs");
+const dai = (n) => Number(web3.utils.toWei(n.toString(), "picoether"));
 
 async function main() {
+
+  let tokenAdmin;
+
+  const accounts = await hre.ethers.getSigners();
+  const deployer = accounts[0],
+  // const deployer = 0x75cFC852f0A83DF3b19ead24793240B37b7DfadD,
+  tokenPrice = dai(0.07),
+  duration = 592200, 
+  minPurchase = dai(15), 
+  maxPurchase = dai(170),
+  maxSupply = 5444444671,
+  tokenSupply = 176944452;
+
 
   const xlnMarket = await hre.ethers.getContractFactory("XLNMarket");
   const market = await xlnMarket.deploy();
   await market.deployed();
   const marketAddress = market.address;
+
   console.log('Market Deployed -----', market.address)
 
   const xlnNFT = await hre.ethers.getContractFactory("XLNNFT");
@@ -23,7 +38,7 @@ async function main() {
   const token = await xlnToken.deploy(
     'Medallion XLN', //name
     '$XLN', //sticker
-    totalSupply
+    maxSupply
   )
 
    await token.deployed()
@@ -32,20 +47,31 @@ async function main() {
   const xlnICO = await hre.ethers.getContractFactory('XLNICO')
   const ico = await xlnICO.deploy(
       token.address,
-      300, // duration (592200s = 1 week)
-      web3.utils.toWei('2', 'milli'), // price of 1 token in DAI (wei) (= 0.002 DAI. 0.002 * 10M = 20,000 DAI ~= 20,000 USD)
-      totalSupply, //_availableTokens for the ICO. can be less than maxTotalSupply
-      200, //_minPurchase (in DAI)
-      5000 //_maxPurchase (in DAI)
+      duration, // duration (592200s = 1 week)
+      tokenPrice, // price of 1 token in DAI (wei) (= 0.002 DAI. 0.002 * 10M = 20,000 DAI ~= 20,000 USD)
+      tokenSupply, //_availableTokens for the ICO. can be less than maxTotalSupply
+      minPurchase, //_minPurchase (in DAI)
+      maxPurchase //_maxPurchase (in DAI)
   );
 
    await ico.deployed();
-  await token.updateAdmin(ico.address);
+  await token.updateAdmin(deployer.address);
+
+  // await token.updateAdmin(deployer.address);
+  tokenAdmin = await token.admin();
+
+  console.log('ICO Deployed 1 -----', ico.address, tokenAdmin )
+
+  await token.connect(deployer).mint(deployer, 100000)
+  await token.connect(deployer).mint(ico.address, tokenSupply )
+
   await ico.start();
 
-  console.log('ICO Deployed -----', ico.address )
+  console.log('ICO Deployed 2 -----', ico.address )
 
   let config = `
+          exports.tokenPrice = '${tokenPrice}'
+          exports.deployerAddress = '${deployer.address}'
           exports.tokenAddress = '${token.address}'
           exports.icoAddress = '${ico.address}'
           exports.nftAddress = '${nft.address}'

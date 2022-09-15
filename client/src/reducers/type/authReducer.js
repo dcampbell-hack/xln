@@ -2,10 +2,13 @@ import {
     LOGIN,
     LOGOUT,
     REGISTER, 
+    USERNAME,
     UPDATE_PASSWORD,
     FORGOT_PASSWORD,
     RESET_PASSWORD,
     AUTH_ERROR,
+    ADD_NEW_ERROR,
+    REMOVE_ERROR,
     CONNECTED_WALLET,
     LOAD_USER
     } from'../../actions/types'
@@ -22,6 +25,7 @@ import {
         balance: 0
         },
         error: null,
+        errors: [],
         status: null,
         isError: false,
         isAuthenticated: false,
@@ -44,9 +48,24 @@ import {
                 return { ...state, loading: false, isError: false, forgotPassword: { success: true } }
             case RESET_PASSWORD:
                 return { ...state, loading: false, isError: false, }
+            case ADD_NEW_ERROR:
+                return { ...state, isError: true, errors: [ ...state.errors, action.payload ]}
+            case REMOVE_ERROR:
+                return { ...state, loading: false, isError: false, errors: [] }
              case AUTH_ERROR:
-                console.log('Error ---->', action.payload)
-                return { ...state, loading: false, isError: true, forgotPassword: { error: action.payload.response.data.error }, error:  action.payload?.response?.data?.error || 'check form inputs' , status: action.payload?.response?.status || 500 }
+               let authErr = [];
+               const authenError = "Please provide a valid email and password";
+               const invalidCredential = "Invalid credentials";
+               const nonExistentUser = "This user does not exist. Please register."
+               const invalidFields = "Invalid fields. Please fill out all form fields."
+                if(action.status == 400 ) authErr.push(authenError); 
+                if(action.status == 401 ) authErr.push( invalidCredential );
+                if(action.status == 500 ){
+                    if(action.error == 'login') authErr.push( nonExistentUser );
+                    if(action.error == 'register') authErr.push( invalidFields );
+                }
+                console.log('Error State ----', action.status, action.error )
+                return { ...state, loading: false, isError: true, errors: [ ...state.errors, ...authErr ],  status: action.payload?.response?.status || 500, }
             default: 
                return state;
         }

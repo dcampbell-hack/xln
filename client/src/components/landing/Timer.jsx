@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export const Timer = (props) => {
+export const Timer = ({ timer: { date, announcement, phases }}) => {
 
 const [ timerDays, setTimerDays ] = useState(0)
 const [ timerHours, setTimerHours ] = useState(0)
@@ -11,7 +11,7 @@ const [ timerSeconds, setTimerSeconds ] = useState(0)
 let interval;
 
 const startTimer = () => {
-    const countdownDate = new Date("January, 31  2023").getTime();
+    const countdownDate = new Date(date).getTime();
 
     interval = setInterval(() => {
         const now = new Date().getTime();
@@ -42,11 +42,18 @@ useEffect(() => {
    startTimer();
 })
 
+const mapPhases = () => phases.map(({ active, tokenPrice, label }) => <div className={`timer-phase-item `}>  
+ <div className={ active && 'active'}>
+ <h4>{label}</h4>
+   <p>${tokenPrice}</p>
+ </div>
+</div>)
+
 
   return (
     <div className="xln-countdown panel-padding">
       <div className='countdown-wrapper'>
-        <h1>ICO ends in</h1>
+        <h1>{ announcement } @ ${ phases[0].tokenPrice} per token</h1>
         <div className='countdown-time'>
            <div className='countdown-item'>
               <h1>{timerDays}</h1>
@@ -73,7 +80,12 @@ useEffect(() => {
               <h1>{timerSeconds}</h1>
               <p>Seconds</p>
            </div>
-        </div>    
+        </div>   
+
+        <div className='timer-phase-container'>
+           { mapPhases() }
+        </div>
+
       </div>    
     </div>
   )

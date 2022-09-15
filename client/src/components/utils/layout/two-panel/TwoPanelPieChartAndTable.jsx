@@ -1,5 +1,5 @@
 import Chart from '../../charts';
-import Table from '../../tables';
+import Table from '../tables';
 
 const TwoPanelPieChartAndTable = ({ options: { standard, table, chart, chartData } }) => {
 

@@ -6,76 +6,80 @@ import { ErrorAlert } from "../../errors/alert";
 //Redux
 import { connect } from "react-redux";
 
-import { uploadFile } from "../../../../../actions/user";
+// import { uploadFile } from "../../../../../actions/user";
 
 import {
-  validateEmailAddress,
-  validatePassword,
-} from "../../../operations/auth";
-
-import {
-  WalletSignIn,
+  AddPermissions,
+  AvatarProfile,
+  BuyShare,
   BuyTokens,
+  CreateAsset,
+  CodeBlock,
+  FileUpload,
   MintTokens,
   MintAsset,
-  CreateAsset,
-  BuyAsset,
   ShowComments,
   ShowReviews,
   ShowAsset,
   ShowAssets,
-  BuyShare,
   SellShare,
   TxPrompt,
-  CodeBlock,
-  AddPermissions,
-  AvatarProfile,
-  FileUpload,
   TestFuncsTemplate,
 } from "./layoutStyles";
 
 import {
-  tokenSupply,
-  updateAddress,
-  start,
+  Wallet,
+  WalletSetting,
+  WalletSignIn,
+} from './walletStyles';
+
+import {
   buyTokens,
   buyXLN,
-  withdrawDai,
-  withdrawTokens,
-  updateAdmin,
-  mint,
-  mintNFT,
-  getListingPrice,
-  makeMarketItem,
   createMarketSale,
   fetchMarketTokens,
   fetchMyNFTs,
   fetchItemsCreated,
+  getListingPrice,
+  makeMarketItem,
+  mint,
+  mintNFT,
+  setShowForm,
+  start,
+  updateAddress,
+  updateAdmin,
+  updateSupply,
+  withdrawDai,
+  withdrawTokens,
 } from "../../../../../actions/blockchain";
 
 const TemplateLayout = ({
+  assets,
+  auth,
   blockchain,
   blockchainAction,
-  templateData,
-  setValues,
-  values,
-  start,
   buyTokens,
   buyNFT,
   buyXLN,
-  withdrawDai,
-  withdrawTokens,
-  updateAdmin,
-  mint,
-  mintNFT,
-  getListingPrice,
-  makeMarketItem,
   createMarketSale,
   fetchMarketTokens,
   fetchMyNFTs,
   fetchItemsCreated,
-  uploadFile,
-  auth,
+  getListingPrice,
+  makeMarketItem,
+  mint,
+  mintNFT,
+  setValues,
+  setShowForm,
+  start,
+  shares,
+  templateData,
+  updateAdmin,
+  updateSupply,
+  users,
+  values,
+  withdrawDai,
+  withdrawTokens,
 }) => {
   let navigate = useNavigate();
   const [showError, setShowError] = useState(false);
@@ -105,28 +109,24 @@ const TemplateLayout = ({
       }
 
       if (!errorArr.length) {
-        console.log("Buy Asset Layout Template", actionType, blockchain );
+        console.log("Buy Asset Layout Template", actionType, blockchain);
 
         switch (actionType) {
           case "start":
             start(values);
             break;
 
-          case "supply":
-            tokenSupply(values);
-            break;
-
           case "updateAddress":
             updateAddress(values);
             break;
 
-            case "buyTokens":
-              console.log('Clicking Buy Tokens Button --->')
-              buyTokens();
-              break;
+          case "buyTokens":
+            console.log("Clicking Buy Tokens Button --->");
+            buyTokens();
+            break;
 
           case "buyNFT":
-            console.log('Clicking Buy NFT Button --->')
+            console.log("Clicking Buy NFT Button --->");
             buyNFT();
             break;
 
@@ -184,20 +184,49 @@ const TemplateLayout = ({
 
   const templateOptions = (type, options) => {
     switch (type) {
-      case "walletSignIn":
-        return <WalletSignIn options={options} setActionType={setActionType} />;
+      case "addPermissions":
+        return (
+          <AddPermissions options={options} setActionType={setActionType} />
+        );
 
-        case "buyTokens":
-          return <BuyTokens options={options} setActionType={setActionType} />;
+      case "avatar":
+        return (
+          <AvatarProfile options={options} setActionType={setActionType} />
+        );
 
-          case "mintTokens":
-            return <MintTokens options={options} setActionType={setActionType} />;
+      case "buy":
+        return <CreateAsset options={options} setActionType={setActionType} />;
 
-      case "buyAsset":
-        return <BuyAsset options={options} setActionType={setActionType} />;
+      case "buyShare":
+        return (
+          <BuyShare
+            options={options}
+            setActionType={setActionType}
+            blockchain={blockchain}
+          />
+        );
+
+      case "buyTokens":
+        return (
+          <BuyTokens
+            options={options}
+            setActionType={setActionType}
+            blockchain={blockchain}
+            setShowForm={setShowForm}
+          />
+        );
+
+      case "codeBlock":
+        return <CodeBlock options={options} setActionType={setActionType} />;
+
+      case "file":
+        return <FileUpload options={options} setActionType={setActionType} />;
 
       case "mintAsset":
         return <MintAsset options={options} setActionType={setActionType} />;
+
+      case "mintTokens":
+        return <MintTokens options={options} setActionType={setActionType} />;
 
       case "createAsset":
         return <CreateAsset options={options} setActionType={setActionType} />;
@@ -214,41 +243,54 @@ const TemplateLayout = ({
       case "showAssets":
         return <ShowAssets options={options} setActionType={setActionType} />;
 
-      case "buyShare":
-        return <BuyShare options={options} setActionType={setActionType} />;
-
       case "sellShare":
         return <SellShare options={options} setActionType={setActionType} />;
 
       case "txPrompt":
         return <TxPrompt options={options} setActionType={setActionType} />;
 
-      case "codeBlock":
-        return <CodeBlock options={options} setActionType={setActionType} />;
-
-      case "addPermissions":
-        return (
-          <AddPermissions options={options} setActionType={setActionType} />
-        );
-
-      case "buy":
-        return <CreateAsset options={options} setActionType={setActionType} />;
-
-      case "file":
-        return <FileUpload options={options} setActionType={setActionType} />;
-
-      case "avatar":
-        return (
-          <AvatarProfile options={options} setActionType={setActionType} />
-        );
-
       case "testFuncsTemplate":
         return (
           <TestFuncsTemplate options={options} setActionType={setActionType} />
         );
 
+      case "wallet":
+        return (
+          <Wallet
+            options={options}
+            setActionType={setActionType}
+            assets={assets}
+            shares={shares}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+        case "walletFileUpload":
+          return (
+            <WalletSetting
+              options={options}
+              setActionType={setActionType}
+              users={users}
+              blockchain={blockchain}
+            />
+          );
+
+      case "walletSetting":
+        return (
+          <WalletSetting
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletSignIn":
+        return <WalletSignIn options={options} setActionType={setActionType} />;
+
       default:
-        return <>Empty</>;
+        return <></>;
     }
   };
 
@@ -262,27 +304,29 @@ const TemplateLayout = ({
 
 const mapStateToProps = (state) => {
   return {
+    assets: state.assets,
     auth: state.auth,
+    blockchain: state.blockchain,
+    shares: state.shares,
     users: state.users,
-    blockchain: state.blockchain
   };
 };
 
-// const mapDispatchToProps = {
-//   start,
-//   buyTokens,
-//   withdrawDai,
-//   withdrawTokens,
-//   updateAdmin,
-//   mint,
+const mapDispatchToProps = {
+  buyTokens,
+  createMarketSale,
+  fetchMarketTokens,
+  fetchMyNFTs,
+  fetchItemsCreated,
+  getListingPrice,
+  mint,
+  makeMarketItem,
+  setShowForm,
+  start,
+  updateAdmin,
+  updateSupply,
+  withdrawDai,
+  withdrawTokens,
+};
 
-//   getListingPrice,
-//   makeMarketItem,
-//   createMarketSale,
-//   fetchMarketTokens,
-//   fetchMyNFTs,
-//   fetchItemsCreated,
-//   uploadFile,
-// };
-
-export default connect(mapStateToProps, {})(TemplateLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateLayout);

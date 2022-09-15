@@ -15,15 +15,20 @@ import {
   FETCH_ITEMS_CREATED,
   UPDATE_ADDRESS,
   TOKEN_SUPPLY,
+  UPDATE_SUPPLY,
   GET_CONTRACT_ADDRESS,
+  LOGGED_IN_USER_ADDRESS,
+  SHOW_FORM,
   CHAIN_ERROR,
 } from "../../actions/types";
 
 const initState = {
   balance: 0,
   address: null,
-  price: 18,
-  supply: 3,
+  price: 0,
+  supply: 0,
+  deployer: null,
+  showForm: false,
   token: {
     address: "",
     message: "",
@@ -102,11 +107,13 @@ const initState = {
 };
 
 export default function (state = initState, action) {
+
   switch (action.type) {
     case GET_CONTRACT_ADDRESS:
-      console.log('Contact Reducer -------', action.payload )
       return {
         ...state,
+       price: action.payload.data.tokenPrice,
+       deployer: action.payload.data.deployerAddress,
        token: { ...state.token, address: action.payload.data.tokenAddress },
        ico: { ...state.ico, address: action.payload.data.icoAddress },
        nft: { ...state.token, address: action.payload.data.nftAddress },
@@ -272,15 +279,37 @@ export default function (state = initState, action) {
           ...state,
           loading: false,
           isError: false,
-          address: payload
+          address: action.payload
         };
-        case TOKEN_SUPPLY:
+        case UPDATE_SUPPLY:
+          console.log('Update Supply Reducer ---> ', action.payload )
           return {
             ...state,
             loading: false,
             isError: false,
-            supply: payload
+            price: action.payload,
+            showForm: false
           };
+          case TOKEN_SUPPLY:
+            console.log('Update Token Supply Reducer ---> ')
+            return {
+              ...state,
+              loading: false,
+              isError: false,
+              supply: action.payload
+            };
+            case SHOW_FORM:
+              return {
+                ...state,
+                loading: false,
+                isError: false,
+                showForm: true
+              };
+    case LOGGED_IN_USER_ADDRESS:
+      return {
+        ...state,
+        address: action.address
+      }
     case CHAIN_ERROR:
       return {
         ...state,

@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
@@ -81,7 +81,7 @@ contract XLNICO {
             );
             
 
-            dai.transfer( address(this), daiAmount);
+            dai.transferFrom( address(this), daiAmount);
               
             sales[msg.sender] = Sale(
                 msg.sender,

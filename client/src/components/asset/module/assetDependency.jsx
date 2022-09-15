@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CheckboxItem from "../../utils/checkbox/imageAvatarCheckbox";
+import CheckboxItem from "../../utils/layout/checkbox/imageAvatarCheckbox";
 import Avatar from '../../utils/avatar';
 
 const AssetDependency = ({  type, assets, setCheckbox, checkbox }) => {

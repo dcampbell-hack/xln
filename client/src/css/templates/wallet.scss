@@ -1,3 +1,146 @@
+.wallet-container{
+    width: 100vw;
+    height: auto;
+    min-height: 90vh;
+    padding: 15px 0;
+    background: rgb(255,211,0);
+    background: linear-gradient(90deg, #D62828 18%, #F77F00 53%, #FCBF49 86%);
+    display: grid;
+    place-content: center;
+}
+
+.wallet-content{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.wallet-content-setting{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.wallet-panel{
+    width:50px;
+    display: flex;
+    align-items: center;
+}
+
+.wallet-tab{
+    width: 100%;
+}
+
+.wallet-tab:hover{
+    background-color: #333;
+}
+
+.wallet-tab i{
+    color: #ccc;
+}
+
+.wallet-avatar{
+    width: 300px;
+    min-width: 300px;
+    height: 450px;
+    display: grid;
+    place-items: center;
+}
+
+.wallet-user-properties{
+    min-width: 300px;
+    height: 450px;
+    display: grid;
+    place-items: center;
+}
+
+.account-network{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.web-links{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.web-link a{
+    width: 130px;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #000;
+
+}
+
+.wallet-profile{
+    width: 80vw;
+    min-width: 600px;
+    height: auto;
+    background: rgba(255,255,255, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+}
+
+.wallet-header{
+    padding: 0 10px;
+    font-size: 12px;
+    background: rgba(250,250,250, 0.5);
+    display: flex;
+    justify-content: start;
+}
+
+.wallet-header a{
+    margin: 0 10px;
+}
+
+.wallet-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    background: rgba(250,250,250,0.5); 
+}
+
+.wallet-footer-name{
+    height: 110px;
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.wallet-footer-name h2{
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.wallet-footer-name i{
+    width: 100%;
+    height: 50px;
+}
+
+.wallet-footer-buttons{
+    width: 130px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wallet-footer-buttons .btn,
+.wallet-footer-buttons p{
+    font-size: 13px;
+}
+
 .wallet-sign-in{
     width: 100vw;
     height: 100vh;
@@ -172,6 +315,25 @@
     background-color: #333;
     position: relative;
     z-index: 0;
+}
+
+.wallet-token-icon{
+    width: 100%;
+    height: 250px;
+    display: grid;
+    place-items: center;
+}
+
+.wallet-token-details{
+    display: grid;
+    place-items: center;
+}
+
+.wallet-token-details  h1, 
+.wallet-token-details  h3, 
+.wallet-token-details  p,
+.wallet-token-details  a{
+    margin: 0;
 }
 
 .test-template-funcs{

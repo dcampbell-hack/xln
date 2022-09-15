@@ -28,21 +28,21 @@ exports.login = asyncHandler(async (req, res, next) => {
     
     // Validate password & email
     if(!email || !password ){
-        return next(new ErrorResponse('Please provide an email and password', 400))
+       res.status(400).json({ success: false, error: 'Please provide a valid email and password' });
     }
 
     // Check for user 
     const user = await User.findOne({ email }).select('+password');
 
     if(!user){
-        return next(new ErrorResponse('Invalid credentials', 401))
+        res.status(401).json({ success: false, error: 'Invalid credentials'});
     }
 
     // Check if password matches 
     const isMatch = await user.matchPassword(password);
 
     if(!isMatch){
-       return next(new ErrorResponse('Invalid credentials', 401))
+        res.status(401).json({ success: false, error: 'Invalid credentials'});
     }
     
     await sendTokenResponse(user, 200, res, next);
@@ -64,6 +64,23 @@ exports.logout = asyncHandler(async (req, res, next) => {
     })
 
 })
+
+
+//@desc Update user
+//@route PUT /api/v1/users/:id
+//@access PRIVATE
+exports.username = asyncHandler(async (req, res, next) => {
+    console.log('Dupl User 1', req.body)
+    res.json({ succes: true })
+    // const isUsername = await User.findOne({ username: req.body.username });
+    // console.log('Dupl User 2', isUsername, req.body)
+    // if (isUsername) {
+    //   res.status(409).json({ success: false, message: "This username is taken" });
+    // }
+  
+    // res.status(200).json({ success: true, message: 'This username is available'})
+  
+  });
 
 
 //@desc Update password 

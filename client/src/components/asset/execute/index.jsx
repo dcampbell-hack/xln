@@ -5,8 +5,8 @@ import Gary from '../../../assets/founders/CAO-Executive.png';
 import AssetLaunch from '../module/assetLaunch';
 import AssetDependency from '../module/assetDependency';
 import AssetHeader from '../module/assetHeader';
-import AssetPermissionTypeCheckbox from '../../utils/checkbox/assetTypePermissionCheckbox';
-import SetAssetPermissions from '../../utils/checkbox/setAssetPermissions';
+import AssetPermissionTypeCheckbox from '../../utils/layout/checkbox/assetTypePermissionCheckbox';
+import SetAssetPermissions from '../../utils/layout/checkbox/setAssetPermissions';
 
 const ExecuteAsset = ({ users }) => {
 

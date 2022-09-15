@@ -1,21 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { LinkNoPaddingL } from '../../buttons/links';
-import Form from '../../forms/index';
+import Form from '../forms/index';
 //import { Button } from '../../buttons/buttons';
 
 
 
-const FormLayout = ({ options: { standard, title, forgotPassword, forgotPasswordLink,  warning, warningLink: { text, to, icon, show, external }, description, image, formData  } }) => {
+const FormLayout = ({ 
+    options: {
+         standard, 
+         title, 
+         forgotPassword, 
+         forgotPasswordLink,  
+         warning, 
+         warningLink: { text, to, icon, show, external }, 
+         description, 
+         image, 
+         formData, 
+     } 
+        }) => {
     const [values, setValues] = useState({});
     const [ showConversion, setShowConversion ] = useState(false)
+    const [ totalSupply, setTotalSupply ] = useState(0);
+    //const [  ] = useState(0);
     const [ conversion, setConversion ] = useState(0);
     const [ exchange, setExchange ] = useState(0);
 
-    const totalSupply = 5444444671;
-    const amountPerDAI = 15;
-    const conversionRate = 0.07;
+    let amountPerDAI = 15;
+    let conversionRate = 0.07;
 
-    console
+    useEffect(() => {
+        setTotalSupply(5444444671);
+        setConversion(15);
+        const conversionRate = 0.07;
+    }, [])
+
+
     
     return(
         <div className={`util-form-layout`}>

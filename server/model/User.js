@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const FileSchema = require('./File');
+const LinkSchema = require('./Links');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const ErrorResponse = require('../utils/errorResponse');
 const { formatField  } = require('../middleware/formatField');
+const Share = require('./Share');
 
 const UserSchema = new Schema({
     firstname: {
@@ -30,6 +32,10 @@ const UserSchema = new Schema({
         unique: true,
         match: [ /^\w+([\.-]?\w+)*(\@\w+\.\w+)/, ' Please add a valid email']
     },
+    media: {
+        type: Boolean,
+        default: false
+      },
     role: {
         type: String,
         enum: ['user', 'admin', 'system', 'publisher'],
@@ -42,14 +48,20 @@ const UserSchema = new Schema({
         select: false
     },
     files: [FileSchema],
-    totalBalance: {
-       type: Number
-    },
     resetPasswordToken: String,
     resetPasswordDate: Date,
     createdAt:{
         type: Date,
         default: Date.now
+    },
+    socialLinks: [LinkSchema],
+    followers: {
+        type: Array,
+        "default": [] 
+    },
+    following:  {
+        type: Array,
+        "default": [] 
     },
     comment: {
         type: Schema.ObjectId,
@@ -57,12 +69,12 @@ const UserSchema = new Schema({
     },
     avatar: {
     type: String,
-        default: 'no-photo.jpg',
+        default: '',
         required: false
     },
     cover: {
         type: String,
-            default: 'default.jpg',
+            default: '',
             required: false
         },
     wallet: {

@@ -1,6 +1,7 @@
 @import './variables/colors';
 
 .util-form-layout{
+    height: 80vh;
     min-height: auto;
     display: grid;
     place-items: center;
@@ -85,7 +86,7 @@ form textarea{
 
 .util-employee-panel{
 width: 400px;
-margin: 2em 0;
+margin: 2em 1em;
 }
 
 .row-reverse{

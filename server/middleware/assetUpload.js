@@ -2,8 +2,6 @@ const ErrorResponse = require('../utils/errorResponse');
 const path = require('path');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-const File = require('../model/File');
-const User = require('../model/User');
 
 const createFolder = (dir) => {
     if (!fs.existsSync(dir)){
@@ -22,9 +20,9 @@ const assetUpload = async (model, fileType, category, req, res, next ) => {
         dir2 = `${process.env.FILE_UPLOAD_PATH}/${_target.id}/${category}`;  
         dir3 = `${_target.id}/${category}`;  
     } else {
-         dir = `${process.env.FILE_UPLOAD_PATH}/${_target.user}`;  
-         dir2 = `${process.env.FILE_UPLOAD_PATH}/${_target.user}/${category}`; 
-         dir3 =  `${_target.user}/${category}`;
+         dir = `${process.env.FILE_UPLOAD_PATH}/${_target.id}`;  
+         dir2 = `${process.env.FILE_UPLOAD_PATH}/${_target.id}/${category}`; 
+         dir3 =  `${_target.id}/${category}`;
     }
 
 
@@ -52,25 +50,21 @@ const assetUpload = async (model, fileType, category, req, res, next ) => {
     }
 
     let file; 
-    if(category === 'avatar'){
-       file = req.files['avatar'];
-    } else if(category === 'cover'){
-        file = req.files['cover'];
-    } else {
-       file = req.files['file'];
-    }
+    file = req.files.file;
+
 
     // Check if asset is a image, text, document, video
 
+    console.log('File asset upload -----', req.files.file )
     //Make sure image is a photo 
     if(!file.mimetype.startsWith(fileType)){
         return next(new ErrorResponse(`Upload ${fileType} file`, 400))
     }
 
     //Check filesize 
-    if(file.size > process.env.MAX_FILE_UPLOAD){
-        return next(new ErrorResponse(`Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`, 400));
-    }
+    // if(file.size > process.env.MAX_FILE_UPLOAD){
+    //     return next(new ErrorResponse(`Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`, 400));
+    // }
 
     //Create custome filename
 

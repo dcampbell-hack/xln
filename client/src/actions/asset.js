@@ -25,7 +25,7 @@ export const getAllAssets = () => async dispatch => {
 
 export const getUserAssets = (userId) => async dispatch => {
     try{
-        const res = await axios.get(`/api/v1/assets?user=${userId}&limit=100`);
+        const res = await axios.get(`/api/v1/assets/${userId}`);
         dispatch({
             type: GET_USER_ASSETS,
             payload: res.data

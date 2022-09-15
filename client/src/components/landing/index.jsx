@@ -11,13 +11,13 @@ import DownloadWhitepaper from './DownloadWhitepaper';
 import Timer from './Timer';
 
 
-const Landing = ({ landing: { cta, summary, overview, blockchain, tokenAllocation, downloadWhitepaper, team, roadMap, contact}, socialLinks }) => {
+const Landing = ({ landing: { cta, summary, overview, timer, blockchain, tokenAllocation, downloadWhitepaper, team, roadMap, contact}, socialLinks }) => {
     return (
         <div className='xln-landing-page'>
             <CTA cta={cta} socialLinks={socialLinks} />
             <Summary summary={summary} />
             <Overview overview={overview} />
-            <Timer />
+            <Timer timer={timer} />
             <Blockchain blockchain={blockchain} />
             <TokenAllocation tokenAllocation={tokenAllocation} />
             <Roadmap roadMap={roadMap} /> 

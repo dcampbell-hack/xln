@@ -1,4 +1,4 @@
-import RoadMapPanel from "../utils/panels/templates/roadMapPanel";
+import RoadMapPanel from "../utils/layout/panels/templates/roadMapPanel";
 
 const Roadmap = ({ roadMap: { header, roadmaps, phases } }) => {
 

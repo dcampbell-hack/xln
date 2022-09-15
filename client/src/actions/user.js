@@ -5,8 +5,7 @@ import {
   GET_USER,
   GET_USERS, 
   GET_USER_BY_USERNAME,
-  UPDATE_USER_AVATAR,
-  UPDATE_USER_COVER,
+  UPLOAD_USER_FILE,
   UPDATE_USER,
   DELETE_USER,
   USER_ERROR
@@ -15,7 +14,7 @@ import {
 export const loadUser = () => async  dispatch => {
   try{
   const res = await axios.get('/api/v1/auth/me');
-
+  
   dispatch({
       type: LOAD_USER,
       payload: res.data
@@ -66,13 +65,31 @@ export const getUsers = () => async  dispatch => {
   }
 }
 
-export const uploadFile = (id, file, config ) => async  dispatch => {
+export const uploadUserFile = (id, values ) => async  dispatch => {
+
+  const config = {
+    Headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+
   try{
-  if(file){
-  const assetPermissions = await axios.put(`/api/v1/users/${id}/avatar`, file, config);
-  const newFile = await axios.put(`/api/v1/users/${id}/avatar`, file, config);
+  if(values.fileLoaded){
+    const formData = new FormData();
+  let res;
+
+  if( values.avatar ){
+    formData.append('file', values.avatar );
+  res = await axios.put(`/api/v1/users/${id}/avatar`, formData, config);
+  }
+
+  if( values.cover ){
+    formData.append('file', values.cover )
+     res = await axios.put(`/api/v1/users/${id}/cover`, formData, config);
+    }
+
   dispatch({
-      type: UPDATE_USER_AVATAR,
+      type: UPLOAD_USER_FILE,
       payload: res.data
   })
 } else {
@@ -86,25 +103,10 @@ export const uploadFile = (id, file, config ) => async  dispatch => {
   }
 }
 
-export const updateUserCover = (id, file, config ) => async  dispatch => {
-  try{
-  if(file){
-  const res = await axios.put(`/api/v1/users/${id}/cover`, file, config);
-  dispatch({
-      type: UPDATE_USER_COVER,
-      payload: res.data
-  })
-} else {
-  dispatch({ type: USER_ERROR, payload: 'File is not defined' })
-}
-
-  } catch(err){
-      dispatch({ type: USER_ERROR, payload: err })
-  }
-}
 
 export const updateUser = (id, user) => async  dispatch => {
   try{
+
   const res = await axios.put(`/api/v1/users/${id}`, user);
   dispatch({
       type: UPDATE_USER,

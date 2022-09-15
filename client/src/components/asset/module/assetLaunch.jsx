@@ -1,5 +1,5 @@
-import  AssetPermissionTypeCheckbox from '../../utils/checkbox/assetTypePermissionCheckbox'
-import SetAssetPermissions from '../../utils/checkbox/setAssetPermissions';
+import  AssetPermissionTypeCheckbox from '../../utils/layout/checkbox/assetTypePermissionCheckbox'
+import SetAssetPermissions from '../../utils/layout/checkbox/setAssetPermissions';
 
 const AssetLaunch = () => {
 

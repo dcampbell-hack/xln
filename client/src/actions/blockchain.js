@@ -4,6 +4,7 @@ import Web3Modal from "web3modal";
 
 import {
   GET_ADDRESS,
+  LOGGED_IN_USER_ADDRESS,
   UPDATE_WALLET_BALANCE,
   MINT_NFT,
   UPDATE_ADMIN,
@@ -21,7 +22,9 @@ import {
   FETCH_ITEMS_CREATED,
   UPDATE_ADDRESS,
   TOKEN_SUPPLY,
+  UPDATE_SUPPLY,
   GET_CONTRACT_ADDRESS,
+  SHOW_FORM,
   CHAIN_ERROR,
 } from "./types";
 
@@ -31,6 +34,18 @@ export const getAddress = () => async (dispatch) => {
 
     dispatch({
       type: GET_ADDRESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: CHAIN_ERROR, payload: err });
+  }
+};
+
+export const loggedInUserAddress = (address) => async (dispatch) => {
+  try {
+    const res = await axios.post("/api/v1/blockchain/address", address);
+    dispatch({
+      type:  LOGGED_IN_USER_ADDRESS,
       payload: res.data,
     });
   } catch (err) {
@@ -51,8 +66,6 @@ export const getContractAddress = () => async (dispatch) => {
   }
 };
 
-
-
 export const updateAddress = (address) => {
   return {
     type: UPDATE_ADDRESS,
@@ -60,12 +73,26 @@ export const updateAddress = (address) => {
   }
 };
 
-export const updateSupply = ({ buyXLN }) => {
+export const setShowForm = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: SHOW_FORM,
+      payload: true,
+    });
+  } catch (err) {
+    dispatch({ type: CHAIN_ERROR, payload: err });
+  }
+};
 
-  console.log('Recieved New Supply --- buyXLN action', buyXLN)
-  return {
-    type: UPDATE_SUPPLY,
-    payload: buyXLN
+export const updateSupply = ({ buyxln }) =>  async (dispatch) => {
+  try {
+
+    dispatch({
+      type: UPDATE_SUPPLY,
+      payload: Number(buyxln),
+    });
+  } catch (err) {
+    dispatch({ type: CHAIN_ERROR, payload: err });
   }
 };
 
@@ -83,6 +110,7 @@ export const updateWalletBalance = () => async (dispatch) => {
 };
 
 export const tokenSupply = (amount) => {
+
   return {
     type: TOKEN_SUPPLY,
     payload: amount
@@ -95,7 +123,6 @@ export const buyTokens = async (ico) =>  async  (dispatch) => {
   try {
 
     const web3Modal = new Web3Modal();
-    console.log('Check buyTokens function() ---', web3Modal)
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner();

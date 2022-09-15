@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TemplateLayout from "../utils/layout/template/elements/layout";
+import { connect } from "react-redux";
+import axios from "axios";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
+import "../../css/xln/XLN.scss";
+import "../../css/assets/Avatar.scss";
 
 import Token from "../../../../artifacts/contracts/XLN_Token.sol/XLNToken.json";
 import ICO from "../../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json";
@@ -11,28 +16,32 @@ import Market from "../../../../artifacts/contracts/XLN_Market.sol/XLNMarket.jso
 // import Web3 from "web3";
 import {
   getAddress,
+  loggedInUserAddress,
   getContractAddress,
   updateWalletBalance,
   connectUserWallet,
 } from "../../actions/blockchain";
 
-import TemplateLayout from "../utils/layout/template/elements/layout";
-import { connect } from "react-redux";
-import Panels from "../utils/panels";
-import "../../css/xln/XLN.scss";
-import "../../css/assets/Avatar.scss";
-import Template from "../utils/layout/template";
-import { filter } from "lodash";
-import axios from "axios";
+import {
+  getUserAssets
+} from "../../actions/asset";
 
-// infura, options, authentication: { userChecks }
+import {
+  getUserShares
+} from "../../actions/share";
+
 const XLN = ({
-  users,
+  assets,
   auth,
   blockchain,
-  page,
   getContractAddress,
   getAddress,
+  getUserAssets,
+  getUserShares,
+  loggedInUserAddress,
+  page,
+  shares,
+  users,
   xln: {
     options: { content, templateData },
   },
@@ -53,8 +62,11 @@ const XLN = ({
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Get Contract Address ----", templateData);
     loadNFTs();
+    getUserAssets(users.id);
+    if(users.sharesOwned > 0){
+        getUserShares(users.id);
+    }
   }, []);
 
   useEffect(() => {
@@ -66,11 +78,12 @@ const XLN = ({
       getAllAddresses();
     }
 
-    console.log("Auth ----", auth.isAuthenticated, accounts.url);
-    if (!auth.isAuthenticated) {
-      console.log("Hello", auth);
-      //  setAccounts({ ...accounts, url: '/login'})
-    }
+    if(users.accountCreated){
+      if (users.isAuthenticated == false) {
+          setAccounts({ ...accounts, url: '/login'})
+     }
+  }
+
   }, []);
 
   useEffect(() => {
@@ -85,9 +98,17 @@ const XLN = ({
         provider = window.ethereum;
         try {
           const eth = await provider.request({ method: "eth_requestAccounts" });
-          if (page == "walletSignIn") {
-            setAccounts({ ...accounts, address: eth[0], url: "/xln/buy-tokens" });
+          if (page == "walletSignIn" ) {
+            loggedInUserAddress(eth[0])
+            setAccounts({ ...accounts, address: eth[0], url: "/xln/wallet" });
           }
+
+          if( page == "wallet" && users.accountCreated){
+            if (users.media == false) {
+                setAccounts({ ...accounts, url: '/xln/upload-user-file'})
+           }
+        }
+
         } catch {
           console.error("User denied accounts access!");
           setContentText(content.errorText);
@@ -109,7 +130,7 @@ const XLN = ({
 
   useEffect(() => {
     const getAccount = async () => {
-      const accounts = await web3Api.web3.eth.getAccounts();
+    const accounts = await web3Api.web3.eth.getAccounts();
       setAccounts(accounts[0]);
     };
 
@@ -119,11 +140,11 @@ const XLN = ({
   // Token Actions
   async function updateAdmin() {}
   async function mintToken(buyerAddress) {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(
+  const web3Modal = new Web3Modal();
+  const connection = await web3Modal.connect();
+  const provider = new ethers.providers.Web3Provider(connection);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(
       blockchain.token.address,
       Token.abi,
       signer
@@ -148,17 +169,18 @@ const XLN = ({
       signer
     );
 
-    console.log('Trigger Buy Tokens ----> 0', blockchain.ico.address, contract )
+    console.log("Trigger Buy Tokens ----> 0", blockchain.ico.address, contract);
 
-    const price = ethers.BigNumber.from(blockchain.price).mul(ethers.BigNumber.from(10).pow(18));
+    const price = ethers.BigNumber.from(blockchain.price).mul(
+      ethers.BigNumber.from(10).pow(18)
+    );
     //const price = ethers.utils.parseUnits(blockchain.price.toString(), "dai");
 
-    console.log('Trigger Buy Tokens ----> 1', price)
+    console.log("Trigger Buy Tokens ----> 1", price);
 
+    const transaction = await contract.buy(price);
 
-    const transaction = await contract.buy( price );
-
-    console.log('Trigger Buy Tokens ----> 2',  transaction )
+    console.log("Trigger Buy Tokens ----> 2", transaction);
 
     await transaction.wait();
   }
@@ -169,8 +191,6 @@ const XLN = ({
   // NFT Actions
 
   async function buyNFT(nft) {
-
-    console.log('Buy New NFT ----- 0')
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
@@ -181,12 +201,17 @@ const XLN = ({
       signer
     );
 
+    const price = ethers.BigNumber.from(blockchain.price).mul(
+      ethers.BigNumber.from(10).pow(18)
+    );
 
-
-
-    const price = ethers.BigNumber.from(blockchain.price).mul(ethers.BigNumber.from(10).pow(18));
-
-    console.log('Buy New NFT ----- 1', { price, contract,  bPrice: blockchain.price, marketAddress: blockchain.market.address, nftAddress: blockchain.nft.address  } )
+    console.log("Buy New NFT ----- 1", {
+      price,
+      contract,
+      bPrice: blockchain.price,
+      marketAddress: blockchain.market.address,
+      nftAddress: blockchain.nft.address,
+    });
     // const price = ethers.utils.parseUnits(Number(18).toString(), "ether");
     const transaction = await contract.createMarketSale(
       blockchain.market.address,
@@ -198,7 +223,7 @@ const XLN = ({
 
     await transaction.wait();
     loadNFTs();
-    console.log('Buy New NFT ----- 3', transaction)
+    console.log("Buy New NFT ----- 3", transaction);
   }
 
   if (loadingState === "loaded" && !nfts.length)
@@ -263,8 +288,11 @@ const XLN = ({
   // async function mintNFTNFT(){}
   // async function buyNFTNFT(){}
 
-  const renderTemplate = templateData.filter(({ type }, index) => page == type);
-  renderTemplate[0].options.text = contentText;
+  const renderTemplate = templateData.filter(
+    ({ type }, index) => page == type
+  )[0];
+
+  renderTemplate.options.text = contentText;
 
   return (
     <div className="xln-setup-container">
@@ -287,22 +315,35 @@ const XLN = ({
         </div>
       </div>
 
-      <TemplateLayout templateData={renderTemplate[0]} blockchainAction={  renderTemplate[0].actions } buyTokens={buyTokens} buyNFT={buyNFT} mintToken={mintToken} />
+      <TemplateLayout
+        templateData={renderTemplate}
+        blockchainAction={renderTemplate.actions}
+        buyTokens={buyTokens}
+        buyNFT={buyNFT}
+        mintToken={mintToken}
+      />
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    assets: state.assets,
+    auth: state.auth,
     blockchain: state.blockchain,
+    shares: state.shares,
+    users: state.users
   };
 };
 
 const mapDispatchToProps = {
+  connectUserWallet,
   getAddress,
   getContractAddress,
+  getUserAssets,
+  getUserShares,
+  loggedInUserAddress,
   updateWalletBalance,
-  connectUserWallet,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(XLN);

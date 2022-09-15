@@ -1,7 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const { getUser, getUsers, createUser, updateUser, deleteUser, updateUserAvatar, updateUserCover } = require('../controller/user');
+const { 
+      getUser, 
+      getUsers, 
+      createUser, 
+      updateUser, 
+      deleteUser, 
+      updateUserAvatar, 
+      updateUserCover 
+} = require('../controller/user');
 
 const sharesRouter = require('./share');
 const reviewsRouter = require('./review');
@@ -28,14 +36,15 @@ router.route('/')
       .post(createUser);
 
 router.route('/:id')
-.get(getUser)
-.put(updateUser)
-.delete(deleteUser);
+.get(protect, authorize( 'user','publisher', 'admin'), getUser)
+.put(protect, authorize( 'user','publisher', 'admin'), updateUser)
+.delete(protect, authorize( 'user','publisher', 'admin'), deleteUser);
 
 router.route('/:id/avatar')
       .put(protect, authorize('user', 'publisher', 'admin'), updateUserAvatar)
 
 router.route('/:id/cover')
       .put(protect, authorize('user', 'publisher', 'admin'), updateUserCover)
+
 
 module.exports = router;

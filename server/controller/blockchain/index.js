@@ -21,7 +21,14 @@ const eth_id = 'https://kovan.infura.io/v3/68eb211506c141e78162043b7b0df69a';
 
 //const XLNICO = require('../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json');
 
-const { tokenAddress, icoAddress, nftAddress, marketAddress } = require('../../config/config')
+const { 
+    tokenPrice,
+    deployerAddress,
+    tokenAddress, 
+    icoAddress, 
+    nftAddress, 
+    marketAddress 
+} = require('../../config/config')
 
 // Middleware
 const asyncHandler = require('../../middleware/async');
@@ -34,6 +41,31 @@ const { checkConditionals, preventPublicKnowledge  } = require('../../middleware
 //@route GET /api/v1/blockchain/get-contract-address 
 //@access Public 
 exports.getContractAddress = asyncHandler(async (req, res, next ) => {
-    res.status(200).json({ success: true, data: { message: "Get Contract Address!", tokenAddress, icoAddress, nftAddress, marketAddress  } })
+    res.status(200)
+       .json({ 
+        success: true, 
+        data: { 
+            message: "Get Contract Address!", 
+            tokenPrice,
+            deployerAddress,
+            tokenAddress, 
+            icoAddress, 
+            nftAddress, 
+            marketAddress  } 
+    })
+});
+
+
+
+//@desc Update User Address
+//@route GET /api/v1/blockchain/get-contract-address 
+//@access Public 
+exports.updateUserAddress = asyncHandler(async (req, res, next ) => {
+
+    res.status(200)
+       .json({ 
+        success: true, 
+        address: req.body.address 
+    })
 });
 

@@ -61,6 +61,7 @@ const User = require('./server/routes/user');
 const Wallet = require('./server/routes/wallet');
 const Conditional = require('./server/routes/conditional');
 const Auth = require('./server/routes/auth')
+const AI = require('./server/routes/ai')
 
 const XLN = require('./server/routes/blockchain/')
 const Market = require('./server/routes/blockchain/market')
@@ -92,6 +93,10 @@ app.use('/api/v1/blockchain/token', Token );
 app.use('/api/v1/blockchain/nft', NFT );
 app.use('/api/v1/blockchain/ico', ICO );
 app.use('/api/v1/blockchain/market', Market );
+
+// Artificial Intelligence Routes
+app.use('/api/v1/ai/', AI );
+
 
 
 const server = app.listen(PORT, () => console.log(`Server is started on PORT: ${PORT}`));

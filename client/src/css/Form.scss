@@ -49,7 +49,7 @@ padding: 0 10px;
     list-style: none;
     border-radius: 5px;
     padding: 0 5px;
-    margin: 0;
+    margin: 5px 0;
 }
 
 .form-alert-success{ 
@@ -105,4 +105,15 @@ padding: 0 10px;
 
 .form-toggle-password{
     cursor: pointer;
+}
+
+.form-upload-container{
+    height: 100px;
+}
+
+.form-upload-container p{
+    height: 28px;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
 }
