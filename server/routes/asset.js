@@ -4,7 +4,16 @@ const { authorize, protect } = require('../middleware/auth');
 const advancedResults = require('../middleware/advancedResults');
 const Asset = require('../model/Asset')
 
-const { getAsset, getAssets, createAsset, updateAsset, deleteAsset, assetCoverUpload, getAssetsInRadius } = require('../controller/asset');
+const { 
+    getAsset,
+    getUserAssets,  
+    getAssets, 
+    createAsset, 
+    updateAsset, 
+    deleteAsset, 
+    assetCoverUpload, 
+    getAssetsInRadius 
+} = require('../controller/asset');
 
 
 const sharesRouter = require('./share');
@@ -23,28 +32,32 @@ router.use('/:assetId/tx', transactionsRouter);
 
 router
 .route('/')
-   .get(protect, authorize('user','publisher', 'admin'), advancedResults(Asset, {
-    path: 'reviews, comments, shares, conditionals, offers',
-    select: '_id'
+.get(protect, authorize('user','publisher', 'admin'), advancedResults(Asset, {
+path: 'reviews, comments, shares, conditionals, offers',
+select: '_id'
 }), getAssets)
-   .post(protect, authorize('publisher', 'admin'), createAsset);
+.post(protect, authorize('publisher', 'admin'), createAsset );
+
+router
+.route('/:id/user')
+.get(protect, authorize('publisher', 'admin'), getUserAssets );
 
 router.
 route('/:id')
-    .get(protect, authorize('publisher', 'admin'),  advancedResults(Asset, {
-        path: 'shares',
-        select: '_id'
-    }), getAsset)
-    .put(protect, authorize('publisher', 'admin'), updateAsset)
-    .delete(protect, authorize('publisher', 'admin'), deleteAsset);
+.get(protect, authorize('publisher', 'admin'),  advancedResults(Asset, {
+    path: 'shares',
+    select: '_id'
+}), getAsset)
+.put(protect, authorize('publisher', 'admin'), updateAsset)
+.delete(protect, authorize('publisher', 'admin'), deleteAsset);
 
 router
 .route('/:id/cover')
-     .put(protect, authorize('publisher', 'admin'), assetCoverUpload)
+.post(protect, authorize('publisher', 'admin'), assetCoverUpload)
 
 router
 .route('/radius/:zipcode/:distance')
-      .get(getAssetsInRadius)
+.get(getAssetsInRadius)
 
 
 module.exports = router;

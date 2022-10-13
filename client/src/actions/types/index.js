@@ -14,6 +14,7 @@ export const GET_USER_BY_USERNAME = 'GET_USER_BY_USERNAME';
 export const UPLOAD_USER_FILE = 'UPLOAD_USER_FILE';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const ATTACH_ASSET = 'ATTACH_ASSET';
 export const GET_ASSET = 'GET_ASSET';
 export const GET_ASSETS = 'GET_ASSETS';
 export const GET_USER_ASSETS = 'GET_USER_ASSETS';
@@ -41,7 +42,7 @@ export const UPDATE_ADMIN = 'UPDATE_ADMIN';
 export const MINT = 'MINT';
 export const START = 'START';
 export const BUY_TOKENS = 'BUY_TOKENS';
-export const BUY_XLN = 'BUY_XLN';
+export const BUY_NFT = 'BUY_NFT';
 export const WITHDRAW_TOKENS = 'WITHDRAW_TOKENS';
 export const WITHDRAW_DAI = 'WITHDRAW_DAI';
 export const GET_LISTING_PRICE = 'GET_LISTING_PRICE';
@@ -51,6 +52,7 @@ export const FETCH_MARKET_TOKENS = 'FETCH_MARKET_TOKENS';
 export const FETCH_MY_NFTS = 'FETCH_MY_NFTS';
 export const FETCH_ITEMS_CREATED = 'FETCH_ITEMS_CREATED';
 export const LOGGED_IN_USER_ADDRESS = 'LOGGED_IN_USER_ADDRESS';
+export const LOAD_NFT = 'LOAD_NFT';
 
 
 // ERRORS

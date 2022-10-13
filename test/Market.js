@@ -26,6 +26,7 @@ describe("XLN Market", function () {
       await nft.mintNFT('https-t1');
       await nft.mintNFT('https-t2');
 
+
       await market.makeMarketItem(nftContractAddress, 1, auctionPrice, {
         value: listingPrice
       });

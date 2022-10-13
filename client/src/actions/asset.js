@@ -1,17 +1,80 @@
 import React, { useReducer } from 'react';
+import { mintNFT } from './blockchain';
 import axios from '../axios';
 import {
+    ATTACH_ASSET,
     GET_ASSET,
     GET_ASSETS,
     GET_USER_ASSETS,
     CREATE_ASSET,
     UPDATE_ASSET,
     DELETE_ASSET,
-    AUTH_ERROR
+    ASSET_ERROR
 } from './types';
 
+export const attachAsset = ({ id, values }) => async (dispatch) => {
 
-export const getAllAssets = () => async dispatch => {
+    const config = {
+        Headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+    try {
+      console.log('Attach Asset Action ----', id, values)
+            let res;
+            const formData = new FormData();
+
+          if( values.cover ){
+            formData.append('file', values.cover )
+             res = await axios.post(`/api/v1/assets/${id}/cover`, formData, config);
+            }
+
+      dispatch({
+        type: ATTACH_ASSET,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({ type: ASSET_ERROR, status: 404, error: 'login' });
+    }
+  };
+
+
+
+export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
+
+    const config = {
+        Headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+    try {
+      console.log('Create Asset Action ----', values)
+            let res;
+            const formData = new FormData();
+            res = await axios.post(`/api/v1/assets/`, values );
+
+        //   if( values.cover ){
+        //     formData.append('file', values.cover )
+        //      res = await axios.post(`/api/v1/assets/`, values , config);
+        //     }
+
+        
+
+    //   const res = await axios.post("/api/v1/assets", asset);
+    //   console.log("createAsset Action ---", res);
+    //  console.log(res)
+      dispatch({
+        type: CREATE_ASSET,
+        payload: res.data.data
+      });
+    } catch (err) {
+      dispatch({ type: ASSET_ERROR, status: 404, error: 'login' });
+    }
+  };
+
+  export const getAllAssets = () => async dispatch => {
     try{
         const res = await axios.get('/api/v1/assets?limit=100');
         dispatch({
@@ -19,46 +82,37 @@ export const getAllAssets = () => async dispatch => {
             payload: res.data
         })
     } catch(err){
-        dispatch({ type: AUTH_ERROR, payload: err})
+        dispatch({ type: ASSET_ERROR, payload: err})
     }
 }
 
 export const getUserAssets = (userId) => async dispatch => {
     try{
-        const res = await axios.get(`/api/v1/assets/${userId}`);
+        const res = await axios.get(`/api/v1/assets?user=${userId}&&limit=100`);
+
         dispatch({
             type: GET_USER_ASSETS,
             payload: res.data
         })
     } catch(err){
-        dispatch({ type: AUTH_ERROR, payload: err})
+        dispatch({ type: ASSET_ERROR, payload: err})
     }
 }
 
+
 export const getSingleAsset = (id) => async dispatch => {
     try{
+
         const res = await axios.get(`/api/v1/assets/${id}`);
         dispatch({
             type: GET_ASSET,
             payload: res.data
         })
     } catch(err){
-        dispatch({ type: AUTH_ERROR, payload: err})
+        dispatch({ type: ASSET_ERROR, payload: err})
     }
 }
 
-export const createAsset = (body) => async dispatch => {
-    try{
-        const assetData = await axios.post(`/api/v1/assets`, body);
-        const assetFile = await axios.post(`/api/v1/assets/5f1c5d18c32d4481e03c1619/cover`, body);
-        dispatch({
-            type: CREATE_ASSET,
-            payload: res.data
-        })
-    } catch(err){
-        dispatch({ type: AUTH_ERROR, payload: err})
-    }
-}
 
 export const updateAsset = id => async dispatch => {
     try{
@@ -68,7 +122,7 @@ export const updateAsset = id => async dispatch => {
             payload: res.data
         })
     } catch(err){
-        dispatch({ type: AUTH_ERROR, payload: err})
+        dispatch({ type: ASSET_ERROR, payload: err})
     }
 }
 
@@ -80,6 +134,6 @@ export const deleteAsset = id => async dispatch => {
             payload: res.data
         })
     } catch(err){
-        dispatch({ type: AUTH_ERROR, payload: err})
+        dispatch({ type: ASSET_ERROR, payload: err})
     }
 }

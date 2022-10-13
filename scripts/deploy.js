@@ -67,7 +67,6 @@ async function main() {
 
   await ico.start();
 
-  console.log('ICO Deployed 2 -----', ico.address )
 
   let config = `
           exports.tokenPrice = '${tokenPrice}'

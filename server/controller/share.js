@@ -90,7 +90,7 @@ if(!asset){
 const _assets = await Asset.find()
 const shares = await Share.find({ asset: req.params.assetId });
 
-const minCost = asset.minBenefit + asset.minReward;
+const minCost = asset.fee + asset.price;
 const price = req.body.resell;
 
 

@@ -31,8 +31,7 @@ import Footer from "./global/Footer";
 import Documentation from "./utils/layout/documentation";
 import Landing from "./landing";
 import XLN from "./xln";
-import Template from './utils/layout/template';
-import Wallet from "./wallet";
+// import Template from './utils/layout/template';
 import NotFound from "./notFound";
 import AIModelSelector from './AI/';
 import XRScene from './XR/index';
@@ -73,7 +72,7 @@ const App = ({ auth, users, blockchain, loadUser }) => {
 
   return (
     <div className="xln-container">
-        <Header auth={auth} user={users} header={header} isLoggedIn={isLoggedIn} xln={xln} landing={landing} />
+        <Header auth={auth} user={users} blockchain={blockchain} header={header} isLoggedIn={isLoggedIn} xln={xln} landing={landing} />
         {/* { auth.isError && <Error auth={auth.error} /> } */}
         <Routes>
         <Route path='*' element={<NotFound />} />
@@ -120,26 +119,33 @@ const App = ({ auth, users, blockchain, loadUser }) => {
 
 
           <Route path="/xln/permissions" element={<XLN xln={xln} page={xln.states[0]} />} />
-          <Route path="/xln/buy-share" element={<XLN xln={xln} page={xln.states[1]} />} />
-          <Route path="/xln/buy-tokens" element={<XLN xln={xln} page={xln.states[2]} />} />
-          <Route path="/xln/code-block" element={<XLN xln={xln} page={xln.states[3]} />} />
-          <Route path="/xln/create-asset" element={<XLN xln={xln} page={xln.states[4]} />} />  
-          <Route path="/xln/mint-asset" element={<XLN xln={xln} page={xln.states[5]} />} />
-          <Route path="/xln/sell-share" element={<XLN xln={xln} page={xln.states[6]} />} />
-          <Route path="/xln/assets/:id" element={<XLN xln={xln} page={xln.states[7]} />} />
-          <Route path="/xln/assets" element={<XLN xln={xln} page={xln.states[8]} />} />
-          <Route path="/xln/comments" element={<XLN xln={xln} page={xln.states[9]} />} />
-          <Route path="/xln/reviews" element={<XLN xln={xln} page={xln.states[10]} />} />
-          <Route path="/xln/tx-prompt" element={<XLN xln={xln} page={xln.states[9]} />} />
+          <Route path="/xln/attach-asset/:id" element={<XLN xln={xln} page={xln.states[1]} />} />  
+          <Route path="/xln/buy-share" element={<XLN xln={xln} page={xln.states[2]} />} />
+          <Route path="/xln/buy-tokens" element={<XLN xln={xln} page={xln.states[3]} />} />
+          <Route path="/xln/code-block" element={<XLN xln={xln} page={xln.states[4]} />} />
+          <Route path="/xln/create-asset" element={<XLN xln={xln} page={xln.states[5]} />} />  
+          <Route path="/xln/mint-asset" element={<XLN xln={xln} page={xln.states[6]} />} />
+          <Route path="/xln/sell-share" element={<XLN xln={xln} page={xln.states[7]} />} />
+          <Route path="/xln/assets/:id" element={<XLN xln={xln} page={xln.states[8]} />} />
+          <Route path="/xln/assets/mintable" element={<XLN xln={xln} page={xln.states[9]} />} />
+          <Route path="/xln/assets/buy" element={<XLN xln={xln} page={xln.states[10]} />} />
+          <Route path="/xln/comments" element={<XLN xln={xln} page={xln.states[11]} />} />
+          <Route path="/xln/reviews" element={<XLN xln={xln} page={xln.states[12]} />} />
+          <Route path="/xln/tx-prompt" element={<XLN xln={xln} page={xln.states[13]} />} />
 
-          <Route path="/xln" element={<XLN xln={wallet} page={wallet.states[2]} />} />
-          <Route path="/xln/wallet" element={<XLN xln={wallet} page={wallet.states[0]} />} />
-          <Route path="/xln/setting" element={<XLN xln={wallet} page={wallet.states[1]} />} />
-          <Route path="/xln/upload-user-file" element={<XLN xln={wallet} page={wallet.states[3]} />} />
+          <Route path="/xln" element={<XLN xln={wallet} page={wallet.states[0]} />} />
+          <Route path="/xln/wallet" element={<XLN xln={wallet} page={wallet.states[1]} />} />
+          <Route path="/xln/wallet/setting" element={<XLN xln={wallet} page={wallet.states[2]} />} />
+          <Route path="/xln/wallet/file-upload" element={<XLN xln={wallet} page={wallet.states[3]} />} />
+          <Route path="/xln/wallet/stats" element={<XLN xln={wallet} page={wallet.states[4]} />} />
+          <Route path="/xln/wallet/shares" element={<XLN xln={wallet} page={wallet.states[5]} />} />
+          <Route path="/xln/wallet/assets" element={<XLN xln={wallet} page={wallet.states[6]} />} />
+          <Route path="/xln/wallet/shareholders" element={<XLN xln={wallet} page={wallet.states[7]} />} />
+
           <Route path="/xln/:username" element={<XLN xln={wallet} page={wallet.states[0]} />} />
-          <Route path="/template" element={<Template options={xln.options} />} />
+          {/* <Route path="/template" element={<Template options={xln.options} />} /> */}
 
-          <Route path="/users/:id/wallet" element={<Wallet />} />
+          <Route path="/users/:id/wallet" element={<XLN xln={wallet} page={wallet.states[0]} />} />
           {/* <Route path="/users/:id/cover_photo" element={<CoverPhoto />} />
           <Route path="/users/:id/profile_photo" element={<ProfilePhoto />} /> */}
 

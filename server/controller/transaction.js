@@ -161,7 +161,7 @@ if(buyersWallet.balance < 0.01){
 }
 
 //Check user's balance is less than price of share
-const assetPrice = _asset.minReward + _asset.minBenefit
+const assetPrice = _asset.price + _asset.fee;
 if(buyersWallet.balance < assetPrice  ){
     return next(new ErrorResponse(`You do not have enough to buy a share in this asset. Balance ${ buyersWallet.balance } is less than ${ assetPrice }.`, 401 ));
 }
@@ -201,8 +201,8 @@ if(!seller){
     
     const txInfo = {
         price: share ? share.price : assetPrice,
-        minReward: _asset.minReward,
-        minBenefit: _asset.minBenefit,
+        minReward: _asset.price,
+        minBenefit: _asset.fee,
     }
 
 // Process transaction  

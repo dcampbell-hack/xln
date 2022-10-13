@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const FileSchema = require('./File');
 const slugify = require('slugify');
 const axios = require('axios')
 const geocoder = require('../utils/geocoder');
@@ -32,36 +33,40 @@ const AssetSchema = new mongoose.Schema({
             /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, 'Please use a valid URL with HTTP or HTTPS'
         ]
     },
-    address: {
-        type: String
-    },
-    location: {
-        type: {
-            type: String,
-            enum: ['Point'],
-        },
-        coordinates: {
-            type: [Number],
-            index: '2dsphere'
-        },
-        formattedAddress: String,
-        street: String,
-        city: String,
-        state: String,
-        zipcode: String,
-        country: String
-    },
+    // address: {
+    //     type: String
+    // },
+    // location: {
+    //     type: {
+    //         type: String,
+    //         enum: ['Point'],
+    //     },
+    //     coordinates: {
+    //         type: [Number],
+    //         index: '2dsphere'
+    //     },
+    //     formattedAddress: String,
+    //     street: String,
+    //     city: String,
+    //     state: String,
+    //     zipcode: String,
+    //     country: String
+    // },
     assetType: {
         type: [String],
         required: true,
         enum: [
+            'Blog',
+            'Link',
+            'Live',
             'Text',
             'Image',
+            'Metaverse',
             'Music',
+            'Real Estate',
             'Video',
             'File',
             'Enterprise',
-            'Object'
         ]
     },
     category: {
@@ -86,11 +91,11 @@ const AssetSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
      },
-     minReward: {
+     price: {
         type: Number,
         required: [true, 'Asset must have minimum reward to admin']
     },
-     minBenefit: {
+     fee: {
        type: Number,
        required: [true, 'Asset must have minimum benefit to shareholders']
      },
@@ -115,6 +120,7 @@ const AssetSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Comment',
     }, 
+    files: [FileSchema],
     cover: {
         type: String,
         default: 'no-photo.jpg',
@@ -151,30 +157,30 @@ AssetSchema.pre('save', async function(next){
 
 
 // Geocode & create location field
-AssetSchema.pre('save', async function(next){
-    const loc = await geocoder.geocode(this.address);
-    this.location = {
-        type: 'Point',
-        coordinates: [loc[0].longitude, loc[0].latitude],
-        formattedAddress: loc[0].formattedAddress,
-        street: loc[0].streetName,
-        city: loc[0].city,
-        state: loc[0].state,
-        zipcode: loc[0].zipcode,
-        country: loc[0].countryCode,
-    }
+// AssetSchema.pre('save', async function(next){
+//     const loc = await geocoder.geocode(this.address);
+//     this.location = {
+//         type: 'Point',
+//         coordinates: [loc[0].longitude, loc[0].latitude],
+//         formattedAddress: loc[0].formattedAddress,
+//         street: loc[0].streetName,
+//         city: loc[0].city,
+//         state: loc[0].state,
+//         zipcode: loc[0].zipcode,
+//         country: loc[0].countryCode,
+//     }
 
-    // Do not save address in Database
-    this.address = undefined; 
-    next();
-});
+//     // Do not save address in Database
+//     this.address = undefined; 
+//     next();
+// });
 
 //Update asset with website
 AssetSchema.pre('save', async function(next){
 
     const user = await this.model('User').findOne({ _id: this.user })
 
-    this.website = `http://medallion.tech/${user.username}/${this.slug}`;
+    this.website = `/${user.username}/${this.slug}`;
 
     next();
 })

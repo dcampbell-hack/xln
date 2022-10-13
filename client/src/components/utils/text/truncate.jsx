@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-const TruncateText = ({ id, text, charLimit }) => {
+const TruncateText = ({ id, text, charLimit, expand = true }) => {
 
 const [ showText, setShowText ] = useState(false);
 
@@ -29,7 +29,7 @@ const initText = () => {
     return(
         <div className='truncate-text'>
             { initText() }
-            <button className="btn truncate-btn" onClick={() => setShowText(!showText)}>{ showText ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i> }</button>
+           { expand && <button className="btn truncate-btn" onClick={() => setShowText(!showText)}>{ showText ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i> }</button> }
         </div>
     )
 }

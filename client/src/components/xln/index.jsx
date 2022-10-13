@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TemplateLayout from "../utils/layout/template/elements/layout";
 import { connect } from "react-redux";
 import axios from "axios";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
+// import Web3 from "web3";
+
+
+//UI
+import TemplateLayout from "../utils/layout/template/layout";
+
+// CSS
 import "../../css/xln/XLN.scss";
 import "../../css/assets/Avatar.scss";
+import "../../css/templates/wallet.scss";
 
-import Token from "../../../../artifacts/contracts/XLN_Token.sol/XLNToken.json";
-import ICO from "../../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json";
-import NFT from "../../../../artifacts/contracts/XLN_NFT.sol/XLNNFT.json";
-import Market from "../../../../artifacts/contracts/XLN_Market.sol/XLNMarket.json";
-
-// import Web3 from "web3";
 import {
   getAddress,
+  loadNFTs,
   loggedInUserAddress,
   getContractAddress,
-  updateWalletBalance,
-  connectUserWallet,
+  updateWalletBalance
 } from "../../actions/blockchain";
-
-import {
-  getUserAssets
-} from "../../actions/asset";
 
 import {
   getUserShares
@@ -34,9 +31,9 @@ const XLN = ({
   assets,
   auth,
   blockchain,
+  loadNFTs,
   getContractAddress,
   getAddress,
-  getUserAssets,
   getUserShares,
   loggedInUserAddress,
   page,
@@ -62,12 +59,18 @@ const XLN = ({
   let navigate = useNavigate();
 
   useEffect(() => {
-    loadNFTs();
-    getUserAssets(users.id);
+    if(blockchain.nft.address){
+       loadNFTs(blockchain);
+    }
+
+
+if(!blockchain.address){
     if(users.sharesOwned > 0){
         getUserShares(users.id);
     }
-  }, []);
+}
+
+  }, [ blockchain.nft.address ]);
 
   useEffect(() => {
     const getAllAddresses = async () => {
@@ -84,7 +87,7 @@ const XLN = ({
      }
   }
 
-  }, []);
+  }, [ ]);
 
   useEffect(() => {
     navigate(`${accounts.url}`, { replace: true });
@@ -94,18 +97,22 @@ const XLN = ({
     const loadProvider = async () => {
       let provider = null;
 
+      if( !blockchain.address ){
+        setAccounts({ ...accounts, url: '/xln/'})
+      }
+
       if (window.ethereum) {
         provider = window.ethereum;
         try {
           const eth = await provider.request({ method: "eth_requestAccounts" });
+          if(!blockchain.address) loggedInUserAddress(eth[0])
           if (page == "walletSignIn" ) {
-            loggedInUserAddress(eth[0])
             setAccounts({ ...accounts, address: eth[0], url: "/xln/wallet" });
           }
 
           if( page == "wallet" && users.accountCreated){
             if (users.media == false) {
-                setAccounts({ ...accounts, url: '/xln/upload-user-file'})
+                setAccounts({ ...accounts, url: '/xln/wallet/file-upload'})
            }
         }
 
@@ -126,7 +133,7 @@ const XLN = ({
     };
 
     loadProvider();
-  }, []);
+  }, [ blockchain.address]);
 
   useEffect(() => {
     const getAccount = async () => {
@@ -137,156 +144,12 @@ const XLN = ({
     web3Api.web3 && getAccount();
   }, [web3Api.web3]);
 
-  // Token Actions
-  async function updateAdmin() {}
-  async function mintToken(buyerAddress) {
-  const web3Modal = new Web3Modal();
-  const connection = await web3Modal.connect();
-  const provider = new ethers.providers.Web3Provider(connection);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(
-      blockchain.token.address,
-      Token.abi,
-      signer
-    );
-
-    const transaction = await contract.mint(buyerAddress);
-
-    await transaction.wait();
-  }
-
-  // ICO Actions
-
-  async function buyTokens() {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      blockchain.ico.address,
-      ICO.abi,
-      signer
-    );
-
-    console.log("Trigger Buy Tokens ----> 0", blockchain.ico.address, contract);
-
-    const price = ethers.BigNumber.from(blockchain.price).mul(
-      ethers.BigNumber.from(10).pow(18)
-    );
-    //const price = ethers.utils.parseUnits(blockchain.price.toString(), "dai");
-
-    console.log("Trigger Buy Tokens ----> 1", price);
-
-    const transaction = await contract.buy(price);
-
-    console.log("Trigger Buy Tokens ----> 2", transaction);
-
-    await transaction.wait();
-  }
-
-  async function withdrawTokens() {}
-  async function withdrawDai() {}
-
-  // NFT Actions
-
-  async function buyNFT(nft) {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      blockchain.market.address,
-      Market.abi,
-      signer
-    );
-
-    const price = ethers.BigNumber.from(blockchain.price).mul(
-      ethers.BigNumber.from(10).pow(18)
-    );
-
-    console.log("Buy New NFT ----- 1", {
-      price,
-      contract,
-      bPrice: blockchain.price,
-      marketAddress: blockchain.market.address,
-      nftAddress: blockchain.nft.address,
-    });
-    // const price = ethers.utils.parseUnits(Number(18).toString(), "ether");
-    const transaction = await contract.createMarketSale(
-      blockchain.market.address,
-      blockchain.nft.tokenId,
-      {
-        value: price,
-      }
-    );
-
-    await transaction.wait();
-    loadNFTs();
-    console.log("Buy New NFT ----- 3", transaction);
-  }
-
-  if (loadingState === "loaded" && !nfts.length)
-    return <h1> No NFTs in marketplace</h1>;
-
-  // async function mintNFT(){}
-
-  async function loadNFTs() {
-    // provider, icoContract, tokenContract, nftContract, marketContract, data for marketItem
-
-    const provider = new ethers.providers.JsonProvider();
-
-    const tokenContract = new ethers.Contract(
-      blockchain.token.address,
-      Token.abi,
-      provider
-    );
-    const icoContract = new ethers.Contract(
-      blockchain.ico.address,
-      ICO.abi,
-      provider
-    );
-    const nftContract = new ethers.Contract(
-      blockchain.nft.address,
-      NFT.abi,
-      provider
-    );
-    const marketContract = new ethers.Contract(
-      blockchain.market.address,
-      Market.abi,
-      provider
-    );
-
-    const fetchMarketItems = await marketContract.fetchMarketTokens();
-
-    const items = await Promise.all(
-      data.map(async (i) => {
-        const tokenUri = nftContract.tokenUri(i.tokenId);
-        // We want get the token metadata -json
-        const meta = await axios.get(tokenUri);
-        let price = ethers.utils.formatUtils(i.price.toString(), "ether");
-        let item = {
-          price,
-          tokenId: i.tokenId.toNumber(),
-          seller: i.seller,
-          owner: i.owner,
-          image: meta.data.image,
-          name: meta.data.name,
-          description: meta.data.description,
-        };
-
-        setNFTs(items);
-        setLoadingState("loaded");
-      })
-    );
-  }
-
-  // Market Action
-
-  // async function buyTokenICO(){}
-  // async function mintTokenToken(){}
-  // async function mintNFTNFT(){}
-  // async function buyNFTNFT(){}
+  useEffect(() => {
+    if(users.redirect){
+      setAccounts({ ...accounts, url: users.redirect })
+    }
+    
+      }, [ users.redirect])
 
   const renderTemplate = templateData.filter(
     ({ type }, index) => page == type
@@ -294,33 +157,12 @@ const XLN = ({
 
   renderTemplate.options.text = contentText;
 
+
   return (
     <div className="xln-setup-container">
-      <div className="flex justify-center">
-        {/* <h4>Figure out how to layout later</h4> */}
-        <div className="px-4"></div>
-        <div className="grid grid-cols-1">
-          {nfts.map((nft, i) => {
-            <div key={i} className="border shadow rounded">
-              <img src={nft.image} />
-              <div className="p-4">
-                <p style={{ height: "64px" }}>
-                  {nft.name} {nft.price} ETH
-                </p>
-                <button onClick={() => buyNFT()}>Buy NFT</button>
-              </div>
-              <div className="p-5">{nft.description}</div>
-            </div>;
-          })}
-        </div>
-      </div>
-
       <TemplateLayout
+        content={content}
         templateData={renderTemplate}
-        blockchainAction={renderTemplate.actions}
-        buyTokens={buyTokens}
-        buyNFT={buyNFT}
-        mintToken={mintToken}
       />
     </div>
   );
@@ -337,10 +179,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  connectUserWallet,
+  loadNFTs,
   getAddress,
   getContractAddress,
-  getUserAssets,
   getUserShares,
   loggedInUserAddress,
   updateWalletBalance,

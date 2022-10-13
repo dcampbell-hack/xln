@@ -15,7 +15,7 @@ const startTimer = () => {
 
     interval = setInterval(() => {
         const now = new Date().getTime();
-
+        
         const distance = countdownDate - now;
 
         const days = Math.floor(distance / (24 * 60 * 60 * 1000))

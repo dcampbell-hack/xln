@@ -64,7 +64,6 @@ import {
                     if(action.error == 'login') authErr.push( nonExistentUser );
                     if(action.error == 'register') authErr.push( invalidFields );
                 }
-                console.log('Error State ----', action.status, action.error )
                 return { ...state, loading: false, isError: true, errors: [ ...state.errors, ...authErr ],  status: action.payload?.response?.status || 500, }
             default: 
                return state;

@@ -1,5 +1,5 @@
 import '../../../css/Util.scss';
-import FormLayout from './form/index';
+import FormLayout from './template/formLayout';
 import TwoPanelTextImageCol from './two-panel/TwoPanelTextImageCol';
 import TwoPanelTextImageRow from './two-panel/TwoPanelTextImageRow';
 import TwoPanelPieChartAndTable from './two-panel/TwoPanelPieChartAndTable';

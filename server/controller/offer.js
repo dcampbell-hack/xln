@@ -61,7 +61,7 @@ if(!asset){
     return next(new ErrorResponse(`No asset with the id ${req.params.assetId}`, 404))
 }
 
-const minCost = asset.minReward + asset.minBenefit;
+const minCost = asset.price + asset.fee;
 
 //Check if funds are available
 if(req.body.resell < minCost){

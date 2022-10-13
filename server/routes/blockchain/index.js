@@ -15,6 +15,6 @@ router
 
 router
 .route('/address')
-.post(protect, authorize('publisher', 'admin'), updateUserAddress );
+.post(protect, authorize('publisher', 'user', 'admin'), updateUserAddress );
 
 module.exports = router;

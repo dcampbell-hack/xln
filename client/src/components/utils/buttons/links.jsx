@@ -1,20 +1,10 @@
 import { Link, useNavigate, Route } from "react-router-dom";
 
-export const AnchorTag = ({ className, text, url ="", icon, show, external, amount=0 }) => {
-//     let navigate = useNavigate();
-//     console.log('Clicked button -------', text, url )
-
-// if(external){
-//    navigate(url)
-// }
-   
+export const AnchorTag = ({ className, text, url ="", icon, show, external, amount=0 }) => {   
     return (
         <Link to={url}  className={className} target={external ? "_blank" : "_self"}>
             { show && text + ' '}
-            { icon !== 'number' ?
-            <i className={icon}></i> :
-            <span className="badge">{ amount }</span>
-             }
+            <i className={icon}></i> 
         </Link>
     )
 }
@@ -36,3 +26,5 @@ export const DarkL = ({ text, url, icon, show, external  }) => <AnchorTag classN
 export const LinkL = ({ text, url, icon, show, external, amount, className  }) => <AnchorTag className={"btn btn-link " + className } text={text} url={url} icon={icon} show={show} external={external} amount={amount} />
 
 export const LinkNoPaddingL = ({ text, url, icon, show, external  }) => <AnchorTag className="btn btn-link-no-padding" text={text} url={url} icon={icon} show={show} external={external} />
+
+export const VerticalButtonL = ({ text, url, icon, show, external, amount, className  }) => <AnchorTag className={"btn btn-link " + className } text={text} url={url} icon={icon} show={show} external={external} amount={amount} />

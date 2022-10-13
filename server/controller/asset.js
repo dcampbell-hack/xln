@@ -1,6 +1,7 @@
 // Models
 const Conditional = require('../model/Conditional');
 const Asset = require('../model/Asset');
+const Category = require('../model/Category');
 const Shares = require('../model/Share');
 
 // Utils
@@ -24,6 +25,19 @@ exports.getAssets = asyncHandler(async (req, res, next) => {
     res.status(200).json(res.advancedResults)
 });
 
+//@desc get user assets
+//route GET /api/v1/assets
+//@access PRIVATE
+exports.getUserAssets = asyncHandler(async (req, res, next) => {
+
+    const userAssets = await Asset.find({ user: req.body.id })
+    if(!userAssets){
+        return res.status(500).json({ success: false, error: "The user has not created any assets"})
+    }
+    console.log('User Asset ---', userAssets )
+    res.status(200).json({ success: true, data: userAssets })
+});
+
 //@desc get single asset
 //route GET /api/v1/assets/:id
 //@access PRIVATE
@@ -41,13 +55,20 @@ await checkConditionals(next, req.params.id)
 await preventPublicKnowledge(next, req.params.id )
 
 
+let category = await Category.find();
+
+if(!category){
+   category = [];
+}
+
+
 // const share = await Shares.findOne({ user: user._id })
 
 // // if(user._id !== share.user ){
 // //     next(new ErrorResponse(`You must own a share of this asset to access it.`, 500) )
 // // }
 
-res.status(200).json({ success: true, data: asset })
+res.status(200).json({ success: true,  data: { asset, category } })
    
 });
 
@@ -59,13 +80,23 @@ exports.createAsset = asyncHandler(async (req, res, next) => {
    //Add User to body 
    req.body.user = req.user.id;
 
+   console.log('Create Asset Body ----> ', req.body )
+
    //If user is not admin they can only add one Asset
    if(req.user.role === 'system'){
        return next(new ErrorResponse(`System users are not allowed to publish assets`, 400))
    }
 
-   const asset = await Asset.create(req.body);
+const fee = Number(req.body.price) * 0.03;
+const price = Number(req.body.price) - fee;
+
+   // Check Conditionals
+// await checkConditionals(next, req.user.id)
+// assetUpload(Asset, 'image', 'asset', req, res, next);
+
+   const asset = await Asset.create({ ...req.body, fee, price  });
    res.status(200).json({ success: true, data: asset })
+
 });
 
 
@@ -119,7 +150,9 @@ exports.assetCoverUpload = asyncHandler(async(req, res, next) => {
 
 // Check Conditionals
 await checkConditionals(next, req.params.id)
-   assetUpload(Asset, 'image', 'asset', req, res, next);
+
+console.log('Upload Asset ----', req.params.id)
+assetUpload(Asset, 'image', 'asset', req, res, next);
 })
 
 //@desc Get assets within radius 

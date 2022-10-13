@@ -27,7 +27,7 @@ const {
     tokenAddress, 
     icoAddress, 
     nftAddress, 
-    marketAddress 
+    marketAddress
 } = require('../../config/config')
 
 // Middleware
@@ -41,6 +41,8 @@ const { checkConditionals, preventPublicKnowledge  } = require('../../middleware
 //@route GET /api/v1/blockchain/get-contract-address 
 //@access Public 
 exports.getContractAddress = asyncHandler(async (req, res, next ) => {
+
+
     res.status(200)
        .json({ 
         success: true, 
@@ -51,7 +53,8 @@ exports.getContractAddress = asyncHandler(async (req, res, next ) => {
             tokenAddress, 
             icoAddress, 
             nftAddress, 
-            marketAddress  } 
+            marketAddress  
+        } 
     })
 });
 
@@ -61,6 +64,20 @@ exports.getContractAddress = asyncHandler(async (req, res, next ) => {
 //@route GET /api/v1/blockchain/get-contract-address 
 //@access Public 
 exports.updateUserAddress = asyncHandler(async (req, res, next ) => {
+
+    console.log('User Address', req.body.address)
+
+    const user = await User.findById(req.user.id);
+
+    if(!user){
+        return res.status(404).json({ success: false, data: { message: "No user found"}})
+    }
+
+
+   const role = await User.findByIdAndUpdate(req.user.id, { address: req.body.address, role: "publisher" }, {
+        new: true,
+        runValidators: true
+    });
 
     res.status(200)
        .json({ 

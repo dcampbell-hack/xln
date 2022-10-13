@@ -1,4 +1,9 @@
-import Logo from "../assets/logo/medallion_xln_logo.png";
+// System Images
+import Logo from "../assets/system/xln-logo.png";
+import NoPhoto from "../assets/system/no-photo.jpeg";
+import NoProfile from "../assets/system/user.png";
+import SettingProfile from "../assets/system/user-profile.png";
+
 
 // Employees
 import CEO from "../assets/founders/CEO-Executive.png";
@@ -26,28 +31,42 @@ import DownloadWhitepaper from "../assets/corporate-art/whitepaper.jpg";
 import ChessAvatar from "../assets/corporate-art/metaverse_chess.png";
 import SecuredAsset from "../assets/corporate-art/secure_wallet.png";
 
+
+
+
 const infura = "68eb211506c141e78162043b7b0df69a";
 const date = new Date();
 
 const walletNavLinks = [
   {
-    text: "Stats",
-    to: "/xln/wallet",
+    text: "Create Asset",
+    to: "/xln/create-asset",
+    className: "main-wallet-btn",
     icon: "fa-duotone fa-wave-pulse",
     show: true,
     external: false,
   },
   {
-    text: "Shares",
-    to: "/xln/shares",
+    text: "Mint Asset",
+    to: "/xln/assets/:id",
+    className: "main-wallet-btn",
+    icon: "fa-duotone fa-wave-pulse",
+    show: true,
+    external: false,
+  },
+  {
+    text: "Assets",
+    to: "/xln/wallet/assets",
+    className: "",
     icon: "number",
     show: true,
     external: false,
     amount: 0,
   },
   {
-    text: "Assets",
-    to: "/xln/assets",
+    text: "Shares",
+    to: "/xln/wallet/shares",
+    className: "",
     icon: "number",
     show: true,
     external: false,
@@ -55,19 +74,13 @@ const walletNavLinks = [
   },
   {
     text: "Shareholders",
-    to: "/xln/wallet",
+    to: "/xln/wallet/shareholders",
+    className: "",
     icon: "number",
     show: true,
     external: false,
     amount: 0,
-  },
-  {
-    text: "Settings",
-    to: "/xln/setting",
-    icon: "fa-duotone fa-wave-pulse",
-    show: true,
-    external: false,
-  },
+  }
 ]
 
 export const socialLinks = [
@@ -98,7 +111,7 @@ export const header = {
     isAuthenticated: [
       {
         text: "Activity",
-        to: "/xln/assets",
+        to: "/xln/assets/mintable",
         icon: "",
         show: true,
         external: false,
@@ -917,6 +930,7 @@ export const xln = {
   },
   states: [
     "addPermissions",
+    "attachAsset",
     "buyShare",
     "buyTokens",
     "codeBlock",
@@ -924,14 +938,11 @@ export const xln = {
     "mintAsset",
     "sellShare",
     "showAsset",
-    "showAssets",
+    "showMintableAssets",
+    "showPurchasableAssets",
     "showComments",
     "showReviews",
     "txPrompt",
-    "wallet",
-    "walletSetting",
-    "walletSignIn",
-    "walletFileUpload"
   ],
   options: {
     type: "grid-one-center",
@@ -1274,15 +1285,6 @@ export const xln = {
               show: true,
               external: false,
             },
-            createAsset: "Click here if you ",
-            createAssetButton: {
-              text: "Create Asset",
-              to: "/mint",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            image: CTAMission,
             formData: {
               action: "createAsset",
               method: "post",
@@ -1290,27 +1292,32 @@ export const xln = {
                 label: "Create Asset",
                 className: "btn btn-block btn-info",
                 icon: "",
-                action: () => {},
+                action: "createAsset"
               },
               fields: [
                 {
-                  type: "input",
+                  type: "dropdown",
                   attributes: {
                     label: {
                       error: false,
                       inverse: false,
                       show: false,
-                      labelText: "Name of Asset",
-                      forId: "name-asset",
+                      labelText: "Select Asset Type",
+                      forId: "asset-type",
                     },
                     input: {
                       type: "text",
-                      id: "name-asset",
+                      list: "asset-type-list",
+                      id: "asset-type",
                       className: "",
-                      name: "asset",
-                      value: {},
-                      onChange: "",
-                      placeholder: "Name of Asset",
+                      name: "assetType",
+                      value: {}
+                    },
+                    datalist: {
+                      type: "asset-type",
+                      id: "asset-type-list",
+                      className: "",
+                     schema: {}
                     },
                     aria: {},
                   },
@@ -1322,17 +1329,45 @@ export const xln = {
                       error: false,
                       inverse: false,
                       show: false,
-                      labelText: "Owner of Asset",
-                      forId: "owner-asset",
+                      labelText: "Name of Asset",
+                      forId: "name",
                     },
                     input: {
                       type: "text",
-                      id: "owner-asset",
+                      id: "name",
                       className: "",
-                      name: "email",
+                      name: "name",
                       value: {},
                       onChange: "",
-                      placeholder: "Owner of Asset",
+                      placeholder: "Name of Asset",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "dropdown",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Select Category",
+                      forId: "category-asset",
+                    },
+                    input: {
+                      type: "text",
+                      list: "category-asset-list",
+                      id: "category-asset",
+                      className: "",
+                      name: "category",
+                      value: {},
+                      onChange: ""
+                    },
+                    datalist: {
+                      type: "category",
+                      id: "category-asset-list",
+                      className: "",
+                      schema: {}
                     },
                     aria: {},
                   },
@@ -1344,14 +1379,14 @@ export const xln = {
                       error: false,
                       inverse: false,
                       show: false,
-                      labelText: "Owner of Asset",
-                      forId: "owner-asset",
+                      labelText: "Description",
+                      forId: "asset-description",
                     },
                     area: {
                       type: "text",
-                      id: "owner-asset",
+                      id: "asset-description",
                       className: "",
-                      name: "email",
+                      name: "description",
                       value: {},
                       onChange: "",
                       placeholder: "Asset Description",
@@ -1360,47 +1395,108 @@ export const xln = {
                   },
                 },
                 {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Price of Asset",
+                      forId: "price",
+                    },
+                    input: {
+                      type: "number",
+                      id: "price",
+                      className: "",
+                      name: "price",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Price of Asset",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Stock Limit",
+                      forId: "stock",
+                    },
+                    input: {
+                      type: "number",
+                      id: "stock",
+                      className: "",
+                      name: "stock",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Stock Limit",
+                    },
+                    aria: {},
+                  },
+                }
+              ],
+            },
+          },
+        },
+      },
+      {
+        type: "attachAsset",
+        options: {
+          action: "attachAsset",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Attach an Asset",
+            warning: "Check various assets created by our ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "asset",
+              to: "/xln/create-asset",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "attachAsset",
+              method: "post",
+              submit: {
+                label: "Attach Asset",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "attachAsset"
+              },
+              fields: [
+                {
                   type: "file",
                   attributes: {
                     label: {
                       error: false,
                       inverse: false,
                       show: false,
-                      labelText: "Owner of Asset",
-                      forId: "kyc-email",
+                      labelText: "Attach Asset",
+                      forId: "attach-asset",
                     },
                     input: {
-                      type: "text",
-                      id: "kyc-reset",
-                      className: "",
-                      name: "email",
-                      value: {},
+                      type: "file",
+                      id: "attach-asset",
+                      className: "btn btn-info",
+                      name: "cover",
                       onChange: "",
-                      placeholder: "Owner of Asset",
+                      placeholder: "Attach Asset",
                     },
                     aria: {},
                   },
-                },
+              },
               ],
             },
           },
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "walletSignIn",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
+
+
         },
       },
       {
@@ -1617,9 +1713,184 @@ export const xln = {
         },
       },
       {
-        type: "showAssets",
+        type: "showPurchasableAssets",
         options: {
           action: "showAssets",
+          mode: "buy",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "walletSignIn",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          searchBar: {
+            placeholder: "Search Assets",
+          },
+          assets: [
+            {
+              id: "1",
+              selected: false,
+              username: "aloy",
+              asset_name: "horizon_zero_dawn",
+              avatar: {
+                url: "aloy-avatar.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "horizon_zero_dawn_1.jpeg",
+            },
+            {
+              id: "2",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CEO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "smart-city-4.jpg",
+            },
+            {
+              id: "3",
+              selected: false,
+              username: "satoshi",
+              asset_name: "bitcoin",
+              avatar: {
+                url: "satoshi-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "bitcoin.jpeg",
+            },
+            {
+              id: "4",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CMO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "Banners.jpg",
+            },
+            {
+              id: "4",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CBO-Executive.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "nij-studio-final.jpg",
+            },
+            {
+              id: "5",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "cyberpunk-2077-cover-asset.jpeg",
+            },
+            {
+              id: "6",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CAO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "gundam-in-city.jpg",
+            },
+            {
+              id: "7",
+              selected: false,
+              username: "aloy",
+              asset_name: "horizon_zero_dawn",
+              avatar: {
+                url: "aloy-avatar.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "horizon_zero_dawn_3.jpeg",
+            },
+            {
+              id: "8",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "XPO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "diesel-s-rua-mid-sp.jpg",
+            },
+            {
+              id: "8",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar-2.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "night-city-4-asset.jpeg",
+            },
+            {
+              id: "9",
+              selected: false,
+              username: "satoshi",
+              asset_name: "bitcoin",
+              avatar: {
+                url: "satoshi-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "bitcoin_4.jpeg",
+            },
+            {
+              id: "2",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "night-city-asset.jpeg",
+            },
+          ],
+        },
+      },
+      {
+        type: "showMintableAssets",
+        options: {
+          action: "showAssets",
+          mode: "mint",
           method: "post",
           images: {
             logo: {
@@ -2349,10 +2620,14 @@ export const wallet = {
     ],
   },
   states: [
+    "walletSignIn",
     "wallet",
     "walletSetting",
-    "walletSignIn",
-    "walletFileUpload"
+    "walletFileUpload",
+    "walletStats",
+    "walletShares",
+    "walletAssets",
+    "walletShareholders"
   ],
   options: {
     type: "grid-one-center",
@@ -2363,6 +2638,87 @@ export const wallet = {
     content: {
       defaultText: "Authenticate Wallet to access Medallion XLN features.",
       errorText: "User denied accounts access!",
+      navLinks: walletNavLinks,
+      images: {
+        logo: {
+          url: Logo,
+          width: "200px",
+          height: "auto",
+        },
+        noPhoto: {
+          url: NoPhoto,
+          width: '100%',
+          height: 'autp'
+        },
+        noProfile: {
+          url: NoProfile,
+          width: '100%',
+          height: 'autp'
+        },
+        profileSetting: {
+          url: SettingProfile,
+          width: '200px',
+          height: 'auto'
+          },
+      },
+      walletPanel: [
+        {
+          text: "",
+          url: "/xln/wallet/stats",
+          icon: "fas fa-chart-line",
+          show: false,
+          external: false
+        },
+        {
+          text: "",
+          url: "/xln/wallet/assets",
+          icon: "fas fa-folder-open",
+          show: false,
+          external: false
+        },
+        {
+          text: "",
+          url: "/xln/wallet/file-upload",
+          icon: "fas fa-images",
+          show: false,
+          external: false
+        },
+        {
+          text: "",
+          url: "/xln/wallet/setting",
+          icon: "fas fa-user-cog",
+          show: false,
+          external: false
+        },
+      ],
+      newProfile: [
+        {
+          label: "Add Profile Picture",
+          buttonText: "Update Profile Img",
+          image: {
+            url: NoProfile,
+            width: '200px',
+            height: 'auto'
+            },
+          url: "/xln/wallet/file-upload",
+          icon: "",
+          show: true,
+          external: false
+        },
+        {
+          label: "Add Social Media",
+          buttonText: "Social Media",
+          image: {
+            url: SettingProfile,
+            width: '200px',
+            height: 'auto'
+            },
+          url: "/xln/wallet/setting",
+          icon: "",
+          show: true,
+          external: false
+        },
+      ],
     },
     templateData: [
       {
@@ -2382,28 +2738,36 @@ export const wallet = {
             btnLinkUrl: "/xln/buy-tokens",
             btnLinkText: "Buy More Tokens"
           },
-          images: {
-            logo: {
-              url: Logo,
-              width: "200px",
-              height: "auto",
-            },
-          },
-          navLinks: walletNavLinks,
-          submit: {
-            label: "wallet",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
+        },
+      },
+      {
+        type: "walletAssets",
+        options: {
+          action: "walletAssets",
+        },
+      },
+      {
+        type: "walletShareholders",
+        options: {
+          action: "walletShareholders",
+        },
+      },
+      {
+        type: "walletShares",
+        options: {
+          action: "walletShares",
+        },
+      },
+      {
+        type: "walletStats",
+        options: {
+          action: "walletStats",
         },
       },
       {
         type: "walletFileUpload",
         options: {
-          action1: "cover",
-          action2: "avatar",
           method: "post",
-          navLinks: walletNavLinks,
           form: {
             type: "form",
             standard: "Standard",
@@ -2502,7 +2866,7 @@ export const wallet = {
             description: "lets resolve it here",
             warningLink: {
               text: "profile image",
-              to: "/xln/upload-user-file",
+              to: "/xln/wallet/file-upload",
               icon: "",
               show: true,
               external: false,

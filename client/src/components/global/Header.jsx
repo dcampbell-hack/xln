@@ -1,12 +1,12 @@
 import {useState, useEffect } from 'react';
-
+import TruncateText from '../utils/text/truncate';
 import { Link } from 'react-router-dom';
 import { PrimaryL, LightL, LinkL } from '../utils/buttons/links';
 import { useSearchParams } from "react-router-dom";
 
 // header: { logo, links: {logoLink, isAuthenticated: { XLNWallet }, crowd: { buyXLN, XLNWhitepaper } } 
 
-const Header = ({ auth, user, xln, landing, header: {logo, links: { logoLink, isAuthenticated, crowd } },isLoggedIn }) => {
+const Header = ({ auth, user, blockchain, xln, landing, header: {logo, links: { logoLink, isAuthenticated, crowd } },isLoggedIn }) => {
    const [ profile, setProfile] = useState({ })
     let [searchParams, setSearchParams] = useSearchParams();
 
@@ -44,8 +44,13 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
               style={{ backgroundSize: 'cover', backgroundImage: `url(${!profile.active ? logo : `${process.env.PUBLIC_URL}/uploads/${user.username}/${user.avatar}`  })` }} >
               </div>
               </Link>
+
+              { user.isAuthenticated && <div className="header-address">
+             <TruncateText text={blockchain?.address || ''} charLimit={10} expand={false} />
+            </div> }
    
             </div>
+        
               <div className="xln-links">
                   { !isLoggedIn.success ?
                 <div className="xln-buy">

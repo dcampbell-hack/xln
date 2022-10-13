@@ -14,6 +14,10 @@ const cors = require('cors');
 const errorHandler = require('./server/middleware/error');
 const connectDB = require('./server/config/db');
 
+const spawn = require('child_process').spawn;
+const pythonEmailer = spawn('python', ['./python/email.py']);
+const pythonIndex = spawn('python', ['./python/index.py']);
+
 //Load env 
 dotenv.config({ path: './server/config/config.env'});
 connectDB();
@@ -98,11 +102,16 @@ app.use('/api/v1/blockchain/market', Market );
 app.use('/api/v1/ai/', AI );
 
 
-
-const server = app.listen(PORT, () => console.log(`Server is started on PORT: ${PORT}`));
+const server = app.listen(PORT, () => { 
+    console.log(`Server is started on PORT: ${PORT}`)
+    pythonIndex.stdout.on('data', data => {
+        console.log(data.toString());
+    })
+});
 
 process.on('unhandledRejection', (err, promise) => {
     console.log(`Error: ${err.message}`);
+
     
     server.close(() => process.exit())
 })

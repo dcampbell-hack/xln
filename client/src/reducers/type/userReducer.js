@@ -13,7 +13,7 @@ import {
 ;    
     const initState = {
         users: [],
-        id: "",
+        id: null,
         sharesOwned: 0,
         assetsOwned: 0,
         avatar: "",
@@ -32,6 +32,7 @@ import {
         socialLinks: [],
         updated: null,
         hasWallet: false,
+        redirect: null,
         loading: true,
         isError: false,
         isAuthenticated: false,
@@ -52,7 +53,7 @@ import {
             case GET_USERS:
                 return { ...state, users: action.payload, loading: false }
             case UPLOAD_USER_FILE:
-                return { ...state, avatar: action.payload, loading: false, updated: true }
+                return { ...state, redirect: '/xln/wallet', loading: false, updated: true }
             case CREATE_USER:
                 return { ...state, user: action.payload, loading: false }
              case UPDATE_USER:

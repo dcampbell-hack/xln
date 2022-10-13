@@ -1,7 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const web3 = require("web3");
-const keyData = require("../server/config/p-key.txt");
 
 const tokens = (n) => ethers.utils.parseUnits(n.toString(), 'ethers');
 const dai = (n) => Number(web3.utils.toWei(n.toString(), "picoether"));

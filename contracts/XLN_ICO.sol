@@ -81,7 +81,7 @@ contract XLNICO {
             );
             
 
-            dai.transferFrom( address(this), daiAmount);
+            dai.transferFrom(msg.sender, address(this), daiAmount);
               
             sales[msg.sender] = Sale(
                 msg.sender,
