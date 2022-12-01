@@ -5,17 +5,17 @@ const advancedResults = require('../middleware/advancedResults');
 const Asset = require('../model/Asset')
 
 const { 
+    assetCoverUpload, 
+    createAsset, 
+    deleteAsset, 
     getAsset,
+    getAssetsInRadius,
     getUserAssets,  
     getAssets, 
-    createAsset, 
     updateAsset, 
-    deleteAsset, 
-    assetCoverUpload, 
-    getAssetsInRadius 
 } = require('../controller/asset');
 
-
+const aiRouter = require('./ai/');
 const sharesRouter = require('./share');
 const offersRouter = require('./offer');
 const reviewsRouter = require('./review');
@@ -23,6 +23,7 @@ const commentsRouter = require('./comment');
 const conditionalsRouter = require('./conditional');
 const transactionsRouter = require('./transaction');
 
+router.use('/:assetId/ai/', aiRouter)
 router.use('/:assetId/shares', sharesRouter)
 router.use('/:assetId/offers', offersRouter)
 router.use('/:assetId/reviews', reviewsRouter)

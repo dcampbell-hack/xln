@@ -51,9 +51,9 @@ export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
 
     try {
       console.log('Create Asset Action ----', values)
-            let res;
-            const formData = new FormData();
-            res = await axios.post(`/api/v1/assets/`, values );
+            // let res;
+            // const formData = new FormData();
+           let res = await axios.post(`/api/v1/assets/`, values );
 
         //   if( values.cover ){
         //     formData.append('file', values.cover )
@@ -74,6 +74,10 @@ export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
     }
   };
 
+
+
+
+
   export const getAllAssets = () => async dispatch => {
     try{
         const res = await axios.get('/api/v1/assets?limit=100');
@@ -92,7 +96,7 @@ export const getUserAssets = (userId) => async dispatch => {
 
         dispatch({
             type: GET_USER_ASSETS,
-            payload: res.data
+            payload: res.data.data
         })
     } catch(err){
         dispatch({ type: ASSET_ERROR, payload: err})
@@ -106,7 +110,7 @@ export const getSingleAsset = (id) => async dispatch => {
         const res = await axios.get(`/api/v1/assets/${id}`);
         dispatch({
             type: GET_ASSET,
-            payload: res.data
+            payload: res.data.data
         })
     } catch(err){
         dispatch({ type: ASSET_ERROR, payload: err})

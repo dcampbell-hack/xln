@@ -11,6 +11,7 @@ const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const cors = require('cors');
+const socket = require("socket.io");
 const errorHandler = require('./server/middleware/error');
 const connectDB = require('./server/config/db');
 
@@ -109,9 +110,19 @@ const server = app.listen(PORT, () => {
     })
 });
 
+const io = socket(server, {
+    allowEIO3: true,
+    cors: {credentials: true, origin: 'http://localhost:3000'},
+});
+
+io.on("connection", function (socket) {
+    console.log(socket.id);
+    socket.on("SEND_MESSAGE", function (data) {
+        io.emit("MESSAGE", data);
+    });
+});
+
 process.on('unhandledRejection', (err, promise) => {
     console.log(`Error: ${err.message}`);
-
-    
     server.close(() => process.exit())
 })

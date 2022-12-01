@@ -1,5 +1,6 @@
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import VueSocketIO from "vue-socket.io";
 import wasm from 'vite-plugin-wasm';
 import topLevelAwait from "vite-plugin-top-level-await";
 import builtins from 'rollup-plugin-node-builtins';
@@ -23,9 +24,13 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "api/v1": "http://localhost:8000/"
+      "api/v1": "http://localhost:8001/"
     },
   },
+//   socket: new VueSocketIO({
+//     debug: true,
+//     connection: 'http://localhost:8001'
+// }),
   plugins: [
     react(), 
     wasm({

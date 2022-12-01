@@ -37,9 +37,17 @@
 .form-control input{
 height: 50px;
 border: none;
-border-bottom: 1px solid $info;
 padding: 0 10px;
  margin: 0;
+}
+
+.line_bottom{
+    border-bottom: 1px solid $info;
+}
+
+.line_none{
+    outline: mediumturquoise;
+    border: none;
 }
 
 .form-alert{
@@ -102,6 +110,10 @@ padding: 0 10px;
     height: 50px;
 }
 
+datalist #asset-type{
+    width: 100%;
+}
+
 .password_input input{
     width: 87%;
 }
@@ -136,4 +148,10 @@ padding: 0 10px;
     height: 70px;
     display: flex;
     justify-content: space-between;
+}
+
+.header_blog{
+    font-size: 36px;
+    font-weight: bolder;
+    outline: none;
 }

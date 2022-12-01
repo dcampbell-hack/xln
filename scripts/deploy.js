@@ -67,6 +67,13 @@ async function main() {
 
   await ico.start();
 
+  const xlnSwap = await hre.ethers.getContractFactory('XLNICO')
+  const swap = await xlnSwap.deploy(token.address)
+
+  const xlnENS = await hre.ethers.getContractFactory('XLNENS')
+  const ens = await xlnSwap.deploy(xlnENS.address)
+
+
 
   let config = `
           exports.tokenPrice = '${tokenPrice}'
@@ -75,12 +82,39 @@ async function main() {
           exports.icoAddress = '${ico.address}'
           exports.nftAddress = '${nft.address}'
           exports.marketAddress = '${market.address}'
+          exports.swapAddress = '${swap.address}'
+          exports.swapAddress = '${swap.address}'  
+          exports.ensAddress = '${ens.address}'
           `;
 
   let data = JSON.stringify(config);
   fs.writeFileSync('server/config/config.js', JSON.parse(data))
 
+  saveFrontendFiles(ens, 'xlnENS')
+
 };
+
+function saveFrontendFiles(contract, name){
+   const contractsDir = __dirname + "/../../ensData";
+   
+   if(!fs.existsSync(contractsDir)){
+    fs.mkdirSync(contractsDir)
+   }
+
+   fs.writeFileSync(
+    contractsDir + `/${name}-address.json`,
+    JSON.stringify({ address: contract.address }, undefined, 2)
+   );
+
+   const contractArtifact = artifacts.readArtifactSync(name)
+
+   fs.writeFileSync(
+    contractsDir + `/${name}.json`,
+    JSON.stringify(contractArtifact, null, 2)
+   );
+
+   
+}
 
 
 main()

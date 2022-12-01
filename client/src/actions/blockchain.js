@@ -1,11 +1,13 @@
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { infura } from "../data";
 import Web3Modal from "web3modal";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 
 import XLNNFT from "../../../artifacts/contracts/XLN_NFT.sol/XLNNFT.json";
 import XLNMarket from "../../../artifacts/contracts/XLN_Market.sol/XLNMarket.json";
+import XLNICO from '../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json';
 
 import {
   GET_ADDRESS,
@@ -111,8 +113,7 @@ export const setShowForm = () => async (dispatch) => {
   }
 };
 
-export const updateSupply =
-  ({ buyxln }) =>
+export const updateSupply = ({ buyxln }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -215,21 +216,105 @@ export const tokenSupply = (amount) => {
   };
 };
 
-export const buyTokens = async (ico) => async (dispatch) => {
-  console.log("Buy Tokens  Action ----->", ico);
+export const buyTokens =  (blockchain) => async (dispatch) => {
 
   try {
+
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(ico.address, ICO.abi, signer);
+    const ico = new ethers.Contract( blockchain.ico.address, XLNICO.abi, signer);
 
-    const price = ethers.utils.parseUnits(amount.toString(), "ethers");
-    let transaction = await contract.buyXLN(ico.address, ico.TokenId, {
-      value: price,
-    });
+    console.log('Amount ---', typeof blockchain.dai  )
+
+    //const price = ethers.utils.parseUnits(blockchain.dai, "ethers");
+    let transaction = await ico.buy( '12562800000000000' );
+    console.log('Transaction', transaction)
     await transaction.wait();
+
+
+    // let transaction;
+    // const { asset } = assets;
+
+    // // Mint NFT from contract
+    // const client = ipfsHttpClient(`https://ipfs.infura.io:5001/api/v0/${infura}`);
+
+    // const obj = {
+    //   price: asset.price,
+    //   name: asset.name,
+    //   description: asset.description,
+    //   price: asset.price,
+    //   fileUrl: `${asset.cover}`,
+    // };
+
+    // const fileUrl = `${client}/${obj.fileUrl}}`;
+
+    // const { name, description, price } = obj;
+
+
+    // // upload IPFS
+    // const data = JSON.stringify({
+    //   name,
+    //   description,
+    //   price,
+    //   image: fileUrl,
+    // });
+
+    // try {
+      
+    //   // run a function that creates sale and passes in the url
+    //   const web3Modal = new Web3Modal();
+    //   const connection = await web3Modal.connect();
+    //   const provider = new ethers.providers.Web3Provider(connection);
+    //   const signer = provider.getSigner();
+
+    //   // we want to create
+    //   const nft = new ethers.Contract(
+    //     blockchain.nft.address,
+    //     XLNNFT.abi,
+    //     signer
+    //   );
+
+
+    //   transaction = await nft.mintNFT(`/uploads/${asset.user}/asset/${asset.cover}`);
+    //   let tx = await transaction.wait();
+    
+    //   let event = tx.events[0];
+    //   let value = event.args[2];
+    //   let tokenId = value.toNumber();
+    //   const price = ethers.utils.parseUnits(asset.price, "ether");
+
+    //   // list the item for sale on the marketsale
+    //   const market = new ethers.Contract(
+    //     blockchain.market.address,
+    //     XLNMarket.abi,
+    //     signer
+    //   );
+
+    //   let listingPrice = await market.getListingPrice();
+    //   listingPrice = listingPrice.toString();
+
+    //   transaction = await market.makeMarketItem(
+    //     blockchain.nft.address,
+    //     tokenId,
+    //     price,
+    //     { value: listingPrice }
+    //   );
+
+    //   await transaction.wait();
+
+    //   console.log('NFT Market ---->', transaction )
+
+    // } catch (err) {
+    //   console.log("Error uploading file: ", err );
+    // }
+
+
+    // dispatch({
+    //   type: MINT_NFT,
+    //   // payload: res.data,
+    // });
 
     dispatch({
       type: BUY_TOKENS,
@@ -273,7 +358,6 @@ export const mintToken = (token) => async (dispatch) => {
 
 export const buyNFT = (blockchain) => async (dispatch) => {
   try {
-    console.log("Buy NFT Actions ------> ", blockchain);
 
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
@@ -321,50 +405,39 @@ export const buyNFT = (blockchain) => async (dispatch) => {
   }
 };
 
-export const mintNFT = ({ blockchain, assets, selectedAsset }) =>
+export const mintNFT =
+  ({ blockchain, assets, selectedAsset }) =>
   async (dispatch) => {
     try {
-      const { userAssets } = assets;
+      let transaction;
+      const { asset } = assets;
 
       // Mint NFT from contract
-      console.log("Mint NFT", blockchain, userAssets);
-
-      const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0/");
+      const client = ipfsHttpClient(`https://ipfs.infura.io:5001/api/v0/${infura}`);
 
       const obj = {
-        price: userAssets[selectedAsset].price,
-        name: userAssets[selectedAsset].name,
-        description: userAssets[selectedAsset].description,
-        fileUrl: "",
+        price: asset.price,
+        name: asset.name,
+        description: asset.description,
+        price: asset.price,
+        fileUrl: `${asset.cover}`,
       };
 
-      console.log('File obj', obj)
+      const fileUrl = `${client}/${obj.fileUrl}}`;
 
-      const fileUrl = `${client}/${added.path}}`;
+      const { name, description, price } = obj;
 
-      await createMarket()
 
-      async function createMarket() {
-        const { name, description, price } = formInput;
+      // upload IPFS
+      const data = JSON.stringify({
+        name,
+        description,
+        price,
+        image: fileUrl,
+      });
 
-        if (!name || !description || !price || !fileUrl) return;
-
-        // upload IPFS
-        const data = JSON.stringify({
-          name,
-          description,
-          image: fileUrl,
-        });
-
-        try {
-          const added = await client.add(data);
-          createSale(url);
-        } catch (err) {
-          console.log("Error uploading file: ", error);
-        }
-      }
-
-      async function createSale(url) {
+      try {
+        
         // run a function that creates sale and passes in the url
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
@@ -372,13 +445,20 @@ export const mintNFT = ({ blockchain, assets, selectedAsset }) =>
         const signer = provider.getSigner();
 
         // we want to create
-        const nft = new ethers.Contract( blockchain.nft.address, XLNNFT.abi, signer);
-        let transaction = await nft.mintNFT(url);
+        const nft = new ethers.Contract(
+          blockchain.nft.address,
+          XLNNFT.abi,
+          signer
+        );
+
+
+        transaction = await nft.mintNFT(`/uploads/${asset.user}/asset/${asset.cover}`);
         let tx = await transaction.wait();
+      
         let event = tx.events[0];
         let value = event.args[2];
         let tokenId = value.toNumber();
-        const price = ethers.utils.parseUnits(formInput.price, "ether");
+        const price = ethers.utils.parseUnits(asset.price, "ether");
 
         // list the item for sale on the marketsale
         const market = new ethers.Contract(
@@ -386,6 +466,7 @@ export const mintNFT = ({ blockchain, assets, selectedAsset }) =>
           XLNMarket.abi,
           signer
         );
+
         let listingPrice = await market.getListingPrice();
         listingPrice = listingPrice.toString();
 
@@ -395,14 +476,14 @@ export const mintNFT = ({ blockchain, assets, selectedAsset }) =>
           price,
           { value: listingPrice }
         );
+
         await transaction.wait();
+
+        console.log('NFT Market ---->', transaction )
+
+      } catch (err) {
+        console.log("Error uploading file: ", err );
       }
-
-
-      // await nft.mintNFT("https-t1");
-      // await nft.mintNFT("https-t2");
-
-
 
 
       dispatch({
@@ -414,6 +495,7 @@ export const mintNFT = ({ blockchain, assets, selectedAsset }) =>
         type: CHAIN_ERROR,
         payload: {
           type: "nft",
+          isError: true,
           msg: "Not able to mint NFT",
           err,
         },
@@ -439,6 +521,7 @@ export const updateAdmin = (token) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "index",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -459,6 +542,7 @@ export const mint = (token) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "token",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -481,6 +565,7 @@ export const start = (ico) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "ico",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -504,6 +589,7 @@ export const withdrawTokens = (tokens) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "ico",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -527,6 +613,7 @@ export const withdrawDai = (tokens) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "ico",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -549,6 +636,7 @@ export const getListingPrice = () => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "ico",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -572,6 +660,7 @@ export const makeMarketItem = (item) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "market",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -595,6 +684,7 @@ export const createMarketSale = (sale) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "market",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -617,6 +707,7 @@ export const fetchMarketTokens = () => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "market",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -637,6 +728,7 @@ export const fetchMyNFTs = () => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "market",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
@@ -659,9 +751,24 @@ export const fetchItemsCreated = (tokens) => async (dispatch) => {
       type: CHAIN_ERROR,
       payload: {
         type: "market",
+        isError: true,
         msg: "No NFTs loaded",
         err,
       },
     });
   }
 };
+
+// ENS 
+const listForSale = async ( tokenId, ensName) => {
+  try{
+     const tx = await ENSContract.setApprovalForAll(ENSName.address, true );
+     await tx.wait();
+     let priceInEth = ethers.utils.parseEther(price.toString())
+     const tx2 = await marketplace.listENS(ensName, tokenId, priceInEth );
+     await tx2.wait();
+     prompt('Awesome! You have now listed your Item for sale');
+  } catch(err){
+    console.error(err)
+  }
+}

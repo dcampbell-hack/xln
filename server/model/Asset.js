@@ -4,8 +4,9 @@ const slugify = require('slugify');
 const axios = require('axios')
 const geocoder = require('../utils/geocoder');
 const ErrorResponse = require('../utils/errorResponse');
-const Category = require('../model/Category')
-const Conditional = require('../model/Conditional')
+const ClusterSchema = require('./Cluster')
+const Category = require('./Category')
+const Conditional = require('./Conditional')
 const { checkModelForDuplicate } = require('../middleware/checkModelForDuplicate');
 const { formatField  } = require('../middleware/formatField');
 const { getIpAdress, getLocationFromIpAddress } = require('../middleware/ipAddress');
@@ -33,40 +34,53 @@ const AssetSchema = new mongoose.Schema({
             /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, 'Please use a valid URL with HTTP or HTTPS'
         ]
     },
-    // address: {
-    //     type: String
-    // },
-    // location: {
-    //     type: {
-    //         type: String,
-    //         enum: ['Point'],
-    //     },
-    //     coordinates: {
-    //         type: [Number],
-    //         index: '2dsphere'
-    //     },
-    //     formattedAddress: String,
-    //     street: String,
-    //     city: String,
-    //     state: String,
-    //     zipcode: String,
-    //     country: String
-    // },
+    pending: {
+        type: Boolean,
+        default: true
+    },
+    minted: {
+        type: Boolean,
+        default: false
+    },
+    cluster: [ ClusterSchema ],
     assetType: {
         type: [String],
         required: true,
         enum: [
+            'AI Art',
             'Blog',
+            'Document',
+            'Domain',
+            'Enterprise',
+            'File',
             'Link',
             'Live',
             'Text',
             'Image',
             'Metaverse',
             'Music',
+            'Podcast',
             'Real Estate',
+            'Shop',
             'Video',
-            'File',
-            'Enterprise',
+            "Website"
+        ]
+    },
+    template: {
+        type: [String],
+        required: false,
+        enum: [
+            'grid-template-1',
+            'grid-template-2',
+            'grid-template-3',
+            'grid-template-4',
+            'grid-template-5',
+            'grid-template-6',
+            'grid-template-7',
+            'grid-template-8',
+            'grid-template-9',
+            'grid-template-10',
+            'grid-template-11',
         ]
     },
     category: {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
-import { ethers } from "ethers";
-import Web3Modal from "web3modal";
+// import axios from "axios";
+// import { ethers } from "ethers";
+// import Web3Modal from "web3modal";
 // import Web3 from "web3";
 
 
@@ -43,12 +43,6 @@ const XLN = ({
     options: { content, templateData },
   },
 }) => {
-  const [tokens, setTokens] = useState("");
-  const [ico, setICO] = useState("");
-  const [nfts, setNFTs] = useState([]);
-  const [market, setMarket] = useState("");
-
-  const [loadingState, setLoadingState] = useState("not loaded");
   const [web3Api, setWeb3Api] = useState("");
   const [contentText, setContentText] = useState(content.defaultText);
   const [accounts, setAccounts] = useState({
@@ -160,10 +154,11 @@ if(!blockchain.address){
 
   return (
     <div className="xln-setup-container">
-      <TemplateLayout
+    { users.loading == false && <TemplateLayout
         content={content}
         templateData={renderTemplate}
       />
+    }
     </div>
   );
 };

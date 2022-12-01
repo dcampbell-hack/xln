@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.8;
 
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
@@ -36,7 +36,7 @@ contract XLNICO {
         uint _maxPurchase) {
 
         token = XLNToken(tokenAddress);
-        dai = IERC20(tokenAddress);
+        dai = IERC20(0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3);
 
         require(_duration > 0, 'duration should be > 0');
         require(
@@ -66,10 +66,7 @@ contract XLNICO {
             end = block.timestamp + duration;
     }
 
-    function buy(uint daiAmount)
-        external
-        icoActive() {
-
+    function buy(uint daiAmount) external payable icoActive() {
             require(
                 daiAmount >= minPurchase && daiAmount <= maxPurchase,
                 'have to buy between minPurchase and maxPurchase'

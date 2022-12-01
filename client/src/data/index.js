@@ -4,7 +4,6 @@ import NoPhoto from "../assets/system/no-photo.jpeg";
 import NoProfile from "../assets/system/user.png";
 import SettingProfile from "../assets/system/user-profile.png";
 
-
 // Employees
 import CEO from "../assets/founders/CEO-Executive.png";
 import COO from "../assets/founders/COO-Executive.png";
@@ -31,24 +30,13 @@ import DownloadWhitepaper from "../assets/corporate-art/whitepaper.jpg";
 import ChessAvatar from "../assets/corporate-art/metaverse_chess.png";
 import SecuredAsset from "../assets/corporate-art/secure_wallet.png";
 
-
-
-
-const infura = "68eb211506c141e78162043b7b0df69a";
+export const infura = "68eb211506c141e78162043b7b0df69a";
 const date = new Date();
 
 const walletNavLinks = [
   {
     text: "Create Asset",
     to: "/xln/create-asset",
-    className: "main-wallet-btn",
-    icon: "fa-duotone fa-wave-pulse",
-    show: true,
-    external: false,
-  },
-  {
-    text: "Mint Asset",
-    to: "/xln/assets/:id",
     className: "main-wallet-btn",
     icon: "fa-duotone fa-wave-pulse",
     show: true,
@@ -80,8 +68,8 @@ const walletNavLinks = [
     show: true,
     external: false,
     amount: 0,
-  }
-]
+  },
+];
 
 export const socialLinks = [
   ["Follow on Twitter", "https://twitter.com/MedallionXln", "fab fa-twitter"],
@@ -110,26 +98,33 @@ export const header = {
     logoLink: "/",
     isAuthenticated: [
       {
+        text: "Profile",
+        to: "/xln/profile",
+        icon: "fa-solid fa-user",
+        show: true,
+        external: false,
+      },
+      {
         text: "Activity",
-        to: "/xln/assets/mintable",
-        icon: "",
+        to: "/xln/assets/mint",
+        icon: "fa-solid fa-bolt",
         show: true,
         external: false,
       },
       {
         text: "Wallet",
         to: "/xln/wallet",
-        icon: "",
+        icon: "fa-solid fa-wallet",
         show: true,
         external: false,
       },
       {
         text: "Buy Tokens",
         to: "/xln/buy-tokens",
-        icon: "",
+        icon: "fa-solid fa-coins",
         show: true,
         external: false,
-      }
+      },
     ],
     crowd: [
       {
@@ -356,7 +351,7 @@ export const login = {
             input: {
               type: "email",
               id: "kyc-email",
-              className: "",
+              className: "line_bottom",
               name: "email",
               value: {},
               onChange: "",
@@ -378,7 +373,7 @@ export const login = {
             input: {
               type: "password",
               id: "kyc-password",
-              className: "",
+              className: "line_bottom",
               name: "password",
               value: {},
               onChange: "",
@@ -436,7 +431,7 @@ export const resetPassword = {
             input: {
               type: "password",
               id: "kyc-reset",
-              className: "",
+              className: "line_bottom",
               name: "email",
               value: {},
               onChange: "",
@@ -458,7 +453,7 @@ export const resetPassword = {
             input: {
               type: "password",
               id: "kyc-reset",
-              className: "",
+              className: "line_bottom",
               name: "email",
               value: {},
               onChange: "",
@@ -516,7 +511,7 @@ export const forgotPassword = {
             input: {
               type: "email",
               id: "kyc-email",
-              className: "",
+              className: "line_bottom",
               name: "email",
               value: {},
               onChange: "",
@@ -604,31 +599,30 @@ export const landing = {
     },
   ],
   timer: {
-      announcement: "Medallion XLN raising money with an ICO ", 
-      phases: [
-        {
-          active: true,
-          label: "Phase 1",
-          tokenPrice: 0.7
-        },
-        {
-          active: false,
-          label: "Phase 2",
-          tokenPrice: 0.33
-        },
-        {
-          active: false,
-          label: "Phase 3",
-          tokenPrice: 0.777
-        },
-        {
-          active: false,
-          label: "Phase 4",
-          tokenPrice: 1.11
-        }
-      ],
-     date: "January, 31  2023",
-
+    announcement: "Medallion XLN raising money with an ICO ",
+    phases: [
+      {
+        active: true,
+        label: "Phase 1",
+        tokenPrice: 0.7,
+      },
+      {
+        active: false,
+        label: "Phase 2",
+        tokenPrice: 0.33,
+      },
+      {
+        active: false,
+        label: "Phase 3",
+        tokenPrice: 0.777,
+      },
+      {
+        active: false,
+        label: "Phase 4",
+        tokenPrice: 1.11,
+      },
+    ],
+    date: "January, 31  2023",
   },
   blockchain: {
     header: "",
@@ -922,6 +916,497 @@ export const landing = {
   },
 };
 
+export const asset = {
+  infura,
+  systemChecks: {
+    showHeader: false,
+    showFooter: false,
+  },
+  states: [
+    "aiArt",
+    "blog",
+    "document",
+    "domain",
+    "enterprise",
+    "image",
+    "link",
+    "live",
+    "metaverse",
+    "music",
+    "realEstate",
+    "shop",
+    "text",
+    "video",
+    "website"
+  ],
+  options: {
+    type: "grid-one-center",
+    standard: "Standard",
+    title: "",
+    warning: "",
+    description: "",
+    content: {
+      defaultText: "Authenticate Wallet to access Medallion XLN features.",
+      errorText: "User denied accounts access!",
+    },
+    warningLink: {
+      text: "",
+      to: "/",
+      icon: "",
+      show: true,
+      external: false,
+    },
+    image: CTAMission,
+    templateData: [
+      {
+        type: "aiArt",
+        options: {
+          action: "aiArt",
+          method: "post",
+          text: "aiArt",
+          submit: {
+            label: "Generate Art",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "aiArt",
+          },
+          fields: [
+            {
+              type: "textarea",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Description",
+                  forId: "ai-text-prompt",
+                },
+                area: {
+                  type: "text",
+                  id: "ai-text-prompt",
+                  className: "text-prompt",
+                  name: "prompt",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Enter Text Prompt",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "blog",
+        options: {
+          action: "blog",
+          text: "Blog",
+          buttons: [
+            {
+              button: "add",
+              icon: "fa-solid fa-plus",
+            },
+            {
+              button: "header",
+              icon: "fa-solid fa-heading",
+            },
+            {
+              button: "body",
+              icon: "fas fa-paragraph",
+            },
+            {
+              button: "image",
+              icon: "fas fa-images",
+            },
+            {
+              button: "video",
+              icon: "fas fa-film",
+            },
+            {
+              button: "music",
+              icon: "fa-solid fa-music",
+            },
+            {
+              button: "link",
+              icon: "fas fa-link",
+            },
+            {
+              button: "web cam",
+              icon: "fas fa-camera",
+            },
+            {
+              button: "search",
+              icon: "fas fa-search",
+            },
+          ],
+          fields: [
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Select Category",
+                  forId: "category-asset",
+                },
+                input: {
+                  type: "text",
+                  list: "category-asset-list",
+                  id: "category-asset",
+                  className: "",
+                  name: "category",
+                  value: {},
+                  onChange: "",
+                },
+                datalist: {
+                  type: "category",
+                  id: "category-asset-list",
+                  className: "",
+                  schema: {},
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "textarea",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Description",
+                  forId: "asset-description",
+                },
+                area: {
+                  type: "text",
+                  id: "asset-description",
+                  className: "",
+                  name: "description",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Asset Description",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Text",
+                  forId: "header",
+                },
+                input: {
+                  type: "text",
+                  id: "header",
+                  className: "header_blog",
+                  name: "title",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Enter Text",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "file",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Attach Asset",
+                  forId: "attach-asset",
+                },
+                input: {
+                  type: "file",
+                  id: "attach-asset",
+                  className: "btn btn-info",
+                  name: "cover",
+                  onChange: "",
+                  placeholder: "Attach Asset",
+                },
+                aria: {},
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "document",
+        options: {
+          action: "document",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "domain",
+        options: {
+          action: "link",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "enterprise",
+        options: {
+          action: "enterprise",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "image",
+        options: {
+          action: "image",
+          text: "Image",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Attach an Asset",
+            warning: "Check various assets created by our ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "asset",
+              to: "/xln/create-asset",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "attachAsset",
+              method: "post",
+              submit: {
+                label: "Attach Asset",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "attachAsset",
+              },
+              fields: [
+                {
+                  type: "file",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Attach Asset",
+                      forId: "attach-asset",
+                    },
+                    input: {
+                      type: "file",
+                      id: "attach-asset",
+                      className: "btn btn-info",
+                      name: "cover",
+                      onChange: "",
+                      placeholder: "Attach Asset",
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+      {
+        type: "link",
+        options: {
+          action: "link",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "live",
+        options: {
+          action: "live",
+          method: "post",
+          text: "Live",
+        },
+      },
+      {
+        type: "metaverse",
+        options: {
+          action: "metaverse",
+          method: "post",
+          text: "Metaverse",
+        },
+      },
+      {
+        type: "music",
+        options: {
+          action: "music",
+          method: "post",
+          text: "Music",
+        },
+      },
+      {
+        type: "realEstate",
+        options: {
+          action: "realEstate",
+          method: "post",
+          text: "Real Estate",
+        },
+      },
+      {
+        type: "shop",
+        options: {
+          action: "shop",
+          method: "post",
+          text: "Shop",
+        },
+      },
+      {
+        type: "text",
+        options: {
+          action: "text",
+          method: "post",
+          text: "Text",
+        },
+      },
+      {
+        type: "video",
+        options: {
+          action: "video",
+          method: "post",
+          text: "Video",
+        },
+      },
+      {
+        type: "website",
+        options: {
+          action: "website",
+          method: "post",
+          text: "Website",
+        },
+      },
+    ],
+  },
+  authentication: {
+    userChecks: [
+      {
+        id: "123qd",
+        path: ["auth"],
+        avatar: "rocket.gif",
+        to: "/",
+        action: {},
+        show: true,
+        type: false,
+        select: {
+          metamask: false,
+          coinbase: false,
+          authenticated: false,
+        },
+        error: {
+          button: {
+            link: false,
+            alert: "danger",
+            action: null,
+            label: "Connect Wallet",
+          },
+          header: "Authenticate Metamask Wallet",
+          detailed:
+            "Connect with one of our available wallet providers or create a new one.",
+        },
+      },
+
+      {
+        id: "123q9a",
+        path: ["auth"],
+        avatar: "social-media.gif",
+        to: "/xln/:username",
+        action: {},
+        show: true,
+        type: false,
+        select: {
+          count: 0,
+          data: [],
+        },
+        error: {
+          button: {
+            link: true,
+            alert: "danger",
+            label: "Go to Profile",
+          },
+          header: "Visit Your Profile",
+          detailed: "You have 10 shareholders",
+        },
+      },
+      {
+        id: "123fb",
+        path: ["auth"],
+        avatar: "money-bag.gif",
+        to: "/assets/create",
+        action: {},
+        show: true,
+        type: false,
+        select: {
+          assetCreated: true,
+        },
+        error: {
+          button: {
+            link: true,
+            alert: "danger",
+            label: "Create Asset",
+          },
+          header: "Create Asset",
+          detailed: "Create your first asset",
+        },
+      },
+      {
+        id: "123fw",
+        path: ["auth"],
+        avatar: "share.gif",
+        to: "/shares/:id/buy",
+        action: {},
+        show: true,
+        type: false,
+        select: {
+          count: 0,
+          data: [],
+        },
+        error: {
+          button: {
+            link: true,
+            alert: "danger",
+            label: "Buy Share",
+          },
+          header: "Buy your first share",
+          detailed: "You have 0 shares",
+        },
+      },
+      {
+        id: "123fs",
+        path: ["auth"],
+        avatar: "target.gif",
+        to: "/register",
+        action: {},
+        show: true,
+        type: false,
+        select: {
+          isRegistered: [],
+        },
+        error: {
+          button: {
+            link: true,
+            alert: "danger",
+            label: "Register",
+          },
+          header: "Register User",
+          detailed: "Your account must be registered before further use",
+        },
+      },
+    ],
+  },
+};
+
 export const xln = {
   infura,
   systemChecks: {
@@ -930,7 +1415,6 @@ export const xln = {
   },
   states: [
     "addPermissions",
-    "attachAsset",
     "buyShare",
     "buyTokens",
     "codeBlock",
@@ -1000,7 +1484,7 @@ export const xln = {
                 input: {
                   type: "email",
                   id: "kyc-email",
-                  className: "",
+                  className: "line_bottom",
                   name: "email",
                   value: {},
                   onChange: "",
@@ -1010,6 +1494,60 @@ export const xln = {
               },
             },
           ],
+        },
+      },
+      {
+        type: "attachAsset",
+        options: {
+          action: "attachAsset",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Attach an Asset",
+            warning: "Check various assets created by our ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "asset",
+              to: "/xln/create-asset",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "attachAsset",
+              method: "post",
+              submit: {
+                label: "Attach Asset",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "attachAsset",
+              },
+              fields: [
+                {
+                  type: "file",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Attach Asset",
+                      forId: "attach-asset",
+                    },
+                    input: {
+                      type: "file",
+                      id: "attach-asset",
+                      className: "btn btn-info",
+                      name: "cover",
+                      onChange: "",
+                      placeholder: "Attach Asset",
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
         },
       },
       {
@@ -1255,7 +1793,7 @@ export const xln = {
                 input: {
                   type: "email",
                   id: "kyc-email",
-                  className: "",
+                  className: "line_bottom",
                   name: "email",
                   value: {},
                   onChange: "",
@@ -1292,7 +1830,7 @@ export const xln = {
                 label: "Create Asset",
                 className: "btn btn-block btn-info",
                 icon: "",
-                action: "createAsset"
+                action: "createAsset",
               },
               fields: [
                 {
@@ -1311,13 +1849,13 @@ export const xln = {
                       id: "asset-type",
                       className: "",
                       name: "assetType",
-                      value: {}
+                      value: {},
                     },
                     datalist: {
                       type: "asset-type",
                       id: "asset-type-list",
                       className: "",
-                     schema: {}
+                      schema: {},
                     },
                     aria: {},
                   },
@@ -1335,7 +1873,7 @@ export const xln = {
                     input: {
                       type: "text",
                       id: "name",
-                      className: "",
+                      className: "line_bottom",
                       name: "name",
                       value: {},
                       onChange: "",
@@ -1361,13 +1899,13 @@ export const xln = {
                       className: "",
                       name: "category",
                       value: {},
-                      onChange: ""
+                      onChange: "",
                     },
                     datalist: {
                       type: "category",
                       id: "category-asset-list",
                       className: "",
-                      schema: {}
+                      schema: {},
                     },
                     aria: {},
                   },
@@ -1407,8 +1945,10 @@ export const xln = {
                     input: {
                       type: "number",
                       id: "price",
-                      className: "",
+                      className: "line_bottom",
                       name: "price",
+                      min: 0,
+                      step: 0.01,
                       value: {},
                       onChange: "",
                       placeholder: "Price of Asset",
@@ -1429,74 +1969,20 @@ export const xln = {
                     input: {
                       type: "number",
                       id: "stock",
-                      className: "",
+                      className: "line_bottom",
                       name: "stock",
+                      min: 0,
+                      step: 0.01,
                       value: {},
                       onChange: "",
                       placeholder: "Stock Limit",
                     },
                     aria: {},
                   },
-                }
+                },
               ],
             },
           },
-        },
-      },
-      {
-        type: "attachAsset",
-        options: {
-          action: "attachAsset",
-          method: "post",
-          form: {
-            type: "form",
-            standard: "Standard",
-            title: "Attach an Asset",
-            warning: "Check various assets created by our ",
-            description: "lets resolve it here",
-            warningLink: {
-              text: "asset",
-              to: "/xln/create-asset",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            formData: {
-              action: "attachAsset",
-              method: "post",
-              submit: {
-                label: "Attach Asset",
-                className: "btn btn-block btn-info",
-                icon: "",
-                action: "attachAsset"
-              },
-              fields: [
-                {
-                  type: "file",
-                  attributes: {
-                    label: {
-                      error: false,
-                      inverse: false,
-                      show: false,
-                      labelText: "Attach Asset",
-                      forId: "attach-asset",
-                    },
-                    input: {
-                      type: "file",
-                      id: "attach-asset",
-                      className: "btn btn-info",
-                      name: "cover",
-                      onChange: "",
-                      placeholder: "Attach Asset",
-                    },
-                    aria: {},
-                  },
-              },
-              ],
-            },
-          },
-
-
         },
       },
       {
@@ -1650,7 +2136,7 @@ export const xln = {
                 input: {
                   type: "email",
                   id: "kyc-email",
-                  className: "",
+                  className: "line_bottom",
                   name: "email",
                   value: {},
                   onChange: "",
@@ -1668,6 +2154,11 @@ export const xln = {
           action: "buyNFT",
           method: "post",
           images: {
+            logo: {
+              url: Logo,
+              width: "100px",
+              height: "auto",
+            },
             asset: {
               url: DownloadWhitepaper,
               width: "500px",
@@ -2112,7 +2603,7 @@ export const xln = {
                 input: {
                   type: "email",
                   id: "kyc-email",
-                  className: "",
+                  className: "line_bottom",
                   name: "email",
                   value: {},
                   onChange: "",
@@ -2160,7 +2651,7 @@ export const xln = {
                 input: {
                   type: "email",
                   id: "kyc-email",
-                  className: "",
+                  className: "line_bottom",
                   name: "email",
                   value: {},
                   onChange: "",
@@ -2205,7 +2696,7 @@ export const xln = {
                       input: {
                         type: "email",
                         id: "kyc-email",
-                        className: "",
+                        className: "line_bottom",
                         name: "email",
                         value: {},
                         onChange: "",
@@ -2380,7 +2871,7 @@ export const xln = {
             },
           ],
         },
-      }
+      },
     ],
   },
   authentication: {
@@ -2627,7 +3118,14 @@ export const wallet = {
     "walletStats",
     "walletShares",
     "walletAssets",
-    "walletShareholders"
+    "walletShareholders",
+    "walletSeed",
+    "walletSend",
+    "walletSwap",
+    "walletNinja",
+    "walletReceive",
+    "walletPermission",
+    "walletCredential"
   ],
   options: {
     type: "grid-one-center",
@@ -2647,48 +3145,90 @@ export const wallet = {
         },
         noPhoto: {
           url: NoPhoto,
-          width: '100%',
-          height: 'autp'
+          width: "100%",
+          height: "autp",
         },
         noProfile: {
           url: NoProfile,
-          width: '100%',
-          height: 'autp'
+          width: "100%",
+          height: "autp",
         },
         profileSetting: {
           url: SettingProfile,
-          width: '200px',
-          height: 'auto'
-          },
+          width: "200px",
+          height: "auto",
+        },
       },
       walletPanel: [
+        {
+          text: "",
+          url: "/xln/wallet/",
+          icon: "fas fa-home",
+          show: false,
+          external: false,
+        },
         {
           text: "",
           url: "/xln/wallet/stats",
           icon: "fas fa-chart-line",
           show: false,
-          external: false
+          external: false,
         },
         {
           text: "",
           url: "/xln/wallet/assets",
           icon: "fas fa-folder-open",
           show: false,
-          external: false
-        },
-        {
-          text: "",
-          url: "/xln/wallet/file-upload",
-          icon: "fas fa-images",
-          show: false,
-          external: false
+          external: false,
         },
         {
           text: "",
           url: "/xln/wallet/setting",
           icon: "fas fa-user-cog",
           show: false,
-          external: false
+          external: false,
+        },
+      ],
+      walletFooter: [
+        {
+          text: "",
+          className: "icon",
+          url: "/xln/wallet/seed",
+          icon: "fas fa-plus",
+          show: false,
+          external: false,
+        },
+        {
+          text: "",
+          className: "icon",
+          url: "/xln/wallet/swap",
+          icon: "fas fa-exchange",
+          show: false,
+          external: false,
+        },
+        {
+          text: "",
+          className: "icon",
+          url: "/xln/wallet/ninja",
+          icon: "fas fa-user-ninja",
+          show: false,
+          external: false,
+        },
+        {
+          text: "",
+          className: "icon",
+          url: "/xln/wallet/send",
+          icon: "fas fa-arrow-up",
+          show: false,
+          external: false,
+        },
+        {
+          text: "",
+          className: "icon",
+          url: "/xln/wallet/receive",
+          icon: "fas fa-arrow-down",
+          show: false,
+          external: false,
         },
       ],
       newProfile: [
@@ -2697,26 +3237,26 @@ export const wallet = {
           buttonText: "Update Profile Img",
           image: {
             url: NoProfile,
-            width: '200px',
-            height: 'auto'
-            },
+            width: "200px",
+            height: "auto",
+          },
           url: "/xln/wallet/file-upload",
           icon: "",
           show: true,
-          external: false
+          external: false,
         },
         {
           label: "Add Social Media",
           buttonText: "Social Media",
           image: {
             url: SettingProfile,
-            width: '200px',
-            height: 'auto'
-            },
+            width: "200px",
+            height: "auto",
+          },
           url: "/xln/wallet/setting",
           icon: "",
           show: true,
-          external: false
+          external: false,
         },
       ],
     },
@@ -2736,7 +3276,7 @@ export const wallet = {
             shareholdersText: "Total shareholders",
             valueText: "Total value generated",
             btnLinkUrl: "/xln/buy-tokens",
-            btnLinkText: "Buy More Tokens"
+            btnLinkText: "Buy More Tokens",
           },
         },
       },
@@ -2762,6 +3302,36 @@ export const wallet = {
         type: "walletStats",
         options: {
           action: "walletStats",
+        },
+      },
+      {
+        type: "walletSeed",
+        options: {
+          action: "walletSend",
+        },
+      },
+      {
+        type: "walletSwap",
+        options: {
+          action: "walletSwap",
+        },
+      },
+      {
+        type: "walletNinja",
+        options: {
+          action: "walletNinja",
+        },
+      },
+      {
+        type: "walletReceive",
+        options: {
+          action: "walletReceive",
+        },
+      },
+      {
+        type: "walletSend",
+        options: {
+          action: "walletSend",
         },
       },
       {
@@ -2792,49 +3362,49 @@ export const wallet = {
                 action: () => {},
               },
               fields: [
-                      {
-                        type: "file",
-                        attributes: {
-                          label: {
-                            error: false,
-                            inverse: false,
-                            show: false,
-                            labelText: "Upload New Avatar",
-                            forId: "avatar",
-                          },
-                          input: {
-                            type: "file",
-                            id: "avatar",
-                            className: "btn btn-info",
-                            name: "avatar",
-                            onChange: "",
-                            placeholder: "Upload New Avatar",
-                          },
-                          aria: {},
-                        },
+                {
+                  type: "file",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Upload New Avatar",
+                      forId: "avatar",
                     },
-
-                    {
+                    input: {
                       type: "file",
-                      attributes: {
-                        label: {
-                          error: false,
-                          inverse: false,
-                          show: false,
-                          labelText: "Upload New Cover",
-                          forId: "cover",
-                        },
-                        input: {
-                          type: "file",
-                          id: "cover",
-                          className: "btn btn-info",
-                          name: "cover",
-                          onChange: "",
-                          placeholder: "Upload New Cover",
-                        },
-                        aria: {},
-                      },
+                      id: "avatar",
+                      className: "btn btn-info",
+                      name: "avatar",
+                      onChange: "",
+                      placeholder: "Upload New Avatar",
+                    },
+                    aria: {},
                   },
+                },
+
+                {
+                  type: "file",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Upload New Cover",
+                      forId: "cover",
+                    },
+                    input: {
+                      type: "file",
+                      id: "cover",
+                      className: "btn btn-info",
+                      name: "cover",
+                      onChange: "",
+                      placeholder: "Upload New Cover",
+                    },
+                    aria: {},
+                  },
+                },
               ],
             },
           },
@@ -2882,68 +3452,68 @@ export const wallet = {
                 action: () => {},
               },
               fields: [
-                      {
-                        type: "input",
-                        attributes: {
-                          label: {
-                            error: false,
-                            inverse: false,
-                            show: false,
-                            labelText: "Update First Name",
-                            forId: "firstname",
-                          },
-                          input: {
-                            type: "text",
-                            id: "firstname",
-                            className: "",
-                            name: "firstname",
-                            onChange: "",
-                            placeholder: "Update First Name",
-                          },
-                          aria: {},
-                        },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update First Name",
+                      forId: "firstname",
                     },
-                    {
-                      type: "input",
-                      attributes: {
-                        label: {
-                          error: false,
-                          inverse: false,
-                          show: false,
-                          labelText: "Update Last Name",
-                          forId: "lastname",
-                        },
-                        input: {
-                          type: "text",
-                          id: "lastname",
-                          className: "",
-                          name: "lastname",
-                          onChange: "",
-                          placeholder: "Update Last Name",
-                        },
-                        aria: {},
-                      },
+                    input: {
+                      type: "text",
+                      id: "firstname",
+                      className: "line_bottom",
+                      name: "firstname",
+                      onChange: "",
+                      placeholder: "Update First Name",
+                    },
+                    aria: {},
                   },
-                  {
-                    type: "input",
-                    attributes: {
-                      label: {
-                        error: false,
-                        inverse: false,
-                        show: false,
-                        labelText: "Update Username",
-                        forId: "username",
-                      },
-                      input: {
-                        type: "text",
-                        id: "username",
-                        className: "",
-                        name: "username",
-                        onChange: "",
-                        placeholder: "Update Username",
-                      },
-                      aria: {},
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update Last Name",
+                      forId: "lastname",
                     },
+                    input: {
+                      type: "text",
+                      id: "lastname",
+                      className: "line_bottom",
+                      name: "lastname",
+                      onChange: "",
+                      placeholder: "Update Last Name",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update Username",
+                      forId: "username",
+                    },
+                    input: {
+                      type: "text",
+                      id: "username",
+                      className: "line_bottom",
+                      name: "username",
+                      onChange: "",
+                      placeholder: "Update Username",
+                    },
+                    aria: {},
+                  },
                 },
                 {
                   type: "input",
@@ -2958,14 +3528,14 @@ export const wallet = {
                     input: {
                       type: "text",
                       id: "website",
-                      className: "",
+                      className: "line_bottom",
                       name: "website",
                       onChange: "",
                       placeholder: "Add Website Url",
                     },
                     aria: {},
                   },
-              },
+                },
                 {
                   type: "input",
                   attributes: {
@@ -2979,56 +3549,444 @@ export const wallet = {
                     input: {
                       type: "text",
                       id: "twitter",
-                      className: "",
+                      className: "line_bottom",
                       name: "twitter",
                       onChange: "",
                       placeholder: "Add Twitter Url",
                     },
                     aria: {},
                   },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Instagram",
+                      forId: "instagram",
+                    },
+                    input: {
+                      type: "text",
+                      id: "instagram",
+                      className: "line_bottom",
+                      name: "instagram",
+                      onChange: "",
+                      placeholder: "Add Instagram Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Facebook",
+                      forId: "facebook",
+                    },
+                    input: {
+                      type: "text",
+                      id: "facebook",
+                      className: "line_bottom",
+                      name: "facebook",
+                      onChange: "",
+                      placeholder: "Add Facebook Url",
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+          submit: {
+            label: "walletSignIn",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "walletPermission",
+        options: {
+          action: "wallet",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "200px",
+              height: "auto",
+            },
+          },
+          navLinks: walletNavLinks,
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Edit Permissions",
+            warning: "Update your ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "profile image",
+              to: "/xln/wallet/file-upload",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            image: null,
+            formData: {
+              action: "setPermissions",
+              method: "post",
+              submit: {
+                label: "Set Permissions",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: () => {},
               },
-              {
-                type: "input",
-                attributes: {
-                  label: {
-                    error: false,
-                    inverse: false,
-                    show: false,
-                    labelText: "Add Instagram",
-                    forId: "instagram",
+              fields: [
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update First Name",
+                      forId: "firstname",
+                    },
+                    input: {
+                      type: "text",
+                      id: "firstname",
+                      className: "line_bottom",
+                      name: "firstname",
+                      onChange: "",
+                      placeholder: "Update First Name",
+                    },
+                    aria: {},
                   },
-                  input: {
-                    type: "text",
-                    id: "instagram",
-                    className: "",
-                    name: "instagram",
-                    onChange: "",
-                    placeholder: "Add Instagram Url",
-                  },
-                  aria: {},
                 },
-            },
-              {
-                type: "input",
-                attributes: {
-                  label: {
-                    error: false,
-                    inverse: false,
-                    show: false,
-                    labelText: "Add Facebook",
-                    forId: "facebook",
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update Last Name",
+                      forId: "lastname",
+                    },
+                    input: {
+                      type: "text",
+                      id: "lastname",
+                      className: "line_bottom",
+                      name: "lastname",
+                      onChange: "",
+                      placeholder: "Update Last Name",
+                    },
+                    aria: {},
                   },
-                  input: {
-                    type: "text",
-                    id: "facebook",
-                    className: "",
-                    name: "facebook",
-                    onChange: "",
-                    placeholder: "Add Facebook Url",
-                  },
-                  aria: {},
                 },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update Username",
+                      forId: "username",
+                    },
+                    input: {
+                      type: "text",
+                      id: "username",
+                      className: "line_bottom",
+                      name: "username",
+                      onChange: "",
+                      placeholder: "Update Username",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Website",
+                      forId: "website",
+                    },
+                    input: {
+                      type: "text",
+                      id: "website",
+                      className: "line_bottom",
+                      name: "website",
+                      onChange: "",
+                      placeholder: "Add Website Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Twitter",
+                      forId: "twitter",
+                    },
+                    input: {
+                      type: "text",
+                      id: "twitter",
+                      className: "line_bottom",
+                      name: "twitter",
+                      onChange: "",
+                      placeholder: "Add Twitter Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Instagram",
+                      forId: "instagram",
+                    },
+                    input: {
+                      type: "text",
+                      id: "instagram",
+                      className: "line_bottom",
+                      name: "instagram",
+                      onChange: "",
+                      placeholder: "Add Instagram Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Facebook",
+                      forId: "facebook",
+                    },
+                    input: {
+                      type: "text",
+                      id: "facebook",
+                      className: "line_bottom",
+                      name: "facebook",
+                      onChange: "",
+                      placeholder: "Add Facebook Url",
+                    },
+                    aria: {},
+                  },
+                },
+              ],
             },
+          },
+          submit: {
+            label: "walletSignIn",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "walletCredential",
+        options: {
+          action: "wallet",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "200px",
+              height: "auto",
+            },
+          },
+          navLinks: walletNavLinks,
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Asset Credentials",
+            warning: "Update your ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "profile image",
+              to: "/xln/wallet/file-upload",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            image: null,
+            formData: {
+              action: "setCredentials",
+              method: "post",
+              submit: {
+                label: "Set Credentials",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: () => {},
+              },
+              fields: [
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update First Name",
+                      forId: "firstname",
+                    },
+                    input: {
+                      type: "text",
+                      id: "firstname",
+                      className: "line_bottom",
+                      name: "firstname",
+                      onChange: "",
+                      placeholder: "Update First Name",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update Last Name",
+                      forId: "lastname",
+                    },
+                    input: {
+                      type: "text",
+                      id: "lastname",
+                      className: "line_bottom",
+                      name: "lastname",
+                      onChange: "",
+                      placeholder: "Update Last Name",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Update Username",
+                      forId: "username",
+                    },
+                    input: {
+                      type: "text",
+                      id: "username",
+                      className: "line_bottom",
+                      name: "username",
+                      onChange: "",
+                      placeholder: "Update Username",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Website",
+                      forId: "website",
+                    },
+                    input: {
+                      type: "text",
+                      id: "website",
+                      className: "line_bottom",
+                      name: "website",
+                      onChange: "",
+                      placeholder: "Add Website Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Twitter",
+                      forId: "twitter",
+                    },
+                    input: {
+                      type: "text",
+                      id: "twitter",
+                      className: "line_bottom",
+                      name: "twitter",
+                      onChange: "",
+                      placeholder: "Add Twitter Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Instagram",
+                      forId: "instagram",
+                    },
+                    input: {
+                      type: "text",
+                      id: "instagram",
+                      className: "line_bottom",
+                      name: "instagram",
+                      onChange: "",
+                      placeholder: "Add Instagram Url",
+                    },
+                    aria: {},
+                  },
+                },
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Add Facebook",
+                      forId: "facebook",
+                    },
+                    input: {
+                      type: "text",
+                      id: "facebook",
+                      className: "line_bottom",
+                      name: "facebook",
+                      onChange: "",
+                      placeholder: "Add Facebook Url",
+                    },
+                    aria: {},
+                  },
+                },
               ],
             },
           },
@@ -3066,9 +4024,9 @@ export const wallet = {
           },
         },
       },
-    ]
-  }
-}
+    ],
+  },
+};
 
 export const whitepaper = {
   header: "Whitepaper",

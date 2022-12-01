@@ -20,13 +20,21 @@ module.exports = {
       url: `https://kovan.infura.io/v3/${ eth_id }`,
       accounts: [ keyData ]
     },
+    goerli: {
+      url: `https://goerli.infura.io/v3/${ eth_id }`,
+      accounts: [ keyData ]
+    },
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${ eth_id }`,
+      accounts: [ keyData ]
+    },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${ eth_id }`,
       accounts: [ keyData ]
     }
   },
   solidity: {
-    version: "0.8.4",
+    version: "0.8.8",
     settings: {
       optimizer: {
         enabled: true,

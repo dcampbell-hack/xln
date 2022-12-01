@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-const TruncateText = ({ id, text, charLimit, expand = true }) => {
+const TruncateText = ({ id, text = '', charLimit, expand = true }) => {
 
 const [ showText, setShowText ] = useState(false);
 

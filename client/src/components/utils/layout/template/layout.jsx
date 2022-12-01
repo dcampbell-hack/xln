@@ -27,19 +27,38 @@ import {
   MintAsset,
   SellShare,
   TxPrompt,
-} from "./blockchainStyles";
+} from "./blockchain/blockchainStyles";
 
 import {
-  Wallet,
-  WalletSignIn,
-} from './walletStyles';
+  AIArt,
+  Blog,
+  Document,
+  Domain,
+  Enterprise,
+  Image,
+  Link,
+  Live,
+  Metaverse,
+  Music,
+  RealEstate,
+  Shop,
+  Text,
+  Video,
+  Website,
+} from "./asset/assetStyles";
 
-import { 
+import { Wallet, WalletSignIn } from "./wallet/walletStyles";
+
+import {
   attachAsset,
-  getAllAssets, 
+  getAllAssets,
   getSingleAsset,
-  getUserAssets 
+  getUserAssets,
 } from "../../../../actions/asset";
+
+import {
+generateArt, opencv
+} from "../../../../actions/xln-api";
 
 import {
   buyTokens,
@@ -56,7 +75,6 @@ import {
   setShowForm,
   start,
   updateAdmin,
-  updateSupply,
   withdrawDai,
   withdrawTokens,
 } from "../../../../actions/blockchain";
@@ -87,7 +105,6 @@ const TemplateLayout = ({
   shares,
   templateData,
   updateAdmin,
-  updateSupply,
   users,
   values,
   withdrawDai,
@@ -97,7 +114,7 @@ const TemplateLayout = ({
   const params = useParams();
 
   const [showError, setShowError] = useState(false);
-  const [ selectedAsset, setSelectedAsset ] = useState({})
+  const [selectedAsset, setSelectedAsset] = useState({});
   const [actionType, setActionType] = useState("");
 
   useEffect(() => {
@@ -117,27 +134,25 @@ const TemplateLayout = ({
     }
   }, [auth?.login?.success, auth?.register?.success]);
 
-
   useEffect(() => {
-    if(users.role == "user" &&  blockchain.address ) loggedInUserAddress(blockchain.address)
-  }, [ users.role, blockchain.address ])
+    if (users.role == "user" && blockchain.address)
+      loggedInUserAddress(blockchain.address);
+  }, [users.role, blockchain.address]);
 
   useEffect(() => {
     // get all assets related to user
-    if(users.id ){
-      getUserAssets(users.id)
+    if (users.id) {
+      getUserAssets(users.id);
     }
 
-    if(assets.phase == 'middle' && assets.asset.id ){
+    if (assets.pending && assets.asset.id) {
       navigate(`../xln/attach-asset/${assets.asset.id}`, { replace: true });
     }
 
-    if(templateData.type == "showAsset"){
-      const { id } = params;
-      getSingleAsset(id)
+    if (templateData.type == "showAsset") {
+      getSingleAsset(params.id);
     }
-
-  }, [ assets.phase, users.id, assets.asset.id, templateData.type ]);
+  }, [assets.phase, users.id, assets.asset.id, templateData.type]);
 
   useEffect(() => {
     const callAction = async (e) => {
@@ -152,7 +167,7 @@ const TemplateLayout = ({
             break;
 
           case "buyTokens":
-            buyTokens();
+            buyTokens(blockchain);
             break;
 
           case "buyNFT":
@@ -214,22 +229,22 @@ const TemplateLayout = ({
 
   const templateOptions = (type, options) => {
     switch (type) {
+
+      case "aiArt":
+        return <AIArt options={options} setActionType={setActionType} />;
+
       case "addPermissions":
         return (
           <AddPermissions options={options} setActionType={setActionType} />
         );
 
-        case "attachAsset":   
-            return <CreateAsset 
-                 options={options} 
-                 setActionType={setActionType} 
-                 />;
+      case "attachAsset":
+        return <CreateAsset options={options} setActionType={setActionType} />;
 
       case "avatar":
         return (
           <AvatarProfile options={options} setActionType={setActionType} />
         );
-
 
       case "buyShare":
         return (
@@ -250,6 +265,45 @@ const TemplateLayout = ({
           />
         );
 
+      case "blog":
+        return <Blog options={options} setActionType={setActionType} />;
+
+      case "document":
+        return <Document />;
+
+      case "domain":
+        return <Domain />;
+
+      case "enterprise":
+        return <Enterprise />;
+
+      case "image":
+        return <Image options={options} setActionType={setActionType} />;
+
+      case "link":
+        return <Link options={options} setActionType={setActionType} />;
+
+      case "live":
+        return <Live options={options} setActionType={setActionType} />;
+
+      case "metaverse":
+        return <Metaverse options={options} setActionType={setActionType} />;
+
+      case "music":
+        return <Music options={options} setActionType={setActionType} />;
+
+      case "realEstate":
+        return <RealEstate options={options} setActionType={setActionType} />;
+
+      case "shop":
+        return <Shop options={options} setActionType={setActionType} />;
+
+      case "text":
+        return <Text options={options} setActionType={setActionType} />;
+
+      case "video":
+        return <Video options={options} setActionType={setActionType} />;
+
       case "codeBlock":
         return <CodeBlock options={options} setActionType={setActionType} />;
 
@@ -263,22 +317,21 @@ const TemplateLayout = ({
         return <MintTokens options={options} setActionType={setActionType} />;
 
       case "createAsset":
-      options.form.formData.fields.forEach(field => {
-        if(field.type == "dropdown"){
-          if(field.attributes.datalist.type == "category") field.attributes.datalist.schema = assets.category;
-        }
-      })
+        options.form.formData.fields.forEach((field) => {
+          if (field.type == "dropdown") {
+            if (field.attributes.datalist.type == "category")
+              field.attributes.datalist.schema = assets.category;
+          }
+        });
 
-      options.form.formData.fields.forEach(field => {
-        if(field.type == "dropdown"){
-          if(field.attributes.datalist.type == "asset-type") field.attributes.datalist.schema = assets.assetTypes;
-        }
-      })
+        options.form.formData.fields.forEach((field) => {
+          if (field.type == "dropdown") {
+            if (field.attributes.datalist.type == "asset-type")
+              field.attributes.datalist.schema = assets.assetTypes;
+          }
+        });
 
-        return <CreateAsset 
-             options={options} 
-             setActionType={setActionType} 
-             />;
+        return <CreateAsset options={options} setActionType={setActionType} />;
 
       case "showComments":
         return <ShowComments options={options} setActionType={setActionType} />;
@@ -287,16 +340,32 @@ const TemplateLayout = ({
         return <ShowReviews options={options} setActionType={setActionType} />;
 
       case "showAsset":
-        const { id } = params;
-        console.log('Show Assets -----', id)
-        //  getSingleAsset(id)
-        return <ShowAsset options={options} setActionType={setActionType} />;
+        return (
+          <ShowAsset
+            blockchain={blockchain}
+            assets={assets}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
 
       case "showMintableAssets":
-        return <ShowAssets collection={assets} options={options} setActionType={setActionType} />;
+        return (
+          <ShowAssets
+            collection={assets}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
 
       case "showPurchasableAssets":
-        return <ShowAssets collection={blockchain} options={options} setActionType={setActionType} />;
+        return (
+          <ShowAssets
+            collection={blockchain}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
 
       case "sellShare":
         return <SellShare options={options} setActionType={setActionType} />;
@@ -323,30 +392,89 @@ const TemplateLayout = ({
           />
         );
 
-        case "walletFileUpload":
-          return (
-            <Wallet
-              type={type}
-              content={content}
-              options={options}
-              setActionType={setActionType}
-              users={users}
-              blockchain={blockchain}
-            />
-          );
+      case "walletFileUpload":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
 
+      case "walletStats":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
 
-          case "walletStats":
-            return (
-              <Wallet
-                type={type}
-                content={content}
-                options={options}
-                setActionType={setActionType}
-                users={users}
-                blockchain={blockchain}
-              />
-            );
+      case "walletSeed":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletSwap":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletNinja":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletSend":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletReceive":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
 
       case "walletSetting":
         return (
@@ -360,51 +488,81 @@ const TemplateLayout = ({
           />
         );
 
-        case "walletAssets":
+        case "walletPermission":
           return (
             <Wallet
               type={type}
               content={content}
               options={options}
               setActionType={setActionType}
-              setSelectedAsset={ setSelectedAsset }
-              assets={assets}
-              shares={shares}
               users={users}
               blockchain={blockchain}
             />
           );
 
-          case "walletShares":
-            return (
-              <Wallet
-                type={type}
-                content={content}
-                options={options}
-                setActionType={setActionType}
-                assets={assets}
-                shares={shares}
-                users={users}
-                blockchain={blockchain}
-              />
-            );
 
-            case "walletShareholders":
-              return (
-                <Wallet
-                 type={type}
-                 content={content}
-                  options={options}
-                  setActionType={setActionType}
-                  assets={assets}
-                  shares={shares}
-                  users={users}
-                  blockchain={blockchain}
-                />
-              );
+        case "walletCredential":
+          return (
+            <Wallet
+              type={type}
+              content={content}
+              options={options}
+              setActionType={setActionType}
+              users={users}
+              blockchain={blockchain}
+            />
+          );
+
+      case "walletAssets":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            setSelectedAsset={setSelectedAsset}
+            assets={assets}
+            shares={shares}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletShares":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            assets={assets}
+            shares={shares}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
+
+      case "walletShareholders":
+        return (
+          <Wallet
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            assets={assets}
+            shares={shares}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
 
       case "walletSignIn":
         return <WalletSignIn options={options} setActionType={setActionType} />;
+
+        case "website":
+          return(
+            <Website />
+          )
 
       default:
         return <></>;
@@ -416,7 +574,7 @@ const TemplateLayout = ({
     errors.map((error, index) => <ErrorAlert key={index} error={error} />);
   const errorArr = [];
 
-  return <div>{templateOptions(templateData.type, templateData.options)}</div>;
+  return <>{templateOptions(templateData.type, templateData.options)}</>;
 };
 
 const mapStateToProps = (state) => {
@@ -446,7 +604,6 @@ const mapDispatchToProps = {
   setShowForm,
   start,
   updateAdmin,
-  updateSupply,
   withdrawDai,
   withdrawTokens,
 };

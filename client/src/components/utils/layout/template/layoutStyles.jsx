@@ -7,8 +7,8 @@ import { DangerL, LinkL, PrimaryL, InfoL } from "../../buttons/links";
 import TruncateText from "../../text/truncate";
 import FormatLayout from "../index.jsx";
 import blockchainReducer from "../../../../reducers/type/blockchainReducer";
-
-
+import AllCameras from "../webcam/AllCameras";
+import { timeSince } from "../../operations/calculations";
 
 
 export const AvatarProfile = ({ options: {}, setActionType }) => {
@@ -33,10 +33,22 @@ export const FileUpload = ({ className, id, name }) => (
 );
 
 
+export const Webcam = () => {
+  return(
+    <div className="webcam-container">
+
+    </div>
+  )
+}
+
+
 export const ShowAsset = ({
+  blockchain,
+  assets: { asset },
   options: { images, title, action, description, price, dependencies, submit },
   setActionType,
 }) => {
+
   const listAvatars = () =>
     dependencies.map(({ username, avatar, width, height }, index) => (
       <Avatar
@@ -50,10 +62,10 @@ export const ShowAsset = ({
 
 
   return (
-    <div className="show-asset-container">
+    <div className="show-asset-container"> 
       <div className="show-asset-media">
         <img
-          src={images.asset.url}
+          src={`/uploads/${asset.user}/asset/${asset.cover}`}
           width={images.asset.width}
           height={images.asset.height}
         />
@@ -68,21 +80,45 @@ export const ShowAsset = ({
       </div>
       <div className="show-asset-description">
         <div className="show-asset-header">
-          <h1>{title}</h1>
-          <i>created 2 days ago</i>
+          <h1>{ asset.name }</h1>
+          <i>created { timeSince( new Date(asset.createdAt))} ago</i>
         </div>
-        <TruncateText text={description} charLimit={200} />
+        <TruncateText text={ asset?.description} charLimit={200} />
         <div className="show-asset-price-container">
           <div className="show-asset-price">
-            <h1>{price} XLN </h1>
+          <div className="shareholder-container">
+              <img src={images.logo.url} width={images.logo.width} height={images.logo.height}  />
+            </div>
+            <h1>{ asset.price} XLN </h1>
+            <div className="">
             <div className="shareholder-container">
-              20 <i className="fas fa-user"></i>
+              { asset.flow } <i className="fas fa-user"></i>
+            </div>
+            <div className="shareholder-container">
+              { [].length } <i className="fas fa-comment"></i>
+            </div>
+            <div className="shareholder-container">
+              { [].length } <i className="far fa-sticky-note"></i>
+            </div>
             </div>
           </div>
           <div className="show-asset-buttons">
-            <PrimaryB text={"Buy"} click={() => setActionType(action)} />
-            <InfoB text={"Sell"} />
+            {
+              asset.pending ?
+              <div className="interactive-asset">
+                 <PrimaryB text={"Mint NFT"} click={() => setActionType('mintNFT')} />
+                  
+              </div>
+              :
+            <div className="interactive-asset">  
+                <PrimaryB text={"Buy"} click={() => setActionType(action)} />
+                <InfoB text={"Sell"} />
+            </div>
+}
           </div>
+          <div className="show-asset-info">
+             { blockchain.isError ? <p> An error occured: {  blockchain.error?.err?.message.split('(')[0] } </p> :  <p> Mint new asset</p>  }
+        </div>
         </div>
       </div>
     </div>
@@ -91,7 +127,7 @@ export const ShowAsset = ({
 
 export const ShowAssets = ({
   collection,
-  options: { type, mode, assets, searchBar, setCheckbox, checkbox },
+  options: { type, mode, assets, searchBar, images, setCheckbox, checkbox },
   setActionType,
 }) => {
   let navigate = useNavigate();

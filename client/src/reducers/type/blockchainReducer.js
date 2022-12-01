@@ -14,7 +14,8 @@ const initState = {
   balance: 0,
   address: null,
   price: 0,
-  supply: 0,
+  dai: 15,
+  supply: 215,
   deployer: null,
   showForm: false,
   token: {
@@ -61,7 +62,6 @@ export default function (state = initState, action) {
        market: { ...state.market, address: action.payload.data.marketAddress }
       };
       case LOAD_NFT:
-        console.log('LOAD NFT ----- Reducer', action.payload)
         return {
           ...state,
           loading: false,
@@ -90,16 +90,17 @@ export default function (state = initState, action) {
           address: action.payload
         };
         case UPDATE_SUPPLY:
-          console.log('Update Supply Reducer ---> ', action.payload )
+          console.log('Update Supply ---', state)
+          const dai = Number(action.payload) * Number(state.price);
           return {
             ...state,
             loading: false,
             isError: false,
-            price: action.payload,
+            dai,
+            supply: action.payload,
             showForm: false
           };
           case TOKEN_SUPPLY:
-            console.log('Update Token Supply Reducer ---> ')
             return {
               ...state,
               loading: false,
@@ -122,7 +123,7 @@ export default function (state = initState, action) {
         }
       }
     case CHAIN_ERROR:
-      console.log('Chain Error', action.payload)
+      // console.log('Chain Error', action.payload)
       return {
         ...state,
         loading: false,

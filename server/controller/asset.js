@@ -68,7 +68,7 @@ if(!category){
 // //     next(new ErrorResponse(`You must own a share of this asset to access it.`, 500) )
 // // }
 
-res.status(200).json({ success: true,  data: { asset, category } })
+res.status(200).json({ success: true,  data: asset })
    
 });
 
@@ -151,8 +151,12 @@ exports.assetCoverUpload = asyncHandler(async(req, res, next) => {
 // Check Conditionals
 await checkConditionals(next, req.params.id)
 
+
 console.log('Upload Asset ----', req.params.id)
-assetUpload(Asset, 'image', 'asset', req, res, next);
+await assetUpload(Asset, 'image', 'asset', req, res, next);
+
+await Asset.findByIdAndUpdate( req.params.id, { pending: false } )
+
 })
 
 //@desc Get assets within radius 

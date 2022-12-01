@@ -132,7 +132,7 @@ flex-wrap: wrap;
 .permission-label-container{
     background-color: #fff;
     border-radius: 50%;
-    padding: 3px;
+    padding: 1px;
     display: grid;
     place-items: center;
 }
@@ -143,6 +143,11 @@ flex-wrap: wrap;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
+}
+
+.wallet-content .permission-label-container{
+    width: 300px;
+    height: 300px;
 }
 
 .permission-checkbox input {
@@ -221,6 +226,24 @@ flex-wrap: wrap;
     z-index: 1;
     bottom: 0;
     right: 0;
+}
+
+.domain-text-num-container{
+    width: max-content;
+    padding: 1em 1em 1em;
+}
+
+.domain-text-num-container input{
+  width: 300px;
+  height: 50px;
+  padding: 0 20px;
+}
+
+.domain-text-num-container button{
+    width: 100px;
+    height: 55px;
+    padding: 0 20px;
+    margin: 0 5px;
 }
 
 

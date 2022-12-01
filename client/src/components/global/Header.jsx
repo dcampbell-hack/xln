@@ -45,7 +45,7 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
               </div>
               </Link>
 
-              { user.isAuthenticated && <div className="header-address">
+              { blockchain.address && <div className="header-address">
              <TruncateText text={blockchain?.address || ''} charLimit={10} expand={false} />
             </div> }
    

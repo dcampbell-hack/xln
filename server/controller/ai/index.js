@@ -3,10 +3,59 @@ const ErrorResponse = require('../../utils/errorResponse');
 
 // Middleware
 const asyncHandler = require('../../middleware/async');
+const PythonShell = require('python-shell');
 
-// Machine Learning
-// const brain = require('brain.js');
-// const network = new brain.NeuralNetwork();
+//@desc get all assets
+//route GET /api/v1/assets
+//@access PRIVATE
+exports.hands = asyncHandler(async (req, res, next) => {
+
+        var options = {
+          args:
+          [
+            req.query.funds, // starting funds
+            req.query.size, // (initial) wager size
+            req.query.count, // wager count — number of wagers per sim
+            req.query.sims // number of simulations
+          ]
+        }
+
+    PythonShell.run('../../../../api/index.py', options, function (err, data) {
+        if (err) res.send(err);
+        res.send(data.toString())
+      });
+
+      res.status(200).json({  content: "Hands"})
+
+});
+
+
+//@desc create single asset
+//route POST /api/v1/assets
+//@access PRIVATE
+exports.pipes = asyncHandler(async (req, res, next) => {
+    //Add User to body 
+    req.body.user = req.user.id;
+ 
+    console.log('Create Asset Body ----> ', req.body )
+ 
+    //If user is not admin they can only add one Asset
+    if(req.user.role === 'system'){
+        return next(new ErrorResponse(`System users are not allowed to publish assets`, 400))
+    }
+ 
+   res.status(200).json({ success: true, content: " Pipe " })
+ 
+ });
+//@desc generate AI Art
+//route POST /api/v1/assets/:id/ai/art
+//@access PRIVATE
+exports.generateArt = asyncHandler(async (req, res, next) => {
+    const prompt = req.body.prompt;
+  res.status(200).json({ success: true, data: prompt })
+});
+
+
 
 
 //@desc Smart Learning

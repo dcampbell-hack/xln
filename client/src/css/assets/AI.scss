@@ -1,0 +1,18 @@
+.ai-art-container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+    background-color: aqua;
+}
+
+.ai-art-form{
+    display: grid;
+    grid-template-columns: 200px;
+    grid-template-rows: 1fr;
+}
+
+.text-prompt{
+    width: 30em;
+    height: 200px;
+}
