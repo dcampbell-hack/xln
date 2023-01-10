@@ -1,4 +1,4 @@
-import {useState, useEffect } from 'react';
+import {useState, useEffect, useCallback } from 'react';
 import TruncateText from '../utils/text/truncate';
 import { Link } from 'react-router-dom';
 import { PrimaryL, LightL, LinkL } from '../utils/buttons/links';
@@ -6,9 +6,10 @@ import { useSearchParams } from "react-router-dom";
 
 // header: { logo, links: {logoLink, isAuthenticated: { XLNWallet }, crowd: { buyXLN, XLNWhitepaper } } 
 
-const Header = ({ auth, user, blockchain, xln, landing, header: {logo, links: { logoLink, isAuthenticated, crowd } },isLoggedIn }) => {
+const Header = ({ auth, users, blockchain, xln, landing, header: {logo, links: { logoLink, isAuthenticated, crowd } },isLoggedIn }) => {
    const [ profile, setProfile] = useState({ })
     let [searchParams, setSearchParams] = useSearchParams();
+    const [ menu, setMenu] = useState(false)
 
     const showHeader = () => {
         //setSearchParams("xln")
@@ -17,14 +18,14 @@ const Header = ({ auth, user, blockchain, xln, landing, header: {logo, links: { 
     }
 
 useEffect(() => {
-  if( auth.address !== "" && user.avatar !== ""){
+  if( auth.address !== "" && users.avatar !== ""){
      setProfile({
          active: true,
          address: auth.address,
          balance: auth.balance,
-         username: user.username,
-         avatar: user.avatar,
-         cover: user.cover
+         username: users.username,
+         avatar: users.avatar,
+         cover: users.cover
      })
   }
 }, [])
@@ -36,7 +37,6 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
 
     return(
         <div className="">
-            { window.location.pathname !== '/assets/create' &&
             <div className="xln-header header-padding">
                 <div className="header-profile">
                 <Link to={logoLink}>
@@ -50,9 +50,12 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
             </div> }
    
             </div>
-        
+
+            <div className="header-icon">
+              <button className="toggle-menu" onClick={() => setMenu(!menu)}><i class={ menu ?  "fa-sharp fa-solid fa-caret-down" : "fa-solid fa-bars"}></i></button>
+        { menu &&
               <div className="xln-links">
-                  { !isLoggedIn.success ?
+                  { users.isAuthenticated == false ?
                 <div className="xln-buy">
                     { mapCrowd() }
                 </div>
@@ -62,8 +65,9 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
                 </div>
                }
             </div>
-          </div>
 }
+          </div>
+          </div>
         </div>
     )
 }

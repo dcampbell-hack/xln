@@ -1,4 +1,4 @@
-import FormatLayout from "../utils/layout";
+import FormatLayout from "../layout";
 
 
 const Overview = ({ overview }) => {

@@ -1,0 +1,101 @@
+.profile-sign-in{
+    width: 100vw;
+    height: 100vh;
+    background-color: #0f6;
+    display: grid;
+    grid-template-columns: 4em auto;
+}
+
+.profile-nav{
+    display: grid;
+    justify-content: center;
+    align-content: start;
+    background-color: pink;
+}
+
+.profile-nav a{
+    text-align: center;
+}
+
+.profile-nav a:hover{
+   color: #fff;
+}
+
+.profile-view-max{
+    display: grid;
+    place-items: center;
+    padding: 1em;
+}
+
+.profile-view-panel-icon{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.profile-view-panel{
+margin: 1em 0;
+}
+
+.profile-view-panel p{
+   padding: 0;
+   margin: 0;
+}
+
+.profile-view-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-view-buttons button{
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-content{
+    height: auto;
+    background-color: yellow;
+}
+
+.profile-content .featured-content{
+    display: grid;
+    grid-template-columns: 60em 1fr;
+    background-color: #F77F00;
+}
+
+.featured-content .profile-xln-balance{
+    width: 10em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile-content .asset-items{
+  background-color: #D62828;
+}
+
+.profile-content .asset-items-poster{
+  background-color: #0cf;
+}
+
+.profile-content .asset-top-asset{
+   background-color: #ff0;
+}
+
+
+.profile-view{
+    width: 50%;
+    height: 100%;
+}
+
+.profile-xln-balance{
+    width: 50%;
+    height: 100%;
+}
+
+.search-container{
+    background-color: blue;
+
+}

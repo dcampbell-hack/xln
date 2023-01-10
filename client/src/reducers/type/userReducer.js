@@ -24,7 +24,7 @@ import {
         email: '',
         role: "",
         media: false,
-        accountCreated: null,
+        accountCreated: false,
         username: null,
         files: [],
         followers: [],

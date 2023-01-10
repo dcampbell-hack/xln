@@ -1,4 +1,4 @@
-import FormatLayout from "../utils/layout";
+import FormatLayout from "../layout";
 
 const Whitepaper = ({ whitepaper: { header, image, description, options }}) => {
     return (

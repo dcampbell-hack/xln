@@ -7,6 +7,12 @@ display: flex;
 flex-wrap: wrap;
 }
 
+.audio-file{
+    width: 100vw;
+    height: 100vh;
+    background-color: violet;
+}
+
 .profile-container{
     display: flex;
     justify-content: center;
@@ -244,6 +250,39 @@ flex-wrap: wrap;
     height: 55px;
     padding: 0 20px;
     margin: 0 5px;
+}
+
+.create-xln-asset{
+    height: auto;
+    padding: 1em;
+    background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+
+}
+
+.create-xln-item{
+    width: 230px; 
+    height: 100px;
+    border-radius: 15px;
+    margin: 1em;
+    background: blue;
+    display: grid;
+    place-content: center;
+}
+
+.create-xln-item a{
+    color: #fff;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+}
+
+.xln-item-icon i{
+    border: 1px solid #fff;
+    padding: 0.35em;
 }
 
 

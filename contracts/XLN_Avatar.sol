@@ -1,23 +1,45 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.8;
 
 contract XLNAvatar {
 
+    string id;
+    address userAddress;
+    string firstName;
+    string lastName;
+    string username;
+    string bio;
+    string email;
+    string media;
+    string role;
+    string createdAt;
+    string avatar;
+    string cover;
+    uint32 assetsOwned;
+    uint32 sharesOwned;  
+
 struct Avatar {
     string id;
-    address userId;
-    string fileType;
-    uint256 stock;
+    address userAddress;
+    string firstName;
+    string lastName;
+    string username;
+    string bio;
+    string email;
+    string media;
+    string role;
+    string createdAt;
+    string avatar;
+    string cover;
+    uint32 assetsOwned;
+    uint32 sharesOwned;   
 }
 
-Avatar[] public asset;
+Avatar[] public avatar;
 
-// calldata is a temp var that can be m 
-memory, storage 
-function newAsset(string storage _user, uint256 _stock ) public {
-    asset.push(Asset(_user, _stock ))
+constructor(){
+   userAddress = msg.sender;
 }
-
 
 }

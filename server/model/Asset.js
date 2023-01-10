@@ -47,7 +47,7 @@ const AssetSchema = new mongoose.Schema({
         type: [String],
         required: true,
         enum: [
-            'AI Art',
+            'AI',
             'Blog',
             'Document',
             'Domain',

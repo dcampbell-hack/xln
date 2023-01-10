@@ -43,7 +43,7 @@ useEffect(() => {
 })
 
 const mapPhases = () => phases.map(({ active, tokenPrice, label }) => <div className={`timer-phase-item `}>  
- <div className={ active && 'active'}>
+ <div className={ active ? 'active' : ""}>
  <h4>{label}</h4>
    <p>${tokenPrice}</p>
  </div>

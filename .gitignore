@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /config
+/api
 # /server/config/*
 /.pnp
 .pnp.js

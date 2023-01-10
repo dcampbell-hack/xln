@@ -46,7 +46,42 @@ margin: 10px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
+    align-items: start;
+}
+
+.xln-links{
+    z-index: 2;
+    right: 0;
+    position: absolute;
+    width: 150px;
+    height: auto;
+    background-color: #fff;
+    box-shadow: 0 5px 3px 0 rgba( 31, 38, 135, 0.37 );
+}
+
+
+.xln-public{
+    display: grid;
+}
+
+.xln-buy{
+    display: grid;
+}
+
+.toggle-menu{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+
+}
+
+.toggle-menu:hover{
+    background-color: #e4e4e4;
 }
 
 
@@ -55,11 +90,11 @@ margin: 10px 0;
     width: min-content;
     min-width: 50px;
     height: 10em;
-    background-color: #ccc;
     display: flex;
     flex-wrap: wrap;
     align-items: start;
 }
+
 
 
 .wallet-panel{
@@ -101,6 +136,10 @@ margin: 10px 0;
     height: 500px;
     display: grid;
     place-items: center;
+}
+
+.wallet-user-properties:nth-child(2){
+    padding: 2em 0;
 }
 
 .account-network{
@@ -149,6 +188,10 @@ margin: 10px 0;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    background: rgba( 255, 255, 255, 0.6 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 6px );
+    -webkit-backdrop-filter: blur( 6px );
 }
 
 .main-wallet-btn{
@@ -158,12 +201,12 @@ margin: 10px 0;
 .wallet-nav a{
     width: 100%;
     height: 20px;
-    margin: 3px 0;
     display: grid;
     place-content: center;
     cursor: pointer;
     color: #000;
     list-style: none;
+    border-radius: 0;
 }
 
 .wallet-nav a:hover{
@@ -271,13 +314,6 @@ justify-content: space-between;
     font-size: 13px;
 }
 
-.wallet-sign-in{
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-items: center;
-}
-
 .wallet-xln-logo{
     cursor: pointer;
 }
@@ -290,6 +326,8 @@ justify-content: space-between;
 }
 
 .mint-asset-image{
+    min-width: 600px;
+    max-width: 1000px;
     display: grid;
     place-content: center;
 }
@@ -302,10 +340,24 @@ justify-content: space-between;
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.mint-asset-image{
+    padding: 3em 0;
+}
+
+.buy-tokens-content h2{
+    padding: 0;
+}
+
+.buy-tokens-content {
+    padding: 1.5em;
 }
 
 .buy-xln-tokens{
-    width: 100%;
+    width: 700px;
 }
 
 .buy-xln-form{
@@ -588,7 +640,6 @@ color: #ccc;
     flex: 0.25;
     height: 100%;
     min-height: 100vh;
-    margin-right:10px ;
     background: rgba( 255, 255, 255, 0.6 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 6px );

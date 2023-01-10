@@ -61,7 +61,7 @@ export const GENERATE_ART = 'GENERATE_ART'
 
 
 // ERRORS
-export const API_ERROR = 'API_ERROR';
+export const AI_ERROR = 'AI_ERROR';
 export const ASSET_ERROR = 'ASSET_ERROR';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const USER_ERROR = 'USER_ERROR';

@@ -1,7 +1,8 @@
+import { socialLinks } from '../../data/nav';
 import { LightL } from '../utils/buttons/links';
 import { mapSocialMediaAnchorTagsIcons } from '../utils/operations/dry';
 
-const Footer = ({ footer: { logo, copyright, year }, socialLinks }) => {
+const Footer = ({ footer: { logo, copyright, year } }) => {
 
 
     return (

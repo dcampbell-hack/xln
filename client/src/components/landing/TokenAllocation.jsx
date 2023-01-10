@@ -1,5 +1,5 @@
 import { LinkL, DarkL } from '../utils/buttons/links';
-import FormatLayout from '../utils/layout';
+import FormatLayout from '../layout';
 
 const TokenAllocation = ({ tokenAllocation: { header, type, standard, options, body }}) => {
 

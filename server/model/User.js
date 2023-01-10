@@ -47,7 +47,6 @@ const UserSchema = new Schema({
         minlength: 10,
         select: false
     },
-    files: [FileSchema],
     resetPasswordToken: String,
     resetPasswordDate: Date,
     createdAt:{
@@ -62,10 +61,6 @@ const UserSchema = new Schema({
     following:  {
         type: Array,
         "default": [] 
-    },
-    comment: {
-        type: Schema.ObjectId,
-        ref: 'Comment',
     },
     avatar: {
     type: String,

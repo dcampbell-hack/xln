@@ -1,4 +1,5 @@
 import '../../css/landing/Landing.scss';
+import { socialLinks } from '../../data/nav';
 import CTA from './CTA';
 import Summary from './Summary';
 import Overview from './Overview';
@@ -11,7 +12,7 @@ import DownloadWhitepaper from './DownloadWhitepaper';
 import Timer from './Timer';
 
 
-const Landing = ({ landing: { cta, summary, overview, timer, blockchain, tokenAllocation, downloadWhitepaper, team, roadMap, contact}, socialLinks }) => {
+const Landing = ({ landing: { cta, summary, overview, timer, blockchain, tokenAllocation, downloadWhitepaper, team, roadMap, contact} }) => {
     return (
         <div className='xln-landing-page'>
             <CTA cta={cta} socialLinks={socialLinks} />

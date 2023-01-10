@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import aiReducer from './type/aiReducer';
 import authReducer from './type/authReducer';
 import userReducer from './type/userReducer';
 import blockchainReducer from './type/blockchainReducer';
@@ -11,6 +12,7 @@ import shareReducer from './type/shareReducer';
 // import walletsReducer from './walletsReducer';
 
 export default combineReducers({
+    ai: aiReducer,
     assets: assetReducer,
     auth: authReducer,
     blockchain: blockchainReducer,

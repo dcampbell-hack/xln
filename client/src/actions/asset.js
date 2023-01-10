@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { mintNFT } from './blockchain';
+
 import axios from '../axios';
 import {
     ATTACH_ASSET,
@@ -42,7 +43,7 @@ export const attachAsset = ({ id, values }) => async (dispatch) => {
 
 
 export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
-
+   console.log("create asset")
     const config = {
         Headers: {
           'Content-Type': 'multipart/form-data'
@@ -70,6 +71,7 @@ export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
         payload: res.data.data
       });
     } catch (err) {
+      console.log("Assets Error: ", err)
       dispatch({ type: ASSET_ERROR, status: 404, error: 'login' });
     }
   };

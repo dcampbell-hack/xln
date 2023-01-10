@@ -28,3 +28,15 @@ export const LinkL = ({ text, url, icon, show, external, amount, className  }) =
 export const LinkNoPaddingL = ({ text, url, icon, show, external  }) => <AnchorTag className="btn btn-link-no-padding" text={text} url={url} icon={icon} show={show} external={external} />
 
 export const VerticalButtonL = ({ text, url, icon, show, external, amount, className  }) => <AnchorTag className={"btn btn-link " + className } text={text} url={url} icon={icon} show={show} external={external} amount={amount} />
+
+
+export const AssetLink = ({ name, icon, url}) => <div className='create-xln-item'>
+<Link to={url}>
+<div className='xln-item-icon'>
+  <i className={icon}></i>
+</div>
+<div className='xln-item-name'>
+  {name }
+</div>
+</Link>
+</div>

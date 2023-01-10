@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-// import axios from "axios";
-// import { ethers } from "ethers";
-// import Web3Modal from "web3modal";
-// import Web3 from "web3";
-
 
 //UI
-import TemplateLayout from "../utils/layout/template/layout";
+import TemplateLayout from "../layout/template/layout";
 
 // CSS
 import "../../css/xln/XLN.scss";
@@ -20,12 +15,10 @@ import {
   loadNFTs,
   loggedInUserAddress,
   getContractAddress,
-  updateWalletBalance
+  updateWalletBalance,
 } from "../../actions/blockchain";
 
-import {
-  getUserShares
-} from "../../actions/share";
+import { getUserShares } from "../../actions/share";
 
 const XLN = ({
   assets,
@@ -53,18 +46,20 @@ const XLN = ({
   let navigate = useNavigate();
 
   useEffect(() => {
-    if(blockchain.nft.address){
-       loadNFTs(blockchain);
+    navigate(`${accounts.url}`, { replace: true });
+  }, [accounts.url]);
+
+  useEffect(() => {
+    if (blockchain.nft.address) {
+      loadNFTs(blockchain);
     }
 
-
-if(!blockchain.address){
-    if(users.sharesOwned > 0){
+    if (!blockchain.address) {
+      if (users.sharesOwned > 0) {
         getUserShares(users.id);
+      }
     }
-}
-
-  }, [ blockchain.nft.address ]);
+  }, [blockchain.nft.address]);
 
   useEffect(() => {
     const getAllAddresses = async () => {
@@ -75,41 +70,29 @@ if(!blockchain.address){
       getAllAddresses();
     }
 
-    if(users.accountCreated){
-      if (users.isAuthenticated == false) {
-          setAccounts({ ...accounts, url: '/login'})
-     }
-  }
+  }, []);
 
-  }, [ ]);
 
-  useEffect(() => {
-    navigate(`${accounts.url}`, { replace: true });
-  }, [accounts.url]);
 
   useEffect(() => {
     const loadProvider = async () => {
       let provider = null;
 
-      if( !blockchain.address ){
-        setAccounts({ ...accounts, url: '/xln/'})
+      if (!blockchain.address) {
+        setAccounts({ ...accounts, url: "/xln/" });
       }
 
       if (window.ethereum) {
         provider = window.ethereum;
         try {
           const eth = await provider.request({ method: "eth_requestAccounts" });
-          if(!blockchain.address) loggedInUserAddress(eth[0])
-          if (page == "walletSignIn" ) {
-            setAccounts({ ...accounts, address: eth[0], url: "/xln/wallet" });
-          }
+          if (!blockchain.address) loggedInUserAddress(eth[0]);
 
-          if( page == "wallet" && users.accountCreated){
+          if (page == "wallet" && users.accountCreated) {
             if (users.media == false) {
-                setAccounts({ ...accounts, url: '/xln/wallet/file-upload'})
-           }
-        }
-
+              setAccounts({ ...accounts, url: "/xln/wallet/file-upload" });
+            }
+          }
         } catch {
           console.error("User denied accounts access!");
           setContentText(content.errorText);
@@ -127,11 +110,11 @@ if(!blockchain.address){
     };
 
     loadProvider();
-  }, [ blockchain.address]);
+  }, [blockchain.address]);
 
   useEffect(() => {
     const getAccount = async () => {
-    const accounts = await web3Api.web3.eth.getAccounts();
+      const accounts = await web3Api.web3.eth.getAccounts();
       setAccounts(accounts[0]);
     };
 
@@ -139,11 +122,10 @@ if(!blockchain.address){
   }, [web3Api.web3]);
 
   useEffect(() => {
-    if(users.redirect){
-      setAccounts({ ...accounts, url: users.redirect })
+    if (users.redirect) {
+      setAccounts({ ...accounts, url: users.redirect });
     }
-    
-      }, [ users.redirect])
+  }, [users.redirect]);
 
   const renderTemplate = templateData.filter(
     ({ type }, index) => page == type
@@ -151,14 +133,11 @@ if(!blockchain.address){
 
   renderTemplate.options.text = contentText;
 
-
   return (
     <div className="xln-setup-container">
-    { users.loading == false && <TemplateLayout
-        content={content}
-        templateData={renderTemplate}
-      />
-    }
+      {users.loading == false && (
+        <TemplateLayout content={content} templateData={renderTemplate} />
+      )}
     </div>
   );
 };
@@ -169,7 +148,7 @@ const mapStateToProps = (state) => {
     auth: state.auth,
     blockchain: state.blockchain,
     shares: state.shares,
-    users: state.users
+    users: state.users,
   };
 };
 

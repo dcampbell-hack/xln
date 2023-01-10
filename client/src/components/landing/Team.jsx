@@ -1,4 +1,4 @@
-import EmployeePanel from "../utils/layout/EmployeePanel";
+import EmployeePanel from "../layout/EmployeePanel";
 
 const Team = ({ team: { header, members }}) => {
 

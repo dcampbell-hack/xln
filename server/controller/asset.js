@@ -82,9 +82,16 @@ exports.createAsset = asyncHandler(async (req, res, next) => {
 
    console.log('Create Asset Body ----> ', req.body )
 
+  const foundDuplicateAsset = await Asset.find({ name: req.body.name})
+  console.log("Found Duplicate: ", foundDuplicateAsset)
+
    //If user is not admin they can only add one Asset
    if(req.user.role === 'system'){
-       return next(new ErrorResponse(`System users are not allowed to publish assets`, 400))
+       return res.status(400).json({ success: false, error: "BAD REQUEST: System users are not allowed to publish assets (400)", status: 400  })
+    }
+
+   if(foundDuplicateAsset.length > 0){
+    return res.status(400).json({ success: false, error: "BAD REQUEST: Duplicate Entry (400)", status: 400  })
    }
 
 const fee = Number(req.body.price) * 0.03;
@@ -95,7 +102,7 @@ const price = Number(req.body.price) - fee;
 // assetUpload(Asset, 'image', 'asset', req, res, next);
 
    const asset = await Asset.create({ ...req.body, fee, price  });
-   res.status(200).json({ success: true, data: asset })
+   res.status(200).json({ success: true, data: { asset, created: asset.id }  })
 
 });
 
