@@ -1,6 +1,7 @@
 // Utils
 const ErrorResponse = require('../utils/errorResponse');
 const advancedResults = require('../middleware/advancedResults');
+const downloadImage = require("../middleware/downloadImage")
 
 // Api
 const { Configuration, OpenAIApi } = require("openai")
@@ -8,12 +9,12 @@ const PythonShell = require('python-shell');
 
 // Model
 const Asset = require('../model/Asset');
-const AIModel = require('../model/AIModel');
+const AIArt = require('../model/assetTypes/AIArt');
 const User = require('../model/User');
 
 // Middleware
 const asyncHandler = require('../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../middleware/checkIfValidAsset')
+const { checkConditionals, preventPublicKnowledge, preventSale } = require('../middleware/checkIfValidAsset');
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI
@@ -57,9 +58,13 @@ const response = await openai.createImage({
 
 const imageUrl = response.data.data[0].url
 
+
+const fileName = await downloadImage(next, user, imageUrl)
+
+
 const promptObj = {
    model,
-   url: imageUrl,
+   url: fileName,
    prompt,
    numOfImg: Number(numOfImg),
    size,
@@ -67,9 +72,9 @@ const promptObj = {
    user: req.body.user 
 }
 
-await Asset.findByIdAndUpdate( assetId, { cover: imageUrl })
+await Asset.findByIdAndUpdate( assetId, { cover: fileName })
 
-const ai = await AIModel.create({ ...promptObj });
+const ai = await AIArt.create({ ...promptObj });
 res.status(200).json({ success: true, data: ai })
 
   } catch(err){  
@@ -88,6 +93,19 @@ res.status(200).json({ success: true, data: ai })
    } 
 
 });
+
+
+//@desc get all assets
+//route GET /api/v1/assets
+//@access PRIVATE
+exports.getAssetArt = asyncHandler(async (req, res, next) => {
+
+const { assetId } = req.params;
+
+const asset = await AIArt.find({ asset: assetId })
+
+  res.status(200).json({ status: true, data: asset})
+})
 
 
 

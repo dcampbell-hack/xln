@@ -12,7 +12,8 @@ const {
     getAssetsInRadius,
     getUserAssets,  
     getAssets, 
-    updateAsset, 
+    updateAsset,
+    downloadYoutube 
 } = require('../controller/asset');
 
 const aiRouter = require('./ai/');
@@ -51,6 +52,10 @@ route('/:id')
 }), getAsset)
 .put(protect, authorize('publisher', 'admin'), updateAsset)
 .delete(protect, authorize('publisher', 'admin'), deleteAsset);
+
+router
+.route('/youtube')
+.post(protect, authorize('publisher', 'admin'), downloadYoutube )
 
 router
 .route('/:id/cover')

@@ -29,6 +29,12 @@ body{
     padding: 5em 4em;
 }
 
+.header-icon{
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
 .primary{
   background-color: $primary;
 }
@@ -67,6 +73,12 @@ body{
   
   .danger-text{
       color: $danger;
+  }
+
+  .nav-auth{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
 .xln-container{
@@ -120,8 +132,26 @@ body{
 
 .not-found-container{
     width: 100vw;
-    height: 700px;
+    height: 95vh;
+    display: grid;
+    place-content: center;
+    color: #e4e4e4;
+    background-color: #DC3545;
 }
+
+.not-found{
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto auto;
+    grid-template-rows:5em;
+}
+
+.not-found i{
+    width: auto;
+    height: min-content;
+    font-size: 3em;
+}
+
 
 .wallet-btn-container{
     width: 300px;

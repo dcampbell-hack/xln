@@ -1,0 +1,14 @@
+version: '3'
+services:
+    web: 
+      build: .
+      ports:
+         - "8001:8001"
+    db:
+       image: "mongodb "
+       MONGO_PW: password 
+       volumes:
+            - db-data:/foo
+
+    volumes: 
+       db-data:

@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback } from 'react';
-import TruncateText from '../utils/text/truncate';
+import { ellipsis } from '../utils/text/transform';
 import { Link } from 'react-router-dom';
 import { PrimaryL, LightL, LinkL } from '../utils/buttons/links';
 import { useSearchParams } from "react-router-dom";
@@ -10,6 +10,7 @@ const Header = ({ auth, users, blockchain, xln, landing, header: {logo, links: {
    const [ profile, setProfile] = useState({ })
     let [searchParams, setSearchParams] = useSearchParams();
     const [ menu, setMenu] = useState(false)
+    const [ notification, setNotification] = useState(false);
 
     const showHeader = () => {
         //setSearchParams("xln")
@@ -30,9 +31,9 @@ useEffect(() => {
   }
 }, [])
 
-const mapCrowd = () => crowd.map(({text, to, icon, action, show, external }) => <LinkL key={to} text={text} url={to} click={ action || {}} icon={icon} show={show} external={external} />);
+const mapCrowd = () => crowd.map(({text, to, icon, action, className, show, external }) => <LinkL key={to} text={text} url={to} click={ action || {}} className={className} icon={icon} show={show} external={external} />);
 
-const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, show, external }) => <LinkL key={to} text={text} url={to} click={ action || {}} icon={icon} show={show} external={external} />);
+const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, className, show, external }) => <LinkL key={to} text={text} url={to} click={ action || {}} className={className} icon={icon} show={show} external={external} />);
 
 
     return(
@@ -46,15 +47,21 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
               </Link>
 
               { blockchain.address && <div className="header-address">
-             <TruncateText text={blockchain?.address || ''} charLimit={10} expand={false} />
+               { ellipsis(blockchain.address) }
             </div> }
    
             </div>
 
             <div className="header-icon">
-              <button className="toggle-menu" onClick={() => setMenu(!menu)}><i class={ menu ?  "fa-sharp fa-solid fa-caret-down" : "fa-solid fa-bars"}></i></button>
-        { menu &&
-              <div className="xln-links">
+            { isLoggedIn && 
+            <>
+            <Link className="toggle-menu" to="/xln/create"><i class={"fa-solid fa-plus"}></i></Link>
+            <button className="toggle-menu" onClick={() => setNotification(!notification)}><i class={ notification ?  "fa-solid fa-bell" : "fa-regular fa-bell"}></i></button>
+            </>
+             }
+            <button className="toggle-menu" onClick={() => setMenu(!menu)}><i className={ menu ?  "fa-sharp fa-solid fa-caret-down" : "fa-solid fa-bars"}></i></button>
+          </div>
+         { menu && <div className="xln-links">
                   { users.isAuthenticated == false ?
                 <div className="xln-buy">
                     { mapCrowd() }
@@ -66,7 +73,6 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, s
                }
             </div>
 }
-          </div>
           </div>
         </div>
     )

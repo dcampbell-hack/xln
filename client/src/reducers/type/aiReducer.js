@@ -1,10 +1,13 @@
 import {
+GET_ASSET_ART,
+GET_SINGLE_AI_ART,
  GENERATE_ART,
  OPEN_CV,
  AI_ERROR
 } from'../../actions/types';
 
     const initState = {
+        art: [],
         created: "",
         model: "",
         prompt: "",
@@ -19,6 +22,11 @@ import {
     
     export default function(state = initState, action){
         switch(action.type){
+            case GET_ASSET_ART:
+                console.log("GET_ASSET_ART", action.payload )
+                return { ...state, loading: false, isError: false, art: action.payload.data }
+            case GET_SINGLE_AI_ART:
+                    return { ...state, loading: false, isError: false, assetArt: [ ...action.payload ] }
             case GENERATE_ART:
                 console.log("Generate Art")
                 return { ...state, created: action.payload.name,  loading: false, isError: false }

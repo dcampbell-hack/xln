@@ -18,18 +18,18 @@ async function main() {
   tokenSupply = 176944452;
 
 
-  const xlnMarket = await hre.ethers.getContractFactory("XLNMarket");
-  const market = await xlnMarket.deploy();
-  await market.deployed();
-  const marketAddress = market.address;
+  // const xlnMarket = await hre.ethers.getContractFactory("XLNMarket");
+  // const market = await xlnMarket.deploy();
+  // await market.deployed();
+  // const marketAddress = market.address;
 
-  console.log('Market Deployed -----', market.address)
+  // console.log('Market Deployed -----', market.address)
 
-  const xlnNFT = await hre.ethers.getContractFactory("XLNNFT");
-  const nft = await xlnNFT.deploy(marketAddress);
-  await nft.deployed();
-  const nftAddress = nft.address;
-  console.log('NFT Deployed -----', nft.address)
+  // const xlnNFT = await hre.ethers.getContractFactory("XLNNFT");
+  // const nft = await xlnNFT.deploy(marketAddress);
+  // await nft.deployed();
+
+  // console.log('NFT Deployed -----', nft.address)
 
   //Token
   const xlnToken = await hre.ethers.getContractFactory('XLNToken')
@@ -54,24 +54,28 @@ async function main() {
       maxPurchase //_maxPurchase (in DAI)
   );
 
-   await ico.deployed();
+  await ico.deployed();
   await token.updateAdmin(deployer.address);
 
-  // await token.updateAdmin(deployer.address);
+  await token.updateAdmin(deployer.address);
   tokenAdmin = await token.admin();
+  console.log("Token Admin ----", tokenAdmin )
+  console.log('ICO Deployed 1 -----', ico.address )
 
-  console.log('ICO Deployed 1 -----', ico.address, tokenAdmin )
+  console.log("Mint ----", deployer )
 
-  await token.connect(deployer).mint(deployer, 100000)
+  await token.connect(deployer).mint(deployer, 350000 )
   await token.connect(deployer).mint(ico.address, tokenSupply )
 
-  await ico.start();
 
-  const xlnSwap = await hre.ethers.getContractFactory('XLNICO')
-  const swap = await xlnSwap.deploy(token.address)
 
-  const xlnENS = await hre.ethers.getContractFactory('XLNENS')
-  const ens = await xlnSwap.deploy(xlnENS.address)
+  // await ico.start();
+
+  // const xlnSwap = await hre.ethers.getContractFactory('XLNSWAP')
+  // const swap = await xlnSwap.deploy(token.address)
+
+  // const xlnENS = await hre.ethers.getContractFactory('XLNENS')
+  // const ens = await xlnSwap.deploy(xlnENS.address)
 
 
 
@@ -79,18 +83,19 @@ async function main() {
           exports.tokenPrice = '${tokenPrice}'
           exports.deployerAddress = '${deployer.address}'
           exports.tokenAddress = '${token.address}'
-          exports.icoAddress = '${ico.address}'
-          exports.nftAddress = '${nft.address}'
-          exports.marketAddress = '${market.address}'
-          exports.swapAddress = '${swap.address}'
-          exports.swapAddress = '${swap.address}'  
-          exports.ensAddress = '${ens.address}'
+
           `;
+
+// exports.icoAddress = '${ico.address}'
+// exports.nftAddress = '${nft.address}'
+// exports.marketAddress = '${market.address}'
+// exports.swapAddress = '${swap.address}'  
+// exports.ensAddress = '${ens.address}'
 
   let data = JSON.stringify(config);
   fs.writeFileSync('server/config/config.js', JSON.parse(data))
 
-  saveFrontendFiles(ens, 'xlnENS')
+  // saveFrontendFiles(ens, 'xlnENS')
 
 };
 

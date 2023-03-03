@@ -51,7 +51,8 @@ margin: 10px 0;
 
 .xln-links{
     z-index: 2;
-    right: 0;
+    top: 4.25em;
+    right: 1em;
     position: absolute;
     width: 150px;
     height: auto;
@@ -77,6 +78,8 @@ margin: 10px 0;
     cursor: pointer;
     display: grid;
     place-items: center;
+    background-color: #e4e4e4;
+    text-decoration: none;
 
 }
 

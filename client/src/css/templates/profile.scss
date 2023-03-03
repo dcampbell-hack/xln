@@ -61,7 +61,7 @@ margin: 1em 0;
 
 .profile-content .featured-content{
     display: grid;
-    grid-template-columns: 60em 1fr;
+    grid-template-columns: 2fr 1fr;
     background-color: #F77F00;
 }
 
@@ -73,15 +73,46 @@ margin: 1em 0;
 }
 
 .profile-content .asset-items{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   background-color: #D62828;
+  padding: 0.25em 0;
+
+}
+
+.asset-items .asset{
+    width: 150px;
+    height: 150px;
+    background-color: #0f6;
 }
 
 .profile-content .asset-items-poster{
-  background-color: #0cf;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.25em 0;
+    background-color: #0cf;
+  }
+
+.asset-items-poster .asset{
+    width: 200px;
+    height: 300px;
+    background-color: #D62828;
 }
 
 .profile-content .asset-top-asset{
-   background-color: #ff0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.25em 0;
+   background-color: #F77F00
+}
+
+.asset-top-asset .asset{
+    width: 350px;
+    height: 200px;
+    background-color: #D62828;
 }
 
 

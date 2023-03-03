@@ -10,7 +10,6 @@ import XLNMarket from "../../../artifacts/contracts/XLN_Market.sol/XLNMarket.jso
 import XLNICO from '../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json';
 
 import {
-  GET_ADDRESS,
   LOGGED_IN_USER_ADDRESS,
   UPDATE_WALLET_BALANCE,
   MINT_NFT,
@@ -36,27 +35,8 @@ import {
   CHAIN_ERROR,
 } from "./types";
 
-export const getAddress = () => async (dispatch) => {
-  try {
-    const res = await axios.get("/api/v1/blochain/get-address");
 
-    dispatch({
-      type: GET_ADDRESS,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: CHAIN_ERROR,
-      payload: {
-        type: "index",
-        msg: "No address recieved",
-        err,
-      },
-    });
-  }
-};
-
-export const loggedInUserAddress = (address) => async (dispatch) => {
+export const metamaskAddress = (address) => async (dispatch) => {
   try {
     const res = await axios.post("/api/v1/blockchain/address", { address });
     dispatch({

@@ -15,18 +15,19 @@ import {
   forgotPassword,
   removeError,
   resetPassword,
-} from "../../../../actions/auth";
+} from "../../../../actions/user/auth";
 
 import {
   attachAsset,
   createAsset,
-} from '../../../../actions/asset';
+  downloadYoutube
+} from '../../../../actions/assets/asset';
 
 
 import {
 generateArt,
 opencv
-} from '../../../../actions/ai';
+} from '../../../../actions/assets/ai';
 
 import {
   buyNFT,
@@ -38,7 +39,7 @@ import {
 } from "../../../../actions/blockchain";
 
 
-import { uploadUserFile, updateUser } from "../../../../actions/user";
+import { uploadUserFile, updateUser } from "../../../../actions/user/user";
 
 import { validAuthLogin, validAuthRegister } from "../../../utils/operations/auth";
 
@@ -62,6 +63,7 @@ const Form = ({
   buyNFT,
   buyTokens,
   createAsset,
+  downloadYoutube,
   findUsername,
   forgotPassword,
   formData: { action, method, fields, submit },
@@ -81,7 +83,6 @@ const Form = ({
 }) => {
   let navigate = useNavigate();
   const params = useParams();
-
   const [showError, setShowError] = useState(false);
   //const [ showSuccess, setShowSuccess ] = useState(false)
   const errorArr = [];
@@ -234,6 +235,11 @@ const Form = ({
           resetPassword(values);
           break;
 
+        case "downloadYoutube":
+          values.id = users.id
+          downloadYoutube(values);
+          break;
+
         //Blockchain
         case "updateSupply":
           console.log("Update Supply", values)
@@ -257,7 +263,7 @@ const Form = ({
 
   return (
     <form className="xln-form" onSubmit={(e) => onSubmit(e)} method={method}>
-      <div className={action == "buyXLN" ? "buy-xln-form" : ""}>
+      <div className={action == "buyXLN" ? "buy-xln-form" : "form-default"}>
         {mapFields(fields)}
         {auth.forgotPassword?.success && (
           <div className="form-alert form-alert-success">
@@ -293,6 +299,7 @@ const mapDispatchToProps = {
   buyNFT,
   buyTokens,
   createAsset,
+  downloadYoutube,
   findUsername,
   forgotPassword,
   generateArt,

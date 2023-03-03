@@ -614,6 +614,7 @@ export const header = {
       {
         text: "Profile",
         to: "/xln/profile",
+        className: "nav-auth",
         icon: "fa-solid fa-user",
         show: true,
         external: false,
@@ -621,6 +622,7 @@ export const header = {
       {
         text: "Activity",
         to: "/xln/assets/mint",
+        className: "nav-auth",
         icon: "fa-solid fa-bolt",
         show: true,
         external: false,
@@ -628,6 +630,7 @@ export const header = {
       {
         text: "Wallet",
         to: "/xln/wallet",
+        className: "nav-auth",
         icon: "fa-solid fa-wallet",
         show: true,
         external: false,
@@ -635,6 +638,7 @@ export const header = {
       {
         text: "Buy Tokens",
         to: "/xln/buy-tokens",
+        className: "nav-auth",
         icon: "fa-solid fa-coins",
         show: true,
         external: false,
@@ -644,6 +648,7 @@ export const header = {
       {
         text: "Start",
         to: "/register",
+        className: "nav-auth",
         icon: "",
         show: true,
         external: false,
@@ -651,6 +656,7 @@ export const header = {
       {
         text: "Whitepaper",
         to: "/whitepaper",
+        className: "nav-auth",
         icon: "",
         show: true,
         external: false,
@@ -658,6 +664,7 @@ export const header = {
       {
         text: "Docs",
         to: "/docs",
+        className: "nav-auth",
         icon: "",
         show: true,
         external: false,
@@ -1430,51 +1437,40 @@ export const landing = {
   },
 };
 
-export const asset = {
+export const create = {
   infura,
   systemChecks: {
     showHeader: false,
     showFooter: false,
   },
   states: [
-    "aiArt",
-    "blog",
-    "document",
-    "domain",
-    "enterprise",
-    "image",
-    "link",
-    "live",
-    "metaverse",
-    "music",
-    "realEstate",
-    "shop",
-    "text",
-    "video",
-    "website",
-    "audio"
+    "createAiArt",
+    "createAiChat",
+    "createAudio",
+    "createBlog",
+    "createDocument",
+    "createDomain",
+    "createDownloader",
+    "createEnterprise",
+    "createImage",
+    "createLink",
+    "createLive",
+    "createMetaverse",
+    "createMusic",
+    "createPodcast",
+    "createRealEstate",
+    "createShop",
+    "createText",
+    "createVideo",
+    "createWebsite",
   ],
   options: {
     type: "grid-one-center",
     standard: "Standard",
-    title: "",
-    warning: "",
-    description: "",
-    content: {
-      defaultText: "Authenticate Wallet to access Medallion XLN features.",
-      errorText: "User denied accounts access!",
-    },
-    warningLink: {
-      text: "",
-      to: "/",
-      icon: "",
-      show: true,
-      external: false,
-    },
-    image: CTAMission,
+
     templateData: [
       {
-        type: "aiArt",
+        type: "createAiArt",
         options: {
           action: "aiArt",
           method: "post",
@@ -1608,15 +1604,194 @@ export const asset = {
         },
       },
       {
-        type: "audio",
+        type: "createAiChat",
         options: {
-          action: "audio",
+          action: "aiArt",
           method: "post",
-          text: "Link",
+          text: "aiArt",
+          submit: {
+            label: "Chat",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "aiArt",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Ask Me Anything",
+                  forId: "ama",
+                },
+                input: {
+                  type: "text",
+                  list: "image-size-list",
+                  id: "ama",
+                  className: "",
+                  placeholder: "Ask Me Anything",
+                  name: "size",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            }
+          ]
         },
       },
       {
-        type: "blog",
+        type: "createAudio",
+        options: {
+          action: "audio",
+          method: "post",
+          text: "audio",
+          submit: {
+            label: "Add Song",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "audio",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Name",
+                  forId: "name",
+                },
+                input: {
+                  type: "text",
+                  list: "name",
+                  id: "song-name",
+                  className: "",
+                  placeholder: "Song Name",
+                  name: "song-name",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Band Name",
+                  forId: "band-name",
+                },
+                input: {
+                  type: "text",
+                  list: "",
+                  id: "band-name",
+                  className: "",
+                  placeholder: "Band Name",
+                  name: "size",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "textarea",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Lyrics",
+                  forId: "lyrics",
+                },
+                area: {
+                  type: "text",
+                  id: "lyrics",
+                  className: "",
+                  name: "lyrics",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Include Lyrics",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Producer",
+                  forId: "producer",
+                },
+                input: {
+                  type: "text",
+                  id: "ama",
+                  className: "",
+                  placeholder: "Producer",
+                  name: "producer",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "file",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Attach Cover",
+                  forId: "attach-cover",
+                },
+                input: {
+                  type: "file",
+                  id: "attach-cover",
+                  className: "btn btn-info",
+                  name: "cover",
+                  onChange: "",
+                  placeholder: "Attach Cover",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "file",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Audio File",
+                  forId: "attach-audio",
+                },
+                input: {
+                  type: "file",
+                  id: "attach-audio",
+                  className: "btn btn-info",
+                  name: "audio-file",
+                  onChange: "",
+                  placeholder: "Audio File",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "createBlog",
         options: {
           action: "blog",
           text: "Blog",
@@ -1756,7 +1931,7 @@ export const asset = {
         },
       },
       {
-        type: "document",
+        type: "createDocument",
         options: {
           action: "document",
           method: "post",
@@ -1764,7 +1939,7 @@ export const asset = {
         },
       },
       {
-        type: "domain",
+        type: "createDomain",
         options: {
           action: "link",
           method: "post",
@@ -1772,7 +1947,71 @@ export const asset = {
         },
       },
       {
-        type: "enterprise",
+        type: "createDownloader",
+        options: {
+          action: "link",
+          method: "post",
+          text: "Link",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Youtube Downloader",
+            warning: "Go back to the main  ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "page",
+              to: "/xln",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            createAsset: "Click here if you ",
+            createAssetButton: {
+              text: "Buy Tokens",
+              to: "/buyTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "downloadYoutube",
+              method: "post",
+              submit: {
+                label: "Search",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "downloadYoutube",
+              },
+              fields: [
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Buy XLN",
+                      forId: "youtube-downloader",
+                    },
+                    input: {
+                      type: "text",
+                      id: "youtube-downloader",
+                      className: "",
+                      name: "url_download",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Search or paste youtube link here",
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+      {
+        type: "createEnterprise",
         options: {
           action: "enterprise",
           method: "post",
@@ -1780,7 +2019,654 @@ export const asset = {
         },
       },
       {
-        type: "image",
+        type: "createImage",
+        options: {
+          action: "image",
+          text: "Image",
+          method: "post",
+          submit: {
+            label: "Add Image",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "image",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Image",
+                  forId: "image",
+                },
+                input: {
+                  type: "text",
+                  id: "image",
+                  className: "",
+                  placeholder: "Image",
+                  name: "image",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "createLink",
+        options: {
+          action: "link",
+          method: "post",
+          text: "Link",
+          submit: {
+            label: "Add Link",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "link",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Link",
+                  forId: "link",
+                },
+                input: {
+                  type: "text",
+                  id: "link",
+                  className: "",
+                  placeholder: "Link",
+                  name: "link",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "createLive",
+        options: {
+          action: "live",
+          method: "post",
+          text: "Live",
+          submit: {
+            label: "Add Live",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "live",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Live",
+                  forId: "live",
+                },
+                input: {
+                  type: "text",
+                  id: "live",
+                  className: "",
+                  placeholder: "Live",
+                  name: "live",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "createMetaverse",
+        options: {
+          action: "metaverse",
+          method: "post",
+          text: "Metaverse",
+        },
+      },
+      {
+        type: "createMusic",
+        options: {
+          action: "music",
+          method: "post",
+          text: "Music",
+        },
+      },
+      {
+        type: "createRealEstate",
+        options: {
+          action: "realEstate",
+          method: "post",
+          text: "Real Estate",
+        },
+      },
+      {
+        type: "createPodcast",
+        options: {
+          action: "podcast",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "createShop",
+        options: {
+          action: "shop",
+          method: "post",
+          text: "Shop",
+        },
+      },
+      {
+        type: "createText",
+        options: {
+          action: "text",
+          method: "post",
+          text: "Text",
+          submit: {
+            label: "Add text",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "text",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Text",
+                  forId: "text",
+                },
+                input: {
+                  type: "text",
+                  id: "text",
+                  className: "",
+                  placeholder: "Text",
+                  name: "text",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "createVideo",
+        options: {
+          action: "video",
+          method: "post",
+          text: "Video",
+          submit: {
+            label: "Add video",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "video",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Video",
+                  forId: "video",
+                },
+                input: {
+                  type: "text",
+                  id: "video",
+                  className: "",
+                  placeholder: "Video",
+                  name: "video",
+                  value: {},
+                  onChange: "",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "createWebsite",
+        options: {
+          action: "website",
+          method: "post",
+          text: "Website",
+        },
+      },
+    ],
+  },
+};
+
+export const view = {
+  infura,
+  systemChecks: {
+    showHeader: false,
+    showFooter: false,
+  },
+  states: [
+    "viewAiArt",
+    "viewAiChat",
+    "viewAudio",
+    "viewBlog",
+    "viewDocument",
+    "viewDomain",
+    "viewDownloader",
+    "viewEnterprise",
+    "viewImage",
+    "viewLink",
+    "viewLive",
+    "viewMetaverse",
+    "viewMusic",
+    "viewPodcast",
+    "viewRealEstate",
+    "viewShop",
+    "viewText",
+    "viewVideo",
+    "viewWebsite",
+  ],
+  options: {
+    templateData: [
+      {
+        type: "viewAiArt",
+        options: {
+          action: "aiArt",
+          submit: {
+            label: "Generate Art",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "aiArt",
+          },
+          fields: [
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Select Model",
+                  forId: "model-list",
+                },
+                input: {
+                  type: "text",
+                  list: "ai-model-list",
+                  id: "model-list",
+                  className: "",
+                  placeholder: "Choose AI Model",
+                  name: "model",
+                  value: {},
+                  onChange: "",
+                },
+                datalist: {
+                  type: "model-list",
+                  id: "ai-model-list",
+                  className: "",
+                  schema: {
+                    placeholder: "Open AI",
+                    types: ["Open AI", "Stable Diffusion", "Mid Journey V4"]
+                  },
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Select Size",
+                  forId: "size-list",
+                },
+                input: {
+                  type: "text",
+                  list: "image-size-list",
+                  id: "size-list",
+                  className: "",
+                  placeholder: "Choose Image Size",
+                  name: "size",
+                  value: {},
+                  onChange: "",
+                },
+                datalist: {
+                  type: "size-list",
+                  id: "image-size-list",
+                  className: "",
+                  schema: {
+                    placeholder: "512x512",
+                    types: ["1024x1024", "512x512", "256x256"]
+                  },
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Number Of Images",
+                  forId: "num-image-list",
+                },
+                input: {
+                  type: "text",
+                  list: "number-image-list",
+                  id: "num-image-list",
+                  className: "",
+                  placeholder: "Number Of Images",
+                  name: "numOfImg",
+                  value: {},
+                  onChange: "",
+                },
+                datalist: {
+                  type: "num-image-list",
+                  id: "number-image-list",
+                  className: "",
+                  schema: {
+                    placeholder: "1",
+                    types: [1, 4, 8]
+                  },
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "textarea",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Description",
+                  forId: "ai-text-prompt",
+                },
+                area: {
+                  type: "text",
+                  id: "ai-text-prompt",
+                  className: "text-prompt",
+                  name: "prompt",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Enter Text Prompt",
+                },
+                aria: {},
+              },
+            },
+          ]
+        },
+      },
+      {
+        type: "viewAiChat",
+        options: {
+          action: "aiChat",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "viewAudio",
+        options: {
+          action: "audio",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "viewBlog",
+        options: {
+          action: "blog",
+          text: "Blog",
+          buttons: [
+            {
+              button: "add",
+              icon: "fa-solid fa-plus",
+            },
+            {
+              button: "header",
+              icon: "fa-solid fa-heading",
+            },
+            {
+              button: "body",
+              icon: "fas fa-paragraph",
+            },
+            {
+              button: "image",
+              icon: "fas fa-images",
+            },
+            {
+              button: "video",
+              icon: "fas fa-film",
+            },
+            {
+              button: "music",
+              icon: "fa-solid fa-music",
+            },
+            {
+              button: "link",
+              icon: "fas fa-link",
+            },
+            {
+              button: "web cam",
+              icon: "fas fa-camera",
+            },
+            {
+              button: "search",
+              icon: "fas fa-search",
+            },
+          ],
+          fields: [
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Select Category",
+                  forId: "category-asset",
+                },
+                input: {
+                  type: "text",
+                  list: "category-asset-list",
+                  id: "category-asset",
+                  className: "",
+                  name: "category",
+                  value: {},
+                  onChange: "",
+                },
+                datalist: {
+                  type: "category-asset",
+                  id: "category-asset-list",
+                  className: "",
+                  schema: {},
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "textarea",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Description",
+                  forId: "asset-description",
+                },
+                area: {
+                  type: "text",
+                  id: "asset-description",
+                  className: "",
+                  name: "description",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Asset Description",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Text",
+                  forId: "header",
+                },
+                input: {
+                  type: "text",
+                  id: "header",
+                  className: "header_blog",
+                  name: "title",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Enter Text",
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "file",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Attach Asset",
+                  forId: "attach-asset",
+                },
+                input: {
+                  type: "file",
+                  id: "attach-asset",
+                  className: "btn btn-info",
+                  name: "cover",
+                  onChange: "",
+                  placeholder: "Attach Asset",
+                },
+                aria: {},
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "viewDocument",
+        options: {
+          action: "viewDocument",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "viewDomain",
+        options: {
+          action: "link",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "viewDownloader",
+        options: {
+          action: "link",
+          method: "post",
+          text: "Link",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Youtube Downloader",
+            warning: "Go back to the main  ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "page",
+              to: "/xln",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            createAsset: "Click here if you ",
+            createAssetButton: {
+              text: "Buy Tokens",
+              to: "/buyTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "downloadYoutube",
+              method: "post",
+              submit: {
+                label: "Search",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "downloadYoutube",
+              },
+              fields: [
+                {
+                  type: "input",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Buy XLN",
+                      forId: "youtube-downloader",
+                    },
+                    input: {
+                      type: "text",
+                      id: "youtube-downloader",
+                      className: "",
+                      name: "url_download",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Search or paste youtube link here",
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+      {
+        type: "viewEnterprise",
+        options: {
+          action: "enterprise",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "viewImage",
         options: {
           action: "image",
           text: "Image",
@@ -1835,7 +2721,7 @@ export const asset = {
         },
       },
       {
-        type: "link",
+        type: "viewLink",
         options: {
           action: "link",
           method: "post",
@@ -1843,7 +2729,7 @@ export const asset = {
         },
       },
       {
-        type: "live",
+        type: "viewLive",
         options: {
           action: "live",
           method: "post",
@@ -1851,7 +2737,7 @@ export const asset = {
         },
       },
       {
-        type: "metaverse",
+        type: "viewMetaverse",
         options: {
           action: "metaverse",
           method: "post",
@@ -1859,7 +2745,7 @@ export const asset = {
         },
       },
       {
-        type: "music",
+        type: "viewMusic",
         options: {
           action: "music",
           method: "post",
@@ -1867,7 +2753,7 @@ export const asset = {
         },
       },
       {
-        type: "realEstate",
+        type: "viewRealEstate",
         options: {
           action: "realEstate",
           method: "post",
@@ -1875,7 +2761,15 @@ export const asset = {
         },
       },
       {
-        type: "shop",
+        type: "viewPodcast",
+        options: {
+          action: "podcast",
+          method: "post",
+          text: "Link",
+        },
+      },
+      {
+        type: "viewShop",
         options: {
           action: "shop",
           method: "post",
@@ -1883,7 +2777,7 @@ export const asset = {
         },
       },
       {
-        type: "text",
+        type: "viewText",
         options: {
           action: "text",
           method: "post",
@@ -1891,7 +2785,7 @@ export const asset = {
         },
       },
       {
-        type: "video",
+        type: "viewVideo",
         options: {
           action: "video",
           method: "post",
@@ -1899,127 +2793,11 @@ export const asset = {
         },
       },
       {
-        type: "website",
+        type: "viewWebsite",
         options: {
           action: "website",
           method: "post",
           text: "Website",
-        },
-      },
-    ],
-  },
-  authentication: {
-    userChecks: [
-      {
-        id: "123qd",
-        path: ["auth"],
-        avatar: "rocket.gif",
-        to: "/",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          metamask: false,
-          coinbase: false,
-          authenticated: false,
-        },
-        error: {
-          button: {
-            link: false,
-            alert: "danger",
-            action: null,
-            label: "Connect Wallet",
-          },
-          header: "Authenticate Metamask Wallet",
-          detailed:
-            "Connect with one of our available wallet providers or create a new one.",
-        },
-      },
-
-      {
-        id: "123q9a",
-        path: ["auth"],
-        avatar: "social-media.gif",
-        to: "/xln/:username",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          count: 0,
-          data: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Go to Profile",
-          },
-          header: "Visit Your Profile",
-          detailed: "You have 10 shareholders",
-        },
-      },
-      {
-        id: "123fb",
-        path: ["auth"],
-        avatar: "money-bag.gif",
-        to: "/assets/create",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          assetCreated: true,
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Create Asset",
-          },
-          header: "Create Asset",
-          detailed: "Create your first asset",
-        },
-      },
-      {
-        id: "123fw",
-        path: ["auth"],
-        avatar: "share.gif",
-        to: "/shares/:id/buy",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          count: 0,
-          data: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Buy Share",
-          },
-          header: "Buy your first share",
-          detailed: "You have 0 shares",
-        },
-      },
-      {
-        id: "123fs",
-        path: ["auth"],
-        avatar: "target.gif",
-        to: "/register",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          isRegistered: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Register",
-          },
-          header: "Register User",
-          detailed: "Your account must be registered before further use",
         },
       },
     ],
@@ -3424,122 +4202,6 @@ export const xln = {
               action: "fetchItemsCreated",
             },
           ],
-        },
-      },
-    ],
-  },
-  authentication: {
-    userChecks: [
-      {
-        id: "123qd",
-        path: ["auth"],
-        avatar: "rocket.gif",
-        to: "/",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          metamask: false,
-          coinbase: false,
-          authenticated: false,
-        },
-        error: {
-          button: {
-            link: false,
-            alert: "danger",
-            action: null,
-            label: "Connect Wallet",
-          },
-          header: "Authenticate Metamask Wallet",
-          detailed:
-            "Connect with one of our available wallet providers or create a new one.",
-        },
-      },
-
-      {
-        id: "123q9a",
-        path: ["auth"],
-        avatar: "social-media.gif",
-        to: "/xln/:username",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          count: 0,
-          data: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Go to Profile",
-          },
-          header: "Visit Your Profile",
-          detailed: "You have 10 shareholders",
-        },
-      },
-      {
-        id: "123fb",
-        path: ["auth"],
-        avatar: "money-bag.gif",
-        to: "/assets/create",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          assetCreated: true,
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Create Asset",
-          },
-          header: "Create Asset",
-          detailed: "Create your first asset",
-        },
-      },
-      {
-        id: "123fw",
-        path: ["auth"],
-        avatar: "share.gif",
-        to: "/shares/:id/buy",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          count: 0,
-          data: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Buy Share",
-          },
-          header: "Buy your first share",
-          detailed: "You have 0 shares",
-        },
-      },
-      {
-        id: "123fs",
-        path: ["auth"],
-        avatar: "target.gif",
-        to: "/register",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          isRegistered: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Register",
-          },
-          header: "Register User",
-          detailed: "Your account must be registered before further use",
         },
       },
     ],

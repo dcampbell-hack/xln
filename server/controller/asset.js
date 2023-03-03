@@ -17,6 +17,9 @@ const assetUpload = require('../middleware/assetUpload');
 const checkCategories = require('../middleware/checkModelForDuplicate');
 const asyncHandler = require('../middleware/async');
 
+const fs = require("fs")
+const ytdl = require('ytdl-core')
+
 
 //@desc get all assets
 //route GET /api/v1/assets
@@ -34,7 +37,7 @@ exports.getUserAssets = asyncHandler(async (req, res, next) => {
     if(!userAssets){
         return res.status(500).json({ success: false, error: "The user has not created any assets"})
     }
-    console.log('User Asset ---', userAssets )
+
     res.status(200).json({ success: true, data: userAssets })
 });
 
@@ -186,3 +189,43 @@ exports.getAssetsInRadius = asyncHandler(async(req, res, next) => {
 
     res.status(200).json({ success: true, count: asset.length, data: assets })
 })
+
+
+//@desc Upload photo to asset 
+//@route PUT /api/v1/asset/:id/cover
+//@access PRIVATE 
+exports.downloadYoutube = asyncHandler(async(req, res, next) => {
+const url = req.body.url_download;
+const id = req.body.id
+const isYoutubeLink = url.includes("youtube.com/watch?v=")
+
+if(!isYoutubeLink){
+   return res.status(406).json({ success: false, message: "Paste Youtube Link"})
+}
+
+const video = `youtube_${url.split("=")[1]}.mp4`
+
+console.log("Youtube ---", )
+ ytdl(url).pipe(fs.createWriteStream(`client/uploads/${id}/video/${video}`));
+res.status(200).json({ success: true, data: video})
+
+})
+
+
+exports.youtube = asyncHandler(async(req, res, next) => {
+       try{
+          const url = req.query.url_download;
+          const videoId = await ytdl.getURLVideoID(url)
+          const metInfo = await ytdl.getInfo(url)
+
+          let data = {
+            url: "https://www.youtube.com/embed/"+videoId,
+            info: metInfo.formats
+          }
+
+          return res.send(data)
+
+       } catch(err){
+          return res.status(500)
+       }
+    })

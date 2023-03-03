@@ -29,10 +29,10 @@ export const UPDATE_SHARE = 'UPDATE_SHARE';
 export const DELETE_SHARE = 'DELETE_SHARE';
 export const SHOW_FORM = 'SHOW_FORM';
 export const USERNAME = 'USERNAME';
+export const YOUTUBE = 'YOUTUBE';
 
 // BlOCKCHAIN ACTIONS
 export const GET_CONTRACT_ADDRESS = 'GET_CONTRACT_ADDRESS';
-export const GET_ADDRESS = 'GET_ADDRESS';
 export const UPDATE_ADDRESS = 'UPDATE_ADDRESS';
 export const TOKEN_SUPPLY = 'TOKEN_SUPPLY';
 export const UPDATE_SUPPLY = 'UPDATE_SUPPLY';
@@ -54,11 +54,16 @@ export const FETCH_ITEMS_CREATED = 'FETCH_ITEMS_CREATED';
 export const LOGGED_IN_USER_ADDRESS = 'LOGGED_IN_USER_ADDRESS';
 export const LOAD_NFT = 'LOAD_NFT';
 
-
-// PYTHON
+// AI
+export const GET_ASSET_ART = 'GET_ASSET_ART';
+export const GET_SINGLE_AI_ART = 'GET_SINGLE_AI_ART';
 export const OPEN_CV = 'OPEN_CV'
 export const GENERATE_ART = 'GENERATE_ART'
 
+// AUDIO
+export const GET_ALL_AUDIO = 'GET_ALL_AUDIO'
+export const GET_SINGLE_AUDIO = 'GET_SINGLE_AUDIO'
+export const POST_AUDIO = 'POST_AUDIO'
 
 // ERRORS
 export const AI_ERROR = 'AI_ERROR';

@@ -6,13 +6,16 @@ import {
   GET_USER_ASSETS,
   CREATE_ASSET,
   UPDATE_ASSET,
+  YOUTUBE,
 } from "../../actions/types";
 
 const initState = {
+  asset: {},
   assets: [],
   created: "",
   file: null,
   phase: "start",
+  youtube: null,
   error: null,
   errors: [],
   status: null,
@@ -33,7 +36,7 @@ export default function (state = initState, action) {
     case GET_ASSET:
       return {
         ...state,
-        ...action.payload,
+        asset: { ...action.payload },
         loading: false,
         isError: false,
       };
@@ -47,7 +50,6 @@ export default function (state = initState, action) {
         isError: false,
       };
     case CREATE_ASSET:
-      console.log("Asset is created reducer", action.payload.created )
       return {
         ...state,
         ...action.payload.data.asset,
@@ -57,11 +59,13 @@ export default function (state = initState, action) {
       };
     case UPDATE_ASSET:
       return { ...state, loading: false, isError: false };
+      case YOUTUBE:
+        return { ...state, youtube: action.payload.data, loading: false, isError: false };
     case ASSET_ERROR:
-      console.log("ASSET_ERROR: ", JSON.stringify( action.payload ) )
       let assetErrorMsg = "Error";
        if( action.status == 500 ) assetErrorMsg = "INTERNAL SERVER ERROR" ;
        if(action.status == 400 ) assetErrorMsg = "BAD REQUEST" ;
+       if(action.status == 406 ) assetErrorMsg = "Format input as Youtube Link" ;
        if( action.payload ) assetErrorMsg = "Duplicate Asset" ;
 
        return { ...state, loading: false, isError: true, errors: [ ...state.errors, !action.payload.message ? JSON.stringify( action?.payload?.message ) :  (action.payload.error ? action?.payload?.error : assetErrorMsg ) ],  status: action.payload.status, }

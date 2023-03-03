@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import "../../../../../css/assets/Blog.scss";
-import BlogInput from "./blogInput";
-import BlogOutput from "./blogOutput";
+import CreateBlog from "./createBlog";
+import ViewBlog from "./viewBlog";
 
 export const Blog = ({ options, setActionType }) => {
   const [plus, setPlus] = useState({});
@@ -56,12 +56,12 @@ export const Blog = ({ options, setActionType }) => {
     <>
       <div className="blog-display-entries">
         {content.map(({ type, content }, index) => (
-          <BlogOutput key={index} type={type} content={content} />
+          <ViewBlog key={index} type={type} content={content} />
         ))}
       </div>
 
       <div className="blog-show-content">
-        <BlogInput type={select} attribute={attribute} />
+        <CreateBlog type={select} attribute={attribute} />
       </div>
 
       <div className="blog-container">

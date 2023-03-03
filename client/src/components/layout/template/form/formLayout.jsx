@@ -19,8 +19,6 @@ const FormLayout = ({
      } 
         }) => {
     const [values, setValues] = useState({ errors: []});
-
-    console.log('Form-Layout', formData.action)
     
     return(
         <div className={`util-form-layout`} style={ formData.action !== "updateSupply" ? { height: 'auto'} : { height: 'auto' }}>

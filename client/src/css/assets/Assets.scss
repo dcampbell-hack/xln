@@ -7,6 +7,31 @@ display: flex;
 flex-wrap: wrap;
 }
 
+.asset-form-container{
+    width: 100vw;
+    height: 100vh;
+    padding: 5em 0;
+    overflow-y: auto;
+    display: grid;
+    place-content: center;
+    background: linear-gradient(90deg, #D62828 18%, #F77F00 53%, #FCBF49 86%);
+}
+
+.asset-form{
+    width: 400px;
+    padding: 0.5em 2rem;
+    border-radius: 0.5rem;
+    display: grid;
+    grid-template-columns: 200px;
+    grid-template-rows: 1fr;
+    background: rgba( 255, 255, 255, 0.6 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 6px );
+    -webkit-backdrop-filter: blur( 6px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+
 .audio-file{
     width: 100vw;
     height: 100vh;
@@ -80,6 +105,7 @@ flex-wrap: wrap;
 
 .asset-item{
     width: 400px;
+    height: 250px;
     font-size: 13px;
     opacity: 0.8;
     cursor: pointer;
@@ -88,9 +114,9 @@ flex-wrap: wrap;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: end;
-    margin: 1px 0;
+    margin: 1em 0;
     padding: 10px;
-    background-color: #e4e4e4;
+    background-color: #ccc;
     position: relative;
     z-index: 1;
 }
@@ -99,8 +125,23 @@ flex-wrap: wrap;
     opacity: 1;
 }
 
-.asset-item .asset{
+.asset{
+    background-color: #03f;
     height: 250px;
+}
+
+.asset-base{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.asset-tag{
+    width: max-content;
+    height: min-content;
+    padding: 5px;
+    color: #fff;
+    background-color: #333;
 }
 
 .checkbox{
@@ -133,6 +174,14 @@ flex-wrap: wrap;
 .checkbox-item  .permission{
     background-color: aquamarine;
     align-items: start;
+}
+
+.downloader{
+    width: 100%;
+    height: 95vh;
+    background-color: #ccc;
+    display: grid;
+
 }
 
 .permission-label-container{
@@ -255,7 +304,6 @@ flex-wrap: wrap;
 .create-xln-asset{
     height: auto;
     padding: 1em;
-    background-color: aqua;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -268,13 +316,16 @@ flex-wrap: wrap;
     height: 100px;
     border-radius: 15px;
     margin: 1em;
-    background: blue;
     display: grid;
     place-content: center;
 }
 
+.create-xln-item:hover{
+    background-color: rgba(250,250,250,0.5);
+}
+
 .create-xln-item a{
-    color: #fff;
+    color: #000;
     text-decoration: none;
     display: grid;
     grid-template-columns: 50px 1fr;

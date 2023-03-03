@@ -1,0 +1,120 @@
+.text-prompt{
+    width: 30em;
+    height: 200px;
+    padding: 10px;
+    border: 0.5px #ccc solid;
+}
+
+.ai-chat-container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto 100%;
+    background: linear-gradient(90deg, #D62828 18%, #F77F00 53%, #FCBF49 86%);
+}
+
+.chat-sidebar{
+    width: 300px;
+    padding: 0;
+    margin: 0;
+    background-color: aqua;
+}
+
+.chat-sidebar button{
+ width: 100%;
+ height: 50px;
+ border: none;
+ cursor: pointer;
+ background-color: rgba( 255, 255, 255, 0.6 );
+}
+
+.chat-input-container{
+    width: 100%;
+    min-width: 30em;
+    max-width: 90em;
+    display: grid;
+    grid-template-rows: 70vh 30vh;
+    background-color: aquamarine;
+}
+
+.chat-party-user{
+    display: grid;
+    place-content: center;
+    padding: 10px;
+    background-color: #3f3;
+}
+
+.chat-party-cpu{
+    display: grid;
+    place-content: center;
+    padding: 10px;
+    background-color: #F77F00;
+}
+
+.chat-output{
+    background-color: #D62828;
+}
+
+.chat-input{
+    background-color: #FCBF49;
+    display: grid;
+    place-items: center;
+}
+
+
+.podcast-container{
+    display: grid;
+    grid-template-rows: 100px auto;
+    background-color: aquamarine;
+}
+
+.podcast-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FCBF49;
+}
+
+.podcast-header .session{
+    display: flex;
+}
+
+.podcast-header .buttons{
+    display: flex;
+}
+
+
+.podcast-list-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #D62828;
+}
+
+.podcast-item{
+    width: 400px;
+    height: 300px;
+    margin: 10px 0;
+    background-color: #ccc;
+}
+
+.podcast-cover{
+    border-radius: 10px;
+    height: 250px;
+    display: grid;
+    place-content: center;
+    background-color: #333;
+}
+
+.podcast-base{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #3f3;
+}
+
+.podcast-base h4{
+    width: auto;
+    height: 50px;
+}

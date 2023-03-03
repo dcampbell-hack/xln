@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.8;
+pragma solidity ^0.8.0;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
@@ -20,6 +20,10 @@ contract XLNToken is ERC20 {
         maxTotalSupply = _maxTotalSupply;
     }
 
+    function supportsInterface(bytes4 interfaceID) public view returns (bool) {
+        return interfaceID == 0x01ffc9a7;
+    }
+
     function updateAdmin (address newAdmin) external {
         require(msg.sender == admin, 'only admin');
         admin = newAdmin;
@@ -33,7 +37,6 @@ contract XLNToken is ERC20 {
             'above maxTotalSupply limit'
         );
 
-        console.log('Minting ', amount, ' new tokens for account', account);
         _mint(account, amount);
     }
 }

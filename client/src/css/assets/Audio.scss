@@ -1,0 +1,90 @@
+.audio_player {
+    display: grid;
+    width: 80vw;
+    min-width: 1000px;
+    grid-template-columns: 550px auto;
+    background-color: #28a745;
+  }
+
+  .album_display{
+     display: grid;
+  }
+  
+  .controls {
+    width: 100%;
+    height: 300px;
+
+  }
+
+  .track_slider{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .slide_container{
+    width: 80%;
+  }
+
+  .slide_container input{
+    width: 100%;
+  }
+
+  .control_buttons{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .content-container{
+    display: grid;
+    place-content: center;
+    grid-template-rows: 3em 2em 2em;
+  }
+
+  .playlist ul{
+    margin: 0;
+    padding: 0;
+  }
+
+  .playlist ul li{
+    width: 96%;
+    height: 60px;
+    margin: 1px 0;
+    padding: 0 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .playlist ul li:hover{
+    background-color: #ccc;
+  }
+
+  .ctrl_btn{
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+
+  .ctrl_btn button{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+  }
+
+  .main_ctrl button:nth-child(2){
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none; 
+    font-size: 18px;
+  }
+
+  .ctrl_btn button:nth-child(2):hover{
+    background-color: aqua;
+  }

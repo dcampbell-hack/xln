@@ -6,7 +6,6 @@ import { ErrorAlert } from "../errors/alert";
 //Redux
 import { connect } from "react-redux";
 
-
 import {
   AvatarProfile,
   CodeBlock,
@@ -25,35 +24,57 @@ import { MintAsset } from "./blockchain/asset/mint";
 import { BuyShare } from "./blockchain/share/buy";
 import { SellShare } from "./blockchain/share/sell";
 
-import { AIArt } from './asset/ai/art'
-import { AudioTemplate } from "./asset/audio";
-import { Blog } from './asset/blog'
-import { Document } from "./asset/docs";
-import { Domain } from './asset/domain'
-import { Enterprise } from './asset/enterprise'
-import { Image } from './asset/image'
-import { Link } from './asset/link'
-import { Live } from './asset/live'
-import { Metaverse } from './asset/metaverse'
-import { Music } from './asset/audio/music'
-import { RealEstate } from './asset/real/estate'
-import { Shop } from './asset/shop'
-import { Text } from './asset/text'
-import { Video } from './asset/video'
-import { Website } from './asset/website'
+import CreateAIArt from "./asset/ai/art/createAIArt";
+import ViewAIArt from "./asset/ai/art/viewAIArt";
+import CreateAudioPlayer from "./asset/audio/createAudio";
+import ViewAudioPlayer from "./asset/audio/viewAudio";
+import CreateBlog from "./asset/blog/createBlog";
+import ViewBlog from "./asset/blog/viewBlog";
+import CreateChat from "./asset/ai/chat/createChat";
+import ViewChat from "./asset/ai/chat/viewChat";
+import CreateDocument from "./asset/docs/createDocument";
+import ViewDocument from "./asset/docs/viewDocument";
+import CreateDomain from "./asset/domain/createDomain";
+import ViewDomain from "./asset/domain/viewDomain";
+import CreateDownloader from "./asset/downloader/createDownloader";
+import ViewDownloader from "./asset/downloader/viewDownloader";
+import CreateEnterprise from "./asset/enterprise/createEnterprise";
+import ViewEnterprise from "./asset/enterprise/viewEnterprise";
+import CreateImage from "./asset/image/createImage";
+import ViewImage from "./asset/image/viewImage";
+import CreateLink from "./asset/link/createLink";
+import ViewLink from "./asset/link/viewLink";
+import CreateLive from "./asset/live/createLive";
+import ViewLive from "./asset/live/viewLive";
+import CreateMetaverse from "./asset/metaverse/createMetaverse";
+import ViewMetaverse from "./asset/metaverse/viewMetaverse";
+import CreatePodcast from "./asset/podcast/createPodcast";
+import ViewPodcast from "./asset/podcast/viewPodcast";
+import CreateRealEstate from "./asset/real/createEstate";
+import ViewRealEstate from "./asset/real/viewEstate";
+import CreateShop from "./asset/shop/createShop";
+import ViewShop from "./asset/shop/viewShop";
+import CreateText from "./asset/text/createText";
+import ViewText from "./asset/text/viewText";
+import CreateVideo from "./asset/video/createVideo";
+import ViewVideo from "./asset/video/viewVideo";
+import CreateWebsite from "./asset/website/createWebsite";
+import ViewWebsite from "./asset/website/viewWebsite";
 
 import { Wallet } from "./wallet/";
-
 import { Profile } from "./profile";
-
 
 import {
   attachAsset,
   getAllAssets,
   getSingleAsset,
   getUserAssets,
-} from "../../../actions/asset";
+} from "../../../actions/assets/asset";
 
+import { 
+ getAssetArt,
+ getSingleAIArt
+} from '../../../actions/assets/ai'
 
 import {
   buyTokens,
@@ -63,7 +84,6 @@ import {
   fetchMyNFTs,
   fetchItemsCreated,
   getListingPrice,
-  loggedInUserAddress,
   makeMarketItem,
   mint,
   mintNFT,
@@ -89,6 +109,8 @@ const TemplateLayout = ({
   fetchMarketTokens,
   fetchMyNFTs,
   fetchItemsCreated,
+  getAssetArt,
+  getSingleAIArt,
   getListingPrice,
   getSingleAsset,
   getUserAssets,
@@ -131,11 +153,6 @@ const TemplateLayout = ({
   }, [auth?.login?.success, auth?.register?.success]);
 
   useEffect(() => {
-    if (users.role == "user" && blockchain.address)
-      loggedInUserAddress(blockchain.address);
-  }, [users.role, blockchain.address]);
-
-  useEffect(() => {
     // get all assets related to user
     if (users.id) {
       getUserAssets(users.id);
@@ -145,17 +162,14 @@ const TemplateLayout = ({
       navigate(`../xln/attach-asset/${assets.asset.id}`, { replace: true });
     }
 
-    // console.log("Asset Layout Page: ", templateData )
-
-    if ( templateData.type == "aiArt" && ai.created !== "" ) {
+    if (templateData.type == "aiArt" && ai.created !== "") {
       navigate(`../xln/assets/ai/art/${assets.id}`, { replace: true });
-
     }
 
     if (templateData.type == "showAsset") {
       getSingleAsset(params.id);
     }
-  }, [assets.phase, users.id, assets.id, templateData.type, assets.created ]);
+  }, [assets.phase, users.id, assets.id, templateData.type, assets.created]);
 
   useEffect(() => {
     const callAction = async (e) => {
@@ -201,6 +215,14 @@ const TemplateLayout = ({
             getListingPrice(values);
             break;
 
+          case "getAssetArt":
+            getAssetArt(params.assetId)
+            break;
+
+          case "getSingleAIArt":
+            getSingleAIArt()
+            break;
+
           case "makeMarketItem":
             makeMarketItem(values);
             break;
@@ -232,12 +254,21 @@ const TemplateLayout = ({
 
   const templateOptions = (type, options) => {
     switch (type) {
+      case "createAiArt":
+        return <CreateAIArt options={options} setActionType={setActionType} />;
 
-      case "aiArt":
-        return <AIArt options={options} setActionType={setActionType} />;
+      case "viewAiArt":
+        return <ViewAIArt ai={ai} asset={assets.asset} options={options} setActionType={setActionType} />;
 
-      case "audio":
-          return <AudioTemplate options={options} setActionType={setActionType} />;
+      case "createAudio":
+        return (
+          <CreateAudioPlayer options={options} setActionType={setActionType} />
+        );
+
+      case "viewAudio":
+        return (
+          <ViewAudioPlayer options={options} setActionType={setActionType} />
+        );
 
       case "addPermissions":
         return (
@@ -271,71 +302,157 @@ const TemplateLayout = ({
           />
         );
 
-      case "blog":
-        return <Blog options={options} setActionType={setActionType} />;
+      case "createBlog":
+        return <CreateBlog options={options} setActionType={setActionType} />;
 
-        case "codeBlock":
-          return <CodeBlock options={options} setActionType={setActionType} />;
-  
-          case "createAsset":
-            console.log("Create Asset", options, templateData)
-            return <Profile type={type} options={options} setActionType={setActionType} />;
-    
+      case "viewBlog":
+        return <ViewBlog options={options} setActionType={setActionType} />;
 
-      case "document":
-        return <Document />;
+      case "createAiChat":
+        return <CreateChat options={options} setActionType={setActionType} />;
 
-      case "domain":
-        return <Domain />;
+      case "viewAiChat":
+        return <ViewChat options={options} setActionType={setActionType} />;
 
-      case "enterprise":
-        return <Enterprise />;
+      case "codeBlock":
+        return <CodeBlock options={options} setActionType={setActionType} />;
 
-        case "file":
-          return <FileUpload options={options} setActionType={setActionType} />;
-  
+      case "createAsset":
+        return (
+          <Profile
+            type={type}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
 
-      case "image":
-        return <Image options={options} setActionType={setActionType} />;
+      case "createDocument":
+        return <CreateDocument />;
 
-      case "link":
-        return <Link options={options} setActionType={setActionType} />;
+      case "viewDocument":
+        return <ViewDocument />;
 
-      case "live":
-        return <Live options={options} setActionType={setActionType} />;
+      case "createDomain":
+        return <CreateDomain />;
 
-      case "metaverse":
-        return <Metaverse options={options} setActionType={setActionType} />;
+      case "viewDomain":
+        return <ViewDomain />;
 
-      case "music":
-        return <Music options={options} setActionType={setActionType} />;
+      case "createDownloader":
+        return (
+          <CreateDownloader options={options} setActionType={setActionType} />
+        );
 
-        case "profile":
-          return <Profile type={type} options={options} setActionType={setActionType} />;  
+      case "viewDownloader":
+        return (
+          <ViewDownloader options={options} setActionType={setActionType} />
+        );
 
-      case "realEstate":
-        return <RealEstate options={options} setActionType={setActionType} />;
+      case "createEnterprise":
+        return <CreateEnterprise />;
 
-        case "search":
-          return (
-            <Profile
-              type={type}
-              assets={assets}
-              options={options}
-              setActionType={setActionType}
-              blockchain={blockchain}
-              setShowForm={setShowForm}
-            />
-          );
+      case "viewEnterprise":
+        return <ViewEnterprise />;
 
-      case "shop":
-        return <Shop options={options} setActionType={setActionType} />;
+      case "fileUpload":
+        return <FileUpload options={options} setActionType={setActionType} />;
 
-      case "text":
-        return <Text options={options} setActionType={setActionType} />;
+      case "createImage":
+        return <CreateImage options={options} setActionType={setActionType} />;
 
-      case "video":
-        return <Video options={options} setActionType={setActionType} />;
+      case "viewImage":
+        return <ViewImage options={options} setActionType={setActionType} />;
+
+      case "createLink":
+        return (
+          <CreateLink options={options} setActionType={setActionType} />
+        );
+
+      case "viewLink":
+        return <ViewLink options={options} setActionType={setActionType} />;
+
+      case "createLive":
+        return <CreateLive options={options} setActionType={setActionType} />;
+
+      case "viewLive":
+        return <ViewLive options={options} setActionType={setActionType} />;
+
+      case "createMetaverse":
+        return (
+          <CreateMetaverse options={options} setActionType={setActionType} />
+        );
+
+      case "viewMetaverse":
+        return (
+          <ViewMetaverse options={options} setActionType={setActionType} />
+        );
+
+      case "createMusic":
+        return <CreateMusic options={options} setActionType={setActionType} />;
+
+      case "viewMusic":
+        return <ViewMusic options={options} setActionType={setActionType} />;
+
+      case "profile":
+        return (
+          <Profile
+            type={type}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
+
+      case "createPodcast":
+        return (
+          <CreatePodcast
+            type={type}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
+
+      case "viewPodcast":
+        return (
+          <ViewPodcast
+            type={type}
+            options={options}
+            setActionType={setActionType}
+          />
+        );
+
+      case "createRealEstate":
+        return (
+          <CreateRealEstate options={options} setActionType={setActionType} />
+        );
+
+      case "viewRealEstate":
+        return (
+          <ViewRealEstate options={options} setActionType={setActionType} />
+        );
+
+      case "search":
+        return (
+          <Profile
+            type={type}
+            assets={assets}
+            options={options}
+            setActionType={setActionType}
+            blockchain={blockchain}
+            setShowForm={setShowForm}
+          />
+        );
+
+      case "createShop":
+        return <CreateShop options={options} setActionType={setActionType} />;
+
+      case "viewShop":
+        return <ViewShop options={options} setActionType={setActionType} />;
+
+      case "createText":
+        return <CreateText options={options} setActionType={setActionType} />;
+
+      case "viewText":
+        return <ViewText options={options} setActionType={setActionType} />;
 
       case "mintAsset":
         return <MintAsset options={options} setActionType={setActionType} />;
@@ -378,7 +495,7 @@ const TemplateLayout = ({
         );
 
       case "sellShare":
-        return <SellShare options={options} setActionType={setActionType} />;
+        return <SellShare options={options} se90ptActionType={setActionType} />;
 
       case "txPrompt":
         return <TxPrompt options={options} setActionType={setActionType} />;
@@ -387,6 +504,12 @@ const TemplateLayout = ({
         return (
           <TestFuncsTemplate options={options} setActionType={setActionType} />
         );
+
+      case "createVideo":
+        return <CreateVideo options={options} setActionType={setActionType} />;
+
+      case "viewVideo":
+        return <ViewVideo options={options} setActionType={setActionType} />;
 
       case "wallet":
         return (
@@ -498,30 +621,29 @@ const TemplateLayout = ({
           />
         );
 
-        case "walletPermission":
-          return (
-            <Profile
-              type={type}
-              content={content}
-              options={options}
-              setActionType={setActionType}
-              users={users}
-              blockchain={blockchain}
-            />
-          );
+      case "walletPermission":
+        return (
+          <Profile
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
 
-
-        case "walletCredential":
-          return (
-            <Profile
-              type={type}
-              content={content}
-              options={options}
-              setActionType={setActionType}
-              users={users}
-              blockchain={blockchain}
-            />
-          );
+      case "walletCredential":
+        return (
+          <Profile
+            type={type}
+            content={content}
+            options={options}
+            setActionType={setActionType}
+            users={users}
+            blockchain={blockchain}
+          />
+        );
 
       case "walletAssets":
         return (
@@ -566,11 +688,11 @@ const TemplateLayout = ({
           />
         );
 
+      case "createWebsite":
+        return <CreateWebsite />;
 
-        case "website":
-          return(
-            <Website />
-          )
+      case "viewWebsite":
+        return <ViewWebsite />;
 
       default:
         return <></>;
@@ -604,6 +726,8 @@ const mapDispatchToProps = {
   fetchMarketTokens,
   fetchMyNFTs,
   fetchItemsCreated,
+  getAssetArt,
+  getSingleAIArt,
   getListingPrice,
   getSingleAsset,
   getUserAssets,

@@ -36,7 +36,7 @@ contract XLNICO {
         uint _maxPurchase) {
 
         token = XLNToken(tokenAddress);
-        dai = IERC20(0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3);
+        dai = IERC20(0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3);
 
         require(_duration > 0, 'duration should be > 0');
         require(
