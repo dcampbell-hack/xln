@@ -308,7 +308,7 @@ const TemplateLayout = ({
       case "viewBlog":
         return <ViewBlog options={options} setActionType={setActionType} />;
 
-      case "createAiChat":
+      case "createChat":
         return <CreateChat options={options} setActionType={setActionType} />;
 
       case "viewAiChat":
@@ -525,7 +525,7 @@ const TemplateLayout = ({
           />
         );
 
-      case "walletFileUpload":
+      case "authFileUpload":
         return (
           <Profile
             type={type}
@@ -609,7 +609,7 @@ const TemplateLayout = ({
           />
         );
 
-      case "walletSetting":
+      case "authSetting":
         return (
           <Profile
             type={type}
@@ -621,7 +621,7 @@ const TemplateLayout = ({
           />
         );
 
-      case "walletPermission":
+      case "authPermission":
         return (
           <Profile
             type={type}
@@ -633,7 +633,7 @@ const TemplateLayout = ({
           />
         );
 
-      case "walletCredential":
+      case "authCredential":
         return (
           <Profile
             type={type}

@@ -11,10 +11,10 @@ const {
       updateUserCover 
 } = require('../controller/user');
 
-const sharesRouter = require('./share');
-const reviewsRouter = require('./review');
+const sharesRouter = require('./asset/share');
+const reviewsRouter = require('./asset/review');
 const walletRouter = require('./wallet');
-const commentsRouter = require('./comment');
+const commentsRouter = require('./asset/comment');
 
 router.use('/:userId/wallets', walletRouter)
 router.use('/:userId/shares', sharesRouter)

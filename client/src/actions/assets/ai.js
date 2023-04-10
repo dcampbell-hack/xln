@@ -15,51 +15,53 @@ import {
 } from '../types';
 
 
-export const generateArt = ({ id, assetId = "", blockchain, values: { model, prompt, size, numOfImg }}) => async dispatch => {
+export const textToImage = ({ id, assetId = "", blockchain, values }) => async dispatch => {
 
-let res
-let asset
-let assetNum = assetId;
+    try {
 
-if( assetNum.length === 0 ){
-    const promptSlug = prompt.split(" ").join("").slice(0, 47 ).replace(/[^a-zA-Z0-9 ]/g, '_').toLowerCase();
+        console.log("create asset", values)
+        const config = {
+            Headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+              const formData = new FormData();
+              if(values.file) formData.append('file', values.file)
+              if(values.file) formData.append('cover', values.cover )
+              values.files = formData;
+  
+            if(values.assetType === "AI Art" && !values["model"] && !values["prompt"] && !values["size"]) return addNewError("Fill out form")
+  
+            if( values.assetType === "AI Art" ) values.description = values.description + " : " + values.prompt
+             
+            const res = await axios.post(`/api/v1/assets/`, values , config);
+  
+        dispatch({
+          type: CREATE_ASSET,
+          payload: res.data.data
+        });
+      } catch (err) {
+        console.log("Assets Error: ", err)
+        addNewError(err)
+      }
+   
+}
+
+export const textToAiChat = () => async dispatch => {
 
     try{
-    asset = await axios.post(`/api/v1/assets/`, {
-            assetType: 'AI Art',
-            name: promptSlug,
-            category: "ai, art, art generation, text prompt, prompt, artificial intelligence",
-            description: prompt,
-            price: 50,
-            stock: 17 
-          } );
+     
 
-    if( asset.data.success ){
-        assetNum = asset.data.data.created
-    }
 
     dispatch({
         type: CREATE_ASSET,
-        payload: res.data
+        payload: 'res.data'
     })
     } catch(err){
     dispatch({ type: ASSET_ERROR, payload: err})
 }
-}
 
-try {
-    res = await axios.post(`/api/v1/assets/${assetNum}/ai/art`, { model, prompt, size, numOfImg });
-
-        dispatch({
-            type: GENERATE_ART,
-            payload: res.data
-        })
-} catch(err){
-    dispatch({ type: AI_ERROR, payload: err })
 }
-   
-}
-
 
 export const getAssetArt = (assetId) => async dispatch => {
     try {
@@ -85,9 +87,6 @@ export const getSingleAIArt = (asset) => async dispatch => {
         dispatch({ type: AI_ERROR, payload: err })
     }
 }
-
-
-
 
 export const opencv = () => async dispatch => {
     try{

@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FormWrapper } from '../../../../HOC/form-wrapper'
 import "../../../../../../css/assets/ai/aiCreate.scss";
 import Form from "../../../form/form";
 
 const CreateAIArt = ({ options }) => {
     const [values, setValues] = useState({});
-  
+
     return (
           <FormWrapper>          
-              <h4>Enter Text Prompt</h4>
+              <p>Enter Text Prompt</p>
               <Form formData={options} setValues={setValues} values={values} />
           </FormWrapper>
     );

@@ -63,12 +63,13 @@ export const GENERATE_ART = 'GENERATE_ART'
 // AUDIO
 export const GET_ALL_AUDIO = 'GET_ALL_AUDIO'
 export const GET_SINGLE_AUDIO = 'GET_SINGLE_AUDIO'
-export const POST_AUDIO = 'POST_AUDIO'
+export const CREATE_AUDIO = 'CREATE_AUDIO'
 
 // ERRORS
 export const AI_ERROR = 'AI_ERROR';
 export const ASSET_ERROR = 'ASSET_ERROR';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const AUDIO_ERROR = 'AUDIO_ERROR';
 export const USER_ERROR = 'USER_ERROR';
 export const SHARE_ERROR = 'SHARE_ERROR';
 export const CHAIN_ERROR = 'CHAIN_ERROR';

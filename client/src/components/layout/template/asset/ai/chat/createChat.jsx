@@ -1,27 +1,33 @@
-import React, { useState } from 'react'
-import Form from '../../../form/form'
+import React, { useState } from "react";
+import { Link } from 'react-router-dom'
+import Form from "../../../form/form";
 
+const UseChat = ({ options: { content: { header, description, listChatOptions } }, setActionType }) => {
+  const [values, setValues] = useState({});
+  console.log("Options --------", header, description, listChatOptions )
 
-const CreateChat = ({ options, setActionType }) => {
-
-  const [ values, setValues ] = useState({})
-  
-    return (
-      <div className="ai-chat-container">
-        <div className="chat-sidebar">
-            <button>+ New Chat</button>
-        </div>
-        <div className="chat-input-container">
-            <div className="chat-output">
-              <div className="chat-party-user"><p>Hell There, I am here to kick ass and have fun</p></div>
-              <div className="chat-party-cpu"><p>Do you mean like a Berserker Muppet?</p></div>
-            </div>
-            <div className="chat-input">
-               <Form formData={options} setValues={setValues} values={values} />
-            </div>
-        </div>
+  return (
+    <div className="chat-options">
+      <div className="chat-header">
+        <h2>{header}</h2>
+        <p>{ description }</p>
       </div>
-    );
-  };
+       <div className="chat-card-wrapper" >
+       { listChatOptions.map(({ type, image, title, description, url }) => <div className="chat-card">
+          <div className="chat-card-image">
+            <img src={image} width="100%" height="auto" />
+          </div>
+          <div className="chat-card-text">
+            <h4>{title}</h4>
+            <p>{description.slice(0, 180)}</p>
+            <Link to={url}>Start Chat</Link>
+          </div>
+        </div>)}
 
-  export default CreateChat
+      </div>
+
+    </div>
+  );
+};
+
+export default UseChat;

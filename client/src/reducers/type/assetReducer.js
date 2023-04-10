@@ -62,6 +62,7 @@ export default function (state = initState, action) {
       case YOUTUBE:
         return { ...state, youtube: action.payload.data, loading: false, isError: false };
     case ASSET_ERROR:
+      console.log(action.payload)
       let assetErrorMsg = "Error";
        if( action.status == 500 ) assetErrorMsg = "INTERNAL SERVER ERROR" ;
        if(action.status == 400 ) assetErrorMsg = "BAD REQUEST" ;

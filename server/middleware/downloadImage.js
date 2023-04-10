@@ -1,14 +1,18 @@
 const fs = require("fs");
 const randomColor = require('randomcolor');
 
-async function downloadImage(next, user, filePath){
-    const getImage = await fetch(filePath);
+async function downloadImage(next, user, file){
 
-    const blob = await getImage.blob();
+      const  getImage = await fetch(file.data);
+
+       const blob = await getImage.blob();
+        
+       const arrayBuffer = await blob.arrayBuffer();
     
-    const arrayBuffer = await blob.arrayBuffer();
+       const buffer = Buffer.from(arrayBuffer);
 
-    const buffer = Buffer.from(arrayBuffer);
+
+    console.log(file.type, buffer )
 
     const hex = randomColor()
 

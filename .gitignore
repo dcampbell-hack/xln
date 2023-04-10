@@ -4,6 +4,7 @@
 /node_modules
 /server/config/*
 /api
+/rust
 /client/uploads
 # /server/config/*
 /.pnp

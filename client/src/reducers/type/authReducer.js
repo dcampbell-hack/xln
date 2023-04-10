@@ -2,7 +2,6 @@ import {
     LOGIN,
     LOGOUT,
     REGISTER, 
-    USERNAME,
     UPDATE_PASSWORD,
     FORGOT_PASSWORD,
     RESET_PASSWORD,
@@ -10,7 +9,6 @@ import {
     ADD_NEW_ERROR,
     REMOVE_ERROR,
     CONNECTED_WALLET,
-    LOAD_USER
     } from'../../actions/types'
     
     const initState = {
@@ -36,7 +34,6 @@ import {
     export default function(state = initState, action){
         switch(action.type){
             case LOGIN:
-                console.log('Whats hatnen', action.payload )
                 return { ...state, loading: false, isError: false, login: action.payload, tokenRecieved: true, isAuthenticated: true }
             case LOGOUT:
                 return { ...state, loading: false, isError: false, user: {}, login: {}, loading: false, tokenRecieved: false, isAuthenticated: false }

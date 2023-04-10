@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const sendTokenResponse = (user, statusCode, res, next) => {
     //Create Token 
     const token = user.getSignedJwtToken();
@@ -9,6 +11,9 @@ const sendTokenResponse = (user, statusCode, res, next) => {
    if(process.env.NODE_ENV === 'production'){
        options.secure = true
    }
+
+   let data = JSON.stringify(token);
+   fs.writeFileSync('server/config/authToken.txt', JSON.parse(data))
 
    res.status(statusCode).cookie('token', token, options).json({ success: true, token })
 

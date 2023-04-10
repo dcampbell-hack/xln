@@ -56,33 +56,8 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 
   }
 
-  const socialLinks = [
-    {
-      "user": req.params.id,
-      "platform": "Website",
-      "url": req.body?.website
-    },
-    {
-      "user": req.params.id,
-      "platform": "Twitter",
-      "url": req.body?.twitter
-    },
-    {
-      "user": req.params.id,
-      "platform": "Facebook",
-      "url": req.body?.facebook
-    },
-    {
-      "user": req.params.id,
-      "platform": "Instagram",
-      "url": req.body?.instagram
-    }
-  ]
 
-
- const allLinks =req.user.socialLinks;
-
-  const user = await User.findByIdAndUpdate(req.params.id, { ...req.body,  socialLinks: [ ...allLinks, ...socialLinks ] }, {
+  const user = await User.findByIdAndUpdate(req.params.id, { ...req.body }, {
     new: true,
     runValidators: true
   });

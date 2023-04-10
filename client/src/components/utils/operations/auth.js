@@ -25,7 +25,6 @@ return {
 
 }
 
-
 const validPassword = (values) => {
 
 const { password } = values;
@@ -81,10 +80,21 @@ const { password } = values;
     };
 }
 
+const validURL = (value) => {
+    if(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(value) ){
+        return {
+            status: true,
+            error: ""
+        }
+    } else {
+        return {
+            status: false,
+            error: "Please use a valid URL with HTTP or HTTPS"
+        }
+    }
+}
 
-
-
-export function validAuthLogin(values, addNewError){
+export function validAuthLogin(values, addNewError, setStatus){
 
 if(Object.keys(values).length === 0) return;
 
@@ -92,18 +102,18 @@ const Passwordvalues = validPassword(values);
 const Emailvalues = validEmailAddress(values.email);
 
   if ( !Emailvalues.status) {
-    setShowError(true);
     addNewError(Emailvalues.error);
   }
 
   if ( !Passwordvalues.status) {
-    setShowError(true);
     addNewError(Passwordvalues.error);
   }
+
+  setStatus(false)
 }
 
-export async function validAuthRegister(values, addNewError, findUsername ){
-
+export async function validAuthRegister(values, addNewError, findUsername, setStatus ){
+    setStatus(false)
   if(Object.keys(values).length === 0) return  addNewError('Please enter valid inputs. Fields cannot be empty');
 
 
@@ -124,3 +134,48 @@ if(isUsername) return addNewError("This username already exist")
   const emailValues = validEmailAddress(values.email);
 
 }
+
+export async function validUpdateProfile(values, addNewError, findUsername, setStatus ){
+    setStatus(false)
+    if(values.firstname){
+        if( values.firstname == undefined ) return addNewError('Please enter First Name');
+        if( values.firstname.length < 2 )  return addNewError('First Name must be atleast 2 characters');    
+    }
+
+    if(values.lastname){
+        if( values.lastname == undefined ) return addNewError('Please enter Last Name');
+        if( values.lastname.length < 2 )  return addNewError('Last Name must be atleast 2 characters');    
+    }
+
+    if(values.username){
+        if( values.username == undefined ) return addNewError('Please enter Username');
+        if( values.username.length < 2 )  return addNewError('Username must be atleast 2 characters');
+        const isUsername = await findUsername(values.username);
+        if(isUsername) return addNewError("This username already exist")
+    }
+  
+    if(values.website){
+        const websiteStatus = validURL(values.website)
+        if(!websiteStatus.status) return addNewError(websiteStatus.error)
+    }
+
+    if(values.twitter){
+        const websiteStatus = validURL(values.twitter)
+        if(!websiteStatus.status) return addNewError(websiteStatus.error)
+    }
+
+    if(values.instagram){
+        const websiteStatus = validURL(values.instagram)
+        if(!websiteStatus.status) return addNewError(websiteStatus.error)
+    }
+
+    if(values.facebook){
+        const websiteStatus = validURL(values.facebook)
+        if(!websiteStatus.status) return addNewError(websiteStatus.error)
+    }
+
+
+
+  
+  
+  }

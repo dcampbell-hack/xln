@@ -1,34 +1,41 @@
 // System Images
-import Logo from "../assets/system/xln-logo.png";
-import NoPhoto from "../assets/system/no-photo.jpeg";
-import NoProfile from "../assets/system/user.png";
-import SettingProfile from "../assets/system/user-profile.png";
+import Logo from "../system/image/xln-logo.png";
+import NoPhoto from "../system/image/no-photo.jpeg";
+import NoProfile from "../system/image/user.png";
+import SettingProfile from "../system/image/user-profile.png";
 
 // Employees
-import CEO from "../assets/founders/CEO-Executive.png";
-import COO from "../assets/founders/COO-Executive.png";
-import CAO from "../assets/founders/CAO-Executive.png";
-import CTO from "../assets/founders/CTO-Executive.png";
-import CMO from "../assets/founders/CMO-Executive.png";
-//import CFO from "../assets/founders/CFO-Executive.png";
-import CBO from "../assets/founders/CBO-Executive.jpg";
-import XPO from "../assets/founders/XPO-Executive.png";
-import XRO from "../assets/founders/XRO-Executive.png";
-//import SPS from "../assets/founders/SPS-Executive.png";
+import CEO from "../system/founders/CEO-Executive.png";
+import COO from "../system/founders/COO-Executive.png";
+import CAO from "../system/founders/CAO-Executive.png";
+import CTO from "../system/founders/CTO-Executive.png";
+import CMO from "../system/founders/CMO-Executive.png";
+//import CFO from "../system/founders/CFO-Executive.png";
+import CBO from "../system/founders/CBO-Executive.jpg";
+import XPO from "../system/founders/XPO-Executive.png";
+import XRO from "../system/founders/XRO-Executive.png";
+//import SPS from "../system/founders/SPS-Executive.png";
 
 // Site Assets
-import CTAMission from "../assets/corporate-art/xln-demo.png";
-import CTAContact from "../assets/corporate-art/xln-cta.png";
-import AssetSecurity from "../assets/corporate-art/asset-security-1.png";
-import AssetSecurity2 from "../assets/corporate-art/asset-security-2.png";
-import SurfApps from "../assets/corporate-art/surfing-apps.png";
-import GuardDog from "../assets/corporate-art/decentralized_guard.png";
-import CityAds from "../assets/corporate-art/city-ads.png";
-import Stadium from "../assets/corporate-art/interactive-stadium.png";
-import PulpFiction from "../assets/corporate-art/pulp-fiction_metaverse.png";
-import DownloadWhitepaper from "../assets/corporate-art/whitepaper.jpg";
-import ChessAvatar from "../assets/corporate-art/metaverse_chess.png";
-import SecuredAsset from "../assets/corporate-art/secure_wallet.png";
+import CTAMission from "../system/art/xln-demo.png";
+import CTAContact from "../system/art/xln-cta.png";
+import AssetSecurity from "../system/art/asset-security-1.png";
+import AssetSecurity2 from "../system/art/asset-security-2.png";
+import SurfApps from "../system/art/surfing-apps.png";
+import GuardDog from "../system/art/decentralized_guard.png";
+import CityAds from "../system/art/city-ads.png";
+import Stadium from "../system/art/interactive-stadium.png";
+import PulpFiction from "../system/art/pulp-fiction_metaverse.png";
+import DownloadWhitepaper from "../system/art/whitepaper.jpg";
+import ChessAvatar from "../system/art/metaverse_chess.png";
+import SecuredAsset from "../system/art/secure_wallet.png";
+
+// System Image
+ import ChatToAI from '../system/image/chat_ai.png'
+ import ChatToHuman from '../system/image/chat_human.png'
+ import ChatToGroup from '../system/image/chat_group.png'
+ import ChatToResume from '../system/image/chat_resume.png'
+
 
 export const infura = "68eb211506c141e78162043b7b0df69a";
 const date = new Date();
@@ -694,10 +701,11 @@ export const register = {
       show: true,
       external: false,
     },
-    image: Stadium,
     formData: {
       action: "register",
       method: "post",
+      expand: true,
+      assetType: "Register User",
       submit: {
         label: "Sign Up",
         className: "btn btn-block btn-info",
@@ -719,6 +727,7 @@ export const register = {
               value: {},
               onChange: "",
               placeholder: "First Name *",
+              disabled: false,
             },
             aria: {},
           },
@@ -739,6 +748,7 @@ export const register = {
               value: {},
               onChange: "",
               placeholder: "Last Name *",
+              disabled: false,
             },
             aria: {},
           },
@@ -759,6 +769,7 @@ export const register = {
               value: {},
               onChange: "",
               placeholder: "Username *",
+              disabled: false,
             },
             aria: {},
           },
@@ -779,6 +790,7 @@ export const register = {
               value: {},
               onChange: "",
               placeholder: "Email *",
+              disabled: false,
             },
             aria: {},
           },
@@ -799,6 +811,7 @@ export const register = {
               value: {},
               onChange: "",
               placeholder: "Password *",
+              disabled: false,
             },
             aria: {},
           },
@@ -819,6 +832,7 @@ export const register = {
               value: {},
               onChange: "",
               placeholder: "Confirm Password *",
+              disabled: false,
             },
             aria: {},
           },
@@ -850,10 +864,11 @@ export const login = {
       show: true,
       external: false,
     },
-    image: CTAMission,
     formData: {
       action: "login",
       method: "post",
+      expand: true,
+      assetType: "Login User",
       submit: {
         label: "Login",
         className: "btn btn-block btn-info",
@@ -877,6 +892,7 @@ export const login = {
               value: {},
               onChange: "",
               placeholder: "Email *",
+              disabled: false,
             },
             aria: {},
           },
@@ -899,6 +915,7 @@ export const login = {
               value: {},
               onChange: "",
               placeholder: "Password *",
+              disabled: false,
             },
             aria: {},
           },
@@ -930,10 +947,11 @@ export const resetPassword = {
       show: true,
       external: false,
     },
-    image: CTAMission,
     formData: {
       action: "resetPassword",
       method: "post",
+      expand: true,
+      assetType: "Reset Password",
       submit: {
         label: "Reset Password",
         className: "btn btn-block btn-info",
@@ -957,6 +975,7 @@ export const resetPassword = {
               value: {},
               onChange: "",
               placeholder: "New Password",
+              disabled: false,
             },
             aria: {},
           },
@@ -979,6 +998,7 @@ export const resetPassword = {
               value: {},
               onChange: "",
               placeholder: "Confirm Password",
+              disabled: false,
             },
             aria: {},
           },
@@ -1010,10 +1030,11 @@ export const forgotPassword = {
       show: true,
       external: false,
     },
-    image: CTAMission,
     formData: {
       action: "forgotPassword",
       method: "post",
+      expand: true,
+      assetType: "Forgot Password",
       submit: {
         label: "Forgot Password",
         className: "btn btn-block btn-info",
@@ -1037,6 +1058,7 @@ export const forgotPassword = {
               value: {},
               onChange: "",
               placeholder: "Email *",
+              disabled: false,
             },
             aria: {},
           },
@@ -1438,14 +1460,9 @@ export const landing = {
 };
 
 export const create = {
-  infura,
-  systemChecks: {
-    showHeader: false,
-    showFooter: false,
-  },
   states: [
     "createAiArt",
-    "createAiChat",
+    "createChat",
     "createAudio",
     "createBlog",
     "createDocument",
@@ -1467,13 +1484,15 @@ export const create = {
   options: {
     type: "grid-one-center",
     standard: "Standard",
-
+    content: {},
     templateData: [
       {
         type: "createAiArt",
         options: {
-          action: "aiArt",
+          action: "createAsset",
           method: "post",
+          assetType: "AI Art",
+          toggle: true,
           text: "aiArt",
           submit: {
             label: "Generate Art",
@@ -1501,14 +1520,60 @@ export const create = {
                   name: "model",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 datalist: {
                   type: "model-list",
                   id: "ai-model-list",
                   className: "",
                   schema: {
-                    placeholder: "Open AI",
-                    types: ["Open AI", "Stable Diffusion", "Mid Journey V4"]
+                    types: [
+                      "-- Choose AI Model --",
+                      "andite/anything-v4.0",
+                      "andite/hiten-diffusion",
+                      "andite/mignon-diffusion",
+                      "andite/mikapikazo-diffusion",
+                      "andite/mashuu-diffusion",
+                      "andite/pastel-mix",
+                      "andite/piromizu-diffusion",
+                      "darkstorm2150/Protogen_Eclipse_Official_Release",
+                      "darkstorm2150/Protogen_Infinity_Official_Release",
+                      "darkstorm2150/Protogen_Nova_Official_Release",
+                      "darkstorm2150/Protogen_x3.4_Official_Release",
+                      "darkstorm2150/Protogen_x5.3_Official_Release",
+                      "darkstorm2150/Protogen_x5.8_Official_Release",
+                      "eimiss/EimisAnimeDiffusion_1.0v", 
+                      "hakurei/artstation-diffusion",
+                      "hakurei/waifu-diffusion", 
+                      "lambdalabs/dreambooth-avatar",
+                      "lambdalabs/sd-pokemon-diffusers",
+                      "lambdalabs/text-to-naruto",
+                      "Linaqruf/anything-v3.0",
+                      "nitrosocke/Arcane-Diffusion",
+                      "nitrosocke/archer-diffusion", 
+                      "nitrosocke/classic-anim-diffusion", 
+                      "nitrosocke/elden-ring-diffusion", 
+                      "nitrosocke/Ghibli-Diffusion",
+                      "nitrosocke/Nitro-Diffusion",
+                      "nitrosocke/redshift-diffusion", 
+                      "nitrosocke/spider-verse-diffusion",
+                      "prompthero/openjourney",
+                      "prompthero/openjourney-v4",
+                      "prompthero/openjourney-lora",
+                      "prompthero/funko-diffusion",
+                      "prompthero/linkedin-diffusion",
+                      "prompthero/poolsuite-diffusion",
+                      "midjourney", 
+                      "openai/dalle-2",
+                      "stabilityai/stable-diffusion-2-base", 
+                      "stabilityai/stable-diffusion-2-1",
+                      "wavymulder/Analog-Diffusion",
+                      "wavymulder/lomo-diffusion",
+                      "wavymulder/modelshoot",
+                      "wavymulder/portraitplus",
+                      "wavymulder/timeless-diffusion",
+                      "wavymulder/wavyfusion"
+                    ]
                   },
                 },
                 aria: {},
@@ -1555,6 +1620,7 @@ export const create = {
                   name: "size",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 datalist: {
                   type: "size-list",
@@ -1562,58 +1628,62 @@ export const create = {
                   className: "",
                   schema: {
                     placeholder: "512x512",
-                    types: ["1024x1024", "512x512", "256x256"]
+                    types: ["-- Choose Size --", "1024x1024", "512x512", "256x256"]
                   },
                 },
                 aria: {},
               },
-            },
-            {
-              type: "dropdown",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Number Of Images",
-                  forId: "num-image-list",
-                },
-                input: {
-                  type: "text",
-                  list: "number-image-list",
-                  id: "num-image-list",
-                  className: "",
-                  placeholder: "Number Of Images",
-                  name: "numOfImg",
-                  value: {},
-                  onChange: "",
-                },
-                datalist: {
-                  type: "num-image-list",
-                  id: "number-image-list",
-                  className: "",
-                  schema: {
-                    placeholder: "1",
-                    types: [1, 4, 8]
-                  },
-                },
-                aria: {},
-              },
-            },
+            }
           ]
         },
       },
       {
-        type: "createAiChat",
+        type: "createChat",
         options: {
-          action: "aiArt",
+          action: "aiChat",
           method: "post",
-          text: "aiArt",
+          assetType: "AI Chat",
+          toggle: true,
+          text: "aiChat",
           submit: {
             label: "Chat",
             className: "btn btn-block btn-info",
             icon: "",
             action: "aiArt",
+          },
+          content: {
+            header: "Choose Chat",
+            description: "This webpage provides information on different types of communication and interaction, including human to AI, human to human, and human to group interaction. The chat prompts covered various aspects of each interaction type, such as verbal and nonverbal communication, shared experiences, and effective communication strategies.",
+            listChatOptions: [
+              {
+                type: "HumanToAI",
+                image: ChatToAI,
+                title: "Human To AI",
+                description: "Human to AI dialog involves communication between a human and an artificial intelligence system. The conversation can take various forms, such as text or speech, and is usually initiated by the human. In the case of text-based conversations, the human inputs text into a user interface, which the AI system interprets and generates a response. In speech-based conversations, the human speaks to a virtual assistant or chatbot, which uses natural language processing techniques to understand the spoken words and generate appropriate responses.",
+                url: "/xln/create/asset/ai/chat/human-to-ai"
+              }, 
+              {
+                type: "HumanToHuman",
+                image: ChatToHuman,
+                title: "Human To Human",
+                description: "Human to human interaction refers to communication and interaction between individuals. This can take various forms, such as verbal and nonverbal communication, facial expressions, body language, and gestures. Human to human interaction plays a crucial role in social, emotional, and cognitive development, and is an essential part of human life.",
+                url: "/xln/create/asset/ai/chat/human-to=human"
+              },
+              {
+                type: "HumanToGroup",
+                image: ChatToGroup,
+                title: "Human To Group",
+                description: "Human to group interaction refers to communication and interaction between an individual and a group of people. This can take various forms, such as group meetings, team projects, social gatherings, and community events. Human to group interaction is essential for building relationships, achieving goals, and creating a sense of belonging and community.",
+                url: "/xln/create/asset/ai/chat/human-to-group"
+              },
+              {
+                type: "GroupToAI",
+                image: ChatToResume,
+                title: "Group To AI",
+                description: "Group of humans to AI interaction refers to communication and interaction between a group of individuals and an artificial intelligence system. This can take various forms, such as a group of people using a virtual assistant or chatbot to perform tasks or get information, or a team using an AI system to analyze data or make decisions.",
+                url: "/xln/create/asset/ai/chat/group-to-ai"
+              }
+            ]
           },
           fields: [
             {
@@ -1635,6 +1705,7 @@ export const create = {
                   name: "size",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1645,14 +1716,16 @@ export const create = {
       {
         type: "createAudio",
         options: {
-          action: "audio",
+          action: "createAsset",
           method: "post",
+          assetType: "Audio",
+          toggle: true,
           text: "audio",
           submit: {
             label: "Add Song",
             className: "btn btn-block btn-info",
             icon: "",
-            action: "audio",
+            action: "createAsset",
           },
           fields: [
             {
@@ -1671,9 +1744,10 @@ export const create = {
                   id: "song-name",
                   className: "",
                   placeholder: "Song Name",
-                  name: "song-name",
+                  name: "audioName",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1693,10 +1767,11 @@ export const create = {
                   list: "",
                   id: "band-name",
                   className: "",
-                  placeholder: "Band Name",
-                  name: "size",
+                  placeholder: "Composer",
+                  name: "composer",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1741,6 +1816,7 @@ export const create = {
                   name: "producer",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1753,7 +1829,7 @@ export const create = {
                   inverse: false,
                   show: false,
                   labelText: "Attach Cover",
-                  forId: "attach-cover",
+                  forId: "songCover",
                 },
                 input: {
                   type: "file",
@@ -1762,6 +1838,7 @@ export const create = {
                   name: "cover",
                   onChange: "",
                   placeholder: "Attach Cover",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1780,7 +1857,7 @@ export const create = {
                   type: "file",
                   id: "attach-audio",
                   className: "btn btn-info",
-                  name: "audio-file",
+                  name: "file",
                   onChange: "",
                   placeholder: "Audio File",
                 },
@@ -1795,6 +1872,8 @@ export const create = {
         options: {
           action: "blog",
           text: "Blog",
+          assetType: "Blog",
+          toggle: true,
           buttons: [
             {
               button: "add",
@@ -1852,6 +1931,7 @@ export const create = {
                   name: "category",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 datalist: {
                   type: "category-asset",
@@ -1902,6 +1982,7 @@ export const create = {
                   value: {},
                   onChange: "",
                   placeholder: "Enter Text",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1923,6 +2004,7 @@ export const create = {
                   name: "cover",
                   onChange: "",
                   placeholder: "Attach Asset",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -1935,6 +2017,8 @@ export const create = {
         options: {
           action: "document",
           method: "post",
+          assetType: "Document",
+          toggle: true,
           text: "Link",
         },
       },
@@ -1943,6 +2027,8 @@ export const create = {
         options: {
           action: "link",
           method: "post",
+          assetType: "Link",
+          toggle: true,
           text: "Link",
         },
       },
@@ -1952,6 +2038,8 @@ export const create = {
           action: "link",
           method: "post",
           text: "Link",
+          assetType: "Downloader",
+          toggle: true,
           form: {
             type: "form",
             standard: "Standard",
@@ -1976,6 +2064,7 @@ export const create = {
             formData: {
               action: "downloadYoutube",
               method: "post",
+              assetType: "Downloader",
               submit: {
                 label: "Search",
                 className: "btn btn-block btn-info",
@@ -2001,6 +2090,7 @@ export const create = {
                       value: {},
                       onChange: "",
                       placeholder: "Search or paste youtube link here",
+                      disabled: false,
                     },
                     aria: {},
                   },
@@ -2015,6 +2105,8 @@ export const create = {
         options: {
           action: "enterprise",
           method: "post",
+          assetType: "Enterprise",
+          toggle: true,
           text: "Link",
         },
       },
@@ -2023,6 +2115,8 @@ export const create = {
         options: {
           action: "image",
           text: "Image",
+          assetType: "Image",
+          toggle: true,
           method: "post",
           submit: {
             label: "Add Image",
@@ -2049,6 +2143,7 @@ export const create = {
                   name: "image",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -2061,6 +2156,8 @@ export const create = {
         options: {
           action: "link",
           method: "post",
+          assetType: "Link",
+          toggle: true,
           text: "Link",
           submit: {
             label: "Add Link",
@@ -2087,6 +2184,7 @@ export const create = {
                   name: "link",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -2099,6 +2197,8 @@ export const create = {
         options: {
           action: "live",
           method: "post",
+          assetType: "Live",
+          toggle: true,
           text: "Live",
           submit: {
             label: "Add Live",
@@ -2125,6 +2225,7 @@ export const create = {
                   name: "live",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -2137,6 +2238,8 @@ export const create = {
         options: {
           action: "metaverse",
           method: "post",
+          assetType: "Metaverse",
+          toggle: true,
           text: "Metaverse",
         },
       },
@@ -2145,6 +2248,8 @@ export const create = {
         options: {
           action: "music",
           method: "post",
+          assetType: "Music",
+          toggle: true,
           text: "Music",
         },
       },
@@ -2153,6 +2258,8 @@ export const create = {
         options: {
           action: "realEstate",
           method: "post",
+          assetType: "Real Estate",
+          toggle: true,
           text: "Real Estate",
         },
       },
@@ -2161,6 +2268,8 @@ export const create = {
         options: {
           action: "podcast",
           method: "post",
+          assetType: "Podcast",
+          toggle: true,
           text: "Link",
         },
       },
@@ -2169,6 +2278,8 @@ export const create = {
         options: {
           action: "shop",
           method: "post",
+          assetType: "Shop",
+          toggle: true,
           text: "Shop",
         },
       },
@@ -2177,6 +2288,8 @@ export const create = {
         options: {
           action: "text",
           method: "post",
+          assetType: "Text",
+          toggle: true,
           text: "Text",
           submit: {
             label: "Add text",
@@ -2203,6 +2316,7 @@ export const create = {
                   name: "text",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -2215,6 +2329,8 @@ export const create = {
         options: {
           action: "video",
           method: "post",
+          assetType: "Video",
+          toggle: true,
           text: "Video",
           submit: {
             label: "Add video",
@@ -2241,6 +2357,7 @@ export const create = {
                   name: "video",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -2253,6 +2370,8 @@ export const create = {
         options: {
           action: "website",
           method: "post",
+          assetType: "Website",
+          toggle: true,
           text: "Website",
         },
       },
@@ -2288,6 +2407,7 @@ export const view = {
     "viewWebsite",
   ],
   options: {
+    content: {},
     templateData: [
       {
         type: "viewAiArt",
@@ -2319,6 +2439,7 @@ export const view = {
                   name: "model",
                   value: {},
                   onChange: "",
+                  disabled: false,
                 },
                 datalist: {
                   type: "model-list",
@@ -2359,38 +2480,6 @@ export const view = {
                   schema: {
                     placeholder: "512x512",
                     types: ["1024x1024", "512x512", "256x256"]
-                  },
-                },
-                aria: {},
-              },
-            },
-            {
-              type: "dropdown",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Number Of Images",
-                  forId: "num-image-list",
-                },
-                input: {
-                  type: "text",
-                  list: "number-image-list",
-                  id: "num-image-list",
-                  className: "",
-                  placeholder: "Number Of Images",
-                  name: "numOfImg",
-                  value: {},
-                  onChange: "",
-                },
-                datalist: {
-                  type: "num-image-list",
-                  id: "number-image-list",
-                  className: "",
-                  schema: {
-                    placeholder: "1",
-                    types: [1, 4, 8]
                   },
                 },
                 aria: {},
@@ -2549,6 +2638,7 @@ export const view = {
                   value: {},
                   onChange: "",
                   placeholder: "Enter Text",
+                  disabled: false,
                 },
                 aria: {},
               },
@@ -2623,6 +2713,7 @@ export const view = {
             formData: {
               action: "downloadYoutube",
               method: "post",
+              assetType: "Downloader",
               submit: {
                 label: "Search",
                 className: "btn btn-block btn-info",
@@ -2648,6 +2739,7 @@ export const view = {
                       value: {},
                       onChange: "",
                       placeholder: "Search or paste youtube link here",
+                      disabled: false,
                     },
                     aria: {},
                   },
@@ -2687,6 +2779,7 @@ export const view = {
             formData: {
               action: "attachAsset",
               method: "post",
+              assetType: "Attach",
               submit: {
                 label: "Attach Asset",
                 className: "btn btn-block btn-info",
@@ -2711,6 +2804,7 @@ export const view = {
                       name: "cover",
                       onChange: "",
                       placeholder: "Attach Asset",
+                      disabled: false,
                     },
                     aria: {},
                   },
@@ -2804,1533 +2898,13 @@ export const view = {
   },
 };
 
-export const xln = {
-  infura,
-  systemChecks: {
-    showHeader: false,
-    showFooter: false,
-  },
-  states: [
-    "addPermissions",
-    "buyShare",
-    "buyTokens",
-    "codeBlock",
-    "createAsset",
-    "mintAsset",
-    "search",
-    "sellShare",
-    "showAsset",
-    "showMintableAssets",
-    "showPurchasableAssets",
-    "showComments",
-    "showReviews",
-    "txPrompt",
-  ],
-  options: {
-    type: "grid-one-center",
-    standard: "Standard",
-    title: "",
-    warning: "",
-    description: "",
-    content: {
-      defaultText: "Authenticate Wallet to access Medallion XLN features.",
-      errorText: "User denied accounts access!",
-    },
-    image: CTAMission,
-    templateData: [
-      {
-        type: "addPermissions",
-        options: {
-          action: "Add Permission",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            format: {},
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "500px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Add Permissions",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          fields: [
-            {
-              type: "input",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Enter Email",
-                  forId: "kyc-email",
-                },
-                input: {
-                  type: "email",
-                  id: "kyc-email",
-                  className: "line_bottom",
-                  name: "email",
-                  value: {},
-                  onChange: "",
-                  placeholder: "Email *",
-                },
-                aria: {},
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: "attachAsset",
-        options: {
-          action: "attachAsset",
-          method: "post",
-          form: {
-            type: "form",
-            standard: "Standard",
-            title: "Attach an Asset",
-            warning: "Check various assets created by our ",
-            description: "lets resolve it here",
-            warningLink: {
-              text: "asset",
-              to: "/xln/create-asset",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            formData: {
-              action: "attachAsset",
-              method: "post",
-              submit: {
-                label: "Attach Asset",
-                className: "btn btn-block btn-info",
-                icon: "",
-                action: "attachAsset",
-              },
-              fields: [
-                {
-                  type: "file",
-                  attributes: {
-                    label: {
-                      error: false,
-                      inverse: false,
-                      show: false,
-                      labelText: "Attach Asset",
-                      forId: "attach-asset",
-                    },
-                    input: {
-                      type: "file",
-                      id: "attach-asset",
-                      className: "btn btn-info",
-                      name: "cover",
-                      onChange: "",
-                      placeholder: "Attach Asset",
-                    },
-                    aria: {},
-                  },
-                },
-              ],
-            },
-          },
-        },
-      },
-      {
-        type: "avatar",
-        options: {
-          action: "avatar",
-          method: "post",
-          form: {},
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          text: "Avatar",
-          submit: {
-            label: "avatar",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "buyTokens",
-        options: {
-          action: "buyTokens",
-          method: "post",
-          form: {
-            type: "form",
-            standard: "Standard",
-            title: "Buy XLN Tokens",
-            warning: "You are buying XLN tokens ",
-            description: "lets resolve it here",
-            warningLink: {
-              text: "buyTokens",
-              to: "/buyTokens",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            createAsset: "Click here if you ",
-            createAssetButton: {
-              text: "Buy Tokens",
-              to: "/buyTokens",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            formData: {
-              action: "updateSupply",
-              method: "post",
-              submit: {
-                label: "Update Supply",
-                className: "btn btn-block btn-info",
-                icon: "",
-                action: "updateSupply",
-              },
-              fields: [
-                {
-                  type: "buy",
-                  attributes: {
-                    label: {
-                      error: false,
-                      inverse: false,
-                      show: false,
-                      labelText: "Buy XLN",
-                      forId: "buy-xln",
-                    },
-                    input: {
-                      type: "text",
-                      id: "buy-xln",
-                      className: "",
-                      name: "asset",
-                      value: {},
-                      onChange: "",
-                      placeholder: "Name of Asset",
-                    },
-                    aria: {},
-                  },
-                },
-              ],
-            },
-          },
-          header: "Buy Medallion XLN Tokens",
-          description: `Owning Medallion XLN tokens allows users to interact within the
-          greater Medalllion XLN ecosystem. Users can tokenize assets, receive
-          token rewards, and leverage greater network effects.`,
-          balanceText: "You currently have a balance of",
-          price: 15,
-          images: {
-            cityAds: {
-              url: CityAds,
-              width: "100%",
-              height: "auto",
-            },
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Buy Tokens",
-            className: "btn-block",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "buyShare",
-        options: {
-          action: "buyShare",
-          method: "post",
-          form: {
-            type: "form",
-            standard: "Standard",
-            title: "Buy XLN",
-            warning: "Buy XLN tokens in the crowd sale ",
-            description: "lets resolve it here",
-            warningLink: {
-              text: "buy",
-              to: "/buy",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            createAsset: "Click here if you ",
-            createAssetButton: {
-              text: "Buy XLN",
-              to: "/buy",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            image: {
-              cityAds: {
-                url: ChessAvatar,
-                width: "900px",
-                height: "auto",
-              },
-            },
-            formData: {
-              action: "updateSupply",
-              method: "post",
-              submit: {
-                label: "Update Supply",
-                className: "btn btn-block btn-info",
-                icon: "",
-                action: "updateSupply",
-              },
-              fields: [
-                {
-                  type: "buy",
-                  attributes: {
-                    label: {
-                      error: false,
-                      inverse: false,
-                      show: false,
-                      labelText: "Buy XLN",
-                      forId: "buy-xln",
-                    },
-                    input: {
-                      type: "text",
-                      id: "buy-xln",
-                      className: "",
-                      name: "asset",
-                      value: {},
-                      onChange: "",
-                      placeholder: "Name of Asset",
-                    },
-                    aria: {},
-                  },
-                },
-              ],
-            },
-          },
-          description: "Buy XLN tokens in the crowd sale",
-          price: 15,
-          images: {
-            cityAds: {
-              url: CityAds,
-              width: "900px",
-              height: "auto",
-            },
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Buy Tokens",
-            className: "btn-block",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "codeBlock",
-        options: {
-          action: "Code Block",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "500px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Mint",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          fields: [
-            {
-              type: "input",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Enter Email",
-                  forId: "kyc-email",
-                },
-                input: {
-                  type: "email",
-                  id: "kyc-email",
-                  className: "line_bottom",
-                  name: "email",
-                  value: {},
-                  onChange: "",
-                  placeholder: "Email *",
-                },
-                aria: {},
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: "createAsset",
-        options: {
-          action: "createAsset",
-          method: "post",
-          form: {},
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          text: "Authenticate wallet",
-          submit: {
-            label: "createAsset",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "mintAsset",
-        options: {
-          action: "mintAsset",
-          method: "post",
-          form: {},
-          description: "Mint this asset and own as share of this  asset",
-          price: 2,
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Mint Asset",
-            className: "btn-block",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "mintTokens",
-        options: {
-          action: "mintTokens",
-          method: "post",
-          form: {
-            type: "form",
-            standard: "Standard",
-            title: "mint XLN Tokens",
-            warning: "You are buying XLN tokens ",
-            description: "lets resolve it here",
-            warningLink: {
-              text: "mintTokens",
-              to: "/mintTokens",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            createAsset: "Click here if you ",
-            createAssetButton: {
-              text: "mint Tokens",
-              to: "/mintTokens",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            image: CityAds,
-            formData: {
-              action: "mintXLN",
-              method: "post",
-              submit: {
-                label: "Update Supply",
-                className: "btn btn-block btn-info",
-                icon: "",
-                action: "updateSupply",
-              },
-              fields: [
-                {
-                  type: "mint",
-                  attributes: {
-                    label: {
-                      error: false,
-                      inverse: false,
-                      show: false,
-                      labelText: "mint XLN",
-                      forId: "mint-xln",
-                    },
-                    input: {
-                      type: "text",
-                      id: "mint-xln",
-                      className: "",
-                      name: "asset",
-                      value: {},
-                      onChange: "",
-                      placeholder: "Name of Asset",
-                    },
-                    aria: {},
-                  },
-                },
-              ],
-            },
-          },
-          description: " XLN tokens in the crowd sale",
-          price: 15,
-          images: {
-            cityAds: {
-              url: ChessAvatar,
-              width: "900px",
-              height: "auto",
-            },
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Buy Tokens",
-            className: "btn-block",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "search",
-        options: {
-          action: "buyTokens",
-          method: "post",
-          form: {
-            type: "form",
-            standard: "Standard",
-            title: "Buy XLN Tokens",
-            warning: "You are buying XLN tokens ",
-            description: "lets resolve it here",
-            warningLink: {
-              text: "buyTokens",
-              to: "/buyTokens",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            createAsset: "Click here if you ",
-            createAssetButton: {
-              text: "Buy Tokens",
-              to: "/buyTokens",
-              icon: "",
-              show: true,
-              external: false,
-            },
-            formData: {
-              action: "updateSupply",
-              method: "post",
-              submit: {
-                label: "Update Supply",
-                className: "btn btn-block btn-info",
-                icon: "",
-                action: "updateSupply",
-              },
-              fields: [
-                {
-                  type: "buy",
-                  attributes: {
-                    label: {
-                      error: false,
-                      inverse: false,
-                      show: false,
-                      labelText: "Buy XLN",
-                      forId: "buy-xln",
-                    },
-                    input: {
-                      type: "text",
-                      id: "buy-xln",
-                      className: "",
-                      name: "asset",
-                      value: {},
-                      onChange: "",
-                      placeholder: "Name of Asset",
-                    },
-                    aria: {},
-                  },
-                },
-              ],
-            },
-          },
-          header: "Buy Medallion XLN Tokens",
-          description: `Owning Medallion XLN tokens allows users to interact within the
-          greater Medalllion XLN ecosystem. Users can tokenize assets, receive
-          token rewards, and leverage greater network effects.`,
-          balanceText: "You currently have a balance of",
-          price: 15,
-          images: {
-            cityAds: {
-              url: CityAds,
-              width: "100%",
-              height: "auto",
-            },
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Buy Tokens",
-            className: "btn-block",
-            icon: "fa-solid fa-diamond",
-          },
-        },
-      },
-      {
-        type: "sellShare",
-        options: {
-          action: "sellShare",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "500px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "SellShares",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          fields: [
-            {
-              type: "input",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Enter Email",
-                  forId: "kyc-email",
-                },
-                input: {
-                  type: "email",
-                  id: "kyc-email",
-                  className: "line_bottom",
-                  name: "email",
-                  value: {},
-                  onChange: "",
-                  placeholder: "Email *",
-                },
-                aria: {},
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: "showAsset",
-        options: {
-          action: "buyNFT",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "100px",
-              height: "auto",
-            },
-            asset: {
-              url: DownloadWhitepaper,
-              width: "500px",
-              height: "auto",
-            },
-          },
-          title: "The Asset",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          price: 3,
-          submit: {
-            label: "Show",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          dependencies: [
-            {
-              avatar: "aloy-avatar.jpg",
-              username: "aloy",
-              width: "50px",
-              height: "50px",
-            },
-            {
-              avatar: "satoshi-avatar.jpeg",
-              username: "satoshi",
-              width: "50px",
-              height: "50px",
-            },
-            {
-              avatar: "CEO-Executive.png",
-              username: "xln",
-              width: "50px",
-              height: "50px",
-            },
-            {
-              avatar: "CMO-Executive.png",
-              username: "xln",
-              width: "50px",
-              height: "auto",
-            },
-          ],
-          fields: [],
-        },
-      },
-      {
-        type: "showPurchasableAssets",
-        options: {
-          action: "showAssets",
-          mode: "buy",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "showPurchasableAssets",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          searchBar: {
-            placeholder: "Search Assets",
-          },
-          assets: [
-            {
-              id: "1",
-              selected: false,
-              username: "aloy",
-              asset_name: "horizon_zero_dawn",
-              avatar: {
-                url: "aloy-avatar.jpg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "horizon_zero_dawn_1.jpeg",
-            },
-            {
-              id: "2",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CEO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "smart-city-4.jpg",
-            },
-            {
-              id: "3",
-              selected: false,
-              username: "satoshi",
-              asset_name: "bitcoin",
-              avatar: {
-                url: "satoshi-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "bitcoin.jpeg",
-            },
-            {
-              id: "4",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CMO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "Banners.jpg",
-            },
-            {
-              id: "4",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CBO-Executive.jpg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "nij-studio-final.jpg",
-            },
-            {
-              id: "5",
-              selected: false,
-              username: "v",
-              asset_name: "cyberpunk_2077",
-              avatar: {
-                url: "v-cyberpunk-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "cyberpunk-2077-cover-asset.jpeg",
-            },
-            {
-              id: "6",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CAO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "gundam-in-city.jpg",
-            },
-            {
-              id: "7",
-              selected: false,
-              username: "aloy",
-              asset_name: "horizon_zero_dawn",
-              avatar: {
-                url: "aloy-avatar.jpg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "horizon_zero_dawn_3.jpeg",
-            },
-            {
-              id: "8",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "XPO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "diesel-s-rua-mid-sp.jpg",
-            },
-            {
-              id: "8",
-              selected: false,
-              username: "v",
-              asset_name: "cyberpunk_2077",
-              avatar: {
-                url: "v-cyberpunk-avatar-2.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "night-city-4-asset.jpeg",
-            },
-            {
-              id: "9",
-              selected: false,
-              username: "satoshi",
-              asset_name: "bitcoin",
-              avatar: {
-                url: "satoshi-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "bitcoin_4.jpeg",
-            },
-            {
-              id: "2",
-              selected: false,
-              username: "v",
-              asset_name: "cyberpunk_2077",
-              avatar: {
-                url: "v-cyberpunk-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "night-city-asset.jpeg",
-            },
-          ],
-        },
-      },
-      {
-        type: "showMintableAssets",
-        options: {
-          action: "showAssets",
-          mode: "mint",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "showMintableAssets",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          searchBar: {
-            placeholder: "Search Assets",
-          },
-          assets: [
-            {
-              id: "1",
-              selected: false,
-              username: "aloy",
-              asset_name: "horizon_zero_dawn",
-              avatar: {
-                url: "aloy-avatar.jpg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "horizon_zero_dawn_1.jpeg",
-            },
-            {
-              id: "2",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CEO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "smart-city-4.jpg",
-            },
-            {
-              id: "3",
-              selected: false,
-              username: "satoshi",
-              asset_name: "bitcoin",
-              avatar: {
-                url: "satoshi-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "bitcoin.jpeg",
-            },
-            {
-              id: "4",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CMO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "Banners.jpg",
-            },
-            {
-              id: "4",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CBO-Executive.jpg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "nij-studio-final.jpg",
-            },
-            {
-              id: "5",
-              selected: false,
-              username: "v",
-              asset_name: "cyberpunk_2077",
-              avatar: {
-                url: "v-cyberpunk-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "cyberpunk-2077-cover-asset.jpeg",
-            },
-            {
-              id: "6",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "CAO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "gundam-in-city.jpg",
-            },
-            {
-              id: "7",
-              selected: false,
-              username: "aloy",
-              asset_name: "horizon_zero_dawn",
-              avatar: {
-                url: "aloy-avatar.jpg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "horizon_zero_dawn_3.jpeg",
-            },
-            {
-              id: "8",
-              selected: false,
-              username: "xln",
-              asset_name: "xln",
-              avatar: {
-                url: "XPO-Executive.png",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "diesel-s-rua-mid-sp.jpg",
-            },
-            {
-              id: "8",
-              selected: false,
-              username: "v",
-              asset_name: "cyberpunk_2077",
-              avatar: {
-                url: "v-cyberpunk-avatar-2.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "night-city-4-asset.jpeg",
-            },
-            {
-              id: "9",
-              selected: false,
-              username: "satoshi",
-              asset_name: "bitcoin",
-              avatar: {
-                url: "satoshi-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "bitcoin_4.jpeg",
-            },
-            {
-              id: "2",
-              selected: false,
-              username: "v",
-              asset_name: "cyberpunk_2077",
-              avatar: {
-                url: "v-cyberpunk-avatar.jpeg",
-                height: "50px",
-                width: "50px",
-              },
-              cover: "night-city-asset.jpeg",
-            },
-          ],
-        },
-      },
-      {
-        type: "showComments",
-        options: {
-          action: "showComments",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-          },
-          submit: {},
-          fields: [],
-        },
-      },
-      {
-        type: "showReviews",
-        options: {
-          action: "showReviews",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity,
-              width: "600px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "showReviews",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          fields: [
-            {
-              type: "input",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Wallet Sign In",
-                  forId: "kyc-email",
-                },
-                input: {
-                  type: "email",
-                  id: "kyc-email",
-                  className: "line_bottom",
-                  name: "email",
-                  value: {},
-                  onChange: "",
-                  placeholder: "Wallet Email",
-                },
-                aria: {},
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: "txPrompt",
-        options: {
-          action: "TxPrompt",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-            assetSecurity: {
-              url: AssetSecurity2,
-              width: "500px",
-              height: "auto",
-            },
-          },
-          submit: {
-            label: "Tx Prompt",
-            className: "btn btn-block btn-info",
-            icon: "fa-solid fa-diamond",
-          },
-          fields: [
-            {
-              type: "input",
-              attributes: {
-                label: {
-                  error: false,
-                  inverse: false,
-                  show: false,
-                  labelText: "Enter Email",
-                  forId: "kyc-email",
-                },
-                input: {
-                  type: "email",
-                  id: "kyc-email",
-                  className: "line_bottom",
-                  name: "email",
-                  value: {},
-                  onChange: "",
-                  placeholder: "Email *",
-                },
-                aria: {},
-              },
-            },
-            {
-              type: "codeBlock",
-              options: {
-                action: "Code Block",
-                method: "post",
-                images: {
-                  logo: {
-                    url: Logo,
-                    width: "300px",
-                    height: "auto",
-                  },
-                  assetSecurity: {
-                    url: AssetSecurity2,
-                    width: "500px",
-                    height: "auto",
-                  },
-                },
-                submit: {
-                  label: "Mint",
-                  className: "btn btn-block btn-info",
-                  icon: "fa-solid fa-diamond",
-                },
-                fields: [
-                  {
-                    type: "input",
-                    attributes: {
-                      label: {
-                        error: false,
-                        inverse: false,
-                        show: false,
-                        labelText: "Enter Email",
-                        forId: "kyc-email",
-                      },
-                      input: {
-                        type: "email",
-                        id: "kyc-email",
-                        className: "line_bottom",
-                        name: "email",
-                        value: {},
-                        onChange: "",
-                        placeholder: "Email *",
-                      },
-                      aria: {},
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: "testFuncsTemplate",
-        options: {
-          action: "testFuncs",
-          method: "post",
-          images: {
-            logo: {
-              url: Logo,
-              width: "300px",
-              height: "auto",
-            },
-          },
-          submit: {},
-          fields: [],
-          buttons: [
-            {
-              label: "Test ICO start()",
-              details: {
-                show: false,
-                title: "ICO",
-                description: "start",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "start",
-            },
-            {
-              label: "Test ICO buy()",
-              details: {
-                show: false,
-                title: "ICO",
-                description: "buy",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "updateSupply",
-            },
-            {
-              label: "Test ICO withdrawTokens()",
-              details: {
-                show: false,
-                title: "ICO",
-                description: "withdrawTokens()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "withdrawTokens",
-            },
-            {
-              label: "Test ICO withdrawDai()",
-              details: {
-                show: false,
-                title: "ICO",
-                description: "withdrawDai()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "withdrawDai",
-            },
-            {
-              label: "Test NFT mintNFT()",
-              details: {
-                show: false,
-                title: "NFT",
-                description: "mintNFT()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "mintNFT",
-            },
-            {
-              label: "Test Token updateAdmin()",
-              details: {
-                show: false,
-                title: "Token",
-                description: "updateAdmin()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "updateAdmin",
-            },
-            {
-              label: "Test Token mint()",
-              details: {
-                show: false,
-                title: "Token",
-                description: "mint()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "mint",
-            },
-            {
-              label: "Test Market getListingPrice()",
-              details: {
-                show: false,
-                title: "Market",
-                description: "getListingPrice()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "getListingPrice",
-            },
-            {
-              label: "Test Market makeMarketItem()",
-              details: {
-                show: false,
-                title: "Market",
-                description: "makeMarketItem()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "makeMarketItem",
-            },
-            {
-              label: "Test Market createMarketSale()",
-              details: {
-                show: false,
-                title: "Market",
-                description: "createMarketSale",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "createMarketSale",
-            },
-            {
-              label: "Test Market fetchMarketTokens()",
-              details: {
-                show: false,
-                title: "Market",
-                description: "fetchMarketTokens()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "fetchMarketTokens",
-            },
-            {
-              label: "Test Market fetchMyNFTs()",
-              details: {
-                show: false,
-                title: "Market",
-                description: "fetchMyNFTs()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "fetchMyNFTs",
-            },
-            {
-              label: "Test Market fetchItemsCreated()",
-              details: {
-                show: false,
-                title: "Market",
-                description: "fetchItemsCreated()",
-              },
-              className: "btn btn-block btn-info",
-              icon: "fa-solid fa-diamond",
-              action: "fetchItemsCreated",
-            },
-          ],
-        },
-      },
-    ],
-  },
-};
-
 export const wallet = {
   infura,
-  authentication: {
-    userChecks: [
-      {
-        id: "123qd",
-        path: ["auth"],
-        avatar: "rocket.gif",
-        to: "/",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          metamask: false,
-          coinbase: false,
-          authenticated: false,
-        },
-        error: {
-          button: {
-            link: false,
-            alert: "danger",
-            action: null,
-            label: "Connect Wallet",
-          },
-          header: "Authenticate Metamask Wallet",
-          detailed:
-            "Connect with one of our available wallet providers or create a new one.",
-        },
-      },
-
-      {
-        id: "123q9a",
-        path: ["auth"],
-        avatar: "social-media.gif",
-        to: "/xln/:username",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          count: 0,
-          data: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Go to Profile",
-          },
-          header: "Visit Your Profile",
-          detailed: "You have 10 shareholders",
-        },
-      },
-      {
-        id: "123fb",
-        path: ["auth"],
-        avatar: "money-bag.gif",
-        to: "/assets/create",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          assetCreated: true,
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Create Asset",
-          },
-          header: "Create Asset",
-          detailed: "Create your first asset",
-        },
-      },
-      {
-        id: "123fw",
-        path: ["auth"],
-        avatar: "share.gif",
-        to: "/shares/:id/buy",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          count: 0,
-          data: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Buy Share",
-          },
-          header: "Buy your first share",
-          detailed: "You have 0 shares",
-        },
-      },
-      {
-        id: "123fs",
-        path: ["auth"],
-        avatar: "target.gif",
-        to: "/register",
-        action: {},
-        show: true,
-        type: false,
-        select: {
-          isRegistered: [],
-        },
-        error: {
-          button: {
-            link: true,
-            alert: "danger",
-            label: "Register",
-          },
-          header: "Register User",
-          detailed: "Your account must be registered before further use",
-        },
-      },
-    ],
-  },
   states: [
     "profile",
     "wallet",
-    "walletSetting",
-    "walletFileUpload",
+    "authSetting",
+    "authFileUpload",
     "walletStats",
     "walletShares",
     "walletAssets",
@@ -4340,8 +2914,8 @@ export const wallet = {
     "walletSwap",
     "walletNinja",
     "walletReceive",
-    "walletPermission",
-    "walletCredential"
+    "authPermission",
+    "authCredential"
   ],
   options: {
     type: "grid-one-center",
@@ -4550,7 +3124,7 @@ export const wallet = {
         },
       },
       {
-        type: "walletFileUpload",
+        type: "authFileUpload",
         options: {
           method: "post",
           submit: {
@@ -4561,7 +3135,7 @@ export const wallet = {
         },
       },      
       {
-        type: "walletSetting",
+        type: "authSetting",
         options: {
           action: "wallet",
           method: "post",
@@ -4581,7 +3155,7 @@ export const wallet = {
         },
       },
       {
-        type: "walletPermission",
+        type: "authPermission",
         options: {
           action: "wallet",
           method: "post",
@@ -4600,7 +3174,7 @@ export const wallet = {
         },
       },
       {
-        type: "walletCredential",
+        type: "authCredential",
         options: {
           action: "wallet",
           method: "post",
@@ -5217,6 +3791,1265 @@ export const whitepaper = {
           lists: [],
         },
       },
+    ],
+  },
+};
+
+export const xln = {
+  infura,
+  systemChecks: {
+    showHeader: false,
+    showFooter: false,
+  },
+  states: [
+    "addPermissions",
+    "buyShare",
+    "buyTokens",
+    "codeBlock",
+    "createAsset",
+    "mintAsset",
+    "search",
+    "sellShare",
+    "showAsset",
+    "showMintableAssets",
+    "showPurchasableAssets",
+    "showComments",
+    "showReviews",
+    "txPrompt",
+  ],
+  options: {
+    type: "grid-one-center",
+    standard: "Standard",
+    title: "",
+    warning: "",
+    description: "",
+    content: {
+      defaultText: "Authenticate Wallet to access Medallion XLN features.",
+      errorText: "User denied accounts access!",
+    },
+    image: CTAMission,
+    templateData: [
+      {
+        type: "addPermissions",
+        options: {
+          action: "Add Permission",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            format: {},
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "500px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Add Permissions",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Enter Email",
+                  forId: "kyc-email",
+                },
+                input: {
+                  type: "email",
+                  id: "kyc-email",
+                  className: "line_bottom",
+                  name: "email",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Email *",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "attachAsset",
+        options: {
+          action: "attachAsset",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Attach an Asset",
+            warning: "Check various assets created by our ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "asset",
+              to: "/xln/create-asset",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "attachAsset",
+              method: "post",
+              assetType: "Attach",
+              submit: {
+                label: "Attach Asset",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "attachAsset",
+              },
+              fields: [
+                {
+                  type: "file",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Attach Asset",
+                      forId: "attach-asset",
+                    },
+                    input: {
+                      type: "file",
+                      id: "attach-asset",
+                      className: "btn btn-info",
+                      name: "cover",
+                      onChange: "",
+                      placeholder: "Attach Asset",
+                      disabled: false,
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+      {
+        type: "avatar",
+        options: {
+          action: "avatar",
+          method: "post",
+          form: {},
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          text: "Avatar",
+          submit: {
+            label: "avatar",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "buyTokens",
+        options: {
+          action: "buyTokens",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Buy XLN Tokens",
+            warning: "You are buying XLN tokens ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "buyTokens",
+              to: "/buyTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            createAsset: "Click here if you ",
+            createAssetButton: {
+              text: "Buy Tokens",
+              to: "/buyTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "updateSupply",
+              method: "post",
+              assetType: "Update Supply",
+              submit: {
+                label: "Update Supply",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "updateSupply",
+              },
+              fields: [
+                {
+                  type: "buy",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Buy XLN",
+                      forId: "buy-xln",
+                    },
+                    input: {
+                      type: "text",
+                      id: "buy-xln",
+                      className: "",
+                      name: "asset",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Name of Asset",
+                      disabled: false,
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+          header: "Buy Medallion XLN Tokens",
+          description: `Owning Medallion XLN tokens allows users to interact within the
+          greater Medalllion XLN ecosystem. Users can tokenize assets, receive
+          token rewards, and leverage greater network effects.`,
+          balanceText: "You currently have a balance of",
+          price: 15,
+          images: {
+            cityAds: {
+              url: CityAds,
+              width: "100%",
+              height: "auto",
+            },
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Buy Tokens",
+            className: "btn-block",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "buyShare",
+        options: {
+          action: "buyShare",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Buy XLN",
+            warning: "Buy XLN tokens in the crowd sale ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "buy",
+              to: "/buy",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            createAsset: "Click here if you ",
+            createAssetButton: {
+              text: "Buy XLN",
+              to: "/buy",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            image: {
+              cityAds: {
+                url: ChessAvatar,
+                width: "900px",
+                height: "auto",
+              },
+            },
+            formData: {
+              action: "updateSupply",
+              method: "post",
+              assetType: "Update Supply",
+              submit: {
+                label: "Update Supply",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "updateSupply",
+              },
+              fields: [
+                {
+                  type: "buy",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Buy XLN",
+                      forId: "buy-xln",
+                    },
+                    input: {
+                      type: "text",
+                      id: "buy-xln",
+                      className: "",
+                      name: "asset",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Name of Asset",
+                      disabled: false,
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+          description: "Buy XLN tokens in the crowd sale",
+          price: 15,
+          images: {
+            cityAds: {
+              url: CityAds,
+              width: "900px",
+              height: "auto",
+            },
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Buy Tokens",
+            className: "btn-block",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "codeBlock",
+        options: {
+          action: "Code Block",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "500px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Mint",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Enter Email",
+                  forId: "kyc-email",
+                },
+                input: {
+                  type: "email",
+                  id: "kyc-email",
+                  className: "line_bottom",
+                  name: "email",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Email *",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "createAsset",
+        options: {
+          action: "createAsset",
+          method: "post",
+          form: {},
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          text: "Authenticate wallet",
+          submit: {
+            label: "createAsset",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "mintAsset",
+        options: {
+          action: "mintAsset",
+          method: "post",
+          form: {},
+          description: "Mint this asset and own as share of this  asset",
+          price: 2,
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Mint Asset",
+            className: "btn-block",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "mintTokens",
+        options: {
+          action: "mintTokens",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "mint XLN Tokens",
+            warning: "You are buying XLN tokens ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "mintTokens",
+              to: "/mintTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            createAsset: "Click here if you ",
+            createAssetButton: {
+              text: "mint Tokens",
+              to: "/mintTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            image: CityAds,
+            formData: {
+              action: "mintXLN",
+              method: "post",
+              assetType: "Mint",
+              submit: {
+                label: "Update Supply",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "updateSupply",
+              },
+              fields: [
+                {
+                  type: "mint",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "mint XLN",
+                      forId: "mint-xln",
+                    },
+                    input: {
+                      type: "text",
+                      id: "mint-xln",
+                      className: "",
+                      name: "asset",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Name of Asset",
+                      disabled: false,
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+          description: " XLN tokens in the crowd sale",
+          price: 15,
+          images: {
+            cityAds: {
+              url: ChessAvatar,
+              width: "900px",
+              height: "auto",
+            },
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Buy Tokens",
+            className: "btn-block",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "search",
+        options: {
+          action: "buyTokens",
+          method: "post",
+          form: {
+            type: "form",
+            standard: "Standard",
+            title: "Buy XLN Tokens",
+            warning: "You are buying XLN tokens ",
+            description: "lets resolve it here",
+            warningLink: {
+              text: "buyTokens",
+              to: "/buyTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            createAsset: "Click here if you ",
+            createAssetButton: {
+              text: "Buy Tokens",
+              to: "/buyTokens",
+              icon: "",
+              show: true,
+              external: false,
+            },
+            formData: {
+              action: "updateSupply",
+              assetType: "Update Supply",
+              method: "post",
+              submit: {
+                label: "Update Supply",
+                className: "btn btn-block btn-info",
+                icon: "",
+                action: "updateSupply",
+              },
+              fields: [
+                {
+                  type: "buy",
+                  attributes: {
+                    label: {
+                      error: false,
+                      inverse: false,
+                      show: false,
+                      labelText: "Buy XLN",
+                      forId: "buy-xln",
+                    },
+                    input: {
+                      type: "text",
+                      id: "buy-xln",
+                      className: "",
+                      name: "asset",
+                      value: {},
+                      onChange: "",
+                      placeholder: "Name of Asset",
+                      disabled: false,
+                    },
+                    aria: {},
+                  },
+                },
+              ],
+            },
+          },
+          header: "Buy Medallion XLN Tokens",
+          description: `Owning Medallion XLN tokens allows users to interact within the
+          greater Medalllion XLN ecosystem. Users can tokenize assets, receive
+          token rewards, and leverage greater network effects.`,
+          balanceText: "You currently have a balance of",
+          price: 15,
+          images: {
+            cityAds: {
+              url: CityAds,
+              width: "100%",
+              height: "auto",
+            },
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Buy Tokens",
+            className: "btn-block",
+            icon: "fa-solid fa-diamond",
+          },
+        },
+      },
+      {
+        type: "sellShare",
+        options: {
+          action: "sellShare",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "500px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "SellShares",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Enter Email",
+                  forId: "kyc-email",
+                },
+                input: {
+                  type: "email",
+                  id: "kyc-email",
+                  className: "line_bottom",
+                  name: "email",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Email *",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "showAsset",
+        options: {
+          action: "buyNFT",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "100px",
+              height: "auto",
+            },
+            asset: {
+              url: DownloadWhitepaper,
+              width: "500px",
+              height: "auto",
+            },
+          },
+          title: "The Asset",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          price: 3,
+          submit: {
+            label: "Show",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          dependencies: [
+            {
+              avatar: "aloy-avatar.jpg",
+              username: "aloy",
+              width: "50px",
+              height: "50px",
+            },
+            {
+              avatar: "satoshi-avatar.jpeg",
+              username: "satoshi",
+              width: "50px",
+              height: "50px",
+            },
+            {
+              avatar: "CEO-Executive.png",
+              username: "xln",
+              width: "50px",
+              height: "50px",
+            },
+            {
+              avatar: "CMO-Executive.png",
+              username: "xln",
+              width: "50px",
+              height: "auto",
+            },
+          ],
+          fields: [],
+        },
+      },
+      {
+        type: "showPurchasableAssets",
+        options: {
+          action: "showAssets",
+          mode: "buy",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "showPurchasableAssets",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          searchBar: {
+            placeholder: "Search Assets",
+          },
+          assets: [
+            {
+              id: "1",
+              selected: false,
+              username: "aloy",
+              asset_name: "horizon_zero_dawn",
+              avatar: {
+                url: "aloy-avatar.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "horizon_zero_dawn_1.jpeg",
+            },
+            {
+              id: "2",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CEO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "smart-city-4.jpg",
+            },
+            {
+              id: "3",
+              selected: false,
+              username: "satoshi",
+              asset_name: "bitcoin",
+              avatar: {
+                url: "satoshi-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "bitcoin.jpeg",
+            },
+            {
+              id: "4",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CMO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "Banners.jpg",
+            },
+            {
+              id: "4",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CBO-Executive.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "nij-studio-final.jpg",
+            },
+            {
+              id: "5",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "cyberpunk-2077-cover-asset.jpeg",
+            },
+            {
+              id: "6",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CAO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "gundam-in-city.jpg",
+            },
+            {
+              id: "7",
+              selected: false,
+              username: "aloy",
+              asset_name: "horizon_zero_dawn",
+              avatar: {
+                url: "aloy-avatar.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "horizon_zero_dawn_3.jpeg",
+            },
+            {
+              id: "8",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "XPO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "diesel-s-rua-mid-sp.jpg",
+            },
+            {
+              id: "8",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar-2.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "night-city-4-asset.jpeg",
+            },
+            {
+              id: "9",
+              selected: false,
+              username: "satoshi",
+              asset_name: "bitcoin",
+              avatar: {
+                url: "satoshi-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "bitcoin_4.jpeg",
+            },
+            {
+              id: "2",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "night-city-asset.jpeg",
+            },
+          ],
+        },
+      },
+      {
+        type: "showMintableAssets",
+        options: {
+          action: "showAssets",
+          mode: "mint",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "showMintableAssets",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          searchBar: {
+            placeholder: "Search Assets",
+          },
+          assets: [
+            {
+              id: "1",
+              selected: false,
+              username: "aloy",
+              asset_name: "horizon_zero_dawn",
+              avatar: {
+                url: "aloy-avatar.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "horizon_zero_dawn_1.jpeg",
+            },
+            {
+              id: "2",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CEO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "smart-city-4.jpg",
+            },
+            {
+              id: "3",
+              selected: false,
+              username: "satoshi",
+              asset_name: "bitcoin",
+              avatar: {
+                url: "satoshi-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "bitcoin.jpeg",
+            },
+            {
+              id: "4",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CMO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "Banners.jpg",
+            },
+            {
+              id: "4",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CBO-Executive.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "nij-studio-final.jpg",
+            },
+            {
+              id: "5",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "cyberpunk-2077-cover-asset.jpeg",
+            },
+            {
+              id: "6",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "CAO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "gundam-in-city.jpg",
+            },
+            {
+              id: "7",
+              selected: false,
+              username: "aloy",
+              asset_name: "horizon_zero_dawn",
+              avatar: {
+                url: "aloy-avatar.jpg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "horizon_zero_dawn_3.jpeg",
+            },
+            {
+              id: "8",
+              selected: false,
+              username: "xln",
+              asset_name: "xln",
+              avatar: {
+                url: "XPO-Executive.png",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "diesel-s-rua-mid-sp.jpg",
+            },
+            {
+              id: "8",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar-2.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "night-city-4-asset.jpeg",
+            },
+            {
+              id: "9",
+              selected: false,
+              username: "satoshi",
+              asset_name: "bitcoin",
+              avatar: {
+                url: "satoshi-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "bitcoin_4.jpeg",
+            },
+            {
+              id: "2",
+              selected: false,
+              username: "v",
+              asset_name: "cyberpunk_2077",
+              avatar: {
+                url: "v-cyberpunk-avatar.jpeg",
+                height: "50px",
+                width: "50px",
+              },
+              cover: "night-city-asset.jpeg",
+            },
+          ],
+        },
+      },
+      {
+        type: "showComments",
+        options: {
+          action: "showComments",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+          },
+          submit: {},
+          fields: [],
+        },
+      },
+      {
+        type: "showReviews",
+        options: {
+          action: "showReviews",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity,
+              width: "600px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "showReviews",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Wallet Sign In",
+                  forId: "kyc-email",
+                },
+                input: {
+                  type: "email",
+                  id: "kyc-email",
+                  className: "line_bottom",
+                  name: "email",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Wallet Email",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "txPrompt",
+        options: {
+          action: "TxPrompt",
+          method: "post",
+          images: {
+            logo: {
+              url: Logo,
+              width: "300px",
+              height: "auto",
+            },
+            assetSecurity: {
+              url: AssetSecurity2,
+              width: "500px",
+              height: "auto",
+            },
+          },
+          submit: {
+            label: "Tx Prompt",
+            className: "btn btn-block btn-info",
+            icon: "fa-solid fa-diamond",
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Enter Email",
+                  forId: "kyc-email",
+                },
+                input: {
+                  type: "email",
+                  id: "kyc-email",
+                  className: "line_bottom",
+                  name: "email",
+                  value: {},
+                  onChange: "",
+                  placeholder: "Email *",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "codeBlock",
+              options: {
+                action: "Code Block",
+                method: "post",
+                images: {
+                  logo: {
+                    url: Logo,
+                    width: "300px",
+                    height: "auto",
+                  },
+                  assetSecurity: {
+                    url: AssetSecurity2,
+                    width: "500px",
+                    height: "auto",
+                  },
+                },
+                submit: {
+                  label: "Mint",
+                  className: "btn btn-block btn-info",
+                  icon: "fa-solid fa-diamond",
+                },
+                fields: [
+                  {
+                    type: "input",
+                    attributes: {
+                      label: {
+                        error: false,
+                        inverse: false,
+                        show: false,
+                        labelText: "Enter Email",
+                        forId: "kyc-email",
+                      },
+                      input: {
+                        type: "email",
+                        id: "kyc-email",
+                        className: "line_bottom",
+                        name: "email",
+                        value: {},
+                        onChange: "",
+                        placeholder: "Email *",
+                        disabled: false,
+                      },
+                      aria: {},
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      }
     ],
   },
 };

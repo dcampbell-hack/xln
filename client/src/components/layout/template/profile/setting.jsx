@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import FormatLayout from '../..'
-import { assetTypes, walletProfile, formLinks } from '../../../../data/nav'
+import { assetTypes, authProfile, formLinks } from '../../../../data/nav'
 
 
 const Setting = ({ form, navLinks, users, setActionType }) => {
@@ -24,7 +24,7 @@ const Setting = ({ form, navLinks, users, setActionType }) => {
     return (
       <div className="wallet-content-setting">
         <div className="wallet-setting-selections">
-          { formLinks.map(({ url, text}) =>             <div className="select-wallet-settings selected">
+          { formLinks.map(({ url, text}) => <div className="select-wallet-settings selected">
             <Link to={url}>{text}</Link>
           </div>  )
   

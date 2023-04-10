@@ -13,7 +13,7 @@ import { assetTypes } from '../../../../data/nav'
 
     return(
       <div className='create-xln-asset'>
-        { assetTypes.map(({ name, icon, url }) => <AssetLink name={name} icon={icon} url={url} />) }
+        { assetTypes.map(({ name, icon, url }, index) => <AssetLink key={index} name={name} icon={icon} url={url} />) }
       </div>
     )
   }

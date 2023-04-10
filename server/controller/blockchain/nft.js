@@ -3,11 +3,11 @@ const ErrorResponse = require('../../utils/errorResponse');
 
 //Models
 const Asset = require('../../model/Asset');
-const Share = require('../../model/Share');
-const Review = require('../../model/Review');
-const Offer = require('../../model/Offer');
+const Share = require('../../model/asset/Share');
+const Review = require('../../model/asset/Review');
+const Offer = require('../../model/asset/Offer');
 const User = require('../../model/User');
-const Comment = require('../../model/Comment');
+const Comment = require('../../model/asset/Comment');
 
 const { ethers, providers } = require('ethers');
 

@@ -7,8 +7,8 @@ import {
     VerticalButtonL,
     AssetLink
   } from "../../../utils/buttons/links"
-import { assetTypes, walletProfile, formLinks } from '../../../../data/nav'
-import { walletSetting, walletPermission, walletCredential, walletFileUpload } from '../../../../data/forms';
+import { assetTypes, authProfile, formLinks } from '../../../../data/nav'
+import { authSetting, authPermission, authCredential, authFileUpload } from '../../../../data/auth_forms';
 import '../../../../css/templates/profile.scss'
 
 // Components
@@ -29,9 +29,10 @@ export const Profile = ({
     values,
   }) => {
   
-    const mapProfileNav = () => walletProfile.map(({ text, url, icon, external, show}, index) => <LinkL   key={index} text={text} url={url} icon={icon} show={show}  /> )
+    const mapProfileNav = () => authProfile.map(({ text, url, icon, external, show}, index) => <LinkL   key={index} text={text} url={url} icon={icon} show={show}  /> )
      
     const renderView = () => {
+     // console.log("Render View",type)
          switch(type){
           case "profile":
             return <Home />
@@ -47,28 +48,29 @@ export const Profile = ({
                 users={users} 
                 setActionType={setActionType}
                 />
-          case "walletSetting":
+          case "authSetting":
+            console.log("Auth Setting")
             return <Setting
-                form={walletSetting }
+                form={authSetting }
                 users={users}
                 setActionType={setActionType}
               />
   
-          case  "walletPermission":  
+          case  "authPermission":  
              return <Setting
-                form={walletPermission}
+                form={authPermission}
                 users={users}
                 setActionType={setActionType}
               />
-          case  "walletCredential": 
+          case  "authCredential": 
             return  <Setting
-                form={walletCredential}
+                form={authCredential}
                 users={users}
                 setActionType={setActionType}
               />
-            case "walletFileUpload": 
+            case "authFileUpload": 
                return  <Setting
-              form={walletFileUpload}
+              form={authFileUpload}
               users={users}
               setActionType={setActionType}
             />
@@ -86,7 +88,7 @@ export const Profile = ({
     return (
       <div className="profile-sign-in">
           <div className="profile-nav">
-            { walletProfile && mapProfileNav() }
+            { authProfile && mapProfileNav() }
           </div>
            <div className="profile-content">
             {renderView() } 

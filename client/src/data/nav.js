@@ -8,14 +8,6 @@ export const assetTypes = [
       show: true,
     },
     {
-      name: "AI Chat",
-      icon: "fas fa-comments",
-      className: "",
-      url: "/xln/create/asset/ai/chat",
-      external: false,
-      show: true,
-    },
-    {
       name: "Audio",
       icon: "fas fa-volume-up",
       className: "",
@@ -28,6 +20,14 @@ export const assetTypes = [
       icon: "fas fa-rss",
       className: "",
       url: "/xln/create/asset/blog",
+      external: false,
+      show: true,
+    },
+    {
+      name: "Chat",
+      icon: "fas fa-comments",
+      className: "",
+      url: "/xln/create/asset/ai/chat",
       external: false,
       show: true,
     },
@@ -161,7 +161,7 @@ export const assetTypes = [
     },
   ]
 
-export const walletProfile = [
+export const authProfile = [
     {
       text: "",
       url: "/xln/search/",

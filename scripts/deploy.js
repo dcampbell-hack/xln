@@ -62,7 +62,7 @@ async function main() {
   console.log("Token Admin ----", tokenAdmin )
   console.log('ICO Deployed 1 -----', ico.address )
 
-  console.log("Mint ----", deployer )
+  // console.log("Mint ----", deployer )
 
   await token.connect(deployer).mint(deployer, 350000 )
   await token.connect(deployer).mint(ico.address, tokenSupply )
@@ -79,12 +79,9 @@ async function main() {
 
 
 
-  let config = `
-          exports.tokenPrice = '${tokenPrice}'
+  let config = `exports.tokenPrice = '${tokenPrice}'
           exports.deployerAddress = '${deployer.address}'
-          exports.tokenAddress = '${token.address}'
-
-          `;
+          exports.tokenAddress = '${token.address}' `;
 
 // exports.icoAddress = '${ico.address}'
 // exports.nftAddress = '${nft.address}'

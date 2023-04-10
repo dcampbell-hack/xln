@@ -1,4 +1,6 @@
 import axios from '../../axios';
+import { addNewError } from '../error'
+import { setAssetName } from '../../components/utils/helpers/setAssetName';
 import {
     ATTACH_ASSET,
     GET_ASSET,
@@ -36,41 +38,38 @@ export const attachAsset = ({ id, values }) => async (dispatch) => {
     } catch (err) {
       dispatch({ type: ASSET_ERROR, status: 404, error: 'login' });
     }
-  };
+};
 
 
 
 export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
-   console.log("create asset")
-    const config = {
-        Headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
 
     try {
-      console.log('Create Asset Action ----', values)
-            // let res;
-            // const formData = new FormData();
-           let res = await axios.post(`/api/v1/assets/`, values );
 
-        //   if( values.cover ){
-        //     formData.append('file', values.cover )
-        //      res = await axios.post(`/api/v1/assets/`, values , config);
-        //     }
+      console.log("create asset", values)
+      const config = {
+          Headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+            const formData = new FormData();
+            if(values.file) formData.append('file', values.file)
+            if(values.file) formData.append('cover', values.cover )
+            values.files = formData;
 
-        
+          if(values.assetType === "AI Art" && !values["model"] && !values["prompt"] && !values["size"]) return addNewError("Fill out form")
 
-    //   const res = await axios.post("/api/v1/assets", asset);
-    //   console.log("createAsset Action ---", res);
-    //  console.log(res)
+          if( values.assetType === "AI Art" ) values.description = values.description + " : " + values.prompt
+           
+          const res = await axios.post(`/api/v1/assets/`, values , config);
+
       dispatch({
         type: CREATE_ASSET,
         payload: res.data.data
       });
     } catch (err) {
       console.log("Assets Error: ", err)
-      dispatch({ type: ASSET_ERROR, status: 404, error: 'login' });
+      addNewError(err)
     }
   };
 

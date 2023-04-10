@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { category } from "../../../../data/categories";
 // Components
 import { ErrorAlert } from "../../errors/alert";
 
@@ -8,26 +9,27 @@ import { connect } from "react-redux";
 
 // Action items
 import {
-  addNewError,
   loginUser,
   registerUser,
   findUsername,
   forgotPassword,
-  removeError,
-  resetPassword,
+  resetPassword
 } from "../../../../actions/user/auth";
 
+// Action items
 import {
-  attachAsset,
+  addNewError,
+  removeError
+} from "../../../../actions/error";
+
+import {
   createAsset,
-  downloadYoutube
-} from '../../../../actions/assets/asset';
+  downloadYoutube,
+} from "../../../../actions/assets/asset";
 
+import { uploadUserFile, updateUser } from "../../../../actions/user/user";
 
-import {
-generateArt,
-opencv
-} from '../../../../actions/assets/ai';
+import { textToImage } from "../../../../actions/assets/ai";
 
 import {
   buyNFT,
@@ -38,10 +40,17 @@ import {
   updateSupply,
 } from "../../../../actions/blockchain";
 
+import { ToggleFormContainer } from "../../HOC/toggle-form-container";
 
-import { uploadUserFile, updateUser } from "../../../../actions/user/user";
+import {
+  validAuthLogin,
+  validAuthRegister,
+  validUpdateProfile
+} from "../../../utils/operations/auth";
 
-import { validAuthLogin, validAuthRegister } from "../../../utils/operations/auth";
+import {
+  isValidAssetValues,
+} from '../../../utils/operations/asset'
 
 import {
   FormInput,
@@ -53,9 +62,10 @@ import {
   BuyFormInput,
 } from "./formStyles";
 
+import { AssetDetails } from "../../../utils/helpers/assetDetails";
+
 const Form = ({
   addNewError,
-  attachAsset,
   ai,
   assets,
   auth,
@@ -66,11 +76,10 @@ const Form = ({
   downloadYoutube,
   findUsername,
   forgotPassword,
-  formData: { action, method, fields, submit },
-  generateArt,
+  formData: { action, method, assetType = "", toggle = false, fields, submit },
+  textToImage,
   loginUser,
   mintNFT,
-  openCV,
   registerUser,
   removeError,
   resetPassword,
@@ -84,8 +93,29 @@ const Form = ({
   let navigate = useNavigate();
   const params = useParams();
   const [showError, setShowError] = useState(false);
-  //const [ showSuccess, setShowSuccess ] = useState(false)
-  const errorArr = [];
+  const [error, setError] = useState([]);
+  const [status, setStatus ] = useState(false)
+
+  useEffect(() => {
+ 
+    const description =  `${assetType} asset created by ${
+      users.username
+    } on ${new Date(Date.now()).toDateString()}.`
+
+    setValues({
+      ...values,
+      assetType,
+      name: `${assetType}_${Date.now()}`,
+      category: category.find(({ name }) => name === assetType)?.suggestion.toString(),
+      description: values.prompt ? ( description + " " + values.prompt ) : description,
+      website: users.website,
+      price: users.assetPrice - users.assetPrice * 0.03,
+      stock: users.stockLimit,
+      fee: users.assetPrice * 0.03,
+    });
+
+
+  }, []);
 
   useEffect(() => {
     if (auth.register.success) {
@@ -99,17 +129,17 @@ const Form = ({
 
     if (auth.isError) {
       setShowError(true);
-      errorArr.push(auth.error);
-      setValues({ ...values, errors: [...values?.errors, ...errorArr] });
+      setError([...error, auth.error]);
+      setValues({ ...values, errors: [...values?.errors, ...error] });
+    }
+
+    if (users.isError) {
+      users.error && setError([...error, users.error]);
+      setValues({ ...values, errors: [...error] });
     }
   }, [auth?.login?.success, auth?.register?.success]);
 
-  useState(() => {
-    if (users.isError) {
-      users.error && errorArr.push(users.error);
-      setValues({ ...values, errors: [...errorArr] });
-    }
-  }, [users.isError]);
+
 
   const formFieldTypes = (type, attributes, index) => {
     switch (type) {
@@ -134,27 +164,34 @@ const Form = ({
         );
 
       case "textarea":
-        return <FormTextArea 
-        key={index} 
-        options={attributes} 
-        setValues={setValues}
-        values={values}
-        />;
+        return (
+          <FormTextArea
+            key={index}
+            options={attributes}
+            setValues={setValues}
+            values={values}
+          />
+        );
 
       case "select":
-        return <FormSelect 
-        key={index} options={attributes} 
-        setValues={setValues}
-        values={values}
-        />;
+        return (
+          <FormSelect
+            key={index}
+            options={attributes}
+            setValues={setValues}
+            values={values}
+          />
+        );
 
       case "dropdown":
-        return <FormDropdown 
-        key={index} 
-        options={attributes} 
-        setValues={setValues}
-        values={values}
-        />;
+        return (
+          <FormDropdown
+            key={index}
+            options={attributes}
+            setValues={setValues}
+            values={values}
+          />
+        );
 
       case "file":
         return (
@@ -183,44 +220,31 @@ const Form = ({
 
   const onSubmit = async (e) => {
     e.preventDefault();
+     setStatus(!status)
+    console.log("OnSubmit", action, values, error );
 
-    console.log('OnSubmit', action, values)
-    
-    if (!errorArr.length) {
+    if (!error.length) {
       const { id } = params;
       switch (action) {
 
-        case "aiArt":
-          const { assetId } = params;
-          console.log("AI Art", { assetId, values })
-          await generateArt({ id: users.id, assetId, blockchain, values})
-          break;
-
-        case "attachAsset":
-          console.log('attach asset ------', id, values )
-         // mintNFT({ id: users.id, address: blockchain.nft.address, values });
-           attachAsset({ id, values });
-          break;
-
-
         case "buyNFT":
-          console.log('buyNFT', { blockchain })
-          buyNFT('param ----');
+          console.log("buyNFT", { blockchain });
+          buyNFT("param ----");
           break;
 
-          case "buyTokens":
-            buyTokens(values);
-            break;
+        case "buyTokens":
+          buyTokens(values);
+          break;
 
-          case "createAsset":
-            console.log('create asset ------', { id: users.id, values, blockchain })
-           // mintNFT({ id: users.id, address: blockchain.nft.address, values });
-             createAsset({ id: users.id, values, blockchain });
-            break;
+        case "createAsset":
+          await isValidAssetValues(assetType, values, addNewError) 
+          await createAsset({ id: users.id, values, blockchain });
+           
+          break;
 
         // Auth
         case "login":
-          await validAuthLogin(values, addNewError);
+          await validAuthLogin(values, addNewError, setStatus);
           await loginUser(values);
           break;
 
@@ -236,19 +260,20 @@ const Form = ({
           break;
 
         case "downloadYoutube":
-          values.id = users.id
+          values.id = users.id;
           downloadYoutube(values);
           break;
 
+        case "setCredentials":
+        case "updateProfile":
+          await validUpdateProfile(values, addNewError, findUsername);
+          updateUser(users.id, values);
+
         //Blockchain
         case "updateSupply":
-          console.log("Update Supply", values)
+          console.log("Update Supply", values);
           updateSupply(values);
           break;
-
-        // Profile
-        case "updateProfile":
-          updateUser(users.id, values);
 
         // General
         case "uploadFile":
@@ -273,11 +298,16 @@ const Form = ({
           </div>
         )}
 
-        <FormButton className={submit.className} label={submit.label} />
+        {toggle && (
+          <ToggleFormContainer header="Asset details:">
+            <AssetDetails assetType={assetType} users={users} />
+          </ToggleFormContainer>
+        )}
+
+        <FormButton status={status} className={submit.className} label={submit.label} />
 
         {auth.isError && mapErrors(auth.errors)}
-        { assets.isError && mapErrors(assets.errors)}
-        { ai.isError && mapErrors(ai.errors)}
+        {assets.isError && mapErrors(assets.errors)}
       </div>
     </form>
   );
@@ -295,14 +325,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addNewError,
-  attachAsset,
   buyNFT,
   buyTokens,
   createAsset,
   downloadYoutube,
   findUsername,
   forgotPassword,
-  generateArt,
+  textToImage,
   loginUser,
   mintNFT,
   registerUser,
@@ -310,7 +339,7 @@ const mapDispatchToProps = {
   resetPassword,
   uploadUserFile,
   updateSupply,
-  updateUser
+  updateUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

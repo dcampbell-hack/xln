@@ -14,6 +14,7 @@ const FormLayout = ({
          warning, 
          warningLink: { text, to, icon, show, external }, 
          description, 
+         showDescription,
          image, 
          formData, 
      } 
@@ -21,9 +22,10 @@ const FormLayout = ({
     const [values, setValues] = useState({ errors: []});
     
     return(
-        <div className={`util-form-layout`} style={ formData.action !== "updateSupply" ? { height: 'auto'} : { height: 'auto' }}>
+        <div className={formData.expand ? 'util-form-layout-expand' : `util-form-layout`} style={ formData.action !== "updateSupply" ? { height: 'auto'} : { height: 'auto' }}>
             <div className='two-panel-text'>
                 <h2>{ title }</h2>
+                <p>{ showDescription && description }</p>
                 <div className="form-container">
                   <Form formData={formData} setValues={setValues} values={values} />
                 </div>

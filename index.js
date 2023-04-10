@@ -64,9 +64,9 @@ app.use(express.static(path.join(__dirname,'client/public')));
 
 const User = require('./server/routes/user');
 const Wallet = require('./server/routes/wallet');
-const Conditional = require('./server/routes/conditional');
+const Conditional = require('./server/routes/asset/conditional');
 const Auth = require('./server/routes/auth')
-const AI = require('./server/routes/ai')
+const AI = require('./server/routes/asset/ai')
 
 const XLN = require('./server/routes/blockchain/')
 const Market = require('./server/routes/blockchain/market')
@@ -74,14 +74,15 @@ const NFT = require('./server/routes/blockchain/nft')
 const ICO = require('./server/routes/blockchain/ico')
 const Token = require('./server/routes/blockchain/token')
 
-const Asset = require('./server/routes/asset')
-const Share = require('./server/routes/share')
-const Offer = require('./server/routes/offer')
-const Review = require('./server/routes/review')
-const Comment = require('./server/routes/comment')
-const Transaction = require('./server/routes/transaction')
+const Asset = require('./server/routes/asset/asset')
+const Share = require('./server/routes/asset/share')
+const Offer = require('./server/routes/asset/offer')
+const Review = require('./server/routes/asset/review')
+const Comment = require('./server/routes/asset/comment')
+const Transaction = require('./server/routes/asset/transaction')
 
 //Mount routers
+app.use('/api/v1/ai/', AI );
 app.use('/api/v1/auth', Auth);
 app.use('/api/v1/users', User);
 app.use('/api/v1/conditional', Conditional);
@@ -99,8 +100,7 @@ app.use('/api/v1/blockchain/nft', NFT );
 app.use('/api/v1/blockchain/ico', ICO );
 app.use('/api/v1/blockchain/market', Market );
 
-// Artificial Intelligence Routes
-app.use('/api/v1/ai/', AI );
+
 
 
 const server = app.listen(PORT, () => { 

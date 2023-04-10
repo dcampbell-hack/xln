@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const FileSchema = require('./File');
+const FileSchema = require('./asset/File');
 const slugify = require('slugify');
 const axios = require('axios')
 const geocoder = require('../utils/geocoder');
@@ -49,9 +49,11 @@ const AssetSchema = new mongoose.Schema({
         enum: [
             'AI Art',
             'AI Chat',
+            'Audio',
             'Blog',
             'Document',
             'Domain',
+            'Downloader',
             'Enterprise',
             'File',
             'Link',

@@ -6,9 +6,19 @@
     place-items: center;
 }
 
+.util-form-layout-expand{
+    min-height: 78vh;
+    display: grid;
+    place-items: center;
+}
+
 .util-form-layout .two-panel-text{
-  padding: 2em;
+  padding: 0.5em 0;
   width: 25em;
+}
+
+.util-form-layout .two-panel-text p{
+    font-size: 14px;
 }
 
 .util-form-layout .two-panel-text h2{

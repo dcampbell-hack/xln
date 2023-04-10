@@ -104,10 +104,14 @@ export const uploadUserFile = (id, values ) => async  dispatch => {
 }
 
 
-export const updateUser = (id, user) => async  dispatch => {
+export const updateUser = (id, values) => async  dispatch => {
   try{
-
-  const res = await axios.put(`/api/v1/users/${id}`, user);
+  if(values["website"]){ 
+   const isValidURL = new URL(values.website)
+   if(!isValidURL) values.website = "http://" + values.website; 
+  }
+   console.log(values.website)
+   const res = await axios.put(`/api/v1/users/${id}`, values);
   dispatch({
       type: UPDATE_USER,
       payload: res.data
@@ -117,6 +121,7 @@ export const updateUser = (id, user) => async  dispatch => {
       dispatch({ type: USER_ERROR, payload: err })
   }
 }
+
 
 export const deleteUser = id => async  dispatch => {
   try{

@@ -57,14 +57,12 @@ import {
             case CREATE_USER:
                 return { ...state, user: action.payload, loading: false }
              case UPDATE_USER:
+                console.log("Update User Reducer ", action)
                 return { 
                     ...state, 
-                    firstname: action.payload.firstname, 
-                    lastname: action.payload.lastname, 
-                    username: action.payload.username, 
+                    ...action.payload.data, 
                     updated: true, 
                     loading: false,
-                    socialLinks: action.payload.socialLinks
                 }
             case USERNAME:
                 return { ...state, loading: false, username: action.username }

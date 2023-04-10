@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Web3 from 'web3';
 import { connect } from "react-redux";
 
@@ -34,10 +34,9 @@ const XLN = ({
   getUserShares,
   metamaskAddress,
   page,
-  shares,
   users,
   xln: {
-    options: { content, templateData },
+    options: { templateData },
   },
 }) => {
 
@@ -48,43 +47,39 @@ const XLN = ({
 
 
   useEffect(() => {
-
-    if(users.isAuthenticated){
+    if(users?.isAuthenticated){
       navigate("../xln", { replace: true });
     } else {
         navigate("../login", { replace: true });
     }
+
+      // Check if the user has MetaMask installed and enabled
+      if (window.ethereum) {
+        const web3 = new Web3(window.ethereum);
+        setWeb3(web3);
+  
+        // Request access to the user's accounts
+        window.ethereum.enable().then(() => {
+          // Get the user's accounts
+          web3.eth.getAccounts().then(accounts => {
+            setAccount(accounts[0]);
+            metamaskAddress(accounts[0])
+          });
+        });
+      }
+
   }, [ users.isAuthenticated ])
 
-  useEffect(() => {
-    // Check if the user has MetaMask installed and enabled
-    if (window.ethereum) {
-      const web3 = new Web3(window.ethereum);
-      setWeb3(web3);
-
-      // Request access to the user's accounts
-      window.ethereum.enable().then(() => {
-        // Get the user's accounts
-        web3.eth.getAccounts().then(accounts => {
-          setAccount(accounts[0]);
-          metamaskAddress(accounts[0])
-        });
-      });
-    }
-  }, []);
 
   if (!web3 || !account) {
     return <NotFound type="Metamask:" message="Please install MetaMask to use this app."  />;
   }
 
-  const findTemplate = templateData.find(
-    ({ type }, index) => page == type
-  );
+  const findTemplate = templateData.find( ({ type }, index) => page == type );
 
   if(!findTemplate){
     return <NotFound type="Template"  />
   }
-
 
   return (
     <div className="xln-setup-container">
@@ -100,7 +95,6 @@ const mapStateToProps = (state) => {
     assets: state.assets,
     auth: state.auth,
     blockchain: state.blockchain,
-    shares: state.shares,
     users: state.users,
   };
 };

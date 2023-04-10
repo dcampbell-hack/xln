@@ -10,7 +10,7 @@ flex-wrap: wrap;
 .asset-form-container{
     width: 100vw;
     height: 100vh;
-    padding: 5em 0;
+    padding: 0.5em 0;
     overflow-y: auto;
     display: grid;
     place-content: center;
@@ -308,7 +308,6 @@ flex-wrap: wrap;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-around;
-
 }
 
 .create-xln-item{
@@ -321,7 +320,8 @@ flex-wrap: wrap;
 }
 
 .create-xln-item:hover{
-    background-color: rgba(250,250,250,0.5);
+    color: #fff;
+    background-color: rgba( 0, 0, 0, 0.18 );
 }
 
 .create-xln-item a{

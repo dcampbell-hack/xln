@@ -17,7 +17,7 @@ const mapOptions = (options) =>
 export const FormInput = ({
   options: {
     label: { error, inverse, show, labelText, forId },
-    input: { type, id, className, name, value, placeholder, min = "", step = "" },
+    input: { type, id, className, name, value, placeholder, pattern = "", min = "", step = "", disabled=false },
     aria: {},
   },
   setValues,
@@ -48,8 +48,10 @@ export const FormInput = ({
           name={name}
           min={min}
           step={step}
+          pattern={ pattern !== "" && pattern}
           placeholder={placeholder}
           onChange={(e) => onchange(e)}
+          disabled={disabled}
         />
         {type == "password" && (
           <div
@@ -152,21 +154,16 @@ export const FormDropdown = ({
   values,
 }) => {
 
-  const mapCategories = () => datalist.schema.types.map(( type, index) => <option key={index} value={ type } /> );
-
   return (
     <div className="form-control-container">
-      <div className="dropdown_input">
-        <input
-          list={input.list}
-          id={input.id}
-          name={input.name}
-          placeholder={ datalist.schema.placeholder}
-          onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
-        />
-        { datalist.schema.isDescription && <small>{ datalist.schema.description }</small>}
-      </div>
-      <datalist id={datalist.id}>{mapCategories()}</datalist>
+      <select 
+         id={input.id} 
+         value={values[input.name]} 
+         name={input.name}
+         defaultValue={values[input.name]} 
+         onChange={e => setValues({ ...values, [input.name]: e.target.value})} >
+       { datalist.schema.types.map(( type, index) => <option key={index} value={type} >{ type }</option> ) }
+      </select>
     </div>
   );
 };
@@ -241,6 +238,12 @@ export const SingleFileUpload = ({
   );
 };
 
-export const FormButton = ({ label, className, disable }) => (
-  <input className={className} type="submit" value={label} disabled={disable} />
+export const numberSelector = () => {
+  return(
+    <input type="number" value=""  />
+  )
+}
+
+export const FormButton = ({ status, label, className, disable }) => (
+  <button className={className} type="submit"  disabled={disable}>{status ? <i className="fas fa-spinner fa-spin"></i> : label}</button>
 );

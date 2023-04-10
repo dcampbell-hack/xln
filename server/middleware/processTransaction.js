@@ -1,6 +1,6 @@
 const Wallet = require('../model/Wallet');
 const User = require('../model/User');
-const Share = require('../model/Share');
+const Share = require('../model/asset/Share');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.returnWallets = async function( array ){

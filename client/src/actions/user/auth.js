@@ -41,13 +41,6 @@ export const registerUser = (user) => async (dispatch) => {
   }
 };
 
-export const removeError = () => async (dispatch) => {
-  dispatch({
-    type: REMOVE_ERROR,
-    payload: false,
-  });
-};
-
 export const findUsername = (username) => async dispatch => {
   try{
     console.log({ username })
@@ -88,14 +81,6 @@ export const resetPassword = (id) => async (dispatch) => {
     dispatch({ type: AUTH_ERROR, status: err?.response?.status, error: 'resetpassword' });
   }
 };
-
-
-export const addNewError = (error) => async (dispatch) => {
-    dispatch({
-        type: ADD_NEW_ERROR,
-        payload: error,
-      });
-}
 
 export const logoutUser = () => {
   return {
