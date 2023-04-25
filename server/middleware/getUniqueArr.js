@@ -5,4 +5,4 @@ const getUniqArr = (arr, key) => {
     return res;
 };
 
-module.exports = getUniqArr;
+export default getUniqArr;

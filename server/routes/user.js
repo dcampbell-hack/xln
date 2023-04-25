@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const { 
+import { 
       getUser, 
       getUsers, 
       createUser, 
@@ -9,22 +9,21 @@ const {
       deleteUser, 
       updateUserAvatar, 
       updateUserCover 
-} = require('../controller/user');
+} from '../controller/user.js';
 
-const sharesRouter = require('./asset/share');
-const reviewsRouter = require('./asset/review');
-const walletRouter = require('./wallet');
-const commentsRouter = require('./asset/comment');
+import sharesRouter from './asset/share.js';
+import reviewsRouter from './asset/review.js';
+import walletRouter from './wallet.js';
+import commentsRouter from './asset/comment.js';
+
+import advancedResults from '../middleware/advancedResults.js';
+import { protect, authorize } from '../middleware/auth.js';
+import User from '../model/User.js';
 
 router.use('/:userId/wallets', walletRouter)
 router.use('/:userId/shares', sharesRouter)
 router.use('/:userId/reviews', reviewsRouter)
 router.use('/:userId/comments', commentsRouter)
-
-
-const advancedResults = require('../middleware/advancedResults');
-const { protect, authorize } = require('../middleware/auth');
-const User = require('../model/User');
 
 router.use(protect);
 
@@ -47,4 +46,4 @@ router.route('/:id/cover')
       .put(protect, authorize('user', 'publisher', 'admin'), updateUserCover)
 
 
-module.exports = router;
+export default router;

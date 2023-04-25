@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+import Email from 'email-templates';
 
-const Email = require('email-templates');
 const email = new Email({
  message: {
    from: 'hi@example.com'
@@ -51,4 +51,4 @@ console.log(`Message sent: %$`, info.messageId)
 
 }
 
-module.exports = newEmail;
+export default newEmail;

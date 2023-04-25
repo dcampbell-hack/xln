@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const TextSchema = new Schema({ 
@@ -35,4 +35,4 @@ TextSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Text', TextSchema);
+export default mongoose.model('Text', TextSchema);

@@ -29,7 +29,7 @@ import {
 
 import { uploadUserFile, updateUser } from "../../../../actions/user/user";
 
-import { textToImage } from "../../../../actions/assets/ai";
+import { textToImage, postChatMessage, selectLangModel } from "../../../../actions/assets/ai";
 
 import {
   buyNFT,
@@ -59,6 +59,9 @@ import {
   FormDropdown,
   FormButton,
   FileUpload,
+  FormRangeSelector,
+  FormTimeInput,
+  FormColorPicker,
   BuyFormInput,
 } from "./formStyles";
 
@@ -76,14 +79,16 @@ const Form = ({
   downloadYoutube,
   findUsername,
   forgotPassword,
-  formData: { action, method, assetType = "", toggle = false, fields, submit },
-  textToImage,
+  formData: { action, method, assetType = "", content = {}, toggle = false, fields, submit },
   loginUser,
   mintNFT,
+  postChatMessage,
   registerUser,
   removeError,
   resetPassword,
   setValues,
+  textToImage,
+  selectLangModel,
   updateSupply,
   updateUser,
   uploadUserFile,
@@ -102,20 +107,22 @@ const Form = ({
       users.username
     } on ${new Date(Date.now()).toDateString()}.`
 
-    setValues({
+   toggle &&  setValues({
       ...values,
       assetType,
       name: `${assetType}_${Date.now()}`,
       category: category.find(({ name }) => name === assetType)?.suggestion.toString(),
+      cover:  assetType === "AI Chat" && values?.model ? content?.assistantCover[values?.model] : "",
       description: values.prompt ? ( description + " " + values.prompt ) : description,
       website: users.website,
       price: users.assetPrice - users.assetPrice * 0.03,
       stock: users.stockLimit,
       fee: users.assetPrice * 0.03,
+      user: users.id
     });
 
 
-  }, []);
+  }, [ values?.model ]);
 
   useEffect(() => {
     if (auth.register.success) {
@@ -139,8 +146,6 @@ const Form = ({
     }
   }, [auth?.login?.success, auth?.register?.success]);
 
-
-
   const formFieldTypes = (type, attributes, index) => {
     switch (type) {
       case "input":
@@ -152,7 +157,29 @@ const Form = ({
             values={values}
           />
         );
-
+        case "range":
+        return (
+          <FormRangeSelector
+            key={index}
+            options={attributes}
+            setValues={setValues}
+            values={values}
+          />
+        );
+      case "time":
+        return ( <FormTimeInput
+        key={index}
+        options={attributes}
+        setValues={setValues}
+        values={values}
+        /> )
+      case "color": 
+      return ( <FormColorPicker
+         key={index}
+         options={attributes}
+         setValues={setValues}
+         values={values}
+         /> )
       case "buy":
         return (
           <BuyFormInput
@@ -162,7 +189,6 @@ const Form = ({
             values={values}
           />
         );
-
       case "textarea":
         return (
           <FormTextArea
@@ -224,7 +250,6 @@ const Form = ({
     console.log("OnSubmit", action, values, error );
 
     if (!error.length) {
-      const { id } = params;
       switch (action) {
 
         case "buyNFT":
@@ -254,6 +279,14 @@ const Form = ({
           break;
         case "forgotPassword":
           forgotPassword(values);
+          break;
+        case "postChatMessage":
+          console.log("PostChatMessage", params.assetId, values )
+          await postChatMessage(params.assetId, values);
+          break;
+        case "selectLangModel":
+          console.log("Select Lang Model", params.assetId, values)
+          await selectLangModel(params.assetId, values);
           break;
         case "resetPassword":
           resetPassword(values);
@@ -334,6 +367,8 @@ const mapDispatchToProps = {
   textToImage,
   loginUser,
   mintNFT,
+  postChatMessage,
+  selectLangModel,
   registerUser,
   removeError,
   resetPassword,

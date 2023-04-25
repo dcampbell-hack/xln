@@ -1,13 +1,13 @@
-const ErrorResponse = require('../utils/errorResponse');
-const asyncHandler = require('../middleware/async');
-const User = require('../model/User');
-const Wallet = require('../model/Wallet');
+import ErrorResponse from '../utils/errorResponse.js';
+import asyncHandler from '../middleware/async.js';
+import User from '../model/User.js';
+import Wallet from '../model/Wallet.js';
 
 
 //@desc Get Wallet
 //@route GET /api/v1/wallets/:id
 //@access Public 
-exports.getWallet = asyncHandler(async (req, res, next ) => {
+export const getWallet = asyncHandler(async (req, res, next ) => {
 
 const wallet = await Wallet.findById(req.params.id)
                            .populate({ path: 'user', select: 'name description'})
@@ -26,7 +26,7 @@ res.status(200).json({
 //@desc Get Wallets 
 //@route GET /api/v1/wallets/       
 //@access Public 
-exports.getWallets = asyncHandler(async (req, res, next ) => {
+export const getWallets = asyncHandler(async (req, res, next ) => {
     if(req.params.userId){
         const wallets = await Wallet.find({ user: req.params.userId });
         return res.status(200).json({
@@ -42,7 +42,7 @@ exports.getWallets = asyncHandler(async (req, res, next ) => {
 //@desc Add Wallet
 //@route POST /api/v1/:userId/wallets 
 //@access Public 
-exports.createWallet = asyncHandler(async (req, res, next ) => {
+export const createWallet = asyncHandler(async (req, res, next ) => {
 req.body.user = req.params.userId
 
 const user = User.findOne({ _id: req.params.userId });
@@ -79,7 +79,7 @@ res.status(201).json({
 //@desc Transaction in  Wallet
 //@route PUT /api/v1/wallets/:id
 //@access Public 
-exports.transactWallet = asyncHandler(async (req, res, next ) => {
+export const transactWallet = asyncHandler(async (req, res, next ) => {
  let wallet = await Wallet.findById(req.params.id);
  if(!wallet){
      return next(new ErrorResponse(`No wallet with the id of ${req.params.id}`, 404))
@@ -110,7 +110,7 @@ res.status(200).json({
 //@desc Choose Active Wallet
 //@route POST /api/v1/:userId/wallets/:id/choose
 //@access Public 
-exports.chooseWallet = asyncHandler(async (req, res, next ) => {
+export const chooseWallet = asyncHandler(async (req, res, next ) => {
 
 async function activeWallet(id){
     await Wallet.findByIdAndUpdate(id, { active: false }, { new: true, runValidators: true})
@@ -138,7 +138,7 @@ res.status(200).json({
 //@desc Delete Wallet
 //@route GET /api/v1/wallet/:id 
 //@access Public 
-exports.deleteWallet = asyncHandler(async (req, res, next ) => {
+export const deleteWallet = asyncHandler(async (req, res, next ) => {
     const wallet = await Wallet.findById(req.params.id);
     if(!wallet){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

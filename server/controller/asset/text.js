@@ -1,18 +1,18 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const Text = require('../../model/asset/Text');
+import Asset from '../../model/Asset.js';
+import Text from '../../model/asset/Text.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 //@desc Get Text
 //@route GET /api/v1/texts/:id
 //@access Public 
-exports.getText = asyncHandler(async (req, res, next ) => {
+export const getText = asyncHandler(async (req, res, next ) => {
 
 const text = await Text.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -34,7 +34,7 @@ res.status(200).json({
 //@desc Get Reviews 
 //@route GET /api/v1/reviews       
 //@access Public 
-exports.getTexts = asyncHandler(async (req, res, next ) => {
+export const getTexts = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
        await preventPublicKnowledge(next, req.params.assetId )
         const texts = await Text.find({ asset: req.params.assetId });
@@ -51,7 +51,7 @@ exports.getTexts = asyncHandler(async (req, res, next ) => {
 //@desc Create Text
 //@route POST /api/v1/:assetId/texts
 //@access Public 
-exports.createText = asyncHandler(async (req, res, next ) => {
+export const createText = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -74,7 +74,7 @@ res.status(201).json({
 //@desc Update Text
 //@route GET /api/v1/texts/:id
 //@access Public 
-exports.updateText = asyncHandler(async (req, res, next ) => {
+export const updateText = asyncHandler(async (req, res, next ) => {
 
  let text = await Text.findById(req.params.id);
  if(!text){
@@ -95,7 +95,7 @@ res.status(200).json({
 //@desc Delete Review 
 //@route GET /api/v1/texts/:id 
 //@access Public 
-exports.deleteText = asyncHandler(async (req, res, next ) => {
+export const deleteText = asyncHandler(async (req, res, next ) => {
     const text = await Text.findById(req.params.id);
     if(!text){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

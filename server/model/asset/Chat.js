@@ -1,14 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-
-// model: "text-davinci-003",
-// prompt: ``,
-// max_tokens: 64,
-// temperature: 0,
-// top_p: 1.0,
-// frequency_penalty: 0.0,
-// presence_penalty: 0.0,
-// stop: ["\n"]
 
 const ChatSchema = new Schema({ 
 model: {
@@ -19,9 +10,20 @@ model: {
     ],
     required: [ true, "Include the chat model being used"]
 },
+objectId: {
+    type: String
+},
+interface: {
+    type: String,
+    required: [ false, "Include the interface." ]
+},
 prompt: {
     type: String,
     required: [ false, 'Text prompt is required']
+},
+assistant: {
+    type: String,
+
 },
 max_tokens: {
     type: Number,
@@ -81,4 +83,4 @@ ChatSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Chat', ChatSchema);
+export default mongoose.model('Chat', ChatSchema);

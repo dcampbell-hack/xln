@@ -1,4 +1,4 @@
-const sendRequest = (req, request, url, data) => {
+export const sendRequest = (req, request, url, data) => {
     axios.post(`${url}`, data, {
         headers: {'Authorization': req.headers.authorization}
     })

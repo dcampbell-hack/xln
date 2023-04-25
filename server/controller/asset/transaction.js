@@ -1,27 +1,27 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
-const axios = require('axios');
+import ErrorResponse from '../../utils/errorResponse.js';
+import axios from 'axios';
 
 // Models
-const Asset = require('../../model/Asset');
-const User = require('../../model/User');
-const Share = require('../../model/asset/Share');
-const Transaction = require('../../model/asset/Transaction');
-const Wallet = require('../../model/Wallet');
-const Shareholder = require('../../model/Shareholder');
+import Asset from '../../model/Asset.js';
+import User from '../../model/User.js';
+import Share from '../../model/asset/Share.js';
+import Transaction from '../../model/asset/Transaction.js';
+import Wallet from '../../model/Wallet.js';
+import Shareholder from '../../model/Shareholder.js';
 
 // Middleware
-const { returnWallets, processTransaction } = require('../../middleware/processTransaction');
-const getUniqArr = require('../../middleware/getUniqueArr');
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import { returnWallets, processTransaction } from '../../middleware/processTransaction.js';
+import getUniqArr from '../../middleware/getUniqueArr.js';
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 
 
 //@desc Get Transaction
 //@route GET /api/v1/shares/:shareId/tx/:txId
 //@access Public 
-exports.getTransaction = asyncHandler(async (req, res, next ) => {
+export const getTransaction = asyncHandler(async (req, res, next ) => {
 
     if(req.params.id){
         const tx = await Transaction.findById(req.params.id).populate({
@@ -48,9 +48,7 @@ exports.getTransaction = asyncHandler(async (req, res, next ) => {
 //@desc Get Transaction
 //@route GET /api/v1/shares/:shareId/tx      
 //@access Public 
-exports.getTransactions = asyncHandler(async (req, res, next ) => {
-
-
+export const getTransactions = asyncHandler(async (req, res, next ) => {
 
 if(req.params.assetId){
 
@@ -73,7 +71,7 @@ return res.status(200).json({
 //@desc Create Transaction
 //@route GET /api/v1/shares/:shareId/tx
 //@access Public 
-exports.createTransaction = asyncHandler(async (req, res, next ) => {
+export const createTransaction = asyncHandler(async (req, res, next ) => {
 
 req.body.share = req.params.shareId;
 req.body.buyer = req.user.id;

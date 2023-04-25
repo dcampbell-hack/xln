@@ -1,18 +1,18 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const Link = require('../../model/asset/Link');
+import Asset from '../../model/Asset.js';
+import Link from '../../model/asset/Link.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 //@desc Get Link
 //@route GET /api/v1/reviews/:id
 //@access Public 
-exports.getLink = asyncHandler(async (req, res, next ) => {
+export const getLink = asyncHandler(async (req, res, next ) => {
 
 const link = await Link.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -34,7 +34,7 @@ res.status(200).json({
 //@desc Get Links 
 //@route GET /api/v1/links       
 //@access Public 
-exports.getLinks = asyncHandler(async (req, res, next ) => {
+export const getLinks = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
        await preventPublicKnowledge(next, req.params.assetId )
         const links = await Link.find({ asset: req.params.assetId });
@@ -51,7 +51,7 @@ exports.getLinks = asyncHandler(async (req, res, next ) => {
 //@desc Create Link
 //@route POST /api/v1/:assetId/reviews 
 //@access Public 
-exports.createLink = asyncHandler(async (req, res, next ) => {
+export const createLink = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -74,7 +74,7 @@ res.status(201).json({
 //@desc Update Link
 //@route GET /api/v1/links/:id
 //@access Public 
-exports.updateLink = asyncHandler(async (req, res, next ) => {
+export const updateLink = asyncHandler(async (req, res, next ) => {
 
  let link = await Link.findById(req.params.id);
  if(!link){
@@ -95,7 +95,7 @@ res.status(200).json({
 //@desc Delete Link
 //@route GET /api/v1/links/:id 
 //@access Public 
-exports.deleteLink= asyncHandler(async (req, res, next ) => {
+export const deleteLink= asyncHandler(async (req, res, next ) => {
     const link = await Link.findById(req.params.id);
     if(!link){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

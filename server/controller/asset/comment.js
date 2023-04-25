@@ -1,24 +1,24 @@
 //Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 //Models
-const Asset = require('../../model/Asset');
-const Share = require('../../model/asset/Share');
-const Review = require('../../model/asset/Review');
-const Offer = require('../../model/asset/Offer');
-const User = require('../../model/User');
-const Comment = require('../../model/asset/Comment');
+import Asset from '../../model/Asset.js';
+import Share from '../../model/asset/Share.js';
+import Review from '../../model/asset/Review.js';
+import Offer from '../../model/asset/Offer.js';
+import User from '../../model/User.js';
+import Comment from '../../model/asset/Comment.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge  } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge  } from '../../middleware/checkIfValidAsset.js'
 
 
 
 //@desc Get Shares
 //@route GET /api/v1/assets/:assetId/shares/:shareId
 //@access Public 
-exports.getComment = asyncHandler(async (req, res, next ) => {
+export const getComment = asyncHandler(async (req, res, next ) => {
 
     if(req.params.id){
         const comment = await Comment.findById(req.params.id).populate({
@@ -45,7 +45,7 @@ exports.getComment = asyncHandler(async (req, res, next ) => {
 //@desc Get Shares 
 //@route GET /api/v1/assets/:assetId/shares      
 //@access Public 
-exports.getComments = asyncHandler(async (req, res, next ) => {
+export const getComments = asyncHandler(async (req, res, next ) => {
 
 if(req.params.assetId){
 
@@ -68,7 +68,7 @@ return res.status(200).json({
 //@desc Add Comment
 //@route GET /api/v1/share 
 //@access Public 
-exports.addComment = asyncHandler(async (req, res, next ) => {
+export const addComment = asyncHandler(async (req, res, next ) => {
 
 req.body.asset = req.params.assetId 
 req.body.share = req.params.shareId
@@ -118,7 +118,7 @@ if(req.body.review){
 //@desc Update comment
 //@route PUT /api/v1/comment/:id
 //@access Public 
-exports.updateComment = asyncHandler(async (req, res, next ) => {
+export const updateComment = asyncHandler(async (req, res, next ) => {
    let comment = await Comment.findById(req.params.id);
    
    if(!comment){
@@ -138,7 +138,7 @@ exports.updateComment = asyncHandler(async (req, res, next ) => {
 //@desc Delete Share 
 //@route GET /api/v1/share 
 //@access Public 
-exports.deleteComment = asyncHandler(async (req, res, next ) => {
+export const deleteComment = asyncHandler(async (req, res, next ) => {
 const comment = await Comment.findById(req.params.id);
 
 if(!comment){

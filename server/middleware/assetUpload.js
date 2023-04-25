@@ -1,7 +1,7 @@
-const ErrorResponse = require("../utils/errorResponse");
-const path = require("path");
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
+import  ErrorResponse from "../utils/errorResponse.js";
+import  path from "path";
+import  fs from "fs";
+import  { v4 as uuidv4 } from "uuid";
 
 const createFolder = (dir) => {
   if (!fs.existsSync(dir)) {
@@ -103,4 +103,4 @@ const assetUpload = async (model, fileType, category, req, res, next) => {
   next();
 };
 
-module.exports = assetUpload;
+export default assetUpload;

@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { authorize, protect } = require('../../middleware/auth');
-const advancedResults = require('../../middleware/advancedResults');
-const Asset = require('../../model/Asset')
 
-const { 
+import { authorize, protect } from '../../middleware/auth.js';
+import advancedResults from '../../middleware/advancedResults.js';
+import Asset from '../../model/Asset.js'
+
+import { 
     assetCoverUpload, 
     createAsset, 
     deleteAsset, 
@@ -14,20 +15,20 @@ const {
     getAssets, 
     updateAsset,
     downloadYoutube 
-} = require('../../controller/asset/asset');
+} from '../../controller/asset/asset.js';
 
-const aiRouter = require('./ai');
-const audioRouter = require('./audio');
-const commentsRouter = require('./comment');
-const conditionalsRouter = require('./conditional');
-const imageRouter = require('./image');
-const linkRouter = require('./link');
-const offersRouter = require('./offer');
-const reviewsRouter = require('./review');
-const sharesRouter = require('./share');
-const textRouter = require('./text');
-const transactionsRouter = require('./transaction');
-const videoRouter = require('./video');
+import aiRouter from './ai.js';
+import audioRouter from './audio.js';
+import commentsRouter from './comment.js';
+import conditionalsRouter from './conditional.js';
+import imageRouter from './image.js';
+import linkRouter from './link.js';
+import offersRouter from './offer.js';
+import reviewsRouter from './review.js';
+import sharesRouter from './share.js';
+import textRouter from './text.js';
+import transactionsRouter from './transaction.js';
+import videoRouter from './video.js';
 
 router.use('/:assetId/ai/', aiRouter)
 router.use('/asset/audio/', audioRouter)
@@ -76,4 +77,4 @@ router
 .get(getAssetsInRadius)
 
 
-module.exports = router;
+export default router;

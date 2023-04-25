@@ -1,31 +1,36 @@
 //Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 //Models
-const Asset = require('../../model/Asset');
-const Share = require('../../model/asset/Share');
-const Review = require('../../model/asset/Review');
-const Offer = require('../../model/asset/Offer');
-const User = require('../../model/User');
-const Comment = require('../../model/asset/Comment');
+import Asset from '../../model/Asset.js';
+import Share from '../../model/asset/Share.js';
+import Review from '../../model/asset/Review.js';
+import Offer from '../../model/asset/Offer.js';
+import User from '../../model/User.js';
+import Comment from '../../model/asset/Comment.js';
 
-const { ethers, providers } = require('ethers');
+import { ethers, providers } from 'ethers';
+import web3 from 'web3';
+import Web3 from 'web3';
+import axios from 'axios';
+import hre from 'hardhat';
 
-const axios = require('axios');
-const hre = require('hardhat');
-const Web3 = require('web3');
+//import XLNICO from '../../../artifacts/contracts/XLN_ICO.sol/XLNICO.json');
 
-const { nftAddress, nftMarketAddress } = require('../../config/config')
-
+import { tokenAddress, icoAddress } from '../../config/config.js'
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge  } = require('../../middleware/checkIfValidAsset');
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge  } from '../../middleware/checkIfValidAsset.js';
+
+const keyData = "880cc13f65a639ab6ddd37afbfa9b008bc5045fccc2da1b715b67f7c8317fdec"
+const address = '0xf62b5824d151094359C831A6195112e355D5dC61';
+const eth_id = 'https://kovan.infura.io/v3/68eb211506c141e78162043b7b0df69a';
 
 //@desc MintNFT
 //@route GET /api/v1/ico/withdrawTokens 
 //@access Public 
-exports.mintNFT = asyncHandler(async (req, res, next ) => {
+export const mintNFT = asyncHandler(async (req, res, next ) => {
 
     const Market = await hre.ethers.getContractFactory('XLNMarket');
     const market = await Market.deploy();

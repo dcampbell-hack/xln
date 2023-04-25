@@ -1,9 +1,9 @@
-const Wallet = require('../model/Wallet');
-const User = require('../model/User');
-const Share = require('../model/asset/Share');
-const ErrorResponse = require('../utils/errorResponse');
+import Wallet from '../model/Wallet.js';
+import User from '../model/User.js';
+import Share from '../model/asset/Share.js';
+import ErrorResponse from '../utils/errorResponse.js';
 
-exports.returnWallets = async function( array ){
+export const returnWallets = async function( array ){
   
 const wallets = [];
 
@@ -26,7 +26,7 @@ return wallets;
 }
 
 
-exports.processTransaction = async function(res, wallets, txInfo ){
+export const processTransaction = async function(res, wallets, txInfo ){
 
     if(!wallets){
         return( new ErrorResponse('Wallets were not found', 404) )

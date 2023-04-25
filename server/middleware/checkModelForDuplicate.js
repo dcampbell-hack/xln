@@ -1,9 +1,9 @@
-const ErrorResponse = require('../utils/errorResponse');
-const Category = require('../model/Category');
-const { formatField } = require('./formatField');
-const _ = require('lodash')
+import ErrorResponse from '../utils/errorResponse.js';
+import Category from '../model/Category.js';
+import { formatField } from './formatField.js';
+import _ from 'lodash';
  
-exports.checkModelForDuplicate = async (model, value) => {
+export const checkModelForDuplicate = async (model, value) => {
 
 try{
 

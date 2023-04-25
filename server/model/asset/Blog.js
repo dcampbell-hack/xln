@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const BlogSchema = new Schema({ 
@@ -35,4 +35,4 @@ BlogSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Blog', BlogSchema);
+export default mongoose.model('Blog', BlogSchema);

@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { 
+import { 
     getContractAddress,
     updateUserAddress
-}  = require('../../controller/blockchain/');
+}  from '../../controller/blockchain/index.js'
 
-const { protect, authorize } = require('../../middleware/auth');
+import { protect, authorize } from '../../middleware/auth.js'
 
 router
 .route('/get-contract-address')
@@ -17,4 +17,4 @@ router
 .route('/address')
 .post(protect, authorize('publisher', 'user', 'admin'), updateUserAddress );
 
-module.exports = router;
+export default router;

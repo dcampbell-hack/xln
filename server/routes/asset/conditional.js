@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const advancedResults = require('../../middleware/advancedResults');
+import advancedResults from '../../middleware/advancedResults.js';
 
-const { getConditional, createConditional, updateConditional }  = require('../../controller/asset/conditional');
+import { getConditional, createConditional, updateConditional }  from '../../controller/asset/conditional.js';
 
-const Conditional = require('../../model/Conditional');
-const { protect, authorize } = require('../../middleware/auth');
+import Conditional from '../../model/Conditional.js';
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/')
@@ -18,4 +18,4 @@ router
 .put(protect, authorize('publisher', 'admin'), updateConditional )
 
 
-module.exports = router;
+export default router;

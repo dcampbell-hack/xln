@@ -206,6 +206,84 @@ export const FileUpload = ({
   );
 };
 
+export const FormRangeSelector = ({
+  options: {
+    label: { error, inverse, show, labelText, forId },
+    input: { type, id, className, name, value, placeholder, pattern = "", min = "", max="", step = "", disabled=false },
+    aria: {},
+  },
+  setValues,
+  values,
+})  => {
+
+  const [ rangeValue, setRangeValue ] = useState(0);
+  const updateRange = (e) => {
+    e.preventDefault()
+    setValues({ ...values, [e.target.name]: e.target.value })
+    setRangeValue(e.target.value)
+  }
+
+  return(
+    <div className="form-control-container">
+         <label for={forId}>{labelText}</label>
+         <input type="range" id={className} onChange={e => updateRange(e)} name={name} min={min} max={max} step={step} />
+         <label>{ rangeValue }</label>
+    </div>
+  )
+}
+
+export const FormTimeInput = ({
+  options: {
+    label: { error, inverse, show, labelText, forId },
+    input: { type, id, className, name, value, placeholder, pattern = "", min = "", max="", step = "", disabled=false },
+    aria: {},
+  },
+  setValues,
+  values,
+}) => {
+  return(
+    <div>
+      { true ?
+      <div>
+      <label for="appt">Choose a time for your meeting:</label>
+     <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+     <small>Office hours are 9am to 6pm</small>
+     </div>
+     :   <div>
+    <label for="start">Start month:</label>
+    <input type="month" id="start" name="start" min="2018-03" value="2018-05" />
+  </div>
+      }
+      </div>
+  )
+}
+
+export const FormColorPicker = ({
+  options: {
+    label: { error, inverse, show, labelText, forId },
+    input: { type, id, className, name, value, placeholder, pattern = "", min = "", max="", step = "", disabled=false },
+    aria: {},
+  },
+  setValues,
+  values,
+}) => {
+  return(
+    <div>
+      <p>Choose your monster's colors:</p>
+
+<div>
+    <input type="color" id="head" name="head" value="#e66465" />
+    <label for="head">Head</label>
+</div>
+
+<div>
+    <input type="color" id="body" name="body"  value="#f6b73c" />
+    <label for="body">Body</label>
+</div>
+    </div>
+  )
+}
+
 export const SingleFileUpload = ({
   options: { label, input },
   setValues,

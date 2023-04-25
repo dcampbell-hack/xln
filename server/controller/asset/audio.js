@@ -1,18 +1,18 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const Audio = require('../../model/asset/Audio');
+import Asset from '../../model/Asset.js';
+import Audio from '../../model/asset/Audio.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js';
 
 //@desc Get Audio
 //@route GET /api/v1/audios/:id
 //@access Public 
-exports.getAudio = asyncHandler(async (req, res, next ) => {
+export const getAudio = asyncHandler(async (req, res, next ) => {
 
 const audio = await Audio.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -34,7 +34,7 @@ res.status(200).json({
 //@desc Get Audios 
 //@route GET /api/v1/audios       
 //@access Public 
-exports.getAudios = asyncHandler(async (req, res, next ) => {
+export const getAudios = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
        await preventPublicKnowledge(next, req.params.assetId )
         const audios = await Audio.find({ asset: req.params.assetId });
@@ -51,7 +51,7 @@ exports.getAudios = asyncHandler(async (req, res, next ) => {
 //@desc Add Audio
 //@route POST /api/v1/:assetId/audios 
 //@access Public 
-exports.createAudio = asyncHandler(async (req, res, next ) => {
+export const createAudio = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -74,7 +74,7 @@ res.status(201).json({
 //@desc Update Audio
 //@route GET /api/v1/audios/:id
 //@access Public 
-exports.updateAudio = asyncHandler(async (req, res, next ) => {
+export const updateAudio = asyncHandler(async (req, res, next ) => {
 
  let audio = await Audio.findById(req.params.id);
  if(!audio){
@@ -95,7 +95,7 @@ res.status(200).json({
 //@desc Delete Audio 
 //@route GET /api/v1/audios/:id 
 //@access Public 
-exports.deleteAudio = asyncHandler(async (req, res, next ) => {
+export const deleteAudio = asyncHandler(async (req, res, next ) => {
     const audio = await Audio.findById(req.params.id);
     if(!audio){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

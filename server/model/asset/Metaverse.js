@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const MetaverseSchema = new Schema({ 
@@ -35,4 +35,4 @@ MetaverseSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Metaverse', MetaverseSchema);
+export default mongoose.model('Metaverse', MetaverseSchema);

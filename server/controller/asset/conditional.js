@@ -1,7 +1,7 @@
-const ErrorResponse = require('../../utils/errorResponse');
-const asyncHandler = require('../../middleware/async');
-const Asset = require('../../model/Asset');
-const Conditional = require('../../model/Conditional');
+import ErrorResponse from '../../utils/errorResponse.js';
+import asyncHandler from '../../middleware/async.js';
+import Asset from '../../model/Asset.js';
+import Conditional from '../../model/Conditional.js';
 
 //@desc Get Conditional
 //@route GET /api/v1/conditionals/:id
@@ -25,7 +25,7 @@ const Conditional = require('../../model/Conditional');
 //@desc Get Conditionals 
 //@route GET /api/v1/conditionals       
 //@access Public 
-exports.getConditional  = asyncHandler(async (req, res, next ) => {
+export const getConditional  = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
         const conditionals = await Conditional.find({ asset: req.params.assetId });
         return res.status(200).json({
@@ -41,7 +41,7 @@ exports.getConditional  = asyncHandler(async (req, res, next ) => {
 //@desc Add Review
 //@route POST /api/v1/:assetId/reviews 
 //@access Public 
-exports.createConditional = asyncHandler(async (req, res, next ) => {
+export const createConditional = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -71,7 +71,7 @@ res.status(201).json({
 //@desc Update Review
 //@route GET /api/v1/reviews/:id
 //@access Public 
-exports.updateConditional = asyncHandler(async (req, res, next ) => {
+export const updateConditional = asyncHandler(async (req, res, next ) => {
  let conditional = await Conditional.findOne({ asset: req.params.assetId });
 
  console.log('CONDITIONALS ----------', conditional, req.params.assetId );

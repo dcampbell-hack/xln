@@ -1,18 +1,18 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const Review = require('../../model/asset/Review');
+import Asset from '../../model/Asset.js';
+import Review from '../../model/asset/Review.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 //@desc Get Review
 //@route GET /api/v1/reviews/:id
 //@access Public 
-exports.getReview = asyncHandler(async (req, res, next ) => {
+export const getReview = asyncHandler(async (req, res, next ) => {
 
 const review = await Review.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -34,7 +34,7 @@ res.status(200).json({
 //@desc Get Reviews 
 //@route GET /api/v1/reviews       
 //@access Public 
-exports.getReviews = asyncHandler(async (req, res, next ) => {
+export const getReviews = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
        await preventPublicKnowledge(next, req.params.assetId )
         const reviews = await Review.find({ asset: req.params.assetId });
@@ -51,7 +51,7 @@ exports.getReviews = asyncHandler(async (req, res, next ) => {
 //@desc Add Review
 //@route POST /api/v1/:assetId/reviews 
 //@access Public 
-exports.addReview = asyncHandler(async (req, res, next ) => {
+export const addReview = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -74,7 +74,7 @@ res.status(201).json({
 //@desc Update Review
 //@route GET /api/v1/reviews/:id
 //@access Public 
-exports.updateReview = asyncHandler(async (req, res, next ) => {
+export const updateReview = asyncHandler(async (req, res, next ) => {
 
  let review = await Review.findById(req.params.id);
  if(!review){
@@ -95,7 +95,7 @@ res.status(200).json({
 //@desc Delete Review 
 //@route GET /api/v1/reviews/:id 
 //@access Public 
-exports.deleteReview = asyncHandler(async (req, res, next ) => {
+export const deleteReview = asyncHandler(async (req, res, next ) => {
     const review = await Review.findById(req.params.id);
     if(!review){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

@@ -1,7 +1,7 @@
-const Conditional = require('../model/Conditional');
-const ErrorResponse = require('../utils/errorResponse')
+import Conditional from '../model/Conditional.js';
+import ErrorResponse from '../utils/errorResponse.js';
 
-exports.checkConditionals = async (next, assetId) => {
+export const checkConditionals = async (next, assetId) => {
     
 const conditional = await Conditional.findOne({ asset: assetId });
 
@@ -16,7 +16,7 @@ if(conditional.active){
 }
 
 
-exports.preventPublicKnowledge = async (next, assetId) => {
+export const preventPublicKnowledge = async (next, assetId) => {
 
 const conditional = await Conditional.findOne({ asset: assetId });
 
@@ -26,7 +26,7 @@ const conditional = await Conditional.findOne({ asset: assetId });
 
 }
 
-exports.preventSale = async (next, assetId) => {
+export const preventSale = async (next, assetId) => {
 
     const conditional = await Conditional.findOne({ asset: assetId });
 

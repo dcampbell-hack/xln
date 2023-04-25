@@ -8,6 +8,13 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "files": [
+    "../rust/snake_game/pkg/snake_game_bg.wasm",
+    "../rust/snake_game/pkg/snake_game.js",
+    "../rust/snake_game/pkg/snake_game.d.ts"
+  ],
+  "module": "../rust/snake_game/pkg/snake_game.js",
+  "types": "../rust/snake_game/pkg/snake_game.d.ts",
   "dependencies": {
     "@ffmpeg/core": "^0.10.0",
     "@ffmpeg/ffmpeg": "^0.10.1",

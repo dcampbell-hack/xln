@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const advancedResults = require('../../middleware/advancedResults');
+import advancedResults from '../../middleware/advancedResults.js';
 
-const { addComment, getComment, getComments, updateComment, deleteComment }  = require('../../controller/asset/comment');
+import { addComment, getComment, getComments, updateComment, deleteComment }  from '../../controller/asset/comment.js';
 
-const Comment = require('../../model/asset/Comment');
-const { protect, authorize } = require('../../middleware/auth');
+import Comment from '../../model/asset/Comment.js';
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/')
@@ -22,4 +22,4 @@ router
 .put(protect, authorize('publisher', 'admin'), updateComment )
 .delete(protect, authorize('publisher', 'admin'), deleteComment );
 
-module.exports = router;
+export default router;

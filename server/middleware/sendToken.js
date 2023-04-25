@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 const sendTokenResponse = (user, statusCode, res, next) => {
     //Create Token 
@@ -19,4 +19,4 @@ const sendTokenResponse = (user, statusCode, res, next) => {
 
 }
 
-module.exports = sendTokenResponse;
+export default sendTokenResponse;

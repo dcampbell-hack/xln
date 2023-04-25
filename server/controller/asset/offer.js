@@ -1,15 +1,20 @@
-const ErrorResponse = require('../../utils/errorResponse');
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
-const axios = require('axios');
-const Asset = require('../../model/Asset');
-const Share = require('../../model/asset/Share');
-const Offer = require('../../model/asset/Offer');
+// Pkg
+import axios from 'axios';
+
+// Utils
+import ErrorResponse from '../../utils/errorResponse.js';
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
+
+// Model
+import Asset from '../../model/Asset.js';
+import Share from '../../model/asset/Share.js';
+import Offer from '../../model/asset/Offer.js';
 
 //@desc Get Offer
 //@route GET /api/v1/offers/:id
 //@access Public 
-exports.getOffer = asyncHandler(async (req, res, next ) => {
+export const getOffer = asyncHandler(async (req, res, next ) => {
 
 const offer = await Offer.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -28,7 +33,7 @@ res.status(200).json({
 //@desc Get Offers 
 //@route GET /api/v1/offers       
 //@access Public 
-exports.getOffers = asyncHandler(async (req, res, next ) => {    
+export const getOffers = asyncHandler(async (req, res, next ) => {    
     if(req.params.assetId){
 
         // Check if Asset is set to Private
@@ -48,7 +53,7 @@ exports.getOffers = asyncHandler(async (req, res, next ) => {
 //@desc Create Offer from asset
 //@route POST /api/v1/:assetId/offers 
 //@access Public 
-exports.createOfferDirect = asyncHandler(async (req, res, next ) => {
+export const createOfferDirect = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id;
 
@@ -100,7 +105,7 @@ res.status(201).json({
 //@desc Create Offer from share
 //@route POST /api/v1/:shareId/resell
 //@access Public 
-exports.createOfferResell = asyncHandler(async (req, res, next ) => {
+export const createOfferResell = asyncHandler(async (req, res, next ) => {
 
     req.body.share = req.params.shareid;
     const share = await Share.findOne({ _id: req.params.shareId });
@@ -143,7 +148,7 @@ if(req.user.totalBalance < share.price){
 //@desc Respond To Offer
 //@route GET /api/v1/offers/:id
 //@access Public 
-exports.respondOffer = asyncHandler(async (req, res, next ) => {
+export const respondOffer = asyncHandler(async (req, res, next ) => {
 
 const response = req.body.accepted
  let offer = await Offer.findById(req.params.id);
@@ -243,7 +248,7 @@ res.status(500).json({ success: true,  msg: response.data.msg })
 //@desc Delete Offer 
 //@route GET /api/v1/offers/:id 
 //@access Public 
-exports.deleteOffer = asyncHandler(async (req, res, next ) => {
+export const deleteOffer = asyncHandler(async (req, res, next ) => {
     const offer = await Offer.findById(req.params.id);
     if(!offer){
         return next(new ErrorResponse(`No offer with the id of ${req.params.id}`, 404))

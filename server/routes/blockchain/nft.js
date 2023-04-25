@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { mintNFT }  = require('../../controller/blockchain/nft');
+import { mintNFT }  from '../../controller/blockchain/nft.js';
 
-const { protect, authorize } = require('../../middleware/auth');
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/mintNFT')
 .post( mintNFT );
 
 
-module.exports = router;
+export default router;

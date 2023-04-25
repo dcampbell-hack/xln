@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-const ErrorResponse = require('../../utils/errorResponse');
-const checkModelForDuplicate = require('../../middleware/checkModelForDuplicate');
-const Shareholder = require('../Shareholder');
-const getUniqArr = require('../../middleware/getUniqueArr');
-const axios = require('axios');
+import ErrorResponse from '../../utils/errorResponse.js';
+import { checkModelForDuplicate } from '../../middleware/checkModelForDuplicate.js';
+import Shareholder from '../Shareholder.js';
+import getUniqArr from '../../middleware/getUniqueArr.js';
 
 const ShareSchema = new Schema({
     shareNumber: {
@@ -173,4 +172,4 @@ ShareSchema.virtual('comments', {
     justOne: false
 })
 
-module.exports = mongoose.model('Share', ShareSchema )
+export default mongoose.model('Share', ShareSchema )

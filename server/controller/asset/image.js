@@ -1,18 +1,18 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const Image = require('../../model/asset/Image');
+import Asset from '../../model/Asset.js';
+import Image from '../../model/asset/Image.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 //@desc Get Image
 //@route GET /api/v1/images/:id
 //@access Public 
-exports.getImage = asyncHandler(async (req, res, next ) => {
+export const getImage = asyncHandler(async (req, res, next ) => {
 
 const image = await Image.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -34,7 +34,7 @@ res.status(200).json({
 //@desc Get Images 
 //@route GET /api/v1/images       
 //@access Public 
-exports.getImages = asyncHandler(async (req, res, next ) => {
+export const getImages = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
        await preventPublicKnowledge(next, req.params.assetId )
         const images = await Image.find({ asset: req.params.assetId });
@@ -51,7 +51,7 @@ exports.getImages = asyncHandler(async (req, res, next ) => {
 //@desc Add Image
 //@route POST /api/v1/:assetId/images 
 //@access Public 
-exports.createImage = asyncHandler(async (req, res, next ) => {
+export const createImage = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -74,7 +74,7 @@ res.status(201).json({
 //@desc Update Image
 //@route GET /api/v1/images/:id
 //@access Public 
-exports.updateImage = asyncHandler(async (req, res, next ) => {
+export const updateImage = asyncHandler(async (req, res, next ) => {
 
  let image = await Image.findById(req.params.id);
  if(!image){
@@ -95,7 +95,7 @@ res.status(200).json({
 //@desc Delete Image 
 //@route GET /api/v1/images/:id 
 //@access Public 
-exports.deleteImage = asyncHandler(async (req, res, next ) => {
+export const deleteImage = asyncHandler(async (req, res, next ) => {
     const image = await Image.findById(req.params.id);
     if(!image){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

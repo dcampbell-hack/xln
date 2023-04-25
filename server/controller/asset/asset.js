@@ -1,26 +1,31 @@
-const { textToImage, textToAiChat } = require('./ai');
+// API
+import axios from 'axios';
+import path from 'path';
+import fs from "fs"
+import ytdl from 'ytdl-core';
+
+// Controller
+import { textToImage, postChatMessage } from './ai.js';
 
 // Models
-const Conditional = require('../../model/Conditional');
-const Asset = require('../../model/Asset');
-const Category = require('../../model/Category');
-const Shares = require('../../model/asset/Share');
+import Conditional from '../../model/Conditional.js';
+import Asset from '../../model/Asset.js';
+import Category from '../../model/Category.js';
+import Shares from '../../model/asset/Share.js';
+import Chat from '../../model/asset/Chat.js';
 
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
-const geocoder = require('../../utils/geocoder');
-const axios = require('axios');
-const path = require('path');
+import ErrorResponse from '../../utils/errorResponse.js';
+import geocoder from '../../utils/geocoder.js';
+
 
 // Middleware
-const { checkConditionals, preventPublicKnowledge } = require('../../middleware/checkIfValidAsset')
+import { checkConditionals, preventPublicKnowledge } from '../../middleware/checkIfValidAsset.js'
 
-const assetUpload = require('../../middleware/assetUpload');
-const checkCategories = require('../../middleware/checkModelForDuplicate');
-const asyncHandler = require('../../middleware/async');
+import assetUpload from '../../middleware/assetUpload.js';
+import { checkModelForDuplicate } from '../../middleware/checkModelForDuplicate.js';
+import asyncHandler from '../../middleware/async.js';
 
-const fs = require("fs")
-const ytdl = require('ytdl-core')
 const authToken = fs.readFileSync('./server/config/authToken.txt', {
   encoding: 'utf8', flag: 'r'
 });
@@ -29,14 +34,14 @@ const authToken = fs.readFileSync('./server/config/authToken.txt', {
 //@desc get all assets
 //route GET /api/v1/assets
 //@access PRIVATE
-exports.getAssets = asyncHandler(async (req, res, next) => {
+export const getAssets = asyncHandler(async (req, res, next) => {
     res.status(200).json(res.advancedResults)
 });
 
 //@desc get user assets
 //route GET /api/v1/assets
 //@access PRIVATE
-exports.getUserAssets = asyncHandler(async (req, res, next) => {
+export const getUserAssets = asyncHandler(async (req, res, next) => {
 
     const userAssets = await Asset.find({ user: req.body.id })
     if(!userAssets){
@@ -49,7 +54,7 @@ exports.getUserAssets = asyncHandler(async (req, res, next) => {
 //@desc get single asset
 //route GET /api/v1/assets/:id
 //@access PRIVATE
-exports.getAsset = asyncHandler(async (req, res, next) => {
+export const getAsset = asyncHandler(async (req, res, next) => {
 const user = req.user;
 
 
@@ -84,13 +89,13 @@ res.status(200).json({ success: true,  data: asset })
 //@desc create single asset
 //route POST /api/v1/assets
 //@access PRIVATE
-exports.createAsset = asyncHandler(async (req, res, next) => {
+export const createAsset = asyncHandler(async (req, res, next) => {
 
    //Add User to body 
    req.body.user = req.user.id;
    const foundDuplicateAsset = await Asset.find({ name: req.body.name})
 
-   const { assetType, name, category, description, website, price, fee, stock, user, model, prompt, size   } = req.body;
+   //const { assetType, name, category, description, cover, website, price, fee, stock, user, model, prompt, size   } = req.body;
 
    //If user is not admin they can only add one Asset
    if(req.user.role === 'system'){
@@ -105,8 +110,8 @@ exports.createAsset = asyncHandler(async (req, res, next) => {
 // assetUpload(Asset, 'image', 'asset', req, res, next);
 
 try{
-
-const asset = await Asset.create({ assetType, name, category, description, website, price, fee, stock, user   });
+console.log({ asset: req.body })
+const asset = await Asset.create({ ...req.body });
 req.body.assetId = asset.id
 
 // AI Art
@@ -115,7 +120,8 @@ if( asset.assetType[0] == "AI Art"){
 } 
 
 if( asset.assetType[0] == "AI Chat"){
-    await textToAiChat(req, res, next)
+ await postChatMessage(req, res, next)
+ return next()
 }
 // Audio
 // Blog
@@ -136,7 +142,7 @@ if( asset.assetType[0] == "AI Chat"){
 // Video 
 // Website
 
-
+// return res.status(200).json({ status: true, data: asset })
 
 
 } catch(error){
@@ -149,7 +155,7 @@ if( asset.assetType[0] == "AI Chat"){
 //@desc update single asset
 //route PUT /api/v1/assets/:id
 //@access PRIVATE
-exports.updateAsset = asyncHandler(async (req, res, next) => {
+export const updateAsset = asyncHandler(async (req, res, next) => {
 
 // Check conditionals
 await checkConditionals(next, req.params.id)
@@ -169,7 +175,7 @@ if(!asset){
 //@desc delete single asset
 //route DELETE /api/v1/assets/:id
 //@access PRIVATE
-exports.deleteAsset = asyncHandler(async (req, res, next) => {
+export const deleteAsset = asyncHandler(async (req, res, next) => {
 
  // Check Conditionals
 await checkConditionals(next, req.params.id)   
@@ -192,7 +198,7 @@ if(asset.user.toString() !== req.user.id && req.user.role !== 'admin'){
 //@desc Upload photo to asset 
 //@route PUT /api/v1/asset/:id/cover
 //@access PRIVATE 
-exports.assetCoverUpload = asyncHandler(async(req, res, next) => {
+export const assetCoverUpload = asyncHandler(async(req, res, next) => {
 
 // Check Conditionals
 await checkConditionals(next, req.params.id)
@@ -208,7 +214,7 @@ await Asset.findByIdAndUpdate( req.params.id, { pending: false } )
 //@desc Get assets within radius 
 //@route GET /api/v1/asset/radius/:zipcode/:distance 
 //@access PUBLIC 
-exports.getAssetsInRadius = asyncHandler(async(req, res, next) => {
+export const getAssetsInRadius = asyncHandler(async(req, res, next) => {
     const { zipcode, distance } = req.params;
     const loc = await geocoder.geocode(zipcode)
     const lat = loc[0].latitude;
@@ -230,7 +236,7 @@ exports.getAssetsInRadius = asyncHandler(async(req, res, next) => {
 //@desc Upload photo to asset 
 //@route PUT /api/v1/asset/:id/cover
 //@access PRIVATE 
-exports.downloadYoutube = asyncHandler(async(req, res, next) => {
+export const downloadYoutube = asyncHandler(async(req, res, next) => {
 const url = req.body.url_download;
 const id = req.body.id
 const isYoutubeLink = url.includes("youtube.com/watch?v=")
@@ -248,7 +254,7 @@ res.status(200).json({ success: true, data: video})
 })
 
 
-exports.youtube = asyncHandler(async(req, res, next) => {
+export const youtube = asyncHandler(async(req, res, next) => {
        try{
           const url = req.query.url_download;
           const videoId = await ytdl.getURLVideoID(url)

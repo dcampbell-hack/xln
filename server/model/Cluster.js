@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-const ErrorResponse = require('../utils/errorResponse');
+import ErrorResponse from '../utils/errorResponse.js';
 
 const ClusterSchema = new Schema({ 
 filename: {
@@ -60,4 +60,4 @@ ClusterSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = ClusterSchema;
+export default ClusterSchema;

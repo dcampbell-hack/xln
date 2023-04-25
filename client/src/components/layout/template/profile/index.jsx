@@ -35,7 +35,7 @@ export const Profile = ({
      // console.log("Render View",type)
          switch(type){
           case "profile":
-            return <Home />
+            return <Home users={users} />
           case "search":
             return <Search assets={assets} />
           case "createAsset":

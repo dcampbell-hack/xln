@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const RealEstateSchema = new Schema({ 
@@ -35,4 +35,4 @@ RealEstateSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('RealEstate', RealEstateSchema);
+export default mongoose.model('RealEstate', RealEstateSchema);

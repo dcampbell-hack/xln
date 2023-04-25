@@ -1,5 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-ethers")
+require("@nomiclabs/hardhat-ethers");
 const fs = require("fs");
 const keyData = fs.readFileSync('./server/config/p-key.txt', {
   encoding: 'utf8', flag: 'r'
@@ -7,7 +7,7 @@ const keyData = fs.readFileSync('./server/config/p-key.txt', {
 
 const eth_id = '68eb211506c141e78162043b7b0df69a';
 
-module.exports = {
+module.exports =  {
   defaultNetwork: 'hardhat',
   allowUnlimitedContractSize: true,
   networks: {

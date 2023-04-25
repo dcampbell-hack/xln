@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { InfoB, LinkB } from '../../../utils/buttons/buttons'
 
 
-const ProfileView = ({ maxBoolean }) => {
+const ProfileView = ({ maxBoolean, avatar, id }) => {
 
     const [ max, setMax ] = useState(true)
     
@@ -10,12 +10,12 @@ const ProfileView = ({ maxBoolean }) => {
             <div className='profile-view'>
                   {
                     max && 
-                    <div className='profile-view-max'>
-                            <img className="profile-view-symbol" src="/uploads/xln/avatar/CEO-Executive.png" width="200px"  height="auto" />
+                    <div className='profile-view-max' >
+                            <img className="profile-view-symbol" src={`/uploads/${id}/avatar/${avatar}`} width="200px"  height="auto" />
                             { max &&
                             <div className='profile-view-panel'>
                                 <div className='profile-view-panel-icon'>
-                                <img src="/uploads/xln/avatar/CEO-Executive.png" width="50px" height="50px" />
+                                <img src={`/uploads/${id}/avatar/${avatar}`} width="50px" height="50px" />
                                     <h3>#1 Asset with Shareholders Today</h3>
                                 </div>
     

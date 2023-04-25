@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true });
 
-const { getWallet, getWallets, createWallet, transactWallet, deleteWallet, chooseWallet } = require('../controller/wallet');
+import { getWallet, getWallets, createWallet, transactWallet, deleteWallet, chooseWallet } from '../controller/wallet.js';
 
-const advancedResults = require('../middleware/advancedResults');
-const { protect, authorize } = require('../middleware/auth');
-const Wallet = require('../model/Wallet');
+import advancedResults from '../middleware/advancedResults.js';
+import { protect, authorize } from '../middleware/auth.js';
+import Wallet from '../model/Wallet.js';
 
 router.route('/')
       .get(
@@ -24,4 +24,4 @@ router.route('/:id/choose')
 .put(protect, authorize('publisher', 'admin'), chooseWallet )
 
 
-module.exports = router;
+export default router;

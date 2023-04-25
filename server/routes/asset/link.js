@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { 
+import { 
     getLink,
     getLinks,
     createLink
-}  = require('../../controller/asset/link');
+}  from '../../controller/asset/link.js';
 
-const { protect, authorize } = require('../../middleware/auth');
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/')
@@ -19,4 +19,4 @@ router
 .get(protect, authorize('publisher', 'admin'), getLink)
 
 
-module.exports = router;
+export default router;

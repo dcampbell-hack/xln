@@ -1,14 +1,14 @@
-const express = require('express');
-const Share = require('../../model/asset/Share');
+import express from 'express';
 const router = express.Router({ mergeParams: true });
 
-const { addShare, getShare, getShares, updateShare, deleteShare } = require('../../controller/asset/share');
-const { createOfferResell } = require('../../controller/asset/offer');
-const { protect, authorize } = require('../../middleware/auth');
-const advancedResults = require('../../middleware/advancedResults');
+import Share from '../../model/asset/Share.js';
+import { addShare, getShare, getShares, updateShare, deleteShare } from '../../controller/asset/share.js';
+import { createOfferResell } from '../../controller/asset/offer.js';
+import { protect, authorize } from '../../middleware/auth.js';
+import advancedResults from '../../middleware/advancedResults.js';
 
-const transactionRouter = require('./transaction');
-const commentsRouter = require('./comment');
+import transactionRouter from './transaction.js';
+import commentsRouter from './comment.js';
 
 router.use('/:shareId/tx', transactionRouter);
 router.use('/:shareId/comments', commentsRouter);
@@ -29,4 +29,4 @@ router.route('/:id')
 router.route('/:shareId/resell')
       .post(protect, authorize('publisher', 'admin'), createOfferResell )
 
-module.exports = router;
+      export default router;

@@ -1,23 +1,48 @@
-const express = require('express');
-const path = require('path');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
-const colors = require('colors');
-const fileupload = require('express-fileupload');
-const cookieParser = require('cookie-parser');
-const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
-const xss = require('xss-clean');
-const rateLimit = require('express-rate-limit');
-const hpp = require('hpp');
-const cors = require('cors');
-const socket = require("socket.io");
-const errorHandler = require('./server/middleware/error');
-const connectDB = require('./server/config/db');
+import express from 'express';
+import path from 'path';
+import * as dotenv from 'dotenv';
+import morgan from 'morgan';
+import colors from 'colors';
+import fileupload from 'express-fileupload';
+import cookieParser from 'cookie-parser';
+import mongoSanitize from 'express-mongo-sanitize';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import rateLimit from 'express-rate-limit';
+import hpp from 'hpp';
+import cors from 'cors';
+import { Server} from "socket.io";
+import { createServer } from 'http';
+import { fileURLToPath } from 'url';
 
-const spawn = require('child_process').spawn;
-const pythonEmailer = spawn('python', ['./python/email.py']);
-const pythonIndex = spawn('python', ['./python/index.py']);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// import { spawn } from 'child_process';
+// import pythonEmailer = spawn('python', ['./python/email.py'];
+// import pythonIndex = spawn('python', ['./python/index.py'];
+
+import errorHandler from './server/middleware/error.js'
+import connectDB from "./server/config/db.js";
+
+import User from './server/routes/user.js';
+import Wallet from './server/routes/wallet.js';
+import Conditional from './server/routes/asset/conditional.js';
+import Auth from './server/routes/auth.js';
+import AI from './server/routes/asset/ai.js';
+
+import XLN from './server/routes/blockchain/index.js';
+import Market from './server/routes/blockchain/market.js';
+import NFT from './server/routes/blockchain/nft.js';
+import ICO from './server/routes/blockchain/ico.js';
+import Token from './server/routes/blockchain/token.js';
+
+import Asset from './server/routes/asset/asset.js';
+import Share from './server/routes/asset/share.js';
+import Offer from './server/routes/asset/offer.js';
+import Review from './server/routes/asset/review.js';
+import Comment from './server/routes/asset/comment.js';
+import Transaction from './server/routes/asset/transaction.js';
 
 //Load env 
 dotenv.config({ path: './server/config/config.env'});
@@ -62,25 +87,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'client/public')));
 
-const User = require('./server/routes/user');
-const Wallet = require('./server/routes/wallet');
-const Conditional = require('./server/routes/asset/conditional');
-const Auth = require('./server/routes/auth')
-const AI = require('./server/routes/asset/ai')
-
-const XLN = require('./server/routes/blockchain/')
-const Market = require('./server/routes/blockchain/market')
-const NFT = require('./server/routes/blockchain/nft')
-const ICO = require('./server/routes/blockchain/ico')
-const Token = require('./server/routes/blockchain/token')
-
-const Asset = require('./server/routes/asset/asset')
-const Share = require('./server/routes/asset/share')
-const Offer = require('./server/routes/asset/offer')
-const Review = require('./server/routes/asset/review')
-const Comment = require('./server/routes/asset/comment')
-const Transaction = require('./server/routes/asset/transaction')
-
 //Mount routers
 app.use('/api/v1/ai/', AI );
 app.use('/api/v1/auth', Auth);
@@ -100,17 +106,14 @@ app.use('/api/v1/blockchain/nft', NFT );
 app.use('/api/v1/blockchain/ico', ICO );
 app.use('/api/v1/blockchain/market', Market );
 
-
-
-
 const server = app.listen(PORT, () => { 
     console.log(`Server is started on PORT: ${PORT}`)
-    pythonIndex.stdout.on('data', data => {
-        console.log(data.toString());
-    })
+    // pythonIndex.stdout.on('data', data => {
+    //     console.log(data.toString());
+    // })
 });
 
-const io = socket(server, {
+const io = new Server(server, {
     allowEIO3: true,
     cors: {credentials: true, origin: 'http://localhost:3000'},
 });

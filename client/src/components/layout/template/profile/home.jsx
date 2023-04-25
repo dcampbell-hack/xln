@@ -3,22 +3,24 @@ import { useState, useEffect } from 'react'
 // Components
 import ProfileView from './profileView'
 
-const Home = () => {
+const Home = ({ users: { avatar, cover, id } }) => {
 
     const [ isVideoplaying, setIsVideoPlaying ] = useState(false)
-  
+    
     return(
       <div className="profile-home">
-         <div className="featured-content">
+         <div className="featured-content" style={{ backgroundImage: `url(/uploads/${id}/cover/${cover})`, backgroundColor: 'rgba(250, 250, 250, 0.5)'}}>
+            <div className="translucent-filter">
             { isVideoplaying ?
-                    <ProfileView max={false} />
+                    <ProfileView max={false} avatar={avatar} id={id} />
                   :
-                  <ProfileView max={true} />
+                  <ProfileView max={true} avatar={avatar} id={id} />
   }
   
           <div className="profile-xln-balance">
             <img src="/uploads/xln/asset/images/xln_logo.png" width="50px" height="auto" />
             <h4>350,000 XLN</h4>
+          </div>
           </div>
           </div>
 

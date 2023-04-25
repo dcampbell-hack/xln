@@ -58,7 +58,10 @@ export const LOAD_NFT = 'LOAD_NFT';
 export const GET_ASSET_ART = 'GET_ASSET_ART';
 export const GET_SINGLE_AI_ART = 'GET_SINGLE_AI_ART';
 export const OPEN_CV = 'OPEN_CV'
-export const GENERATE_ART = 'GENERATE_ART'
+export const TEXT_TO_IMAGE = 'TEXT_TO_IMAGE'
+export const GET_CHAT_MSG = 'GET_CHAT_MSG'
+export const POST_CHAT_MSG = 'POST_CHAT_MSG'
+export const SELECT_LLM = 'SELECT_LLM,'
 
 // AUDIO
 export const GET_ALL_AUDIO = 'GET_ALL_AUDIO'

@@ -1,12 +1,12 @@
-const express = require('express');
-const Review = require('../../model/asset/Review');
+import express from 'express';
 const router = express.Router({ mergeParams: true });
-const advancedResults = require('../../middleware/advancedResults');
+import advancedResults from '../../middleware/advancedResults.js';
 
-const { addReview, getReview, getReviews, updateReview, deleteReview }  = require('../../controller/asset/review');
-const { protect, authorize } = require('../../middleware/auth');
+import Review from '../../model/asset/Review.js';
+import { addReview, getReview, getReviews, updateReview, deleteReview }  from '../../controller/asset/review.js';
+import { protect, authorize } from '../../middleware/auth.js';
 
-const commentsRouter = require('./comment');
+import commentsRouter from './comment.js';
 router.use('/:reviewId/comments', commentsRouter);
 
 router
@@ -23,4 +23,4 @@ router
 .put(protect, authorize('publisher', 'admin'), updateReview)
 .delete(protect, authorize('publisher', 'admin'), deleteReview );
 
-module.exports = router;
+export default router;

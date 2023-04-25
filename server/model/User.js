@@ -1,13 +1,14 @@
-const mongoose = require("mongoose");
+// Pkg
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-const FileSchema = require("./asset/File");
-const LinkSchema = require("./Links");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const ErrorResponse = require("../utils/errorResponse");
-const { formatField } = require("../middleware/formatField");
-const Share = require("./asset/Share");
+
+// Model
+import ErrorResponse from "../utils/errorResponse.js";
+import { formatField } from "../middleware/formatField.js";
+import Share from "./asset/Share.js";
 
 const UserSchema = new Schema(
   {
@@ -54,7 +55,6 @@ const UserSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    socialLinks: [LinkSchema],
     followers: {
       type: Array,
       default: [],
@@ -216,4 +216,4 @@ UserSchema.virtual("shares", {
   justOne: false,
 });
 
-module.exports = mongoose.model("User", UserSchema);
+export default mongoose.model("User", UserSchema);

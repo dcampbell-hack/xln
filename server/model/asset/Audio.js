@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const AudioSchema = new Schema({ 
@@ -60,4 +60,4 @@ AudioSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Audio', AudioSchema);
+export default mongoose.model('Audio', AudioSchema);

@@ -5,21 +5,20 @@ import { createAsset } from './asset';
 
 import axios from '../../axios';
 import {
-   CREATE_ASSET,
    OPEN_CV,
-   GENERATE_ART,
+   TEXT_TO_IMAGE,
    GET_ASSET_ART,
    GET_SINGLE_AI_ART,
-   AI_ERROR,
-   ASSET_ERROR
+   GET_CHAT_MSG,
+   POST_CHAT_MSG,
+   SELECT_LLM,
+   AI_ERROR
 } from '../types';
 
 
 export const textToImage = ({ id, assetId = "", blockchain, values }) => async dispatch => {
 
     try {
-
-        console.log("create asset", values)
         const config = {
             Headers: {
               'Content-Type': 'multipart/form-data'
@@ -37,7 +36,7 @@ export const textToImage = ({ id, assetId = "", blockchain, values }) => async d
             const res = await axios.post(`/api/v1/assets/`, values , config);
   
         dispatch({
-          type: CREATE_ASSET,
+          type: TEXT_TO_IMAGE,
           payload: res.data.data
         });
       } catch (err) {
@@ -47,20 +46,52 @@ export const textToImage = ({ id, assetId = "", blockchain, values }) => async d
    
 }
 
-export const textToAiChat = () => async dispatch => {
-
+export const getChatMessages = (id) => async dispatch => {
     try{
-     
-
+        const res = await axios.get(`/api/v1/assets/${id}/ai/chat`);
 
     dispatch({
-        type: CREATE_ASSET,
-        payload: 'res.data'
+        type: GET_CHAT_MSG,
+        payload: res.data
     })
     } catch(err){
-    dispatch({ type: ASSET_ERROR, payload: err})
+    console.log("Get Chat Messages Failed ---", err)
+    dispatch({ type: AI_ERROR, payload: err})
 }
 
+}
+
+export const postChatMessage = ( assetId, prompt ) => async dispatch => {
+    try{
+        // const object = prompt.id = assetId;
+        console.log("Action: PostChatMesage", prompt )
+        const res = await axios.post(`/api/v1/assets/${assetId}/ai/chat`,  prompt );
+    
+        dispatch({
+            type: POST_CHAT_MSG,
+            payload: res.data
+        })
+
+    } catch(error){
+        dispatch({ type: AI_ERROR, error })
+    }
+}
+
+export const selectLangModel = ( assetId, prompt ) => async dispatch => {
+    console.log("Action: SelectLangModel ---------" )
+    try{
+        // const object = prompt.id = assetId;
+        console.log("Action: SelectLangModel", prompt )
+        const res = await axios.post(`/api/v1/assets/${assetId}/ai/llm`,  prompt );
+    
+        dispatch({
+            type: SELECT_LLM,
+            payload: res.data
+        })
+
+    } catch(error){
+        dispatch({ type: AI_ERROR, error })
+    }
 }
 
 export const getAssetArt = (assetId) => async dispatch => {

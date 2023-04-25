@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { Schema } = require('mongoose');
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const sharesOwnedCollection = new Schema({ shareId: String })
 
@@ -29,4 +29,4 @@ const ShareholderSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Shareholder',  ShareholderSchema)
+export default mongoose.model('Shareholder',  ShareholderSchema)

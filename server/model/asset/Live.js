@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const LiveSchema = new Schema({ 
@@ -35,4 +35,4 @@ LiveSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Live', LiveSchema);
+export default mongoose.model('Live', LiveSchema);

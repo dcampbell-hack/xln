@@ -1,9 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { start, buyXLN, withdrawTokens, withdrawDai }  = require('../../controller/blockchain/ico');
-
-const { protect, authorize } = require('../../middleware/auth');
+import { start, buyXLN, withdrawTokens, withdrawDai }  from '../../controller/blockchain/ico.js';
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/start')
@@ -22,4 +21,4 @@ router
 .post( withdrawDai );
 
 
-module.exports = router;
+export default router;

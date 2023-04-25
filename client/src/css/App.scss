@@ -195,8 +195,24 @@ body{
 .modal-content{
     width: 100%;
     height: 75vh;
+    display: grid;
+    place-items: center;
 }
 
 .center{
     text-align: center ;
+}
+
+.translucent-filter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250, 250 , 250, 0.5);
+    filter: alpha(opacity=50); 
+    backdrop-filter: blur(5px);
+    -ms-filter: "alpha(opacity=50)"; 
+    -khtml-opacity: .50; 
+    -moz-opacity: .50;
 }

@@ -1,7 +1,6 @@
-const ErrorResponse = require('../utils/errorResponse');
+import ErrorResponse from '../utils/errorResponse.js';
 
-
-exports.formatField = (value) => {
+export const formatField = (value) => {
  
  try{
 

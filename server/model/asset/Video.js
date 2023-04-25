@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const VideoSchema = new Schema({ 
@@ -35,4 +35,4 @@ VideoSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('Video', VideoSchema);
+export default mongoose.model('Video', VideoSchema);

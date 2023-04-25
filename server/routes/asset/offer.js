@@ -1,12 +1,13 @@
-const express = require('express');
-const Offer = require('../../model/asset/Offer');
+import express from 'express';
+import Offer from '../../model/asset/Offer.js';
 const router = express.Router({ mergeParams: true });
 
-const { createOfferDirect, createOfferResell, getOffer, getOffers, respondOffer, deleteOffer } = require('../../controller/asset/offer');
-const { protect, authorize } = require('../../middleware/auth');
-const advancedResults = require('../../middleware/advancedResults');
+import { createOfferDirect, createOfferResell, getOffer, getOffers, respondOffer, deleteOffer } from '../../controller/asset/offer.js';
+import { protect, authorize } from '../../middleware/auth.js';
+import advancedResults from '../../middleware/advancedResults.js';
 
-const commentsRouter = require('./comment');
+import commentsRouter from './comment.js';
+
 router.use('/:offerId/comments', commentsRouter);
 
 router.route('/')
@@ -29,4 +30,4 @@ router.route('/:id')
 
 
 
-module.exports = router;
+export default router;

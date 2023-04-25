@@ -73,7 +73,9 @@ import {
 
 import { 
  getAssetArt,
- getSingleAIArt
+ getSingleAIArt,
+ getChatMessages,
+ postChatMessages
 } from '../../../actions/assets/ai'
 
 import {
@@ -110,6 +112,7 @@ const TemplateLayout = ({
   fetchMyNFTs,
   fetchItemsCreated,
   getAssetArt,
+  getChatMessages,
   getSingleAIArt,
   getListingPrice,
   getSingleAsset,
@@ -309,10 +312,10 @@ const TemplateLayout = ({
         return <ViewBlog options={options} setActionType={setActionType} />;
 
       case "createChat":
-        return <CreateChat options={options} setActionType={setActionType} />;
+        return <CreateChat options={options} assets={assets} users={users}  setActionType={setActionType} />;
 
-      case "viewAiChat":
-        return <ViewChat options={options} setActionType={setActionType} />;
+      case "viewChat":
+        return <ViewChat options={options} assetId={params.assetId} ai={ai} users={users} getChatMessages={getChatMessages} setActionType={setActionType} />;
 
       case "codeBlock":
         return <CodeBlock options={options} setActionType={setActionType} />;
@@ -398,6 +401,7 @@ const TemplateLayout = ({
           <Profile
             type={type}
             options={options}
+            users={users}
             setActionType={setActionType}
           />
         );
@@ -435,6 +439,7 @@ const TemplateLayout = ({
           <Profile
             type={type}
             assets={assets}
+            users={users}
             options={options}
             setActionType={setActionType}
             blockchain={blockchain}
@@ -727,6 +732,7 @@ const mapDispatchToProps = {
   fetchMyNFTs,
   fetchItemsCreated,
   getAssetArt,
+  getChatMessages,
   getSingleAIArt,
   getListingPrice,
   getSingleAsset,

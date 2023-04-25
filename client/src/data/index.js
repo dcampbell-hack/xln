@@ -31,11 +31,16 @@ import ChessAvatar from "../system/art/metaverse_chess.png";
 import SecuredAsset from "../system/art/secure_wallet.png";
 
 // System Image
- import ChatToAI from '../system/image/chat_ai.png'
- import ChatToHuman from '../system/image/chat_human.png'
- import ChatToGroup from '../system/image/chat_group.png'
- import ChatToResume from '../system/image/chat_resume.png'
+import ChatToAI from "../system/image/cover/chat_ai.png";
+import ChatToHuman from "../system/image/cover/chat_human.png";
+import ChatToGroup from "../system/image/cover/chat_group.png";
+import ChatToResume from "../system/image/cover/chat_resume.png";
 
+// Sentinel Bot
+import Sentinel from '../system/image/avatar/sentinel.png'
+import ChatGPT from '../system/image/avatar/chat_gpt.png'
+import Flan from '../system/image/avatar/flan.png'
+import Bloom from '../system/image/avatar/bloom.png'
 
 export const infura = "68eb211506c141e78162043b7b0df69a";
 const date = new Date();
@@ -1542,20 +1547,20 @@ export const create = {
                       "darkstorm2150/Protogen_x3.4_Official_Release",
                       "darkstorm2150/Protogen_x5.3_Official_Release",
                       "darkstorm2150/Protogen_x5.8_Official_Release",
-                      "eimiss/EimisAnimeDiffusion_1.0v", 
+                      "eimiss/EimisAnimeDiffusion_1.0v",
                       "hakurei/artstation-diffusion",
-                      "hakurei/waifu-diffusion", 
+                      "hakurei/waifu-diffusion",
                       "lambdalabs/dreambooth-avatar",
                       "lambdalabs/sd-pokemon-diffusers",
                       "lambdalabs/text-to-naruto",
                       "Linaqruf/anything-v3.0",
                       "nitrosocke/Arcane-Diffusion",
-                      "nitrosocke/archer-diffusion", 
-                      "nitrosocke/classic-anim-diffusion", 
-                      "nitrosocke/elden-ring-diffusion", 
+                      "nitrosocke/archer-diffusion",
+                      "nitrosocke/classic-anim-diffusion",
+                      "nitrosocke/elden-ring-diffusion",
                       "nitrosocke/Ghibli-Diffusion",
                       "nitrosocke/Nitro-Diffusion",
-                      "nitrosocke/redshift-diffusion", 
+                      "nitrosocke/redshift-diffusion",
                       "nitrosocke/spider-verse-diffusion",
                       "prompthero/openjourney",
                       "prompthero/openjourney-v4",
@@ -1563,17 +1568,17 @@ export const create = {
                       "prompthero/funko-diffusion",
                       "prompthero/linkedin-diffusion",
                       "prompthero/poolsuite-diffusion",
-                      "midjourney", 
+                      "midjourney",
                       "openai/dalle-2",
-                      "stabilityai/stable-diffusion-2-base", 
+                      "stabilityai/stable-diffusion-2-base",
                       "stabilityai/stable-diffusion-2-1",
                       "wavymulder/Analog-Diffusion",
                       "wavymulder/lomo-diffusion",
                       "wavymulder/modelshoot",
                       "wavymulder/portraitplus",
                       "wavymulder/timeless-diffusion",
-                      "wavymulder/wavyfusion"
-                    ]
+                      "wavymulder/wavyfusion",
+                    ],
                   },
                 },
                 aria: {},
@@ -1628,64 +1633,168 @@ export const create = {
                   className: "",
                   schema: {
                     placeholder: "512x512",
-                    types: ["-- Choose Size --", "1024x1024", "512x512", "256x256"]
+                    types: [
+                      "-- Choose Size --",
+                      "1024x1024",
+                      "512x512",
+                      "256x256",
+                    ],
                   },
                 },
                 aria: {},
               },
-            }
-          ]
+            },
+          ],
         },
       },
       {
         type: "createChat",
         options: {
-          action: "aiChat",
+          action: "createAsset",
           method: "post",
           assetType: "AI Chat",
           toggle: true,
           text: "aiChat",
           submit: {
-            label: "Chat",
+            label: "Create Chat",
             className: "btn btn-block btn-info",
             icon: "",
-            action: "aiArt",
+            action: "createAsset",
           },
           content: {
-            header: "Choose Chat",
-            description: "This webpage provides information on different types of communication and interaction, including human to AI, human to human, and human to group interaction. The chat prompts covered various aspects of each interaction type, such as verbal and nonverbal communication, shared experiences, and effective communication strategies.",
+            header: "Resume Chat",
+            header2: "Create New Chat",
+            description:
+              "This webpage provides information on different types of communication and interaction, including human to AI, human to human, and human to group interaction. The chat prompts covered various aspects of each interaction type, such as verbal and nonverbal communication, shared experiences, and effective communication strategies.",
+            image: ChatToAI,
+            assistantCover: {
+              "openai/chatgpt": "chat_resume.png",
+              "text-davinci-003": "chat_gpt_davinci_cover.png",
+              "text-curie-001": "chat_gpt_davinci_cover.png",
+              "text-babbage-001": "chat_gpt_babbage_cover.png",
+              "text-ada-001": "chat_gpt_ada_cover.png",
+              "alpaca": "chat_alpaca_cover.png",
+              "bloom": "chat_bloom_100b_cover.png",
+              "llama": "chat_llama_100b_cover.png",
+              "flan": "chat_flan_7b_cover.png",
+              "auto-gpt": "chat_auto_gpt_cover.png",
+              },
             listChatOptions: [
               {
                 type: "HumanToAI",
                 image: ChatToAI,
                 title: "Human To AI",
-                description: "Human to AI dialog involves communication between a human and an artificial intelligence system. The conversation can take various forms, such as text or speech, and is usually initiated by the human. In the case of text-based conversations, the human inputs text into a user interface, which the AI system interprets and generates a response. In speech-based conversations, the human speaks to a virtual assistant or chatbot, which uses natural language processing techniques to understand the spoken words and generate appropriate responses.",
-                url: "/xln/create/asset/ai/chat/human-to-ai"
-              }, 
+                description:
+                  "Human to AI dialog involves communication between a human and an artificial intelligence system. The conversation can take various forms, such as text or speech, and is usually initiated by the human. In the case of text-based conversations, the human inputs text into a user interface, which the AI system interprets and generates a response. In speech-based conversations, the human speaks to a virtual assistant or chatbot, which uses natural language processing techniques to understand the spoken words and generate appropriate responses.",
+                url: "/xln/create/asset/ai/chat/human-to-ai",
+              },
               {
                 type: "HumanToHuman",
                 image: ChatToHuman,
                 title: "Human To Human",
-                description: "Human to human interaction refers to communication and interaction between individuals. This can take various forms, such as verbal and nonverbal communication, facial expressions, body language, and gestures. Human to human interaction plays a crucial role in social, emotional, and cognitive development, and is an essential part of human life.",
-                url: "/xln/create/asset/ai/chat/human-to=human"
+                description:
+                  "Human to human interaction refers to communication and interaction between individuals. This can take various forms, such as verbal and nonverbal communication, facial expressions, body language, and gestures. Human to human interaction plays a crucial role in social, emotional, and cognitive development, and is an essential part of human life.",
+                url: "/xln/create/asset/ai/chat/human-to=human",
               },
               {
                 type: "HumanToGroup",
                 image: ChatToGroup,
                 title: "Human To Group",
-                description: "Human to group interaction refers to communication and interaction between an individual and a group of people. This can take various forms, such as group meetings, team projects, social gatherings, and community events. Human to group interaction is essential for building relationships, achieving goals, and creating a sense of belonging and community.",
-                url: "/xln/create/asset/ai/chat/human-to-group"
+                description:
+                  "Human to group interaction refers to communication and interaction between an individual and a group of people. This can take various forms, such as group meetings, team projects, social gatherings, and community events. Human to group interaction is essential for building relationships, achieving goals, and creating a sense of belonging and community.",
+                url: "/xln/create/asset/ai/chat/human-to-group",
               },
               {
                 type: "GroupToAI",
                 image: ChatToResume,
                 title: "Group To AI",
-                description: "Group of humans to AI interaction refers to communication and interaction between a group of individuals and an artificial intelligence system. This can take various forms, such as a group of people using a virtual assistant or chatbot to perform tasks or get information, or a team using an AI system to analyze data or make decisions.",
-                url: "/xln/create/asset/ai/chat/group-to-ai"
-              }
-            ]
+                description:
+                  "Group of humans to AI interaction refers to communication and interaction between a group of individuals and an artificial intelligence system. This can take various forms, such as a group of people using a virtual assistant or chatbot to perform tasks or get information, or a team using an AI system to analyze data or make decisions.",
+                url: "/xln/create/asset/ai/chat/group-to-ai",
+              },
+            ],
           },
           fields: [
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Select Interface",
+                  forId: "chat-interface",
+                },
+                input: {
+                  type: "text",
+                  list: "chat-interface",
+                  id: "chat-interface",
+                  className: "",
+                  placeholder: "Choose Chat Interface",
+                  name: "interface",
+                  value: {},
+                  onChange: "",
+                  disabled: false,
+                },
+                datalist: {
+                  type: "interface-list",
+                  id: "chat-interface",
+                  className: "",
+                  schema: {
+                    types: [
+                      "-- Choose Chat Interface --",
+                      "human-to-human",
+                      "human-to-ai",
+                      "human-to-group",
+                      "group-to-ai",
+                    ],
+                  },
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "dropdown",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Select Model",
+                  forId: "chat-model",
+                },
+                input: {
+                  type: "text",
+                  list: "chat-model",
+                  id: "chat-model",
+                  className: "",
+                  placeholder: "Choose Chat Model",
+                  name: "model",
+                  value: {},
+                  onChange: "",
+                  disabled: false,
+                },
+                datalist: {
+                  type: "model-list",
+                  id: "chat-model",
+                  className: "",
+                  schema: {
+                    types: [
+                      "-- Choose Chat Model --",
+                      "text-davinci-003",
+                      "text-curie-001",
+                      "text-babbage-001",
+                      "text-ada-001",
+                      "alpaca",
+                      "llama",
+                      "flan",
+                      "auto-gpt",
+                    ],
+                  },
+                },
+                aria: {},
+              },
+            },
             {
               type: "input",
               attributes: {
@@ -1693,24 +1802,153 @@ export const create = {
                   error: false,
                   inverse: false,
                   show: false,
-                  labelText: "Ask Me Anything",
-                  forId: "ama",
+                  labelText: "Prompt",
+                  forId: "chat-prompt",
                 },
                 input: {
                   type: "text",
-                  list: "image-size-list",
-                  id: "ama",
+                  id: "chat-prompt",
                   className: "",
-                  placeholder: "Ask Me Anything",
-                  name: "size",
+                  placeholder: "Prompt",
+                  name: "prompt",
                   value: {},
                   onChange: "",
                   disabled: false,
                 },
                 aria: {},
               },
-            }
-          ]
+            },
+            {
+              type: "range",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Max Tokens",
+                  forId: "chat-max-tokens",
+                },
+                input: {
+                  type: "text",
+                  id: "chat-max-tokens",
+                  className: "",
+                  placeholder: "Max Token",
+                  name: "max_tokens",
+                  value: {},
+                  min: "1",
+                  max: "100",
+                  step: "1",
+                  onChange: "",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "range",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Temperature",
+                  forId: "chat-temperature",
+                },
+                input: {
+                  type: "text",
+                  id: "chat-temperature",
+                  className: "",
+                  placeholder: "Temperature",
+                  name: "temperature",
+                  value: {},
+                  min: "0",
+                  max: "1",
+                  step: "0.1",
+                  onChange: "",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "range",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "top_p",
+                  forId: "chat-top_p",
+                },
+                input: {
+                  type: "text",
+                  id: "chat-top_p",
+                  className: "",
+                  placeholder: "Top P",
+                  name: "top_p",
+                  value: {},
+                  min: "0",
+                  max: "1",
+                  step: "0.1",
+                  onChange: "",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "range",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "frequency_penalty",
+                  forId: "chat_frequency_penalty",
+                },
+                input: {
+                  type: "text",
+                  id: "chat_frequency_penalty",
+                  className: "",
+                  placeholder: "Frequency Penalty",
+                  name: "frequency_penalty",
+                  value: {},
+                  min: "0",
+                  max: "1",
+                  step: "0.1",
+                  onChange: "",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+            {
+              type: "range",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "presence_penalty",
+                  forId: "chat_presence_penalty",
+                },
+                input: {
+                  type: "text",
+                  id: "chat_presence_penalty",
+                  className: "",
+                  placeholder: "presence_penalty",
+                  name: "presence_penalty",
+                  value: {},
+                  min: "0",
+                  max: "1",
+                  step: "0.1",
+                  onChange: "",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+          ],
         },
       },
       {
@@ -1864,7 +2102,7 @@ export const create = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
@@ -2148,7 +2386,7 @@ export const create = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
@@ -2189,7 +2427,7 @@ export const create = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
@@ -2230,7 +2468,7 @@ export const create = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
@@ -2321,7 +2559,7 @@ export const create = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
@@ -2362,7 +2600,7 @@ export const create = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
@@ -2387,7 +2625,7 @@ export const view = {
   },
   states: [
     "viewAiArt",
-    "viewAiChat",
+    "viewChat",
     "viewAudio",
     "viewBlog",
     "viewDocument",
@@ -2447,7 +2685,7 @@ export const view = {
                   className: "",
                   schema: {
                     placeholder: "Open AI",
-                    types: ["Open AI", "Stable Diffusion", "Mid Journey V4"]
+                    types: ["Open AI", "Stable Diffusion", "Mid Journey V4"],
                   },
                 },
                 aria: {},
@@ -2479,7 +2717,7 @@ export const view = {
                   className: "",
                   schema: {
                     placeholder: "512x512",
-                    types: ["1024x1024", "512x512", "256x256"]
+                    types: ["1024x1024", "512x512", "256x256"],
                   },
                 },
                 aria: {},
@@ -2507,15 +2745,61 @@ export const view = {
                 aria: {},
               },
             },
-          ]
+          ],
         },
       },
       {
-        type: "viewAiChat",
+        type: "viewChat",
         options: {
-          action: "aiChat",
+          action: "selectLangModel",
           method: "post",
-          text: "Link",
+          assetType: "AI Chat",
+          toggle: false,
+          text: "aiChat",
+          submit: {
+            label: "Chat",
+            className: "btn btn-block btn-info",
+            icon: "",
+            action: "selectLangModel",
+          },
+          content: {
+            "text-davinci-003": ChatGPT,
+            "text-curie-001": ChatGPT,
+            "text-babbage-001": ChatGPT,
+            "text-ada-001": ChatGPT,
+            "alpaca": "src/system/image/avatar/alpaca.png",
+            "llama":  "src/system/image/avatar/llama.png",
+            "flan": Flan,
+            "auto-gpt":  "src/system/image/avatar/autoGpt.png",
+            'sentinel': Sentinel,
+            "bloom": Bloom
+
+          },
+          fields: [
+            {
+              type: "input",
+              attributes: {
+                label: {
+                  error: false,
+                  inverse: false,
+                  show: false,
+                  labelText: "Prompt",
+                  forId: "chat-prompt",
+                },
+                input: {
+                  type: "text",
+                  id: "chat-prompt",
+                  className: "",
+                  placeholder: "Prompt",
+                  name: "prompt",
+                  value: {},
+                  onChange: "",
+                  disabled: false,
+                },
+                aria: {},
+              },
+            },
+          ],
         },
       },
       {
@@ -2915,7 +3199,7 @@ export const wallet = {
     "walletNinja",
     "walletReceive",
     "authPermission",
-    "authCredential"
+    "authCredential",
   ],
   options: {
     type: "grid-one-center",
@@ -3090,7 +3374,7 @@ export const wallet = {
       {
         type: "walletStats",
         options: {
-          action: "walletStats"
+          action: "walletStats",
         },
       },
       {
@@ -3133,7 +3417,7 @@ export const wallet = {
             icon: "fa-solid fa-diamond",
           },
         },
-      },      
+      },
       {
         type: "authSetting",
         options: {
@@ -5049,9 +5333,7 @@ export const xln = {
             },
           ],
         },
-      }
+      },
     ],
   },
 };
-
-

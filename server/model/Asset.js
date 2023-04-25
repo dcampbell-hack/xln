@@ -1,15 +1,14 @@
-const mongoose = require('mongoose');
-const FileSchema = require('./asset/File');
-const slugify = require('slugify');
-const axios = require('axios')
-const geocoder = require('../utils/geocoder');
-const ErrorResponse = require('../utils/errorResponse');
-const ClusterSchema = require('./Cluster')
-const Category = require('./Category')
-const Conditional = require('./Conditional')
-const { checkModelForDuplicate } = require('../middleware/checkModelForDuplicate');
-const { formatField  } = require('../middleware/formatField');
-const { getIpAdress, getLocationFromIpAddress } = require('../middleware/ipAddress');
+import mongoose from 'mongoose';
+import slugify from 'slugify';
+
+import geocoder from '../utils/geocoder.js';
+import ErrorResponse from '../utils/errorResponse.js';
+import ClusterSchema from './Cluster.js'
+import Category from './Category.js'
+import Conditional from './Conditional.js'
+import { checkModelForDuplicate } from '../middleware/checkModelForDuplicate.js';
+import { formatField  } from '../middleware/formatField.js';
+import {  getLocationFromIpAddress } from '../middleware/ipAddress.js';
 
 const AssetSchema = new mongoose.Schema({
     name: {
@@ -137,7 +136,6 @@ const AssetSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Comment',
     }, 
-    files: [FileSchema],
     cover: {
         type: String,
         default: 'no-photo.jpg',
@@ -284,4 +282,4 @@ AssetSchema.virtual('conditionals', {
     justOne: false
 });
 
-module.exports = mongoose.model('Asset', AssetSchema);
+export default mongoose.model('Asset', AssetSchema);

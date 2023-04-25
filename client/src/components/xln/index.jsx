@@ -47,11 +47,7 @@ const XLN = ({
 
 
   useEffect(() => {
-    if(users?.isAuthenticated){
-      navigate("../xln", { replace: true });
-    } else {
-        navigate("../login", { replace: true });
-    }
+    if(users?.isAuthenticated) navigate("../xln", { replace: true });
 
       // Check if the user has MetaMask installed and enabled
       if (window.ethereum) {
@@ -68,6 +64,8 @@ const XLN = ({
         });
       }
 
+      return;
+      
   }, [ users.isAuthenticated ])
 
 

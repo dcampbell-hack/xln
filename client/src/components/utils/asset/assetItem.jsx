@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux'
 import Avatar from "../avatar";
-import PlaceholderImage from '../../../system/image/placeholder.png'
+import PlaceholderImage from '../../../system/image/cover/placeholder.png'
 import { useNavigate } from "react-router-dom";
 import { getSingleAsset } from "../../../actions/assets/asset"
 
@@ -29,7 +29,7 @@ export const AssetItem = ({
       key={id}
       onClick={() => handleClick(id) }
       style={{
-        background: cover !== 'no-photo.jpg' ? `url(/uploads/${userId}/asset/${cover})` : `url(${PlaceholderImage})`,
+        background: cover !== 'no-photo.jpg' ? ( assetType == 'AI Chat' ? `url(/src/system/image/cover/${cover})`  : `url(/uploads/${userId}/asset/${cover})` ) : `url(${PlaceholderImage})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}

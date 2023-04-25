@@ -1,5 +1,5 @@
-const fs = require("fs");
-const randomColor = require('randomcolor');
+import fs from "fs";
+import randomColor from 'randomcolor';
 
 async function downloadImage(next, user, file){
 
@@ -22,4 +22,4 @@ async function downloadImage(next, user, file){
     return fileName;
 }
 
-module.exports = downloadImage;
+export default downloadImage;

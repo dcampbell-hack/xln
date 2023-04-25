@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const { Schema } = require('mongoose');
-const ErrorResponse = require('../utils/errorResponse');
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
+import ErrorResponse from '../utils/errorResponse.js';
 
 const WalletSchema = new Schema({
   balance: {
@@ -37,4 +37,4 @@ if(user.role !== 'system'){
 })
 
 
-module.exports = mongoose.model('Wallet', WalletSchema)
+export default mongoose.model('Wallet', WalletSchema)

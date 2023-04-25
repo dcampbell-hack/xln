@@ -1,22 +1,22 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
-const advancedResults = require('../../middleware/advancedResults');
+import ErrorResponse from '../../utils/errorResponse.js';
+import advancedResults from '../../middleware/advancedResults.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const User = require('../../model/User');
-const Share = require('../../model/asset/Share');
+import Asset from '../../model/Asset.js';
+import User from '../../model/User.js';
+import Share from '../../model/asset/Share.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { getLocationFromIpAddress } = require('../../middleware/ipAddress');
-const { shareholderValidation } = require('../../middleware/shareholderValidation');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { getLocationFromIpAddress } from '../../middleware/ipAddress.js';
+import { shareholderValidation } from '../../middleware/shareholderValidation.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 //@desc Get Shares
 //@route GET /api/v1/assets/:assetId/shares/:shareId
 //@access Public 
-exports.getShare = asyncHandler(async (req, res, next ) => {
+export const getShare = asyncHandler(async (req, res, next ) => {
 
     if(req.params.id){
         const share = await Share.findById(req.params.id).populate({
@@ -43,7 +43,7 @@ exports.getShare = asyncHandler(async (req, res, next ) => {
 //@desc Get Shares 
 //@route GET /api/v1/assets/:assetId/shares      
 //@access Public 
-exports.getShares = asyncHandler(async (req, res, next ) => {
+export const getShares = asyncHandler(async (req, res, next ) => {
 
 // Check conditionals
 await checkConditionals(next, req.params.assetId)
@@ -70,7 +70,7 @@ return res.status(200).json({
 //@desc Add Share 
 //@route GET /api/v1/share 
 //@access Public 
-exports.addShare = asyncHandler(async (req, res, next ) => {
+export const addShare = asyncHandler(async (req, res, next ) => {
 req.body.user = req.user.id;
 
 const user = await User.findById(req.body.user);
@@ -149,7 +149,7 @@ res.status(200).json({ success: true, data: shareObj })
 //@desc Update Share 
 //@route PUT /api/v1/share/:id
 //@access Public 
-exports.updateShare = asyncHandler(async (req, res, next ) => {
+export const updateShare = asyncHandler(async (req, res, next ) => {
    let share = await Share.findById(req.params.id);
    if(!share){
        return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))
@@ -174,7 +174,7 @@ exports.updateShare = asyncHandler(async (req, res, next ) => {
 //@desc Delete Share 
 //@route GET /api/v1/share/:id
 //@access Public 
-exports.deleteShare = asyncHandler(async (req, res, next ) => {
+export const deleteShare = asyncHandler(async (req, res, next ) => {
 const share = await Share.findById(req.params.id);
 if(!share){
     return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

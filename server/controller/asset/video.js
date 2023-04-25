@@ -1,18 +1,18 @@
 // Utils
-const ErrorResponse = require('../../utils/errorResponse');
+import ErrorResponse from '../../utils/errorResponse.js';
 
 // Model
-const Asset = require('../../model/Asset');
-const Video = require('../../model/asset/Video');
+import Asset from '../../model/Asset.js';
+import Video from '../../model/asset/Video.js';
 
 // Middleware
-const asyncHandler = require('../../middleware/async');
-const { checkConditionals, preventPublicKnowledge, preventSale } = require('../../middleware/checkIfValidAsset')
+import asyncHandler from '../../middleware/async.js';
+import { checkConditionals, preventPublicKnowledge, preventSale } from '../../middleware/checkIfValidAsset.js'
 
 //@desc Get Video
 //@route GET /api/v1/reviews/:id
 //@access Public 
-exports.getVideo = asyncHandler(async (req, res, next ) => {
+export const getVideo = asyncHandler(async (req, res, next ) => {
 
 const video = await Video.findById(req.params.id)
                            .populate({ path: 'asset', select: 'name description'})
@@ -34,7 +34,7 @@ res.status(200).json({
 //@desc Get Videos
 //@route GET /api/v1/videos       
 //@access Public 
-exports.getVideos = asyncHandler(async (req, res, next ) => {
+export const getVideos = asyncHandler(async (req, res, next ) => {
     if(req.params.assetId){
        await preventPublicKnowledge(next, req.params.assetId )
         const videos = await Video.find({ asset: req.params.assetId });
@@ -51,7 +51,7 @@ exports.getVideos = asyncHandler(async (req, res, next ) => {
 //@desc Add Review
 //@route POST /api/v1/:assetId/reviews 
 //@access Public 
-exports.createVideo = asyncHandler(async (req, res, next ) => {
+export const createVideo = asyncHandler(async (req, res, next ) => {
 req.body.asset = req.params.assetId;
 req.body.user = req.user.id
 
@@ -74,7 +74,7 @@ res.status(201).json({
 //@desc Update Review
 //@route GET /api/v1/reviews/:id
 //@access Public 
-exports.updateReview = asyncHandler(async (req, res, next ) => {
+export const updateReview = asyncHandler(async (req, res, next ) => {
 
  let video = await Video.findById(req.params.id);
  if(!video){
@@ -95,7 +95,7 @@ res.status(200).json({
 //@desc Delete Video
 //@route GET /api/v1/videos/:id 
 //@access Public 
-exports.deleteVideo = asyncHandler(async (req, res, next ) => {
+export const deleteVideo = asyncHandler(async (req, res, next ) => {
     const video = await Video.findById(req.params.id);
     if(!video){
         return next(new ErrorResponse(`No share with the id of ${req.params.id}`, 404))

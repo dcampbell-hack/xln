@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { updateAdmin, mint }  = require('../../controller/blockchain/token');
+import { updateAdmin, mint }  from '../../controller/blockchain/token.js';
 
-const { protect, authorize } = require('../../middleware/auth');
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/update-admin')
@@ -14,4 +14,4 @@ router
 .post( mint );
 
 
-module.exports = router;
+export default router;

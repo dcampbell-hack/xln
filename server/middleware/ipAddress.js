@@ -1,10 +1,10 @@
-const request = require('request');
-const localIpV4Address = require("local-ipv4-address");
+import request from 'request';
+import localIpV4Address from "local-ipv4-address";
 
 const URL = "https://www.ipapi.co";
 
 
-exports.getLocationFromIpAddress = function(){
+export const getLocationFromIpAddress = function(){
 
    localIpV4Address().then(function(address){
     console.log("My IP address is " + address);

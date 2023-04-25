@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-const ErrorResponse = require('../utils/errorResponse');
+import ErrorResponse from '../utils/errorResponse.js';
 
 const ConditionalSchema = new Schema({ 
     active_asset: {
@@ -34,4 +34,4 @@ user: {
 });
 
 
-module.exports = mongoose.model('Conditional', ConditionalSchema);
+export default mongoose.model('Conditional', ConditionalSchema);

@@ -1,6 +1,6 @@
-const axios = require('axios')
-const fs = require("fs");
-const randomColor = require('randomcolor');
+import axios from 'axios';
+import fs from "fs";
+import randomColor from 'randomcolor';
 
 const stableDiffusion = async (next, asset, prompt ) => {
 
@@ -51,5 +51,4 @@ console.log("Stable Diff fuction -----", asset, prompt)
     return fileName;
 }
 
-
-module.exports = stableDiffusion;
+export default stableDiffusion;

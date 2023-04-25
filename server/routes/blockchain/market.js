@@ -1,15 +1,15 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { 
+import { 
     getListingPrice, 
     makeMarketItem, 
     createMarketSale, 
     fetchMarketTokens, 
     fetchMyNFTs, 
-    fetchItemsCreated }  = require('../../controller/blockchain/market');
+    fetchItemsCreated }  from '../../controller/blockchain/market.js';
 
-const { protect, authorize } = require('../../middleware/auth');
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/get-listing-price')
@@ -36,4 +36,4 @@ router
 .get( fetchItemsCreated )
 
 
-module.exports = router;
+export default router;

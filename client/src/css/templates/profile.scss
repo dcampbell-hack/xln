@@ -22,9 +22,15 @@
 }
 
 .profile-view-max{
+    width: 500px;
     display: grid;
     place-items: center;
     padding: 1em;
+}
+
+.profile-view-max img{
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .profile-view-panel-icon{
@@ -59,9 +65,7 @@ margin: 1em 0;
 }
 
 .profile-content .featured-content{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    background-color: #F77F00;
+  width: 100%;
 }
 
 .featured-content .profile-xln-balance{

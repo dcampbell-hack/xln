@@ -1,12 +1,14 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true});
 
-const { 
+import { 
     textToImage,
-    textToAiChat
-}  = require('../../controller/asset/ai');
+    getChatMessages,
+    postChatMessage,
+    selectLangModel
+}  from '../../controller/asset/ai.js';
 
-const { protect, authorize } = require('../../middleware/auth');
+import { protect, authorize } from '../../middleware/auth.js';
 
 router
 .route('/art')
@@ -15,7 +17,12 @@ router
 
 router
 .route('/chat')
-.post(protect, authorize('publisher', 'admin'), textToAiChat)
+.get(protect, authorize('publisher', 'admin'),getChatMessages)
+.post(protect, authorize('publisher', 'admin'), postChatMessage)
+
+router
+.route('/llm')
+.post(protect, authorize('publisher', 'admin'), selectLangModel)
 
 
-module.exports = router;
+export default router;

@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router({ mergeParams: true });
 
-const { getTransactions, getTransaction, createTransaction } = require('../../controller/asset/transaction');
-const advancedResults = require('../../middleware/advancedResults');
-const { protect, authorize } = require('../../middleware/auth');
-const Transaction = require('../../model/asset/Transaction');
+import { getTransactions, getTransaction, createTransaction } from '../../controller/asset/transaction.js';
+import advancedResults from '../../middleware/advancedResults.js';
+import { protect, authorize } from '../../middleware/auth.js';
+import Transaction from '../../model/asset/Transaction.js';
 
-const commentsRouter = require('./comment');
+import commentsRouter from './comment.js';
 router.use('/:txId/comments', commentsRouter)
 
 
@@ -20,4 +20,4 @@ router.route('/')
 router.route('/:txId')
       .get(protect, authorize('publisher', 'admin'), getTransaction)
       
-module.exports = router;
+      export default router;

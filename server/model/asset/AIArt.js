@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const AIArtSchema = new Schema({ 
@@ -108,4 +108,4 @@ AIArtSchema.virtual('assets', {
     justOne: false
 })
 
-module.exports = mongoose.model('AIArt', AIArtSchema);
+export default mongoose.model('AIArt', AIArtSchema);

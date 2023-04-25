@@ -1,7 +1,7 @@
-const Shareholder = require('../model/Shareholder');
-const ErrorResponse = require('../utils/errorResponse');
+import Shareholder from '../model/Shareholder.js';
+import ErrorResponse from '../utils/errorResponse.js';
 
-exports.shareholderValidation = async (obj) => {
+export const shareholderValidation = async (obj) => {
 
     const calculateSupernode = (array) => {
        const sum = array.map(arr => arr && arr.marketcap ? arr.marketcap : 0 ).reduce((a, b ) => a + b);
