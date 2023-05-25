@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FormWrapper } from '../../layout/HOC/form-wrapper';
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 const ffmpeg = createFFmpeg({ log: true })
 
@@ -31,20 +32,17 @@ const convertToGif = async () => {
 }
 
     return ready ? (
-        <div>
+        <FormWrapper>
             { video && <video
                         controls 
                         width="600"
-                        src={URL.createObjectURL(video)}
-                     
-            >
-                </video>}
+                        src={URL.createObjectURL(video)}></video>}
             <input type="file" onChange={ e => setVideo(e.target.files?.item(0)) } />
             <h3>Result</h3>
-            <button onClick={conveertToGif} className="btn btn-danger">Convert</button>
+            <button onClick={convertToGif} className="btn btn-danger">Convert</button>
             {gif && <img src={gif} width="300px" height="auto" /> }
-        </div>
-    ) : <p>Loading...</p>
+        </FormWrapper>
+    ) : ( <p>Loading...</p> )
 }
 
 export default FFMpeg;

@@ -63,6 +63,7 @@ import {
   FormTimeInput,
   FormColorPicker,
   BuyFormInput,
+  ToggleSwitch
 } from "./formStyles";
 
 import { AssetDetails } from "../../../utils/helpers/assetDetails";
@@ -157,6 +158,15 @@ const Form = ({
             values={values}
           />
         );
+        case "toggle":
+          return (
+            <ToggleSwitch
+            key={index}
+            options={attributes}
+            setValues={setValues}
+            values={values}
+            />
+          )
         case "range":
         return (
           <FormRangeSelector
@@ -264,7 +274,6 @@ const Form = ({
         case "createAsset":
           await isValidAssetValues(assetType, values, addNewError) 
           await createAsset({ id: users.id, values, blockchain });
-           
           break;
 
         // Auth

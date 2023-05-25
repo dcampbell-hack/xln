@@ -4,7 +4,21 @@
     "moduleResolution": "NodeNext",
     "target": "ES2020",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "./build",
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "useUnknownInCatchVariables": false,
+    "emitDeclarationOnly": true,
 },
+"exclude": ["node_modules"],
 "include": ["**/*"],
+"typeRoots": [
+    "./server/types/",
+    "./node_modules/@types/"
+  ]
 }

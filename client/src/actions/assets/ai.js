@@ -78,12 +78,9 @@ export const postChatMessage = ( assetId, prompt ) => async dispatch => {
 }
 
 export const selectLangModel = ( assetId, prompt ) => async dispatch => {
-    console.log("Action: SelectLangModel ---------" )
     try{
         // const object = prompt.id = assetId;
-        console.log("Action: SelectLangModel", prompt )
-        const res = await axios.post(`/api/v1/assets/${assetId}/ai/llm`,  prompt );
-    
+        const res = await axios.post(`/api/v1/assets/${assetId}/ai/llm`,  prompt );    
         dispatch({
             type: SELECT_LLM,
             payload: res.data
@@ -107,6 +104,19 @@ export const getAssetArt = (assetId) => async dispatch => {
     }
 }
 
+export const executeAgent = (asset) => async dispatch => {
+    try{
+        // const object = prompt.id = assetId;
+        const res = await axios.post(`/api/v1/assets/${assetId}/ai/agent`,  prompt );    
+        dispatch({
+            type: EXECUTE_AGENT,
+            payload: res.data
+        })
+
+    } catch(error){
+        dispatch({ type: AI_ERROR, error })
+    }
+}
 
 export const getSingleAIArt = (asset) => async dispatch => {
     try {    

@@ -16,8 +16,8 @@
   "module": "../rust/snake_game/pkg/snake_game.js",
   "types": "../rust/snake_game/pkg/snake_game.d.ts",
   "dependencies": {
-    "@ffmpeg/core": "^0.10.0",
-    "@ffmpeg/ffmpeg": "^0.10.1",
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.6",
     "@pmndrs/branding": "^0.0.8",
     "@react-spring/three": "^9.2.4",
     "@react-three/cannon": "^6.3.0",

@@ -44,11 +44,12 @@ const ViewChat = ({
     console.log("View Chat -----", assetId, ai);
     getChatMessages(assetId);
 
-    if(Object.keys(ai.chat).length !== 0){
+    if(ai.chat && Object.keys(ai.chat).length !== 0){
 
       const { model, max_tokens = parseInt(max_tokens), temperature = parseFloat(temperature), top_p = parseFloat(top_p), frequency_penalty = parseFloat(frequency_penalty) , presence_penalty = parseFloat(presence_penalty) } = ai.chat;
       setValues({ model, max_tokens, temperature, top_p, frequency_penalty, presence_penalty })
     }
+    
   }, [ ai.chats.length ]);
 
 

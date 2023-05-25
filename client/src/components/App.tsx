@@ -35,6 +35,7 @@ import Footer from "./global/Footer";
 import Documentation from "./documentation";
 import Landing from "./landing";
 import XLN from "./xln";
+import FFMpeg from './utils/ffmpeg/'
 
 // import Template from './utils/layout/template';
 import NotFound from "./notFound";
@@ -133,7 +134,7 @@ const App: React.FC<AppProps> = ({ auth, users, blockchain, loadUser }:AppProps)
           <Route path="/xln/create/asset/real-estate/" element={<XLN xln={create} page={create.states[14]} />} />  
           <Route path="/xln/create/asset/shop/" element={<XLN xln={create} page={create.states[15]} />} />  
           <Route path="/xln/create/asset/text/" element={<XLN xln={create} page={create.states[16]} />} />  
-          <Route path="/xln/create/asset/video/" element={<XLN xln={create} page={create.states[17]} />} />  
+          <Route path="/xln/create/asset/video/" element={<FFMpeg xln={create} page={create.states[17]} />} />  
           <Route path="/xln/create/asset/website/" element={<XLN xln={create} page={create.states[18]} />} />  
           
           {/* View Asset */}

@@ -133,6 +133,8 @@ export const FormTextArea = ({
   values,
 }) => {
   return (
+    <div className={`form-control-container`}>
+    <div className="form-control">
     <textarea
       className={className}
       name={name}
@@ -145,6 +147,8 @@ export const FormTextArea = ({
     >
       {text}
     </textarea>
+    </div>
+    </div>
   );
 };
 
@@ -188,10 +192,14 @@ export const FileUpload = ({
     <div className="form-upload-container">
       <p>{label.labelText}</p>
       <div className="toggle-upload-form">
-        <InfoB
-          icon={toggle ? "fas fa-minus" : "fas fa-plus"}
-          click={() => setToggle(!toggle)}
-        />
+        <div
+           className="btn btn-info "
+          onClick={() => setToggle(!toggle)}
+          role="button"
+        >
+        <i className={toggle ? "fas fa-minus" : "fas fa-plus"}></i>
+        </div>
+    </div>
         {toggle && (
           <input
             className={input.className}
@@ -201,7 +209,6 @@ export const FileUpload = ({
             onChange={onChange}
           />
         )}
-      </div>
     </div>
   );
 };
@@ -322,6 +329,28 @@ export const numberSelector = () => {
   )
 }
 
+export const ToggleSwitch = ({
+  options: {
+    label: { forId, labelText, show },
+    input: { id, name, size, multiple, list },
+    aria: {},
+  },
+  setValues,
+  values,
+}) => {
+
+  return(
+    <div className="form-control-container"> 
+      <label>{ labelText }</label>
+    <label class="switch">
+  <input type="checkbox" name={name} onChange={(e) => setValues({ ...values, [e.target.name]: e.target.checked })} />
+  <span class="slider round"></span>
+</label>
+</div>
+
+  )
+}
+
 export const FormButton = ({ status, label, className, disable }) => (
-  <button className={className} type="submit"  disabled={disable}>{status ? <i className="fas fa-spinner fa-spin"></i> : label}</button>
+  <button className={className} type="submit"  disabled={disable}>{ label }</button>
 );

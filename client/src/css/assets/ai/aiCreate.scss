@@ -21,6 +21,13 @@
     width: 600px;
 }
 
+.chat-content-buttons{
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
 .chat-content h2{
     color: #F77F00;;
     margin: 0;
@@ -267,4 +274,14 @@ overflow-y: auto;
     background-color: #F77F00;
     padding: 1px;
     margin: 10px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.chat-text{
+    width: 90%;
+   position: absolute;
+   z-index: 2;
+   color: #fff;
+   line-height: normal;
 }
