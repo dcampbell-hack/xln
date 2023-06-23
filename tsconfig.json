@@ -13,7 +13,7 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "useUnknownInCatchVariables": false,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": true
 },
 "exclude": ["node_modules"],
 "include": ["**/*"],

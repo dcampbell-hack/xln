@@ -62,10 +62,13 @@ req.body.user = req.user.id
 //Check conditional
 // checkConditionals(next, req.body.asset )
 
+console.log("Audio Creation ---", req.body)
+
 const asset = Asset.findById(req.body.asset);
 if(!asset){
     return next(new ErrorResponse(`No asset with the id ${req.body.asset}`, 404))
 }
+
 const audio = await Audio.create(req.body);
 
 

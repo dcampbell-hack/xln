@@ -114,9 +114,7 @@ sendTokenResponse(user, 200, res, next);
 //@route POST /api/v1/auth/me 
 //@access Public 
 export const getMe = asyncHandler(async (req: IUserAuthRequest, res: Response, next: NextFunction) => {
-    console.log("Get Me Function()", req.user.id)
     const user = await User.findById(req.user.id);
-
     res.status(200).json({
         success: true,
         data: user

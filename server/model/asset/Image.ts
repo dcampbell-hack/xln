@@ -4,6 +4,29 @@ const { Schema, Types } = mongoose;
 import { IImage } from '../../type/model.ts'
 
 const ImageSchema = new Schema<IImage>({ 
+    description: {
+      type: String
+    }, 
+    filePath: {
+        type: String,
+        required: false
+    },
+    size: {
+        type: Number,
+        required: true
+    },
+    encoding: {
+      type: String,
+      required: true
+    },
+    mimetype: {
+        type: String,
+        required: true
+    },
+    md5: {
+        type: String,
+        required: true
+    },
 asset:  {
     type:'ObjectId',
     ref: 'Asset',

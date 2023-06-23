@@ -10,7 +10,7 @@
     display: grid;
     justify-content: center;
     align-content: start;
-    background-color: pink;
+    background-color: #373658;
 }
 
 .profile-nav a{
@@ -19,6 +19,10 @@
 
 .profile-nav a:hover{
    color: #fff;
+}
+
+.profile-nav .btn-link{
+    color: #ccc;
 }
 
 .profile-view-max{
@@ -61,7 +65,9 @@ margin: 1em 0;
 }
 
 .profile-content{
-    height: auto;
+    overflow: auto;
+    height: 100vh;
+
 }
 
 .profile-content .featured-content{

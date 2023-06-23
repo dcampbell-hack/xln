@@ -67,26 +67,9 @@ const AssetSchema = new Schema<IAsset>({
             "Website"
         ]
     },
-    template: {
-        type: [String],
-        required: false,
-        enum: [
-            'grid-template-1',
-            'grid-template-2',
-            'grid-template-3',
-            'grid-template-4',
-            'grid-template-5',
-            'grid-template-6',
-            'grid-template-7',
-            'grid-template-8',
-            'grid-template-9',
-            'grid-template-10',
-            'grid-template-11',
-        ]
-    },
     category: {
         type: String,
-        required: [ true, 'Please give asset a category']
+        required: [ false, 'Please give asset a category']
     },
     averageRating: {
         type: Number

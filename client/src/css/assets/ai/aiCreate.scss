@@ -197,6 +197,36 @@ overflow-y: auto;
     width: 25em;
 }
 
+.chat-container{
+    display: flex;
+}
+
+.icon{
+    color: #fff;
+}
+
+.voice-record{
+    width: 50px;
+    height: 50px;
+    background-color: #D62828;
+    display: grid;
+    place-items: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.pressed{
+    width: 50px;
+    height: 50px;
+    background-color: #3f3;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
 
 .podcast-container{
     display: grid;

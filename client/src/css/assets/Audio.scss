@@ -1,14 +1,32 @@
 .audio_player {
     display: grid;
-    width: 80vw;
-    min-width: 1000px;
-    grid-template-columns: 550px auto;
-    background-color: #28a745;
+    width: 100vw;
+    height: auto;
+    background-color: #e4e4e4;
   }
 
-  .album_display{
-     display: grid;
-  }
+.album_display_container{
+  width: 100vw;
+  height: 80vh;
+  display: grid;
+  place-content: center;
+}
+
+.album_display{
+     width: 30em;
+     height: 30em;
+     padding: 10px;
+     border-radius: 5px;
+     background-color: #fff;
+     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.album_display_panel{
+  width: 100vw;
+  height: auto;
+  background-color: blue;
+  display: flex;
+}
   
   .controls {
     width: 100%;
@@ -17,9 +35,12 @@
   }
 
   .track_slider{
-    width: 100%;
-    height: 50px;
+    flex-grow: 4;
+    width: 400px;
+    height: 90px;
+    padding: 10px;
     display: flex;
+    align-items: center;
     justify-content: space-around;
   }
 
@@ -42,6 +63,14 @@
     grid-template-rows: 3em 2em 2em;
   }
 
+.playlist-header{
+    width: 98vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1vw;
+  }
+
   .playlist ul{
     margin: 0;
     padding: 0;
@@ -49,20 +78,40 @@
 
   .playlist ul li{
     width: 96%;
-    height: 60px;
+    height: auto;
     margin: 1px 0;
     padding: 0 2%;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(0.25turn, rgba(255,255,255), rgba(225,225,225), rgba(56,2,155,0));
+    border-image-slice: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .playlist ul li:hover{
+  .playlist ol li:hover{
     background-color: #ccc;
+  }
+
+  .artist_details{
+    width: 250px;
+    height: 90px;
+    color: #ccc;
+    line-height: normal;
+    padding: 10px;
+  }
+
+  .artist_details h4{
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    color: #fff;
   }
 
   .ctrl_btn{
     width: 150px;
+    height: 90px;
+    padding: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -72,6 +121,7 @@
   .ctrl_btn button{
       width: 30px;
       height: 30px;
+      background:rgba(250, 250, 250, 0);
       border-radius: 50%;
       border: none;
       cursor: pointer;
@@ -83,6 +133,7 @@
     border-radius: 50%;
     border: none; 
     font-size: 18px;
+    background-color: rgba(250, 250, 250, 0);
   }
 
   .ctrl_btn button:nth-child(2):hover{

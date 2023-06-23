@@ -4,6 +4,63 @@ const { Schema, Types } = mongoose;
 import { IVideo } from '../../type/model.ts'
 
 const VideoSchema = new Schema<IVideo>({ 
+    category: {
+        type: [String],
+        required: true,
+        enum: [
+            "Autos & Vehicles",
+            "Comedy",
+            "Education",
+            "Entertainment",
+            "Fashion",
+            "Film & Animation",
+            "Gaming",
+            "Howto & Style",
+            "Music",
+            "News & Politics",
+            "Nonprofits & Activism",
+            "People & Blogs",
+            "Pets & Animals",
+            "Science & Technology",
+            "Sports",
+            "Travel & Events",
+        ]
+    },
+    language: {
+        type: [String],
+        required: true,
+        enum: [
+            "English",
+            "Spanish",
+        ]
+    },
+    filePath: {
+        type: String,
+        required: false
+    },
+    size: {
+        type: Number,
+        required: true
+    },
+    encoding: {
+      type: String,
+      required: true
+    },
+    mimetype: {
+        type: String,
+        required: true
+    },
+    md5: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+    },
+   detail: {
+    type: String
+   },
+
 asset:  {
     type: 'ObjectId',
     ref: 'Asset',

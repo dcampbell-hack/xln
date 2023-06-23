@@ -22,31 +22,3 @@
     "include": ["./**/*"],
     "references": [{ "path": "./tsconfig.node.json" }]
   }
-  
-// {
-//   "compileOnSave": true,
-//   "compilerOptions": {
-//       "outDir": "./built",
-//       "esModuleInterop": true,
-//       "allowJs": true,
-//       "target": "esnext",
-//       "allowUnreachableCode": false,
-//       "noImplicitReturns": true,
-//       "noImplicitAny": true,
-//       "typeRoots": [ "./typings" ],
-//       "outFile": "./built/combined.js",
-//       "moduleResolution": "node",                 
-//       "module": "amd",                                                            
-//       "strictNullChecks": true,              
-//       "strictPropertyInitialization": false
-//   },
-//   "include": [
-//       "./**/*"
-//   ],
-//   "exclude": [
-//       "node_modules",
-//       "./plugins/**/*",
-//       "./typings/**/*",
-//       "./built/**/*" // This is what fixed it!
-//   ]
-// }

@@ -41,6 +41,7 @@ export interface IUser {
     pending: boolean,
     minted: boolean,
     assetType: string[],
+    mimeType: string,
     template: string[],
     category: string,
     averageRating: number,
@@ -75,12 +76,15 @@ export interface IUser {
     composer: string,
     lyrics: string,
     producer: string,
-    audioCover: string,
     audioFile: string,
+    filePath: string,
+    encoding: string,
+    size: number,
+    mimetype: string,
+    md5: string,
     asset:  Types.ObjectId,
     user: Types.ObjectId
   }
-
 
   export interface IBlog {
     asset:  Types.ObjectId,
@@ -114,11 +118,28 @@ export interface IUser {
   }
 
   export interface IImage {
+    image: string,
+    description: string,
+    filePath: string,
+    encoding: string,
+    size: number,
+    mimetype: string,
+    md5: string,
     asset:  Types.ObjectId,
     user: Types.ObjectId
   }
 
   export interface ILink {
+    asset:  Types.ObjectId,
+    user: Types.ObjectId
+  }
+
+  export interface IDocument {
+    filePath: string,
+    encoding: string,
+    size: number,
+    mimetype: string,
+    md5: string,
     asset:  Types.ObjectId,
     user: Types.ObjectId
   }
@@ -178,6 +199,7 @@ export interface IUser {
   }
 
   export interface IText {
+    content: string,
     asset:  Types.ObjectId,
     user: Types.ObjectId
   }
@@ -192,6 +214,15 @@ export interface IUser {
   }
 
   export interface IVideo {
+    category: string,
+    language: string,
+    title: string,
+    detail: string,
+    filePath: string,
+    encoding: string,
+    size: number,
+    mimetype: string,
+    md5: string,
     asset:  Types.ObjectId,
     user: Types.ObjectId
   }

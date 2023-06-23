@@ -1,5 +1,5 @@
 //React
-import React, { useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 
 // Typescript
 import { AppProps  } from "../types";
@@ -32,8 +32,8 @@ import {
 import Header from "./global/Header";
 import Error from "./global/Error";
 import Footer from "./global/Footer";
-import Documentation from "./documentation";
-import Landing from "./landing";
+import Documentation from "./documentation/";
+import Landing from "./landing/";
 import XLN from "./xln";
 import FFMpeg from './utils/ffmpeg/'
 
@@ -61,6 +61,8 @@ const App: React.FC<AppProps> = ({ auth, users, blockchain, loadUser }:AppProps)
  const xlnToken = sessionStorage.getItem('xln_token');
  const isLoggedIn = xlnToken ? JSON.parse(xlnToken) : false;
 
+ const [ showDropdown, setShowDropdown] = useState<boolean>(false)
+
   useEffect(() => {
 
       if (isLoggedIn?.success) {
@@ -71,9 +73,10 @@ const App: React.FC<AppProps> = ({ auth, users, blockchain, loadUser }:AppProps)
 
   return (
     <div className="xln-container">
-        <Header auth={auth} users={users} blockchain={blockchain} header={header} isLoggedIn={isLoggedIn}/>
+        <Header auth={auth} users={users} blockchain={blockchain} dropdown={{ showDropdown, setShowDropdown }} header={header} isLoggedIn={isLoggedIn}/>
         {/* { auth.isError && <Error auth={auth.error} /> } */}
         <Suspense fallback="Loading ...">
+        <div onClick={() => setShowDropdown(landing.systemChecks.showDropdown)}>
         <Routes>
           <Route path='*' element={<NotFound />} />
           <Route path="/"  element={<Landing landing={landing} />} />
@@ -134,7 +137,7 @@ const App: React.FC<AppProps> = ({ auth, users, blockchain, loadUser }:AppProps)
           <Route path="/xln/create/asset/real-estate/" element={<XLN xln={create} page={create.states[14]} />} />  
           <Route path="/xln/create/asset/shop/" element={<XLN xln={create} page={create.states[15]} />} />  
           <Route path="/xln/create/asset/text/" element={<XLN xln={create} page={create.states[16]} />} />  
-          <Route path="/xln/create/asset/video/" element={<FFMpeg xln={create} page={create.states[17]} />} />  
+          <Route path="/xln/create/asset/video/" element={<XLN xln={create} page={create.states[17]} />} />  
           <Route path="/xln/create/asset/website/" element={<XLN xln={create} page={create.states[18]} />} />  
           
           {/* View Asset */}
@@ -180,6 +183,7 @@ const App: React.FC<AppProps> = ({ auth, users, blockchain, loadUser }:AppProps)
           <Route path="/shares/:id/buy" element={<ExecuteShare />} />
           <Route path="/shares/:id/sell" element={<ExecuteShare />} /> */}
         </Routes>
+        </div>
         { !isLoggedIn?.success && (
           <Footer footer={footer} />
         )}

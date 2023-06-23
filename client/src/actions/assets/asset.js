@@ -1,3 +1,4 @@
+import FormData from 'form-data'
 import axios from "../../axios";
 import { addNewError } from "../error";
 import { setAssetName } from "../../components/utils/helpers/setAssetName";
@@ -13,9 +14,7 @@ import {
   ASSET_ERROR,
 } from "../types";
 
-export const attachAsset =
-  ({ id, values }) =>
-  async (dispatch) => {
+export const attachAsset = ({ id, values }) => async (dispatch) => {
     const config = {
       Headers: {
         "Content-Type": "multipart/form-data",
@@ -50,11 +49,9 @@ export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
       };
 
       const formData = new FormData();
-      if (values.file) formData.append("file", values.file);
-      if (values.cover) formData.append("cover", values.cover);
-      values.files = formData;
-
-      console.log("Create Asset ----->", formData, values.files)
+       Object.entries(values).map(([ key, value]) => formData.append(key, value))
+    
+      console.log("Create Asset ----->", formData, values )
 
       if (
         values.assetType === "AI Art" &&
@@ -66,7 +63,7 @@ export const createAsset = ({ id, blockchain, values }) => async (dispatch) => {
 
       if (values.assetType === "AI Art") values.description = values.description + " : " + values.prompt;
 
-      const res = await axios.post(`/api/v1/assets/`, values, config);
+      const res = await axios.post(`/api/v1/assets/`, formData, config);
 
       dispatch({
         type: CREATE_ASSET,

@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /server/config/*
-/api
+/api/experimental/
 /rust
 /client/uploads
 /.pnp

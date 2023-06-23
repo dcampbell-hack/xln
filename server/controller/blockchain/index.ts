@@ -45,8 +45,6 @@ export const getContractAddress = asyncHandler(async (req, res, next ) => {
 //@access Public 
 export const updateUserAddress = asyncHandler(async (req, res, next ) => {
 
-    console.log('User Address', req.body.address)
-
     const user = await User.findById(req.user.id);
 
     if(!user){

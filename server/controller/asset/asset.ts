@@ -12,7 +12,7 @@ import  models from "../../static/models.json" assert { type: "json" };
 
 // Controller
 import { textToImage, runHuggingFaceModel, runOpenAIModel } from "./ai.ts";
-import { createAudio } from "./audio.js"
+import { createAudio } from "./audio.ts"
 
 // Models
 import Conditional from "../../model/Conditional.ts";
@@ -30,7 +30,7 @@ import {
   preventPublicKnowledge,
 } from "../../middleware/checkIfValidAsset.js";
 
-import assetUpload from "../../middleware/assetUpload.js";
+import { assetUpload, createFile } from "../../middleware/assetUpload.js";
 import { checkModelForDuplicate } from "../../middleware/checkModelForDuplicate.ts";
 import asyncHandler from "../../middleware/async.ts";
 
@@ -108,23 +108,29 @@ export const createAsset = asyncHandler(async (req: IUserAuthRequest, res: Respo
 
   console.log("Asset Body Data -----", { 
     body: req.body, 
-    cover: req.files 
+    cover: req.files?.file
   })
 
   try {
-    // const asset = await Asset.create({ ...req.body });
-    // req.body.assetId = asset.id;
+    const asset = await Asset.create({ ...req.body });
+    req.body.assetId = asset.id;
 
     // Check Conditionals
 //assetUpload(Asset, 'image', 'asset', req, res, next);
 
-    if (assetType == "AI Art") {
+if(req.files?.file !== undefined){
+  // This block should cover file uploads for Image, Audio, Video and Documents
+  console.log("File ----", req.body.assetType, req.body);
+ const fileResponse = await createFile({  file: req.files?.file, body: { user: req.user.id, asset: asset.id, ...req.body  } })
+ if( fileResponse.success ) res.json(200).json({ success: true, data: asset })
+ else if( fileResponse.success ) res.json(500).json({ success: false, error: "No file loaded"})
+}
+
+    if (assetType === "AI Art") {
       await textToImage(req, res, next);
     }
 
-    if (assetType == "AI Chat") {
-      console.log("Asset Chat ----", req.body);
-
+    if (assetType === "AI Chat") {
       if (models.openai.includes(req.body.model)) {
         await runOpenAIModel(req, res, next);
       } else if (models.huggingface.includes(req.body.model)) {
@@ -132,35 +138,25 @@ export const createAsset = asyncHandler(async (req: IUserAuthRequest, res: Respo
       } else {
         res.status(500).json({ status: false, error: "model does not exist" });
       }
-      return next();
     }
     
-    if(assetType == "Audio"){
-        console.log("Audio ----", req.body);
-        await assetUpload(Asset, "audio", "asset", req, res, next);
-    }
+
     // Blog
     // Document
     // Domain
     // Downloader
     // Enterprise
     // File
+
     // Link
     // Live
     // Text
-    if(assetType == "Image"){
-        console.log("Image ----", req.body);
-        await assetUpload(Asset, "image", "asset", req, res, next);
-    }
     // Metaverse
     // Music
     // Podcast
     // Real Estate
     // Shop
-    if(assetType == "Video"){
-        console.log("Image ----", req.body);
-        await assetUpload(Asset, "image", "asset", req, res, next);
-    }
+
     // Website
 
     // return res.status(200).json({ status: true, data: asset })

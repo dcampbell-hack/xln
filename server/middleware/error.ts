@@ -12,34 +12,35 @@ const errorHandler = (err: IError, req: Request, res: Response, next: NextFuncti
     
 
     //Mongoose ObjectId 
-    if(err.name === 'CastError'){
+    if(error.name === 'CastError'){
         const message = `Resource not found id of ${err.value}`;
         error = new ErrorResponse(message, 404)
     }
 
     //Mongoose duplicate 
-    if(err.code === 'E11000' ){
+    if(error.code === 'E11000' ){
         const message = 'Duplicate field entered';
         error = new ErrorResponse(message, 400);
 
-        res.status(err.statusCode).json({ success: false, error: error.message })
+        res.status(error.statusCode).json({ success: false, error: error.message })
     }
 
     //Mongoose validation error 
-    if(err.name = 'ValidationError'){
+    if(error.name = 'ValidationError'){
         const message = Object.values(err.errors!).map(val => val.message)[0]
         error = new ErrorResponse(message, 400)
 
 
-    res.status(err.statusCode || 500).json({
+    res.status(error.statusCode || 500).json({
         success: false,
         error: error.message || 'Server Error'
     })
 
 }
 
-} catch(err){
-    console.log(`Error: ${err}`)
+} catch(error){
+    console.log(`Error: ${error}`)
+    res.status(500).json({ success: false, error})
 }
 }
 

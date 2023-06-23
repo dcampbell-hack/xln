@@ -1,3 +1,5 @@
+import Documentation from "../components/documentation"
+
 export type Auth = {
     login: Object,
     register: Object,
@@ -75,12 +77,26 @@ export type Auth = {
     action: () => JSX.Element
   }
 
+  export interface SubmitBtn{
+    label: string,
+    className: string
+  }
 
   export type Btn = {
     text: string,
     className: string,
     icon: string,
     click: () => JSX.Element
+  }
+
+  export type LinkProps = {
+    className: string,
+    text: string, 
+    url: string, 
+    icon: string, 
+    amount?: number,
+    show: boolean, 
+    external: boolean
   }
 
   export type Header = {
@@ -90,6 +106,11 @@ export type Auth = {
         isAuthenticated: NavBtn[], 
         crowd: NavBtn[]
     },
+  }
+
+  export type NavDropdown = {
+    showDropdown: boolean, 
+    setShowDropdown:  React.Dispatch<React.SetStateAction<boolean>>
   }
 
   export type Footer = {
@@ -154,6 +175,7 @@ export type Auth = {
      auth: Auth,
      users: User,
      blockchain: Blockchain,
+     dropdown:  NavDropdown,
      header: Header,
      isLoggedIn: boolean,
   }
@@ -165,3 +187,75 @@ export type Auth = {
   export interface ErrorProps {
     auth: Auth
   }
+
+  export interface LabelProps {
+    show: boolean,
+    labelText: string,
+    forId: string,
+  }
+
+  export interface AttributeProps {
+     label: LabelProps,
+     input: {
+      type: string,
+      id: string,
+      className: string,
+      name: string,
+      value: {},
+      onChange: string,
+      placeholder: string,
+      disabled: boolean,
+    },
+     aria: {}
+  }
+
+  export interface FieldProps {
+    type: string,
+    attributes: AttributeProps 
+  }
+
+  export interface FormDataProps{
+    action: string,
+    method: string,
+    expand: boolean,
+    assetType: string,
+    submit: SubmitBtn,
+    fields: FieldProps[]
+  }
+
+  export interface OptionsProps {
+    id?: string,
+    standard: string;
+    title: string;
+    forgotPassword: string;
+    forgotPasswordLink: string;
+    warning: string;
+    warningLink: Btn;
+    description: string;
+    showDescription: any;
+    image: string;
+    formData: FormDataProps;
+    clickable?: boolean,
+    charLimit?: number; 
+    minimizeImage?: boolean; 
+    button?: NavBtn;
+  }
+
+  export interface DocsProps {
+    docs: {
+    header: string, 
+    image: string, 
+    description: string, 
+    options: OptionsProps
+    }
+  } 
+
+  export interface FormatLayoutProps{
+    type: string,
+    options: OptionsProps
+  }
+
+export interface LayoutProps {
+  options: OptionsProps
+}
+

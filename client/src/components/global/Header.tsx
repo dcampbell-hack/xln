@@ -7,11 +7,12 @@ import { useSearchParams } from "react-router-dom";
 
 // header: { logo, links: {logoLink, isAuthenticated: { XLNWallet }, crowd: { buyXLN, XLNWhitepaper } } 
 
-const Header: React.FC<HeaderProps> = ({ auth, users, blockchain, header: {logo, links: { logoLink, isAuthenticated, crowd } },isLoggedIn }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ auth, users, blockchain, dropdown, header: {logo, links: { logoLink, isAuthenticated, crowd } },isLoggedIn }: HeaderProps) => {
    const [ profile, setProfile] = useState<IProfile | { } >({ })
     const [ menu, setMenu] = useState(false)
     const [ notification, setNotification] = useState(false);
 
+    const { showDropdown, setShowDropdown } = dropdown;
 
 useEffect(() => {
   if( blockchain.address  && users.avatar !== ""){
@@ -54,9 +55,9 @@ const mapIsAuthenticated = () => isAuthenticated.map(({text, to, icon, action, c
             <button className="toggle-menu" onClick={() => setNotification(!notification)}><i className={ notification ?  "fa-solid fa-bell" : "fa-regular fa-bell"}></i></button>
             </>
              }
-            <button className="toggle-menu" onClick={() => setMenu(!menu)}><i className={ menu ?  "fa-sharp fa-solid fa-caret-down" : "fa-solid fa-bars"}></i></button>
+            <button className="toggle-menu" onClick={() => setShowDropdown(!showDropdown)}><i className={ menu ?  "fa-sharp fa-solid fa-caret-down" : "fa-solid fa-bars"}></i></button>
           </div>
-         { menu && <div className="xln-links">
+         { showDropdown && <div className="xln-links">
                   { users.isAuthenticated == false ?
                 <div className="xln-buy">
                     { mapCrowd() }

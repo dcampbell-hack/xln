@@ -8,7 +8,7 @@ import { IUserAuthRequest, AdvanceResults } from '../../type/definition.js'
 import asyncHandler from "../../middleware/async.ts";
 import advancedResults from "../../middleware/advancedResults.js";
 import ErrorResponse from "../../utils/errorResponse.js";
-import assetUpload from "../../middleware/assetUpload.js";
+import { assetUpload } from "../../middleware/assetUpload.js";
 
 // Model
 import User from "../../model/User.js";

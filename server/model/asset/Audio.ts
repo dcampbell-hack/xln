@@ -3,6 +3,14 @@ const { Schema, Types } = mongoose;
 
 import { IAudio } from '../../type/model.ts'
 
+
+  //  size: 5613746,
+  //  encoding: '7bit',
+  //  tempFilePath: '',
+  //  truncated: false,
+  //  mimetype: 'audio/mpeg',
+  //  md5: '05cedffc59024b03ae057e19fb3a1c05',
+
 const AudioSchema = new Schema<IAudio>({ 
 audioName: {
     type: String,
@@ -19,15 +27,25 @@ lyrics: {
 producer: {
    type: String,
 },
-audioCover: {
+filePath: {
     type: String,
-    default: 'no-photo.jpg',
     required: false
 },
-audioFile: {
+size: {
+    type: Number,
+    required: true
+},
+encoding: {
+  type: String,
+  required: true
+},
+mimetype: {
     type: String,
-    default: 'no-photo.jpg',
-    required: false
+    required: true
+},
+md5: {
+    type: String,
+    required: true
 },
 asset:  {
     type:'ObjectId',
